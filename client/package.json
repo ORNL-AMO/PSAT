@@ -1,0 +1,28 @@
+{
+  "name": "psat-client",
+  "version": "0.0.0",
+
+  "description": "Pumping System Assessment Tool",
+  "homepage": "https://github.com/ORNL-AMO/PSAT#psat",
+  "license": "MIT",
+  "repository": "ORNL-AMO/PSAT",
+  "contributors": [
+    "Gina Accawi <accawigk@ornl.gov> (hyperion.ornl.gov/psat)",
+    "Noah Rosser <noah@codesimple.consulting>"
+  ],
+  "bugs": {
+    "url": "https://github.com/ORNL-AMO/PSAT/issues"
+  },
+  "keywords": [
+    "electron",
+    "ornl",
+    "psat"
+  ],
+
+  "scripts": {
+    "start": "electron index.js"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^1.2.0"
+  }
+}
