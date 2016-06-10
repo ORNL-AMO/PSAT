@@ -24,5 +24,8 @@
   },
   "devDependencies": {
     "electron-prebuilt": "^1.2.0"
+  },
+  "dependencies": {
+    "ffi":""
   }
 }

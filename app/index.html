@@ -13,6 +13,17 @@
     <h1>BOOM!</h1>
     We are using node <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    and Electron <script>document.write(process.versions.electron)</script>.<br>
+    FROM C:
+    <script>
+      var ffi = require('ffi');
+
+      var libm = ffi.Library('libm', {
+        'ceil': [ 'double', [ 'double' ] ]
+      });
+      
+      document.write(libm.ceil(1.5))
+    </script>
   </body>
+
 </html>
