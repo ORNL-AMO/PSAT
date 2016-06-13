@@ -4,6 +4,11 @@
 
     
 </head>
+<style>
+  .hover:hover {
+    cursor: pointer;
+  }
+</style>
   <body>
     Units
     <select>
@@ -29,20 +34,13 @@
     <hr>          
     <table>
       <tr>
-        <th/><th>A</th><th>B</th>
+        <th/><th>A</th><th class='hover' onclick="alert('yo')"> + </th>
       <tr>
       <tr>
         <td>Pump RPM</td><td><input type="number"></td>
-        <td><input type="number"></td>
       </tr>
       <tr>
         <td>Drive</td>
-        <td> 
-          <select>
-            <option>Direct drive</option>
-            <option>Belt drive</option>
-          </select>
-        </td>
         <td> 
           <select>
             <option>Direct drive</option>
@@ -53,22 +51,19 @@
       <tr>
         <td>Kinematic Viscosity (cS)</td>
         <td><input type="number"></td>
-        <td><input type="number"></td>
       </tr>
       <tr>
         <td>Specific Gravity</td>
-        <td><input type="number"></td>
         <td><input type="number"></td>
       </tr>
       <tr>
         <td>Number Stages</td>
         <td><input type="number"></td>
-        <td><input type="number"></td>
       </tr>
     </table>
     <script>
-      $=require('jquery');
-      $( document ).ready(function() {
+      $ = require('jquery');
+      $(document).ready(function() {
         alert('hi')
       });
     </script>
