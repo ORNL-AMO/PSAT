@@ -23,9 +23,10 @@
     "start": "electron ."
   },
   "devDependencies": {
-    "electron-prebuilt": "^1.2.0"
+    "electron-prebuilt": ""
   },
   "dependencies": {
-    "ffi":""
+    "ffi":"",
+    "jquery":""
   }
 }
