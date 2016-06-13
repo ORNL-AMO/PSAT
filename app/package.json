@@ -20,7 +20,7 @@
   ],
 
   "scripts": {
-    "start": "electron index.js"
+    "start": "electron ."
   },
   "devDependencies": {
     "electron-prebuilt": "^1.2.0"
