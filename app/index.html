@@ -1,29 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Big Bang!</title>
-    <style>
-      h1 {
-        font-size: 100px;
-      }
-    </style>
-  </head>
   <body>
-    <h1>BOOM!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.<br>
-    FROM C:
-    <script>
-      var ffi = require('ffi');
-
-      var libm = ffi.Library('libm', {
-        'ceil': [ 'double', [ 'double' ] ]
-      });
-      
-      document.write(libm.ceil(1.5))
-    </script>
-  </body>
+    Units
+    <select>
+      <option>gpm, ft, hp</option>
+      <option>MGD, ft, hp</option>
+      <option>L/s, m, kW</option>
+      <option>m<sup>3</sup>/hr, m, kW</option>
+    </select>   
+    Pump Style
+    <select>
+      <option>End suction slurry</option>
+      <option>End suction sewage</option>
+      <option>End suction stock</option>
+      <option>API double suction</option>
+      <option>Multistage boiler feed</option>
+      <option>End suction ANSI/API</option>
+      <option>Axial flow</option>
+      <option>Double suction</option>
+      <option>Vertical turbine</option>
+      <option>Large end suction</option>
+      <option>Specified optimal eff</option>
+    </select>     
+    <hr>          
+    <table>
+      <tr>
+        <th/><th>A</th><th>B</th>
+      <tr>
+      <tr>
+        <td>Pump RPM</td><td><input type="number"></td>
+        <td><input type="number"></td>
+      </tr>
+      <tr>
+        <td>Drive</td>
+        <td> 
+          <select>
+            <option>Direct drive</option>
+            <option>Belt drive</option>
+          </select>
+        </td>
+        <td> 
+          <select>
+            <option>Direct drive</option>
+            <option>Belt drive</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Kinematic Viscosity (cS)</td>
+        <td><input type="number"></td>
+        <td><input type="number"></td>
+      </tr>
+      <tr>
+        <td>Specific Gravity</td>
+        <td><input type="number"></td>
+        <td><input type="number"></td>
+      </tr>
+      <tr>
+        <td>Number Stages</td>
+        <td><input type="number"></td>
+        <td><input type="number"></td>
+      </tr>
+    </table>
+</body>
 
 </html>
