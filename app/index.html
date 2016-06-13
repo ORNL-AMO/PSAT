@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-
-    
-</head>
-<style>
-  .hover:hover {
-    cursor: pointer;
-  }
-</style>
+  <head>
+    <style>
+      .hover:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
   <body>
     Units
     <select>
@@ -34,7 +32,7 @@
     <hr>          
     <table>
       <tr>
-        <th/><th>A</th><th class='hover' onclick="alert('yo')"> + </th>
+        <th/><th>A</th><th class='hover' onclick="addPump()"> + </th>
       <tr>
       <tr>
         <td>Pump RPM</td><td><input type="number"></td>
@@ -66,7 +64,9 @@
       $(document).ready(function() {
         
       });
+      function addPump() {      
+        alert('hi');
+      }
     </script>
-</body>
-
+  </body>
 </html>
