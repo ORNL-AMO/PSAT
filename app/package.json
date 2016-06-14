@@ -1,7 +1,6 @@
 {
   "name": "psat-client",
   "version": "0.0.0",
-
   "description": "Pumping System Assessment Tool",
   "homepage": "https://github.com/ORNL-AMO/PSAT#psat",
   "license": "MIT",
@@ -18,15 +17,15 @@
     "ornl",
     "psat"
   ],
-
   "scripts": {
     "start": "electron ."
   },
   "devDependencies": {
-    "electron-prebuilt": ""
+    "electron-prebuilt": "",
+    "electron-reload": "^1.0.0"
   },
   "dependencies": {
-    "ffi":"",
-    "jquery":""
+    "ffi": "",
+    "jquery": ""
   }
 }

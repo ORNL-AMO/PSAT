@@ -65,7 +65,9 @@
         
       });
       function addPump() {      
-        $('table tr').first().append('<th>HI</th>');
+        $('table tr').each(function (i,e) {
+          $(e).append($(e).children().last().copy());
+        });
       }
     </script>
   </body>
