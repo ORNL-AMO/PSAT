@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <title>Pumping System Assessment Tool</title>
     <style>
       .hover:hover {
         cursor: pointer;
@@ -40,7 +41,7 @@
       <tr>
         <td>Drive</td>
         <td> 
-          <select>
+          <select style='width:100%'>
             <option>Direct drive</option>
             <option>Belt drive</option>
           </select>
@@ -68,7 +69,9 @@
         $('table tr').each(function (i,e) {
           var last = $(e).children().last();
           $(e).append(last.clone());
-          last.text(last.index()  );
+          if (i==0) {
+            last.text(last.index());
+          }
         });
       }
     </script>
