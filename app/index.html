@@ -74,7 +74,35 @@
       <tr>
         <td>Pump shaft power</td><td>192.4 (164.8)</td>
       </tr>
-
+      <tr>
+        <td>Motor efficiency</td><td>95.7 (05.8)</td>
+      </tr>
+      <tr>
+        <td>Motor power factor</td><td>86.7 (85.7)</td>
+      </tr>
+      <tr>
+        <td>Motor current</td><td>217.1 (188.2)</td>
+      </tr>
+      <tr>
+        <td>Motor power</td><td>150.0 (128.4)</td>
+      </tr>
+      <tr>
+        <td>Annual energy</td><td>1314.0 (1125.1)</td>
+      </tr>
+      <tr>
+        <td>Annual cost</td><td>65.7 (56.3)</td>
+      </tr>
+      <tr>
+        <td><hr></td><td></td>
+      </tr>
+      <tr>
+        <td>Savings potential, $1000</td>
+        <td>9.4</td>
+      </tr>
+      <tr>
+        <td>Optimization rating</td>
+        <td>85.6</td>
+      </tr>
     </table>
     <script>
       $ = require('jquery');
@@ -86,7 +114,7 @@
           var last = $(e).children().last();
           $(e).append(last.clone());
           if (i==0) {
-            last.text(last.index());
+            last.replaceWith($('<th>').text(last.index()));
           }
         });
       }
