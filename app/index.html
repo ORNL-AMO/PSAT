@@ -6,6 +6,48 @@
       .hover:hover {
         cursor: pointer;
       }
+      .green {
+        color: green;
+      }
+      button {
+        background: #c1c6c9;
+        background-image: -webkit-linear-gradient(top, #c1c6c9, #919699);
+        background-image: -moz-linear-gradient(top, #c1c6c9, #919699);
+        background-image: -ms-linear-gradient(top, #c1c6c9, #919699);
+        background-image: -o-linear-gradient(top, #c1c6c9, #919699);
+        background-image: linear-gradient(to bottom, #c1c6c9, #919699);
+        -webkit-border-radius: 28;
+        -moz-border-radius: 28;
+        border-radius: 28px;
+        font-family: Arial;
+        color: #ffffff;
+        font-size: 12px;
+        padding: 3px 5px 3px 5px;
+        text-decoration: none;
+      }
+
+      button:hover {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+        text-decoration: none;
+      }
+      
+      input {
+        padding: .5em;
+        border: solid 1px #fff;
+        box-shadow: inset 1px 1px 2px 0 #707070;
+      }
+      
+      td input {
+        width:5em;
+      }
+      td select {
+        --width:50%;
+      }
     </style>
   </head>
   <body>
@@ -41,7 +83,7 @@
       <tr>
         <td>Drive</td>
         <td> 
-          <select style='width:100%'>
+          <select>
             <option>Direct drive</option>
             <option>Belt drive</option>
           </select>
@@ -66,7 +108,7 @@
       <tr>
         <td>Line freq</td>
         <td> 
-          <select style='width:100%'>
+          <select>
             <option>50 Hz</option>
             <option selected>60 Hz</option>
           </select>
@@ -83,11 +125,11 @@
       <tr>
         <td>Efficiency class</td>
         <td> 
-          <select style='width:100%'>
-            <option>Standard efficiency</option>
-            <option selected>Energy efficient</option>
+          <select>
+            <option>Standard</option>
+            <option selected>Energy</option>
             <option>Average</option>
-            <option>Specified (DO WE NEED?)</option>
+            <option>Specified?</option>
           </select>
         </td>
       </tr>    
@@ -99,7 +141,7 @@
 
       <tr>
         <td>Full-load amps</td>
-        <td><input type="button" value="EST"><input type="number" value="225.4"></td>
+        <td><input type="number" value="225.4"><button>EST</button></td>
       </tr>
 
       <tr>
@@ -130,7 +172,7 @@
       <tr>
         <td>Load estimate method</td>
         <td> 
-          <select style='width:100%'>
+          <select>
             <option>Power</option>
             <option>Curent</option>
           </select>
@@ -150,34 +192,34 @@
         <td><hr></td><td></td>
       </tr>
       <tr>
-        <td>Pump efficiency</td><td>72.6 (84.8)</td>
+        <td>Pump efficiency</td><td>72.6 <span class='green'>(84.8)</span></td>
       </tr>
       <tr>
-        <td>Motor rated power</td><td>200 (200)</td>
+        <td>Motor rated power</td><td>200 <span class='green'>(200)</span></td>
       </tr>
       <tr>
-        <td>Motor shaft power</td><td>192.4 (164.8)</td>
+        <td>Motor shaft power</td><td>192.4 <span class='green'>(164.8)</span></td>
       </tr>
       <tr>
-        <td>Pump shaft power</td><td>192.4 (164.8)</td>
+        <td>Pump shaft power</td><td>192.4 <span class='green'>(164.8)</span></td>
       </tr>
       <tr>
-        <td>Motor efficiency</td><td>95.7 (05.8)</td>
+        <td>Motor efficiency</td><td>95.7 <span class='green'>(05.8)</span></td>
       </tr>
       <tr>
-        <td>Motor power factor</td><td>86.7 (85.7)</td>
+        <td>Motor power factor</td><td>86.7 <span class='green'>(85.7)</span></td>
       </tr>
       <tr>
-        <td>Motor current</td><td>217.1 (188.2)</td>
+        <td>Motor current</td><td>217.1 <span class='green'>(188.2)</span></td>
       </tr>
       <tr>
-        <td>Motor power</td><td>150.0 (128.4)</td>
+        <td>Motor power</td><td>150.0 <span class='green'>(128.4)</span></td>
       </tr>
       <tr>
-        <td>Annual energy</td><td>1314.0 (1125.1)</td>
+        <td>Annual energy</td><td>1314.0 <span class='green'>(1125.1)</span></td>
       </tr>
       <tr>
-        <td>Annual cost</td><td>65.7 (56.3)</td>
+        <td>Annual cost</td><td>65.7 <span class='green'>(56.3)</span></td>
       </tr>
       <tr>
         <td><hr></td><td></td>
