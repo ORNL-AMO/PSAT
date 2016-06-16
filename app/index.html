@@ -75,7 +75,7 @@
     <hr>          
     <table>
       <tr>
-        <th/><th>1</th><th class='hover' onclick="addPump()"> + </th>
+        <th/><th onclick="$(this).text('MyNewName')">1</th><th class='hover' onclick="addPump()"> + </th>
       <tr>
       <tr>
         <td>Pump RPM</td><td><input type="number" value="1780"></td>
@@ -243,7 +243,9 @@
           var last = $(e).children().last();
           $(e).append(last.clone());
           if (i==0) {
+            //last.replaceWith($('<th onclick="$(this).text(''MyNewName'')>').text(last.index()));
             last.replaceWith($('<th>').text(last.index()));
+             
           }
         });
       }
