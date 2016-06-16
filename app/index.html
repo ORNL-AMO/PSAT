@@ -7,9 +7,9 @@
         cursor: pointer;
         
       }
-      tr:nth-child(even) {
-    background-color: lightgray;
-}
+      tbody tr:nth-child(odd) {
+        background-color: lightgray;
+      }
       th {
         color: green;
 
@@ -38,7 +38,9 @@
 
       }
       td select {
-        width:50%;
+        width:100%;
+        padding-left: 5px;
+        padding-right: 5px;
       }
     </style>
   </head>
@@ -66,167 +68,171 @@
     </select>     
     <hr>          
     <table>
-      <tr>
-        <th/><th onclick="$(this).text('MyNewName')">1</th><th class='hover' onclick="addPump()"> + </th>
-      <tr>
-      <tr>
-        <td>Pump RPM</td><td><input type="number" value="1780"></td>
-      </tr>
-      <tr>
-        <td>Drive</td>
-        <td> 
-          <select>
-            <option>Direct drive</option>
-            <option>Belt drive</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>Kinematic Viscosity (cS)</td>
-        <td><input type="number" value="1.00"></td>
-      </tr>
-      <tr>
-        <td>Specific Gravity</td>
-        <td><input type="number" value="1.000"></td>
-      </tr>
-      <tr>
-        <td>Number Stages</td>
-        <td><input type="number" value="1"></td>
-      </tr>
-      <tr>
-        <td>Fixed specific speed?</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>Line freq</td>
-        <td> 
-          <select>
-            <option>50 Hz</option>
-            <option selected>60 Hz</option>
-          </select>
-        </td>
-      </tr>      
-      <tr>
-        <td>Horsepower</td>
-        <td><input type="number" value="200"></td>
-      </tr>
-      <tr>
-        <td>Motor rpm</td>
-        <td><input type="number" value="1780"></td>
-      </tr>
-      <tr>
-        <td>Efficiency class</td>
-        <td> 
-          <select>
-            <option>Standard</option>
-            <option selected>Energy</option>
-            <option>Average</option>
-            <option>Specified?</option>
-          </select>
-        </td>
-      </tr>    
-      <tr>
-        <td>Voltage</td>
-        <td><input type="number" value="460"></td>
-      </tr>
+      <thead>
+        <tr>
+          <th/><th onclick="$(this).text('MyNewName')">1</th><th class='hover' onclick="addPump()"> + </th>
+        <tr>
+      </thead>
+      <tbody>
+        
+      
+        <tr>
+          <td>Pump RPM</td><td><input type="number" value="1780"></td>
+        </tr>
+        <tr>
+          <td>Drive</td>
+          <td> 
+            <select>
+              <option>Direct drive</option>
+              <option>Belt drive</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Kinematic Viscosity (cS)</td>
+          <td><input type="number" value="1.00"></td>
+        </tr>
+        <tr>
+          <td>Specific Gravity</td>
+          <td><input type="number" value="1.000"></td>
+        </tr>
+        <tr>
+          <td>Number Stages</td>
+          <td><input type="number" value="1"></td>
+        </tr>
+        <tr>
+          <td>Fixed specific speed?</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>Line freq</td>
+          <td> 
+            <select>
+              <option>50 Hz</option>
+              <option selected>60 Hz</option>
+            </select>
+          </td>
+        </tr>      
+        <tr>
+          <td>Horsepower</td>
+          <td><input type="number" value="200"></td>
+        </tr>
+        <tr>
+          <td>Motor rpm</td>
+          <td><input type="number" value="1780"></td>
+        </tr>
+        <tr>
+          <td>Efficiency class</td>
+          <td> 
+            <select>
+              <option>Standard</option>
+              <option selected>Energy</option>
+              <option>Average</option>
+              <option>Specified?</option>
+            </select>
+          </td>
+        </tr>    
+        <tr>
+          <td>Voltage</td>
+          <td><input type="number" value="460"></td>
+        </tr>
+        <tr>
+          <td>Full-load amps</td>
+          <td><input type="number" value="225.4"><button>EST</button></td>
+        </tr>
 
+        <tr>
+          <td>Size margin</td>
+          <td><input type="number" value="0"></td>
+        </tr>
 
-      <tr>
-        <td>Full-load amps</td>
-        <td><input type="number" value="225.4"><button>EST</button></td>
-      </tr>
+        <tr>
+          <td>Operating fraction</td>
+          <td><input type="number" value="1.000"></td>
+        </tr>
+       <tr>
+          <td>$ / kwhr</td>
+          <td><input type="number" value=".0500"></td>
+        </tr>
+        <tr>
+          <td>Flow rate, gpm</td>
+          <td><input type="number" value="2000"></td>
+        </tr>
+        <tr>
+          <td>$ / kwhr</td>
+          <td><input type="number" value=".0500"></td>
+        </tr>     
+        <tr>
+          <td>Head, ft</td>
+          <td><input type="number" value="277"></td>
+        </tr>       
+        <tr>
+          <td>Load estimate method</td>
+          <td> 
+            <select>
+              <option>Power</option>
+              <option>Curent</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Motor kW</td>
+          <td><input type="number" value="150"></td>
+        </tr>
 
-      <tr>
-        <td>Size margin</td>
-        <td><input type="number" value="0"></td>
-      </tr>
+        <tr>
+          <td>Voltage</td>
+          <td><input type="number" value="460"></td>
+        </tr>
 
-      <tr>
-        <td>Operating fraction</td>
-        <td><input type="number" value="1.000"></td>
-      </tr>
-     <tr>
-        <td>$ / kwhr</td>
-        <td><input type="number" value=".0500"></td>
-      </tr>
-      <tr>
-        <td>Flow rate, gpm</td>
-        <td><input type="number" value="2000"></td>
-      </tr>
-      <tr>
-        <td>$ / kwhr</td>
-        <td><input type="number" value=".0500"></td>
-      </tr>     
-      <tr>
-        <td>Head, ft</td>
-        <td><input type="number" value="277"></td>
-      </tr>       
-      <tr>
-        <td>Load estimate method</td>
-        <td> 
-          <select>
-            <option>Power</option>
-            <option>Curent</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>Motor kW</td>
-        <td><input type="number" value="150"></td>
-      </tr>
-
-      <tr>
-        <td>Voltage</td>
-        <td><input type="number" value="460"></td>
-      </tr>
-
-      <tr>
-        <td><hr></td><td><hr></td>
-      </tr>
-      <!-- <tr>
-        <td>Pump efficiency</td><td><table style='width:100%'><tr><td>72.6</td><td> <span class='green'>(84.8)</span></td></tr></table></td>
-      </tr> -->
-      <tr>
-        <td>Pump efficiency</td><td class='result'>72.6 <span>(84.8)</span></td>
-      </tr>
-      <tr>
-        <td>Motor rated power</td><td class='result'>200 <span>(200)</span></td>
-      </tr>
-      <tr>
-        <td>Motor shaft power</td><td class='result'>192.4 <span>(164.8)</span></td>
-      </tr>
-      <tr>
-        <td>Pump shaft power</td><td class='result'>192.4 <span>(164.8)</span></td>
-      </tr>
-      <tr>
-        <td>Motor efficiency</td><td class='result'>95.7 <span>(05.8)</span></td>
-      </tr>
-      <tr>
-        <td>Motor power factor</td><td class='result'>86.7 <span>(85.7)</span></td>
-      </tr>
-      <tr>
-        <td>Motor current</td><td class='result'>217.1 <span>(188.2)</span></td>
-      </tr>
-      <tr>
-        <td>Motor power</td><td class='result'>150.0 <span>(128.4)</span></td>
-      </tr>
-      <tr>
-        <td>Annual energy</td><td class='result'>1314.0 <span>(1125.1)</span></td>
-      </tr>
-      <tr>
-        <td>Annual cost</td><td class='result'>65.7 <span>(56.3)</span></td>
-      </tr>
-      <tr>
-        <td><hr></td><td><hr></td>
-      </tr>
-      <tr>
-        <td>Savings potential, $1000</td>
-        <td>9.4</td>
-      </tr>
-      <tr>
-        <td>Optimization rating</td>
-        <td>85.6</td>
-      </tr>
+        <tr>
+          <td><hr></td><td><hr></td>
+        </tr>
+        <!-- <tr>
+          <td>Pump efficiency</td><td><table style='width:100%'><tr><td>72.6</td><td> <span class='green'>(84.8)</span></td></tr></table></td>
+        </tr> -->
+        <tr>
+          <td>Pump efficiency</td><td class='result'>72.6 <span>(84.8)</span></td>
+        </tr>
+        <tr>
+          <td>Motor rated power</td><td class='result'>200 <span>(200)</span></td>
+        </tr>
+        <tr>
+          <td>Motor shaft power</td><td class='result'>192.4 <span>(164.8)</span></td>
+        </tr>
+        <tr>
+          <td>Pump shaft power</td><td class='result'>192.4 <span>(164.8)</span></td>
+        </tr>
+        <tr>
+          <td>Motor efficiency</td><td class='result'>95.7 <span>(05.8)</span></td>
+        </tr>
+        <tr>
+          <td>Motor power factor</td><td class='result'>86.7 <span>(85.7)</span></td>
+        </tr>
+        <tr>
+          <td>Motor current</td><td class='result'>217.1 <span>(188.2)</span></td>
+        </tr>
+        <tr>
+          <td>Motor power</td><td class='result'>150.0 <span>(128.4)</span></td>
+        </tr>
+        <tr>
+          <td>Annual energy</td><td class='result'>1314.0 <span>(1125.1)</span></td>
+        </tr>
+        <tr>
+          <td>Annual cost</td><td class='result'>65.7 <span>(56.3)</span></td>
+        </tr>
+        <tr>
+          <td><hr></td><td><hr></td>
+        </tr>
+        <tr>
+          <td>Savings potential, $1000</td>
+          <td>9.4</td>
+        </tr>
+        <tr>
+          <td>Optimization rating</td>
+          <td>85.6</td>
+        </tr>
+      </tbody>
     </table>
     <script>
       $ = require('jquery');
