@@ -3,37 +3,28 @@
   <head>
   <title>Pumping System Assessment Tool</title>
     <style>
-      .hover:hover {
+      .hover:hover, button:hover {
         cursor: pointer;
+        
       }
-      .green {
+      tr:nth-child(even) {
+    background-color: lightgray;
+}
+      th {
+        color: green;
+
+      }
+      td.result {
+        position: relative;
+      }
+      td.result span {
+        position: absolute; 
+        left: 50%;
         color: green;
       }
-      button {
-        background: #c1c6c9;
-        background-image: -webkit-linear-gradient(top, #c1c6c9, #919699);
-        background-image: -moz-linear-gradient(top, #c1c6c9, #919699);
-        background-image: -ms-linear-gradient(top, #c1c6c9, #919699);
-        background-image: -o-linear-gradient(top, #c1c6c9, #919699);
-        background-image: linear-gradient(to bottom, #c1c6c9, #919699);
-        -webkit-border-radius: 28;
-        -moz-border-radius: 28;
-        border-radius: 28px;
-        font-family: Arial;
-        color: #ffffff;
-        font-size: 12px;
-        padding: 3px 5px 3px 5px;
-        text-decoration: none;
-      }
 
-      button:hover {
-        background: #3cb0fd;
-        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-        text-decoration: none;
+      button {
+        border-width: 2px;
       }
       
       input {
@@ -42,11 +33,12 @@
         box-shadow: inset 1px 1px 2px 0 #707070;
       }
       
-      td input {
+      td input[type=number] {
         width:5em;
+
       }
       td select {
-        --width:50%;
+        width:50%;
       }
     </style>
   </head>
@@ -189,40 +181,43 @@
       </tr>
 
       <tr>
-        <td><hr></td><td></td>
+        <td><hr></td><td><hr></td>
+      </tr>
+      <!-- <tr>
+        <td>Pump efficiency</td><td><table style='width:100%'><tr><td>72.6</td><td> <span class='green'>(84.8)</span></td></tr></table></td>
+      </tr> -->
+      <tr>
+        <td>Pump efficiency</td><td class='result'>72.6 <span>(84.8)</span></td>
       </tr>
       <tr>
-        <td>Pump efficiency</td><td>72.6 <span class='green'>(84.8)</span></td>
+        <td>Motor rated power</td><td class='result'>200 <span>(200)</span></td>
       </tr>
       <tr>
-        <td>Motor rated power</td><td>200 <span class='green'>(200)</span></td>
+        <td>Motor shaft power</td><td class='result'>192.4 <span>(164.8)</span></td>
       </tr>
       <tr>
-        <td>Motor shaft power</td><td>192.4 <span class='green'>(164.8)</span></td>
+        <td>Pump shaft power</td><td class='result'>192.4 <span>(164.8)</span></td>
       </tr>
       <tr>
-        <td>Pump shaft power</td><td>192.4 <span class='green'>(164.8)</span></td>
+        <td>Motor efficiency</td><td class='result'>95.7 <span>(05.8)</span></td>
       </tr>
       <tr>
-        <td>Motor efficiency</td><td>95.7 <span class='green'>(05.8)</span></td>
+        <td>Motor power factor</td><td class='result'>86.7 <span>(85.7)</span></td>
       </tr>
       <tr>
-        <td>Motor power factor</td><td>86.7 <span class='green'>(85.7)</span></td>
+        <td>Motor current</td><td class='result'>217.1 <span>(188.2)</span></td>
       </tr>
       <tr>
-        <td>Motor current</td><td>217.1 <span class='green'>(188.2)</span></td>
+        <td>Motor power</td><td class='result'>150.0 <span>(128.4)</span></td>
       </tr>
       <tr>
-        <td>Motor power</td><td>150.0 <span class='green'>(128.4)</span></td>
+        <td>Annual energy</td><td class='result'>1314.0 <span>(1125.1)</span></td>
       </tr>
       <tr>
-        <td>Annual energy</td><td>1314.0 <span class='green'>(1125.1)</span></td>
+        <td>Annual cost</td><td class='result'>65.7 <span>(56.3)</span></td>
       </tr>
       <tr>
-        <td>Annual cost</td><td>65.7 <span class='green'>(56.3)</span></td>
-      </tr>
-      <tr>
-        <td><hr></td><td></td>
+        <td><hr></td><td><hr></td>
       </tr>
       <tr>
         <td>Savings potential, $1000</td>
