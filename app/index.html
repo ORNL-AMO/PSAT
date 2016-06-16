@@ -20,9 +20,15 @@
       td.result span {
         position: absolute; 
         left: 50%;
+        bottom: 1px;
         color: green;
       }
-
+      .sum {
+        font-weight: bold;
+      }
+      .sum td:not(:first-child) {
+        color: green;
+      }
       button {
         border-width: 2px;
       }
@@ -224,13 +230,13 @@
         <tr>
           <td><hr></td><td><hr></td>
         </tr>
-        <tr>
-          <td>Savings potential, $1000</td>
-          <td>9.4</td>
+        <tr class=sum>
+          <td>Savings potential</td>
+          <td class='result'><span>$8400</span></td>
         </tr>
-        <tr>
+        <tr class=sum>
           <td>Optimization rating</td>
-          <td>85.6</td>
+          <td class='result'><span>85.6%</span></td>
         </tr>
       </tbody>
     </table>
