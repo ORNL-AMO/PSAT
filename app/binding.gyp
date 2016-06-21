@@ -2,7 +2,7 @@
   "targets": [
     {
       "target_name": "addon",
-      "sources": [ "hello.cc" ]
+      "sources": [ "h2.cpp","hello.cc","Calculator.cpp","Calculator.h"]
     }
   ]
 }
