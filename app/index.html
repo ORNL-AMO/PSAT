@@ -14,8 +14,10 @@
       tbody tr:nth-child(odd) {
         background-color: lightgray;
       }
-      th {
+      th,.th {
         color: green;
+        font-weight: bold;
+        text-align: center;
 
       }
       td.result {
@@ -84,8 +86,8 @@
     <table>
       <thead>
         <tr>
-          <th/><th class='hover' onclick="$(this).text('MyNewName')">1</th><th class='hover' onclick="addPump()"> + </th>
-        <tr>
+          <th>Pump</th><th class='hover' onclick="$(this).text('MyNewName')">1</th><th class='hover' onclick="addPump()"> + </th>
+        </tr>
       </thead>
       <tbody>
         <tr>
@@ -117,6 +119,8 @@
           <td><input type="checkbox"></td>
         </tr>
         <tr>
+          <td class='th'>Motor</td><td/>
+        </tr>
           <td>Line freq</td>
           <td> 
             <select>
@@ -157,6 +161,9 @@
           <td><input type="number" value="0"></td>
         </tr>
         <tr>
+          <td class='th'>Cost</td><td/>
+        </tr>
+        <tr>
           <td>Operating fraction</td>
           <td><input type="number" value="1.000"></td>
         </tr>
@@ -164,6 +171,9 @@
           <td>$ / kwhr</td>
           <td><input type="number" value=".0500"></td>
         </tr>
+        <tr>
+          <td class='th'>Field</td><td/>
+        </tr>        
         <tr>
           <td>Flow rate, gpm</td>
           <td><input type="number" value="2000"></td>
@@ -194,7 +204,7 @@
           <td><input type="number" value="460"></td>
         </tr>
         <tr>
-          <td><hr></td><td><hr></td>
+          <td class=th>Results</td><td></td>
         </tr>
         <tr>
           <td>Pump efficiency</td><td class='result'>72.6 <span>(84.8)</span></td>
@@ -227,7 +237,7 @@
           <td>Annual cost</td><td class='result'>65.7 <span>(56.3)</span></td>
         </tr>
         <tr>
-          <td><hr></td><td><hr></td>
+          <td class=th>Summary</td><td></td>
         </tr>
         <tr class=sum>
           <td>Savings potential</td>
