@@ -13,4 +13,6 @@ App.on('window-all-closed', function () {
     App.quit();
 })
 
+const addon = require('./build/Release/addon');
 
+console.log(addon.hello());
