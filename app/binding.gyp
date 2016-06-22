@@ -2,7 +2,8 @@
   	"targets": [
 		{
 	    	"target_name": "bridge",
-			'sources' : [ 'apibridge.cpp','<!@(ls -1 ../api/*.cpp)','<!@(ls -1 ../api/calculator/*.cpp)'],
+	    	# 'include_dirs': ['../api'],
+			'sources' : [ 'bridge.cpp','<!@(ls -1 ../api/*.cpp)','<!@(ls -1 ../api/calculator/*.cpp)'],
 			"cflags": ["-Wall","-std=c++11"],  
 			"conditions": [ 
 		        [ 'OS=="mac"', { 
