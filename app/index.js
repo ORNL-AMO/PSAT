@@ -13,6 +13,5 @@ App.on('window-all-closed', function () {
     App.quit();
 })
 
-const addon = require('./build/Release/api-bridge');
-
-console.log(addon.sum());
+const bridge = require('./build/Release/bridge');
+console.log(bridge.pumpEff());
