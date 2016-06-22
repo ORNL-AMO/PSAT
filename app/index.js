@@ -13,6 +13,6 @@ App.on('window-all-closed', function () {
     App.quit();
 })
 
-const addon = require('./build/Release/addon');
+const addon = require('./build/Release/api-bridge');
 
-console.log(addon.hello());
+console.log(addon.sum());
