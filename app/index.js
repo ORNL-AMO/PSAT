@@ -13,5 +13,5 @@ App.on('window-all-closed', function () {
     App.quit();
 })
 
-const bridge = require('./build/Release/bridge');
-console.log(bridge.pumpEff());
+// const bridge = require('./build/Release/bridge');
+// console.log(bridge.pumpEff());

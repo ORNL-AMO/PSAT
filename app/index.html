@@ -176,7 +176,7 @@
         </tr>        
         <tr>
           <td>Flow rate, gpm</td>
-          <td><input type="number" value="2000"></td>
+          <td><input type="number" value="2000" onblur="pumpEff($(this).val())"></td>
         </tr>
         <tr>
           <td>$ / kwhr</td>
@@ -251,6 +251,10 @@
     </table>
     <script>
       $ = require('jquery');
+      const bridge = require('./build/Release/bridge');
+      function pumpEff(v) {        
+        $('td:contains("Pump efficiency")').next().html(bridge.pumpEff(v)+' <span>(109)</span>');
+      }
       $(document).ready(function() {
         
       });
