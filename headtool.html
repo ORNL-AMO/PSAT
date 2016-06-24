@@ -1,6 +1,58 @@
-<h1 >Hello</h1>
-<p>I'm a great tool!</p>
-<button onclick='BackToCond()'>BACK</button>
+<style scoped=scoped>
+	h1 {
+		color: green;
+	}
+	em {
+		font-size: smaller;
+		font-weight: lighter;
+	}
+	input {
+		margin-bottom: 1rem;
+	}
+	.result {
+		box-shadow: 1px 1px 2px 0 #707070;
+		background-color: ghostwhite;
+	}
+	
+}
+
+</style>
+<h1>Head Tool</h1>
+Suction pipe diameter (ID)<br>
+<input type=number/> <em>inches</em><br>
+Discharge pipe diameter (ID)<br>
+<input type=number/> <em>inches</em><br>
+Suction gauge pressure (Ps)<br>
+<input type=number/> <em>psig</em><br>
+Discharge gauge pressure (Ps)<br>
+<input type=number/> <em>psig</em><br>
+Suction gauge elevation (Zs)<br>
+<input type=number/> <em>ft</em><br>
+Discharge gauge elevation (Zs)<br>
+<input type=number/> <em>ft</em><br>
+Suction line loss coefficients (Ks)<br>
+<input type=number/><br>
+Discharge line loss coefficients (Ks)<br>
+<input type=number/><br>
+Fluid specific gravity<br>
+<input type=number/><br>
+Flow rate<br>
+<input type=number/> <em>gpm</em><br>
+Differential elevation head<br>
+<input class=result disabled="" type=number/> <em>ft</em><br>
+Differential pressure head<br>
+<input class=result disabled="" type=number/> <em>ft</em><br>
+Differential velocity head<br>
+<input class=result disabled="" type=number/> <em>ft</em><br>
+Estimated suction friction head<br>
+<input class=result disabled="" type=number/> <em>ft</em><br>
+Estimated discharge friction head<br>
+<input class=result disabled="" type=number/> <em>ft</em><br>
+<span style='color:green'>Pump head</span><br>
+<input style='background-color: lightgray' class=result disabled="" type=number/> <em>ft</em><br>
+
+
+<button onclick='BackToCond()'>CANCEL</button> <button onclick='BackToCond()'>ACCEPT</button>
 <script>
 
 </script>
