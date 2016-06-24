@@ -22,11 +22,13 @@
     </style>
     <script>
       $ = require('jquery');
+      Bridge = require('./build/Release/bridge');
+
       $(document).ready(function() {
         $('body').load('conditions.html');
       });
       
-      function backToCond() {
+      function BackToCond() {
         $('body').html(Cond);
       }
     </script>

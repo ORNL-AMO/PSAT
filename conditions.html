@@ -227,8 +227,6 @@ Pump Style
   </tbody>
 </table>
 <script>
-  $ = require('jquery');
-  const bridge = require('./build/Release/bridge');
   function pumpEff(v) {        
     $('td:contains("Pump efficiency")').next().html(bridge.pumpEff(v)+' <span>(109)</span>');
   }
