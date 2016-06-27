@@ -37,6 +37,10 @@
     padding-right: 5px;
     display: block;
   }
+  .vam span, .vam button {
+    vertical-align: middle;
+  }
+  
 </style>
 Units
 <select>
@@ -181,7 +185,7 @@ Pump Style
       <td><input type="number" value="460"></td>
     </tr>
     <tr>
-      <td class=th>Results</td><td></td>
+      <td class='th vam'><span>Results</span> <button onclick='curve()'>CURVE</button></td><td></td>
     </tr>
     <tr>
       <td>Pump efficiency</td><td class='result'>72.6 <span>(84.8)</span></td>
@@ -228,11 +232,15 @@ Pump Style
 </table>
 <script>
   function pumpEff(v) {        
-    $('td:contains("Pump efficiency")').next().html(bridge.pumpEff(v)+' <span>(109)</span>');
+    $('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
   }
   function headTool() {
     Cond = $('body').children();
     $('body').load('headtool.html');
+  }
+  function curve() {
+    Cond = $('body').children();
+    $('body').load('curve.html');
   }
   function addPump() {      
     $('table tr').each(function (i,e) {
