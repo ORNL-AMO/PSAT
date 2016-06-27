@@ -1,2 +1,30 @@
-<h1>I'm a great curve!</h1>
+<h1>System Head Curve</h1>
+<style scoped>
+	h1 {
+	    color: green;
+	  }
+	canvas {
+		//width: 40rem;
+		//height: 30rem;
+		background-color: black;
+		border: 3px solid green;
+
+	}
+</style>
+<canvas width="700" height="500" /><br>
 <button onclick='BackToCond()'>BACK</button>
+<script>
+	var ctx = $('canvas')[0].getContext('2d');
+	ctx.strokeStyle = "yellow";
+	ctx.lineWidth = 3.0;
+	ctx.translate(0, ctx.canvas.height);
+	ctx.scale(ctx.canvas.width/3000,-1);
+	ctx.beginPath();
+    ctx.moveTo(0,57.6);
+    ctx.lineTo(600,67.3);
+    ctx.lineTo(1800,144.8);
+    ctx.lineTo(2400,212.7);
+    ctx.lineTo(3000,300);   
+    ctx.stroke();
+</script>
+
