@@ -17,36 +17,49 @@
 	Ctx.fillStyle = "white";
 	Ctx.textAlign = 'center';
 	Ctx.textBaseline = 'middle';
-	
+	Ctx.font = '12px san serif';
+	PAD = 50;
 	function xPos(x) {
-		return x*(Cnv.width-80)/3000+40;
+		return x*(Cnv.width-PAD*2)/3000+PAD;
 	}
 	function yPos(y) {
-		return (300-y)*(Cnv.height-80)/300+40;
+		return (300-y)*(Cnv.height-PAD*2)/300+PAD;
 	}
 
 	Ctx.beginPath();
 	for (let x=0; x<=3000; x+=200) {
 		const xp = xPos(x);
-		Ctx.moveTo(xp,40);
-		Ctx.lineTo(xp,Cnv.height-40);	
-		Ctx.fillText(x,xp,Cnv.height-20);	
+		Ctx.moveTo(xp,PAD);
+		Ctx.lineTo(xp,Cnv.height-PAD);	
+		Ctx.fillText(x,xp,Cnv.height-.75*PAD);	
 	}
 	for (let y=0; y<=300; y+=20) {
 		const yp = yPos(y);
-		Ctx.moveTo(40,yp);
-		Ctx.lineTo(Cnv.width-40,yp);	
-		Ctx.fillText(y,20,yp);	
+		Ctx.moveTo(PAD,yp);
+		Ctx.lineTo(Cnv.width-PAD,yp);	
+		Ctx.fillText(y,.75*PAD,yp);	
 	}
-	Ctx.moveTo(xPos(0),yPos(57.6));
-	for (let val of [ [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
+	Ctx.stroke();
+	Ctx.save();
+
+	Ctx.fillStyle = 'yellow';
+	Ctx.font = '14px san serif';
+	Ctx.fillText('FLOW RATE',Cnv.width/2,Cnv.height-.33*PAD);
+	
+	Ctx.translate(.33*PAD,Cnv.height/2);
+	Ctx.rotate(-Math.PI/2);
+	Ctx.fillText('HEAD',0,0);	
+	
+	Ctx.restore();
+
+	Ctx.lineWidth = 2;
+	Ctx.strokeStyle = "yellow";	
+	Ctx.beginPath();
+
+	//Ctx.moveTo(xPos(0),yPos(57.6));
+	for (let val of [ [0,57.6], [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
 		Ctx.lineTo(xPos(val[0]), yPos(val[1]));
 	}
-    // ctx.moveTo(0,57.6);
-    // ctx.lineTo(600,67.3);
-    // ctx.lineTo(1800,144.8);
-    // ctx.lineTo(2400,212.7);
-    // ctx.lineTo(3000,300);   
     Ctx.stroke();
 </script>
 
