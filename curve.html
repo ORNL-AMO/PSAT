@@ -1,5 +1,15 @@
-<h1>System Head Curve</h1>
+
 <style scoped>
+	div {
+		width: 80%;
+		margin: auto;
+		/*text-align: center;*/
+		/*margin-left: auto;
+		margin-right: auto;*/
+	}
+	/*form {
+		text-align: left;
+	}*/
 	h1 {
 	    color: green;
 	  }
@@ -8,8 +18,18 @@
 		/*border: 3px solid green;*/
 	}
 </style>
-<canvas width="700" height="500" /><br>
-<button onclick='BackToCond()'>BACK</button>
+<div>
+	<h1>System Head Curve</h1>
+	<form>
+		Flow rate<br>
+		<input type=number/><br>
+		Head<br>
+		<input type=number/><br>	
+	</form><br>
+	<canvas width="700" height="500" /><br>
+	<button onclick='BackToCond()'>BACK</button>
+</div>
+
 <script>
 	Cnv = $('canvas')[0];
 	Ctx = Cnv.getContext('2d');
@@ -56,7 +76,6 @@
 	Ctx.strokeStyle = "yellow";	
 	Ctx.beginPath();
 
-	//Ctx.moveTo(xPos(0),yPos(57.6));
 	for (let val of [ [0,57.6], [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
 		Ctx.lineTo(xPos(val[0]), yPos(val[1]));
 	}
