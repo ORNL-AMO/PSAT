@@ -67,7 +67,7 @@ Pump Style
 <table>
   <thead>
     <tr>
-      <th>Pump</th><th class='hover' onclick="notes(this)"><button>1</button></th><th class='hover' onclick="addPump()"><button>+</button></th>
+      <th>Pump</th><th class='hover' onclick='load("notes")''><button>1</button></th><th class='hover' onclick="addPump()"><button>+</button></th>
     </tr>
   </thead>
   <tbody>
@@ -165,7 +165,7 @@ Pump Style
     </tr>     
     <tr>
       <td>Head, ft</td>
-      <td><input type="number" value="277"><button onclick='headTool()'>TOOL</button></td>
+      <td><input type="number" value="277"><button onclick='load("headtool")'>TOOL</button></td>
     </tr>       
     <tr>
       <td>Load estimate method</td>
@@ -185,7 +185,7 @@ Pump Style
       <td><input type="number" value="460"></td>
     </tr>
     <tr>
-      <td class='th vam'><span>Results</span> <button onclick='curve()'>CURVE</button></td><td></td>
+      <td class='th vam'><span>Results</span> <button onclick='load("curve")'>CURVE</button></td><td></td>
     </tr>
     <tr>
       <td>Pump efficiency</td><td class='result'>72.6 <span>(84.8)</span></td>
@@ -231,16 +231,12 @@ Pump Style
   </tbody>
 </table>
 <script>
+  function load(nm) {
+    Cond = $('body').children();
+    $('body').load(nm+'.html');
+  }
   function pumpEff(v) {        
     $('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
-  }
-  function headTool() {
-    Cond = $('body').children();
-    $('body').load('headtool.html');
-  }
-  function curve() {
-    Cond = $('body').children();
-    $('body').load('curve.html');
   }
   function addPump() {     
     const thAdd = $('th').last().detach();
@@ -253,9 +249,5 @@ Pump Style
       }
     });
   }  
-  function notes() {
-    Cond = $('body').children();
-    $('body').load('notes.html');
-  }
   
 </script>
