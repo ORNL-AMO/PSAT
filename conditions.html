@@ -67,7 +67,7 @@ Pump Style
 <table>
   <thead>
     <tr>
-      <th>Pump</th><th class='hover' onclick="$(this).text('MyNewName')">1</th><th class='hover' onclick="addPump()"> + </th>
+      <th>Pump</th><th class='hover' onclick="notes(this)">1</th><th class='hover' onclick="addPump()"> + </th>
     </tr>
   </thead>
   <tbody>
@@ -247,10 +247,15 @@ Pump Style
       var last = $(e).children().last();
       $(e).append(last.clone());
       if (i==0) {
-        last.replaceWith($('<th class=hover onclick="$(this).text(\'MyNewName\')">').text(last.index()));
+        last.replaceWith($('<th class=hover onclick="notes(this)">').text(last.index()));
         //last.replaceWith($('<th>').text(last.index()));
          
       }
     });
   }
+  function notes() {
+    Cond = $('body').children();
+    $('body').load('notes.html');
+  }
+  
 </script>
