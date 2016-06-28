@@ -5,23 +5,48 @@
 	  }
 	canvas {
 		background-color: black;
-		border: 3px solid green;
+		/*border: 3px solid green;*/
 	}
 </style>
 <canvas width="700" height="500" /><br>
 <button onclick='BackToCond()'>BACK</button>
 <script>
-	var ctx = $('canvas')[0].getContext('2d');
-	ctx.strokeStyle = "yellow";
-	ctx.lineWidth = 3.0;
-	ctx.translate(0, ctx.canvas.height);
-	ctx.scale(ctx.canvas.width/3000,-1);
-	ctx.beginPath();
-    ctx.moveTo(0,57.6);
-    ctx.lineTo(600,67.3);
-    ctx.lineTo(1800,144.8);
-    ctx.lineTo(2400,212.7);
-    ctx.lineTo(3000,300);   
-    ctx.stroke();
+	Cnv = $('canvas')[0];
+	Ctx = Cnv.getContext('2d');
+	Ctx.strokeStyle = "green";
+	Ctx.fillStyle = "white";
+	Ctx.textAlign = 'center';
+	Ctx.textBaseline = 'middle';
+	
+	function xPos(x) {
+		return x*(Cnv.width-80)/3000+40;
+	}
+	function yPos(y) {
+		return (300-y)*(Cnv.height-80)/300+40;
+	}
+
+	Ctx.beginPath();
+	for (let x=0; x<=3000; x+=200) {
+		const xp = xPos(x);
+		Ctx.moveTo(xp,40);
+		Ctx.lineTo(xp,Cnv.height-40);	
+		Ctx.fillText(x,xp,Cnv.height-20);	
+	}
+	for (let y=0; y<=300; y+=20) {
+		const yp = yPos(y);
+		Ctx.moveTo(40,yp);
+		Ctx.lineTo(Cnv.width-40,yp);	
+		Ctx.fillText(y,20,yp);	
+	}
+	Ctx.moveTo(xPos(0),yPos(57.6));
+	for (let val of [ [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
+		Ctx.lineTo(xPos(val[0]), yPos(val[1]));
+	}
+    // ctx.moveTo(0,57.6);
+    // ctx.lineTo(600,67.3);
+    // ctx.lineTo(1800,144.8);
+    // ctx.lineTo(2400,212.7);
+    // ctx.lineTo(3000,300);   
+    Ctx.stroke();
 </script>
 
