@@ -242,17 +242,17 @@ Pump Style
     Cond = $('body').children();
     $('body').load('curve.html');
   }
-  function addPump() {      
+  function addPump() {     
+    const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {
-      var last = $(e).children().last();
-      $(e).append(last.clone());
+      const newEl = $(e).children().last().clone();
+      $(e).append(newEl);
       if (i==0) {
-        last.replaceWith($('<th class=hover onclick="notes(this)"><button>'+last.index()+'</button></th>'));
-        //last.replaceWith($('<th>').text(last.index()));
-         
+        newEl.find('button').text(newEl.index());     
+        newEl.after(thAdd);    
       }
     });
-  }
+  }  
   function notes() {
     Cond = $('body').children();
     $('body').load('notes.html');
