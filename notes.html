@@ -15,25 +15,33 @@
 	}	
 }
 </style>
+
+
+
 <h1>Notes</h1>
-Date<br>
-<input type=date/><br>
-Facility<br>
-<input name=facility><br>
-System<br>
-<input><br>
-Application<br>
-<input><br>
-Evaluator<br>
-<input><br>
-Comments<br>
-<textarea name='comment' rows=10 cols=100/><br>
-<button onclick='BackToCond()'>CANCEL</button> <button onclick='save()'>SAVE</button>
+<form>
+	Name<br>
+	<input name=name><br>
+	Date<br>
+	<input type=date/><br>
+	Facility<br>
+	<input name=facility><br>
+	System<br>
+	<input><br>
+	Application<br>
+	<input><br>
+	Evaluator<br>
+	<input><br>
+	Comments<br>
+	<textarea name='comment' rows=10 cols=100/><br>
+	<button onclick='BackToCond()'>CANCEL</button> <button onclick='save()'>SAVE</button>
+</form>
 <script>
-	$('[name=comment').val(localStorage.getItem('comment'));	
+	$('[name=comment').val(localStorage.getItem('comment'));
+	$('[name=facility').val(localStorage.getItem('facility'));		
 	function save() {
 		localStorage.setItem('comment',$('[name=comment').val());
-		localStorage.setItem('comment',$('[name=facility').val());
+		localStorage.setItem('facility',$('[name=facility').val());
 
 		BackToCond();
 	}
