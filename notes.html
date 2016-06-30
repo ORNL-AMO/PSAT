@@ -27,7 +27,7 @@
 	Facility<br>
 	<input name=facility><br>
 	System<br>
-	<input><br>
+	<input name='system'><br>
 	Application<br>
 	<input><br>
 	Evaluator<br>
@@ -42,8 +42,11 @@
 	});
 
 	function save() {
-		localStorage.setItem('notes',JSON.stringify($('form').serializeArray()));		
+		const d = $('form').serializeArray();
+		localStorage.setItem('notes',JSON.stringify(d));		
 		BackToCond();
+		$('th button').first().text(d[0].value);
+			
 	}
 	
 </script>
