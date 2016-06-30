@@ -34,15 +34,15 @@
 	<input><br>
 	Comments<br>
 	<textarea name='comment' rows=10 cols=100/><br>
-	<button onclick='BackToCond()'>CANCEL</button> <button onclick='save()'>SAVE</button>
 </form>
+	<button onclick='BackToCond()'>CANCEL</button> <button onclick='save()'>SAVE</button>
 <script>
-	$('[name=comment').val(localStorage.getItem('comment'));
-	$('[name=facility').val(localStorage.getItem('facility'));		
-	function save() {
-		localStorage.setItem('comment',$('[name=comment').val());
-		localStorage.setItem('facility',$('[name=facility').val());
+	$.each(JSON.parse(localStorage.getItem('notes')),function(i,e) {
+		$('[name='+e.name+']').val(e.value);
+	});
 
+	function save() {
+		localStorage.setItem('notes',JSON.stringify($('form').serializeArray()));		
 		BackToCond();
 	}
 	
