@@ -35,7 +35,7 @@
 	Comments<br>
 	<textarea name='comment' rows=10 cols=100/><br>
 </form>
-	<button onclick='BackToCond()'>CANCEL</button> <button onclick='save()'>SAVE</button>
+	<button onclick='Back()'>CANCEL</button> <button onclick='save()'>SAVE</button>
 <script>
 	$.each(JSON.parse(localStorage.getItem('notes')),function(i,e) {
 		$('[name='+e.name+']').val(e.value);
@@ -44,7 +44,7 @@
 	function save() {
 		const d = $('form').serializeArray();
 		localStorage.setItem('notes',JSON.stringify(d));		
-		BackToCond();
+		Back();
 		$('th button').first().text(d[0].value);
 			
 	}
