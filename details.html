@@ -58,9 +58,133 @@ Pump Style
   <option>Vertical turbine</option>
   <option>Large end suction</option>
   <option>Specified optimal eff</option>
-</select>     
+</select><br>
+
 <hr>          
 <table>
+  <thead>
+    <tr>
+      <th>Pump</th><th class='hover' onclick='load("notes")''><button>Add Condition</button></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pump RPM</td>
+    </tr>
+    <tr>
+      <td>Drive</td>
+    </tr>
+    <tr>
+      <td>Kinematic Viscosity (cS)</td>
+     </tr>
+    <tr>
+      <td>Specific Gravity</td>
+     </tr>
+    <tr>
+      <td>Number Stages</td>
+     </tr>
+    <tr>
+      <td>Fixed specific speed?</td>
+     </tr>
+    <tr>
+      <td class='th'>Motor</td>
+    </tr>
+      <td>Line freq</td>
+    </tr>      
+    <tr>
+      <td>Horsepower</td>
+    </tr>
+    <tr>
+      <td>Motor rpm</td>
+    </tr>
+    <tr>
+      <td>Efficiency class</td>
+    </tr>    
+    <tr>
+      <td>Voltage</td>
+    </tr>
+    <tr>
+      <td>Full-load amps</td>
+    </tr>
+    <tr>
+      <td>Size margin</td>
+    </tr>
+    <tr>
+      <td class='th'>Cost</td>
+    </tr>
+    <tr>
+      <td>Operating fraction</td>
+    </tr>
+   <tr>
+      <td>$ / kwhr</td>
+    </tr>
+    <tr>
+      <td class='th'>Field</td>
+    </tr>        
+    <tr>
+      <td>Flow rate, gpm</td>
+    </tr>
+    <tr>
+      <td>$ / kwhr</td>
+    </tr>     
+    <tr>
+      <td>Head, ft</td>
+    </tr>       
+    <tr>
+      <td>Load estimate method</td>
+    </tr>
+    <tr>
+      <td>Motor kW</td>
+    </tr>
+    <tr>
+      <td>Voltage</td>
+    </tr>
+    <tr>
+      <td class='th vam'><span>Results</span> <button onclick='load("curve")'>CURVE</button></td>
+    </tr>
+    <tr>
+      <td>Pump efficiency</td>
+    </tr>
+    <tr>
+      <td>Motor rated power</td>
+    </tr>
+    <tr>
+      <td>Motor shaft power</td>
+    </tr>
+    <tr>
+      <td>Pump shaft power</td>
+    </tr>
+    <tr>
+      <td>Motor efficiency</td>
+    </tr>
+    <tr>
+      <td>Motor power factor</td>
+    </tr>
+    <tr>
+      <td>Motor current</td>
+    </tr>
+    <tr>
+      <td>Motor power</td>
+    </tr>
+    <tr>
+      <td>Annual energy</td>
+    </tr>
+    <tr>
+      <td>Annual cost</td>
+    </tr>
+    <tr>
+      <td class=th>Summary</td>
+    </tr>
+    <tr class=sum>
+      <td>Savings potential</td>      
+    </tr>
+    <tr class=sum>
+      <td>Optimization rating</td>
+    </tr>
+  </tbody>
+</table>
+ 
+<!-- <table>
   <thead>
     <tr>
       <th>Pump</th><th class='hover' onclick='load("notes")''><button>1</button></th><th class='hover' onclick='load("conditions")'><button>+</button></th>
@@ -226,7 +350,8 @@ Pump Style
     </tr>
   </tbody>
 </table>
-<script>
+ -->
+ <script>
   function load(nm) {
     Main = $('body').children();
     $('body').load(nm+'.html');
