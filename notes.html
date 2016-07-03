@@ -21,7 +21,7 @@
 <h1>Notes</h1>
 <form>
 	Name<br>
-	<input name=name><br>
+	<input name=name value='My New Condition'><br>
 	Date<br>
 	<input type=date/><br>
 	Facility<br>
@@ -37,13 +37,15 @@
 </form>
 	<button onclick='Back()'>CANCEL</button> <button onclick='save()'>SAVE</button>
 <script>
-	$.each(JSON.parse(localStorage.getItem('notes')),function(i,e) {
-		$('[name='+e.name+']').val(e.value);
-	});
+	// $.each(JSON.parse(LS.getItem('notes')),function(i,e) {
+	// 	$('[name='+e.name+']').val(e.value);
+	// });
 
 	function save() {
+		const nextId = LS.getItem('maxId')+1;
+		LS.setItem('maxId',nextId);
 		const d = $('form').serializeArray();
-		localStorage.setItem('notes',JSON.stringify(d));		
+		LS.setItem('cond_'+nextId,JSON.stringify(d));		
 		Back();
 		$('th button').first().text(d[0].value);
 			
