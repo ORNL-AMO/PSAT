@@ -45,9 +45,11 @@
 		// LS.setItem('cond_'+nextId,JSON.stringify(d));		
 		let d = {
 			pump_rpm: 1780,
+			drive: 0,
 			viscosity: 1,
 			specific_gravity: 1,
 			stages: 1,
+			line: 1,
 			power_rating: 30,
 			motor_rpm: 1780,
 			motor_voltage: 460,
@@ -60,8 +62,13 @@
 			est_power: 150,
 			field_voltage: 460
 		};
-		$('input[name]').each(function(i,e) {
-			d[$(e).attr('name')] = $(e).val();
+		$('[name]').each(function(i,e) {
+			//if ($(e).is('input')) {
+				d[$(e).attr('name')] = $(e).val();
+			//} else if ($(e).is('select')) {
+
+			//}
+
 		});
 		d.pump_rpm = 9;
 		Back();

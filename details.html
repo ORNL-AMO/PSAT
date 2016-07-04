@@ -201,7 +201,7 @@ Pump Style
     <tr>
       <td>Drive</td>
       <td> 
-        <select>
+        <select name='drive'>
           <option>Direct drive</option>
           <option>Belt drive</option>
         </select>
@@ -228,7 +228,7 @@ Pump Style
     </tr>
       <td>Line freq</td>
       <td> 
-        <select>
+        <select name='line'>
           <option>50 Hz</option>
           <option>60 Hz</option>
         </select>
@@ -368,9 +368,15 @@ Pump Style
         newEl.find('button').text(d.name);     
         newEl.after(thAdd);    
       } else {
-        const inp = newEl.find('input[name]');
-        if (inp) {
-          inp.val(d[inp.attr('name')]);
+        const inp = newEl.find('[name]');
+        if (inp.length>0) {
+          if (inp[0].tagName == 'INPUT') {
+            inp.val(d[inp.attr('name')]);
+          } else if (inp[0].tagName == 'SELECT') {
+
+            newEl.find('option')[1].selected = true;
+          }
+
         }
       }
     });
