@@ -366,7 +366,7 @@ Pump Style
   function addPump(idx,nm) {     
     const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {
-      const newEl = $(e).children()[1].clone();
+      const newEl = $($(e).children()[1]).clone();
       $(e).append(newEl);
       if (i==0) {
         newEl.find('button').text(nm);     

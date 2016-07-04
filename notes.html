@@ -1,7 +1,4 @@
 <style scoped=scoped>
-	h1 {
-		color: green;
-	}
 	em {
 		font-size: smaller;
 		font-weight: lighter;
@@ -47,7 +44,8 @@
 		const d = $('form').serializeArray();
 		LS.setItem('cond_'+nextId,JSON.stringify(d));		
 		Back();
-		$('th button').first().text(d[0].value);
+		addPump(0,'dorky');
+		// $('th button').first().text(d[0].value);
 			
 	}
 	
