@@ -196,7 +196,7 @@ Pump Style
   </thead>
   <tbody>
     <tr>
-      <td>Pump RPM</td><td><input name='rpm_pump' type="number"></td>
+      <td>Pump RPM</td><td><input name='pump_rpm' type="number"></td>
     </tr>
     <tr>
       <td>Drive</td>
@@ -240,7 +240,7 @@ Pump Style
     </tr>
     <tr>
       <td>Motor rpm</td>
-      <td><input name='rpm_motor' type="number"></td>
+      <td><input name='motor_rpm' type="number"></td>
     </tr>
     <tr>
       <td>Efficiency class</td>
@@ -359,14 +359,19 @@ Pump Style
   function pumpEff(v) {        
     $('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
   }
-  function addPump(idx,nm) {     
+  function addPump(idx,d) {     
     const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {
       const newEl = $($(e).children()[1]).clone();
       $(e).append(newEl);
       if (i==0) {
-        newEl.find('button').text(nm);     
+        newEl.find('button').text(d.name);     
         newEl.after(thAdd);    
+      } else {
+        const inp = newEl.find('input[name]');
+        if (inp) {
+          inp.val(d[inp.attr('name')]);
+        }
       }
     });
   }  

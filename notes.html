@@ -41,10 +41,15 @@
 	function save() {
 		const nextId = LS.getItem('maxId')+1;
 		LS.setItem('maxId',nextId);
-		const d = $('form').serializeArray();
-		LS.setItem('cond_'+nextId,JSON.stringify(d));		
+		// const d = $('form').serializeArray();
+		// LS.setItem('cond_'+nextId,JSON.stringify(d));		
+		let d = {};
+		$('input[name]').each(function(i,e) {
+			d[$(e).attr('name')] = $(e).val();
+		});
+		d.pump_rpm = 9;
 		Back();
-		addPump(0,d[0].value);
+		addPump(0,d);
 		// $('th button').first().text(d[0].value);
 			
 	}
