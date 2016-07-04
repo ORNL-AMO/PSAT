@@ -43,7 +43,23 @@
 		LS.setItem('maxId',nextId);
 		// const d = $('form').serializeArray();
 		// LS.setItem('cond_'+nextId,JSON.stringify(d));		
-		let d = {};
+		let d = {
+			pump_rpm: 1780,
+			viscosity: 1,
+			specific_gravity: 1,
+			stages: 1,
+			power_rating: 30,
+			motor_rpm: 1780,
+			motor_voltage: 460,
+			amps: 225.4,
+			margin: 0,
+			fraction: 1,
+			cost: .05,
+			flow: 2000,
+			head: 277,
+			est_power: 150,
+			field_voltage: 460
+		};
 		$('input[name]').each(function(i,e) {
 			d[$(e).attr('name')] = $(e).val();
 		});
