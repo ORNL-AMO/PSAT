@@ -44,7 +44,7 @@
 		const d = $('form').serializeArray();
 		LS.setItem('cond_'+nextId,JSON.stringify(d));		
 		Back();
-		addPump(0,'dorky');
+		addPump(0,d[0].value);
 		// $('th button').first().text(d[0].value);
 			
 	}
