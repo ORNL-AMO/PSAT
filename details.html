@@ -369,14 +369,10 @@ Pump Style
         newEl.after(thAdd);    
       } else {
         const inp = newEl.find('[name]');
-        if (inp.length>0) {
-          if (inp[0].tagName == 'INPUT') {
-            inp.val(d[inp.attr('name')]);
-          } else if (inp[0].tagName == 'SELECT') {
-
-            newEl.find('option')[1].selected = true;
-          }
-
+        if (inp.is('input')) {
+          inp.val(d[inp.attr('name')]);
+        } else if (inp.is('select')) {
+          newEl.find('option')[d[inp.attr('name')]].selected = true;
         }
       }
     });

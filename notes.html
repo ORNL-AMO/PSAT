@@ -63,12 +63,7 @@
 			field_voltage: 460
 		};
 		$('[name]').each(function(i,e) {
-			//if ($(e).is('input')) {
-				d[$(e).attr('name')] = $(e).val();
-			//} else if ($(e).is('select')) {
-
-			//}
-
+			d[$(e).attr('name')] = $(e).val();
 		});
 		d.pump_rpm = 9;
 		Back();
