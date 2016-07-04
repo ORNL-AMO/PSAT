@@ -196,7 +196,7 @@ Pump Style
   </thead>
   <tbody>
     <tr>
-      <td>Pump RPM</td><td><input type="number"></td>
+      <td>Pump RPM</td><td><input name='rpm_pump' type="number"></td>
     </tr>
     <tr>
       <td>Drive</td>
@@ -208,20 +208,20 @@ Pump Style
       </td>
     </tr>
     <tr>
-      <td>Kinematic Viscosity (cS)</td>
-      <td><input type="number"></td>
+      <td>Kinematic Viscosity</td>
+      <td><input name='viscosity' type="number"></td>
     </tr>
     <tr>
       <td>Specific Gravity</td>
-      <td><input type="number"></td>
+      <td><input name='sg' type="number"></td>
     </tr>
     <tr>
       <td>Number Stages</td>
-      <td><input type="number"></td>
+      <td><input name='stages' type="number"></td>
     </tr>
     <tr>
       <td>Fixed specific speed?</td>
-      <td><input type="checkbox"></td>
+      <td><input name='speed' type="checkbox"></td>
     </tr>
     <tr>
       <td class='th'>Motor</td><td/>
@@ -235,12 +235,12 @@ Pump Style
       </td>
     </tr>      
     <tr>
-      <td>Horsepower</td>
-      <td><input type="number"></td>
+      <td>Power Rating</td>
+      <td><input name='power_rating' type="number"></td>
     </tr>
     <tr>
       <td>Motor rpm</td>
-      <td><input type="number"></td>
+      <td><input name='rpm_motor' type="number"></td>
     </tr>
     <tr>
       <td>Efficiency class</td>
@@ -255,41 +255,37 @@ Pump Style
     </tr>    
     <tr>
       <td>Voltage</td>
-      <td><input type="number"></td>
+      <td><input name='voltage' type="number"></td>
     </tr>
     <tr>
       <td>Full-load amps</td>
-      <td><input type="number"><button>EST</button></td>
+      <td><input name='amps' type="number"><button>EST</button></td>
     </tr>
     <tr>
       <td>Size margin</td>
-      <td><input type="number"></td>
+      <td><input name='margin' type="number"></td>
     </tr>
     <tr>
       <td class='th'>Cost</td><td/>
     </tr>
     <tr>
       <td>Operating fraction</td>
-      <td><input type="number"></td>
+      <td><input name='fraction' type="number"></td>
     </tr>
    <tr>
       <td>$ / kwhr</td>
-      <td><input type="number"></td>
+      <td><input name='cost' type="number"></td>
     </tr>
     <tr>
       <td class='th'>Field</td><td/>
     </tr>        
     <tr>
-      <td>Flow rate, gpm</td>
-      <td><input type="number" onchange="pumpEff($(this).val())"></td>
+      <td>Flow rate</td>
+      <td><input name='flow' type="number" onchange="pumpEff($(this).val())"></td>
     </tr>
     <tr>
-      <td>$ / kwhr</td>
-      <td><input type="number"></td>
-    </tr>     
-    <tr>
-      <td>Head, ft</td>
-      <td><input type="number"><button onclick='load("headtool")'>TOOL</button></td>
+      <td>Head</td>
+      <td><input name='head' type="number"><button onclick='load("headtool")'>TOOL</button></td>
     </tr>       
     <tr>
       <td>Load estimate method</td>
@@ -301,12 +297,12 @@ Pump Style
       </td>
     </tr>
     <tr>
-      <td>Motor kW</td>
-      <td><input type="number"></td>
+      <td>Estimated Power</td>
+      <td><input name='est_power' type="number"></td>
     </tr>
     <tr>
       <td>Voltage</td>
-      <td><input type="number"></td>
+      <td><input name='voltage' type="number"></td>
     </tr>
     <tr>
       <td class='th vam'><span>Results</span> <button onclick='load("curve")'>CURVE</button></td><td></td>
