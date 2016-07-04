@@ -9,6 +9,9 @@
     text-align: center;
 
   }
+  td:nth-child(2),th:nth-child(2) {
+    display: none;
+  }
   td.result {
     position: relative;
   }
@@ -61,10 +64,11 @@ Pump Style
 </select><br>
 
 <hr>          
+<!--
 <table>
   <thead>
     <tr>
-      <th>Pump</th><th class='hover' onclick='load("notes")''><button>Add Condition</button></th>
+      <th>Pump</th><th class='hover' onclick='load("notes")><button>Add Condition</button></th>
     </tr>
   </thead>
   <tbody>
@@ -183,16 +187,16 @@ Pump Style
     </tr>
   </tbody>
 </table>
- 
-<!-- <table>
+ -->
+<table>
   <thead>
     <tr>
-      <th>Pump</th><th class='hover' onclick='load("notes")''><button>1</button></th><th class='hover' onclick='load("conditions")'><button>+</button></th>
+      <th>Pump</th><th class='hover' onclick='load("notes")'><button>1</button></th><th class='hover' onclick='load("conditions")'><button>ADD CONDITION</button></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Pump RPM</td><td><input type="number" value="1780"></td>
+      <td>Pump RPM</td><td><input type="number"></td>
     </tr>
     <tr>
       <td>Drive</td>
@@ -205,15 +209,15 @@ Pump Style
     </tr>
     <tr>
       <td>Kinematic Viscosity (cS)</td>
-      <td><input type="number" value="1.00"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td>Specific Gravity</td>
-      <td><input type="number" value="1.000"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td>Number Stages</td>
-      <td><input type="number" value="1"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td>Fixed specific speed?</td>
@@ -226,24 +230,24 @@ Pump Style
       <td> 
         <select>
           <option>50 Hz</option>
-          <option selected>60 Hz</option>
+          <option>60 Hz</option>
         </select>
       </td>
     </tr>      
     <tr>
       <td>Horsepower</td>
-      <td><input type="number" value="200"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td>Motor rpm</td>
-      <td><input type="number" value="1780"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td>Efficiency class</td>
       <td> 
         <select>
           <option>Standard</option>
-          <option selected>Energy</option>
+          <option>Energy</option>
           <option>Average</option>
           <option>Specified?</option>
         </select>
@@ -251,41 +255,41 @@ Pump Style
     </tr>    
     <tr>
       <td>Voltage</td>
-      <td><input type="number" value="460"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td>Full-load amps</td>
-      <td><input type="number" value="225.4"><button>EST</button></td>
+      <td><input type="number"><button>EST</button></td>
     </tr>
     <tr>
       <td>Size margin</td>
-      <td><input type="number" value="0"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td class='th'>Cost</td><td/>
     </tr>
     <tr>
       <td>Operating fraction</td>
-      <td><input type="number" value="1.000"></td>
+      <td><input type="number"></td>
     </tr>
    <tr>
       <td>$ / kwhr</td>
-      <td><input type="number" value=".0500"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td class='th'>Field</td><td/>
     </tr>        
     <tr>
       <td>Flow rate, gpm</td>
-      <td><input type="number" value="2000" onchange="pumpEff($(this).val())"></td>
+      <td><input type="number" onchange="pumpEff($(this).val())"></td>
     </tr>
     <tr>
       <td>$ / kwhr</td>
-      <td><input type="number" value=".0500"></td>
+      <td><input type="number"></td>
     </tr>     
     <tr>
       <td>Head, ft</td>
-      <td><input type="number" value="277"><button onclick='load("headtool")'>TOOL</button></td>
+      <td><input type="number"><button onclick='load("headtool")'>TOOL</button></td>
     </tr>       
     <tr>
       <td>Load estimate method</td>
@@ -298,59 +302,59 @@ Pump Style
     </tr>
     <tr>
       <td>Motor kW</td>
-      <td><input type="number" value="150"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td>Voltage</td>
-      <td><input type="number" value="460"></td>
+      <td><input type="number"></td>
     </tr>
     <tr>
       <td class='th vam'><span>Results</span> <button onclick='load("curve")'>CURVE</button></td><td></td>
     </tr>
     <tr>
-      <td>Pump efficiency</td><td class='result'>72.6 <span>(84.8)</span></td>
+      <td>Pump efficiency</td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td>Motor rated power</td><td class='result'>200 <span>(200)</span></td>
+      <td>Motor rated power</td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td>Motor shaft power</td><td class='result'>192.4 <span>(164.8)</span></td>
+      <td>Motor shaft power</td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td>Pump shaft power</td><td class='result'>192.4 <span>(164.8)</span></td>
+      <td>Pump shaft power</td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td>Motor efficiency</td><td class='result'>95.7 <span>(05.8)</span></td>
+      <td>Motor efficiency</td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td>Motor power factor</td><td class='result'>86.7 <span>(85.7)</span></td>
+      <td>Motor power factor</td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td>Motor current</td><td class='result'>217.1 <span>(188.2)</span></td>
+      <td>Motor current</td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td>Motor power</td><td class='result'>150.0 <span>(128.4)</span></td>
+      <td>Motor power</td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td>Annual energy</td><td class='result'>1314.0 <span>(1125.1)</span></td>
+      <td>Annual energy</td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td>Annual cost</td><td class='result'>65.7 <span>(56.3)</span></td>
+      <td>Annual cost</td><td class='result'><span></span></td>
     </tr>
     <tr>
       <td class=th>Summary</td><td></td>
     </tr>
     <tr class=sum>
       <td>Savings potential</td>
-      <td class='result'><span>$8400</span></td>
+      <td class='result'><span></span></td>
     </tr>
     <tr class=sum>
       <td>Optimization rating</td>
-      <td class='result'><span>85.6%</span></td>
+      <td class='result'><span></span></td>
     </tr>
   </tbody>
 </table>
- -->
+
  <script>
   function load(nm) {
     Main = $('body').children();
@@ -359,13 +363,13 @@ Pump Style
   function pumpEff(v) {        
     $('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
   }
-  function addPump() {     
+  function addPump(idx,nm) {     
     const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {
-      const newEl = $(e).children().last().clone();
+      const newEl = $(e).children()[1].clone();
       $(e).append(newEl);
       if (i==0) {
-        newEl.find('button').text(newEl.index());     
+        newEl.find('button').text(nm);     
         newEl.after(thAdd);    
       }
     });
