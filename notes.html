@@ -39,10 +39,6 @@
 	// });
 
 	function save() {
-		const nextId = LS.getItem('maxId')+1;
-		LS.setItem('maxId',nextId);
-		// const d = $('form').serializeArray();
-		// LS.setItem('cond_'+nextId,JSON.stringify(d));		
 		let d = {
 			pump_rpm: 1780,
 			drive: 0,
@@ -66,10 +62,11 @@
 		$('[name]').each(function(i,e) {
 			d[$(e).attr('name')] = $(e).val();
 		});
-		d.pump_rpm = 9;
+		const nextId = LS.getItem('maxId')+1;
+		LS.setItem('maxId',nextId);
+		LS.setItem('conditions'+nextId,JSON.stringify({nextId:d}));		
 		Back();
 		addPump(0,d);
-		// $('th button').first().text(d[0].value);
 			
 	}
 	
