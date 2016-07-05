@@ -235,7 +235,7 @@ Pump Style
   function pumpEff(v) {        
     $('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
   }
-  function addPump(idx,d) {     
+  function addPump(d) {     
     const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {
       const newEl = $($(e).children()[1]).clone();
@@ -245,12 +245,13 @@ Pump Style
         newEl.after(thAdd);    
       } else {
         const inp = newEl.find('[name]');
+        const v = d[inp.attr('name')];
         if (inp.is(':checkbox')) {
-          inp[0].checked = d[inp.attr('name')];
+          inp[0].checked = v;
         } else if (inp.is('input')) {
-          inp.val(d[inp.attr('name')]);
+          inp.val(v);
         } else if (inp.is('select')) {
-          newEl.find('option')[d[inp.attr('name')]].selected = true;
+          newEl.find('option')[v].selected = true;
         }
       }
     });

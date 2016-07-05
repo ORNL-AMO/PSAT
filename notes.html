@@ -18,7 +18,7 @@
 <h1>Notes</h1>
 <form>
 	Name<br>
-	<input name=name value='My New Condition'><br>
+	<input name=name><br>
 	Date<br>
 	<input type=date/><br>
 	Facility<br>
@@ -37,6 +37,8 @@
 	// $.each(JSON.parse(LS.getItem('notes')),function(i,e) {
 	// 	$('[name='+e.name+']').val(e.value);
 	// });
+
+	$('[name=name]').val('Condition ' + (Cond ? Cond.length+1 : 1));
 
 	function save() {
 		let d = {
@@ -59,14 +61,17 @@
 			est_power: 150,
 			field_voltage: 460
 		};
+		
 		$('[name]').each(function(i,e) {
 			d[$(e).attr('name')] = $(e).val();
 		});
-		const nextId = LS.getItem('maxId')+1;
-		LS.setItem('maxId',nextId);
-		LS.setItem('conditions'+nextId,JSON.stringify({nextId:d}));		
+		if (!Cond) {
+			Cond = [];
+		}
+		Cond.push(d);
+		LS.setItem('conditions',JSON.stringify(Cond));
 		Back();
-		addPump(0,d);
+		addPump(d);
 			
 	}
 	

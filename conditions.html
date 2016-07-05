@@ -1,11 +1,31 @@
 <h1>Conditions</h1>
-<em>None!</em><br>
+<ul>
+</ul>
 <hr>
 <button onclick='nu()'>NEW</button>
+<button onclick='removeAll()'>REMOVE ALL</button>
+
 <script>
 	function nu() {
 		$('body').load('notes.html');
 		//Back();
 		//addPump();
 	}
+	function removeAll() {
+		LS.removeItem('conditions');
+		delete Cond;
+		start();
+
+	}
+	function start() {
+		if (Cond) {
+			$.each(Cond,function(i,e) {		
+				$('ul').append('<li>'+e.name+'</li>');
+			});		
+		} else {
+			$('ul').append('<em>None</em>');
+		}		
+	}
+	start();
+
 </script>

@@ -32,9 +32,10 @@
       }
     </style>
     <script>
-      LS = localStorage;
       $ = require('jquery');
       Bridge = require('./build/Release/bridge');
+      LS = localStorage;
+      Cond = JSON.parse(LS.getItem('conditions'));
 
       $(document).ready(function() {
         $('body').load('details.html');
