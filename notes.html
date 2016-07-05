@@ -34,11 +34,17 @@
 </form>
 	<button onclick='Back()'>CANCEL</button> <button onclick='save()'>SAVE</button>
 <script>
-	// $.each(JSON.parse(LS.getItem('notes')),function(i,e) {
-	// 	$('[name='+e.name+']').val(e.value);
-	// });
 
-	$('[name=name]').val('Condition ' + (Cond ? Cond.length+1 : 1));
+	function start(idx) {
+		if (idx) {
+			$('[name]').each(function(i,e) {
+				$(e).val(Cond[idx][$(e).attr('name')]);
+			});				
+		} else {
+			$('[name=name]').val('Condition ' + (Cond ? Cond.length+1 : 1));
+		}
+	}
+
 
 	function save() {
 		let d = {
@@ -71,7 +77,7 @@
 		Cond.push(d);
 		LS.setItem('conditions',JSON.stringify(Cond));
 		Back();
-		addPump(d);
+		addPump(Cond.length-1,d);
 			
 	}
 	

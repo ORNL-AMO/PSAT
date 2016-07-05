@@ -67,7 +67,7 @@ Pump Style
 <table>
   <thead>
     <tr>
-      <th>Pump</th><th class='hover' onclick='load("notes")'><button>1</button></th><th class='hover' onclick='load("conditions")'><button>ADD CONDITION</button></th>
+      <th>Pump</th><th><button onclick='loadNotes(this)'>1</button></th><th class='hover' onclick='load("conditions")'><button>ADD CONDITION</button></th>
     </tr>
   </thead>
   <tbody>
@@ -228,20 +228,27 @@ Pump Style
 </table>
 
  <script>
-  function load(nm) {
-    Main = $('body').children();
-    $('body').load(nm+'.html');
+  function load(nm,fn) {
+    Main = $('body').children().detach();
+    $('body').load(nm+'.html',fn);
+  }
+  function loadNotes(e) {
+    load('notes',function() {debugger;
+      start($(e).parent().data('idx'));      
+    });
   }
   function pumpEff(v) {        
     $('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
   }
-  function addPump(d) {     
+  function addPump(idx,d) {     
     const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {
       const newEl = $($(e).children()[1]).clone();
       $(e).append(newEl);
       if (i==0) {
         newEl.find('button').text(d.name);     
+        newEl.data('idx',idx);
+        newEl.find('button').data('apple','banana');
         newEl.after(thAdd);    
       } else {
         const inp = newEl.find('[name]');
