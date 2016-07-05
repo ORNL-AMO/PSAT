@@ -7,9 +7,8 @@
 
 <script>
 	function nu() {
-		$('body').load('notes.html', function() {
-			start();
-		});
+		delete Idx;
+		$('body').load('notes.html');
 	}
 	function removeAll() {
 		LS.removeItem('conditions');

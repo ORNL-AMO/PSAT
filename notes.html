@@ -34,16 +34,15 @@
 </form>
 	<button onclick='Back()'>CANCEL</button> <button onclick='save()'>SAVE</button>
 <script>
-
-	function start(idx) {
-		if (idx) {
-			$('[name]').each(function(i,e) {
-				$(e).val(Cond[idx][$(e).attr('name')]);
-			});				
-		} else {
-			$('[name=name]').val('Condition ' + (Cond ? Cond.length+1 : 1));
-		}
+	if (window['Idx']) {
+		$('[name]').each(function(i,e) {
+			$(e).val(Cond[Idx][$(e).attr('name')]);
+		});				
+	} else {
+		Idx = Cond ? Cond.length : 0;
+		$('[name=name]').val('Condition ' + (Idx+1));
 	}
+
 
 
 	function save() {
@@ -74,10 +73,10 @@
 		if (!Cond) {
 			Cond = [];
 		}
-		Cond.push(d);
+		Cond[Idx] = d;
 		LS.setItem('conditions',JSON.stringify(Cond));
 		Back();
-		addPump(Cond.length-1,d);
+		addPump(d);
 			
 	}
 	

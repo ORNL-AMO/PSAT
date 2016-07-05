@@ -233,22 +233,20 @@ Pump Style
     $('body').load(nm+'.html',fn);
   }
   function loadNotes(e) {
-    load('notes',function() {debugger;
-      start($(e).parent().data('idx'));      
-    });
+    Idx = $(e).parent().data('idx');
+    load('notes');
   }
   function pumpEff(v) {        
     $('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
   }
-  function addPump(idx,d) {     
+  function addPump(d) {     
     const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {
       const newEl = $($(e).children()[1]).clone();
       $(e).append(newEl);
       if (i==0) {
         newEl.find('button').text(d.name);     
-        newEl.data('idx',idx);
-        newEl.find('button').data('apple','banana');
+        newEl.data('idx',Idx);
         newEl.after(thAdd);    
       } else {
         const inp = newEl.find('[name]');
