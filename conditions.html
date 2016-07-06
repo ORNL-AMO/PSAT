@@ -1,6 +1,14 @@
+<style scoped>
+	li {
+		list-style-type:none;
+	}
+	li:hover {
+		cursor: pointer;
+		color: dodgerblue;
+	}
+</style>
 <h1>Conditions</h1>
-<ul>
-</ul>
+<ul/>
 <hr>
 <button onclick='nu()'>NEW</button>
 <button onclick='removeAll()'>REMOVE ALL</button>
@@ -16,10 +24,17 @@
 		start();
 
 	}
+	function update(e) {
+		Idx = $(e).index();
+		Back();
+		//updatePump(Cond[Idx]);
+		addPump(Cond[Idx]);
+
+	}
 	function start() {
 		if (Cond) {
 			$.each(Cond,function(i,e) {		
-				$('ul').append('<li>'+e.name+'</li>');
+				$('ul').append('<li onclick="update(this)"">'+e.name+'</li>');
 			});		
 		} else {
 			$('ul').append('<em>None</em>');

@@ -39,8 +39,8 @@
 			$(e).val(Cond[Idx][$(e).attr('name')]);
 		});				
 	} else {
-		Idx = Cond ? Cond.length : 0;
-		$('[name=name]').val('Condition ' + (Idx+1));
+		//Idx = Cond ? Cond.length : 0;
+		$('[name=name]').val('Condition ' + ((Cond ? Cond.length : 0)+1));
 	}
 
 
@@ -73,10 +73,18 @@
 		if (!Cond) {
 			Cond = [];
 		}
-		Cond[Idx] = d;
-		LS.setItem('conditions',JSON.stringify(Cond));
 		Back();
-		addPump(d);
+		if (window['Idx']) {
+			Cond[Idx] = d;
+			updatePump(d);
+		} else {
+			Idx = Cond.length;
+			Cond.push(d);
+			addPump(d);
+		}
+		LS.setItem('conditions',JSON.stringify(Cond));
+
+
 			
 	}
 	
