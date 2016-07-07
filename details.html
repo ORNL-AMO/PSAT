@@ -165,7 +165,7 @@ Pump Style
     </tr>        
     <tr>
       <td>Flow rate</td>
-      <td><input name='flow' type="number" onchange="pumpEff($(this).val())"></td>
+      <td><input name='flow' type="number" onchange="pumpEff(this)"></td>
     </tr>
     <tr>
       <td>Head</td>
@@ -236,6 +236,7 @@ Pump Style
 </table>
 
  <script>
+
   function load(nm,fn) {
     Main = $('body').children().detach();
     $('body').load(nm+'.html',fn);
@@ -244,9 +245,14 @@ Pump Style
     Idx = $(e).parent().data('idx');
     load('notes');
   }
-  function pumpEff(v) {        
-    $('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
+  function pumpEff(v) {    //debugger;
+    let i = $(v).parent().index();
+    let r = $('td:contains("Pump efficiency")').parent();
+    r.children().eq(i).html(Bridge.pumpEff($(v).val()));
+    //$('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
   }
+
+
   function setPump() {
     let th = $('th').filter(function(i,e) {
       return Idx == $(e).data('idx');
@@ -254,7 +260,7 @@ Pump Style
     if (th.length == 0) {
       addPump(Cond[Idx]);
     } else {
-      $(th).find('button').text(Cond[Idx].name);
+      $(th).find('button').text(Cond[Idx].name);      
     }
   }
   
@@ -278,7 +284,8 @@ Pump Style
           newEl.find('option')[v].selected = true;
         }
       }
-    });
+    });   
+    pumpEff($('[name=flow]').last());
   }  
   
 </script>
