@@ -239,13 +239,17 @@ Pump Style
   function pumpEff(v) {        
     $('td:contains("Pump efficiency")').next().html(Bridge.pumpEff(v)+' <span>(109)</span>');
   }
-  function updatePump(d) {
-    $('th').each(function(i,e) {
-      if (Idx == $(e).data('idx')) {
-        $(e).css('background-color:yellow');
-      }
+  function setPump() {
+    let th = $('th').filter(function(i,e) {
+      return Idx == $(e).data('idx');
     });
+    if (th.length == 0) {
+      addPump(Cond[Idx]);
+    } else {
+      $(th).find('button').text(Cond[Idx].name);
+    }
   }
+  
   function addPump(d) {     
     const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {

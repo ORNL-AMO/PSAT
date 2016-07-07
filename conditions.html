@@ -15,29 +15,26 @@
 
 <script>
 	function nu() {
-		delete Idx;
+		Idx = Cond.length;
 		$('body').load('notes.html');
 	}
 	function removeAll() {
 		LS.removeItem('conditions');
-		delete Cond;
+		Cond = [];
 		start();
 
 	}
 	function update(e) {
 		Idx = $(e).index();
 		Back();
-		//updatePump(Cond[Idx]);
-		addPump(Cond[Idx]);
-
+		setPump();
 	}
 	function start() {
-		if (Cond) {
-			$.each(Cond,function(i,e) {		
-				$('ul').append('<li onclick="update(this)"">'+e.name+'</li>');
-			});		
-		} else {
-			$('ul').append('<em>None</em>');
+		$.each(Cond,function(i,e) {		
+			$('ul').append('<li onclick="update(this)"">'+e.name+'</li>');
+		});		
+		if (Cond.length==0) {
+			$('ul').html('<em>None</em>');
 		}		
 	}
 	start();
