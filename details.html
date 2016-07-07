@@ -62,12 +62,20 @@ Pump Style
   <option>Large end suction</option>
   <option>Specified optimal eff</option>
 </select><br>
-
 <hr>          
 <table>
   <thead>
     <tr>
-      <th>Pump</th><th><button onclick='loadNotes(this)'>1</button></th><th class='hover' onclick='load("conditions")'><button>ADD CONDITION</button></th>
+      <!-- <th>Pump</th><th><button onclick='loadNotes(this)'>1</button></th><th class='hover' onclick='load("conditions")'><button>ADD CONDITION</button></th>
+       -->
+      <th>Pump</th>
+        <th>
+          <button><i class="fa fa-times"/></button>
+          <span>1</span>
+          <button><i class="fa fa-floppy-o"/></button><button onclick='loadNotes(this)'><i class="fa fa-pencil-square-o"></button></i>
+        </th>
+        <th class='hover' onclick='load("conditions")'><button><i class="fa fa-plus-square"/></button></th>
+      
     </tr>
   </thead>
   <tbody>
@@ -161,7 +169,7 @@ Pump Style
     </tr>
     <tr>
       <td>Head</td>
-      <td><input name='head' type="number"><button onclick='load("headtool")'>TOOL</button></td>
+      <td><input name='head' type="number"><button onclick='load("headtool")'><i class="fa fa-line-chart"/></button></td>
     </tr>       
     <tr>
       <td>Load estimate method</td>
@@ -181,7 +189,7 @@ Pump Style
       <td><input name='field_voltage' type="number"></td>
     </tr>
     <tr>
-      <td class='th vam'><span>Results</span> <button onclick='load("curve")'>CURVE</button></td><td></td>
+      <td class='th vam'><span>Results</span> <button onclick='load("curve")'><i class="fa fa-line-chart"/></button></td><td></td>
     </tr>
     <tr>
       <td>Pump efficiency</td><td class='result'><span></span></td>
@@ -256,7 +264,7 @@ Pump Style
       const newEl = $($(e).children()[1]).clone();
       $(e).append(newEl);
       if (i==0) {
-        newEl.find('button').text(d.name);     
+        newEl.find('span').text(d.name);     
         newEl.data('idx',Idx);
         newEl.after(thAdd);    
       } else {
