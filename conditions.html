@@ -12,6 +12,9 @@
 <hr>
 <button onclick='nu()'>NEW</button>
 <button onclick='removeAll()'>REMOVE ALL</button>
+<button>IMPORT</button>
+<button>EXPORT</button>
+
 
 <script>
 	function nu() {
@@ -21,8 +24,10 @@
 	function removeAll() {
 		LS.removeItem('conditions');
 		Cond = [];
+		Idx = 0;
 		start();
-
+		$(Main).find('td:nth-child(n+3),th:nth-child(n+3):nth-last-child(n+2)').remove();
+		Back();
 	}
 	function update(e) {
 		Idx = $(e).index();

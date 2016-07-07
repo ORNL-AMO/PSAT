@@ -72,7 +72,7 @@ Pump Style
         <th>
           <button><i class="fa fa-times"/></button>
           <span>1</span>
-          <button><i class="fa fa-floppy-o"/></button><button onclick='loadNotes(this)'><i class="fa fa-pencil-square-o"></button></i>
+          <button onclick='save(this);'><i class="fa fa-floppy-o"/></button><button onclick='loadNotes(this)'><i class="fa fa-pencil-square-o"></button></i>
         </th>
         <th class='hover' onclick='load("conditions")'><button><i class="fa fa-plus-square"/></button></th>
       
@@ -169,7 +169,7 @@ Pump Style
     </tr>
     <tr>
       <td>Head</td>
-      <td><input name='head' type="number"><button onclick='load("headtool")'><i class="fa fa-line-chart"/></button></td>
+      <td><input name='head' type="number"><button onclick='load("headtool")'><i class="fa fa-wrench"/></button></td>
     </tr>       
     <tr>
       <td>Load estimate method</td>
@@ -235,8 +235,19 @@ Pump Style
   </tbody>
 </table>
 
- <script>
-
+<script>
+  function save(e) {
+    $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {
+      let v;
+      if ($(el).is('input')) {
+        v = $(el).val();
+      } else if ($(el).is('select')) {
+        v = $(el).children(':selected').index();
+      }     
+      Cond[$(e).parent().data('idx')][$(el).attr('name')] = v;
+    });
+    LS.setItem('conditions',JSON.stringify(Cond));
+  }
   function load(nm,fn) {
     Main = $('body').children().detach();
     $('body').load(nm+'.html',fn);
@@ -250,8 +261,6 @@ Pump Style
     let r = $('td:contains("Pump efficiency")').parent();
     r.children().eq(i).html(Bridge.pumpEff($(v).val()));
   }
-
-
   function setPump() {
     let th = $('th').filter(function(i,e) {
       return Idx == $(e).data('idx');
@@ -262,7 +271,6 @@ Pump Style
       $(th).find('span').text(Cond[Idx].name);      
     }
   }
-  
   function addPump(d) {     
     const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {
@@ -286,5 +294,4 @@ Pump Style
     });   
     pumpEff($('[name=flow]').last());
   }  
-  
 </script>
