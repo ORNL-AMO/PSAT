@@ -70,7 +70,7 @@ Pump Style
        -->
       <th>Pump</th>
         <th>
-          <button><i class="fa fa-times"/></button>
+          <button onclick='rm(this)'><i class="fa fa-times"/></button>
           <span>1</span>
           <button onclick='save(this);'><i class="fa fa-floppy-o"/></button><button onclick='loadNotes(this)'><i class="fa fa-pencil-square-o"></button></i>
         </th>
@@ -236,6 +236,10 @@ Pump Style
 </table>
 
 <script>
+  function rm(e) {
+    $('td:nth-child('+($(e).parent().index()+1)+')').remove();
+    $(e).parent().remove();
+  }
   function save(e) {
     $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {
       let v;
