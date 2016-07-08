@@ -237,7 +237,7 @@ Pump Style
 
 <script>
   function rm(e) {
-    $('td:nth-child('+($(e).parent().index()+1)+')').remove();
+    $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
     $(e).parent().remove();
   }
   function save(e) {
