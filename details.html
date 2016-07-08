@@ -243,7 +243,9 @@ Pump Style
   function save(e) {
     $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {
       let v;
-      if ($(el).is('input')) {
+      if ($(el).is(':checkbox')) {
+        v = el.checked;
+      } else if ($(el).is('input')) {
         v = $(el).val();
       } else if ($(el).is('select')) {
         v = $(el).children(':selected').index();
