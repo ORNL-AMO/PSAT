@@ -2,14 +2,13 @@
 	li {
 		list-style-type:none;
 	}
-	.disabled {
+	li:not([onclick]) {
 		opacity: .6;
 	}	
-	li:not(.disabled):hover {
+	li[onclick]:hover {
 		cursor: pointer;
 		color: dodgerblue;
-	}
-	
+	}	
 </style>
 <h1>Conditions</h1>
 <ul/>
@@ -44,8 +43,8 @@
 			let th = Main.find('th').filter(function(j,el) {
 		      return i == $(el).data('idx');
 		    });
-		    const attr = th.length == 0 ? 'onclick=update(this)' : 'class=disabled';
-		    $('ul').append(`<li ${attr}>${e.name}</li>`);		  
+		    const attr = th.length == 0 ? 'onclick=update(this)' : '';
+		    $('ul').append(`<li title data-x ${attr}>${e.name}</li>`);		  
 		});		
 		if (Cond.length==0) {
 			$('ul').html('<em>None</em>');
