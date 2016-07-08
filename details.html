@@ -255,7 +255,7 @@ Pump Style
     LS.setItem('conditions',JSON.stringify(Cond));
   }
   function load(nm,fn) {
-    Main = $('body').children().detach();
+    Main = $('body').contents().detach();    
     $('body').load(nm+'.html',fn);
   }
   function loadNotes(e) {
