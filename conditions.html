@@ -2,13 +2,14 @@
 	li {
 		list-style-type:none;
 	}
-	li:hover {
+	.disabled {
+		opacity: .6;
+	}	
+	li:not(.disabled):hover {
 		cursor: pointer;
 		color: dodgerblue;
 	}
-	span {
-		opacity: .6;
-	}
+	
 </style>
 <h1>Conditions</h1>
 <ul/>
@@ -33,7 +34,7 @@
 		$(Main).find('td:nth-child(n+3),th:nth-child(n+3):nth-last-child(n+2)').remove();
 		Back();
 	}
-	function update(e) {
+	function update(e) {debugger;
 		Idx = $(e).index();
 		Back();
 		setPump();
@@ -42,13 +43,9 @@
 		$.each(Cond,function(i,e) {		
 			let th = Main.find('th').filter(function(j,el) {
 		      return i == $(el).data('idx');
-		    });debugger;
-		    if (th.length == 0) {
-				$('ul').append(`<li onclick="update(this)">${e.name}</li>`);
-				
-		    } else {
-			    $('ul').append(`<span>${e.name}</span><br>`);		      	 	
-		    }
+		    });
+		    const attr = th.length == 0 ? 'onclick=update(this)' : 'class=disabled';
+		    $('ul').append(`<li ${attr}>${e.name}</li>`);		  
 		});		
 		if (Cond.length==0) {
 			$('ul').html('<em>None</em>');

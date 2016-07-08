@@ -126,7 +126,7 @@ Pump Style
     </tr>      
     <tr>
       <td>Power Rating <em>(kW)</em></td>
-      <td><input name='power_rating' type="number"><button><i class="fa fa-calculator"/></button></td>
+      <td><input name='power_rating' type="number"><button onclick=cvt(this)><i class="fa fa-calculator"/></button></td>
     </tr>
     <tr>
       <td>Motor rpm</td>
@@ -240,8 +240,13 @@ Pump Style
     </tr>
   </tbody>
 </table>
-
 <script>
+  function cvt(e) {
+    if(prompt('Convert FROM Horsepower (HP)?')) {debugger;
+      let el=$(e).prev();
+      el.val(Math.round(el.val()*7457)/10000);
+    };    
+  }
   function rm(e) {
     $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
     $(e).parent().remove();
