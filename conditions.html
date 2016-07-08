@@ -6,6 +6,9 @@
 		cursor: pointer;
 		color: dodgerblue;
 	}
+	span {
+		opacity: .6;
+	}
 </style>
 <h1>Conditions</h1>
 <ul/>
@@ -37,7 +40,15 @@
 	}
 	function start() {
 		$.each(Cond,function(i,e) {		
-			$('ul').append('<li onclick="update(this)"">'+e.name+'</li>');
+			let th = Main.find('th').filter(function(j,el) {
+		      return i == $(el).data('idx');
+		    });debugger;
+		    if (th.length == 0) {
+				$('ul').append(`<li onclick="update(this)">${e.name}</li>`);
+				
+		    } else {
+			    $('ul').append(`<span>${e.name}</span><br>`);		      	 	
+		    }
 		});		
 		if (Cond.length==0) {
 			$('ul').html('<em>None</em>');
