@@ -12,6 +12,9 @@
     text-align: center;
 
   }
+  td > * {
+    vertical-align: middle;
+  }
   td:nth-child(2),th:nth-child(2) {
     display: none;
   }
@@ -123,7 +126,7 @@ Pump Style
     </tr>      
     <tr>
       <td>Power Rating <em>(kW)</em></td>
-      <td><input name='power_rating' type="number"></td>
+      <td><input name='power_rating' type="number"><button><i class="fa fa-calculator"/></button></td>
     </tr>
     <tr>
       <td>Motor rpm</td>
