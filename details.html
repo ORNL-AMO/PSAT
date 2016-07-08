@@ -1,5 +1,8 @@
 
-<style scoped=scoped>      
+<style scoped=scoped>     
+  em {
+    font-size: .75rem;
+  } 
   tbody tr:nth-child(odd) {
     background-color: lightgray;
   }
@@ -80,7 +83,7 @@ Pump Style
   </thead>
   <tbody>
     <tr>
-      <td>Pump RPM</td><td><input name='pump_rpm' type="number"></td>
+      <td>Pump <em>(rpm)</em></td><td><input name='pump_rpm' type="number"></td>
     </tr>
     <tr>
       <td>Drive</td>
@@ -254,9 +257,9 @@ Pump Style
     });
     LS.setItem('conditions',JSON.stringify(Cond));
   }
-  function load(nm,fn) {
+  function load(nm) {
     Main = $('body').contents().detach();    
-    $('body').load(nm+'.html',fn);
+    $('body').load(nm+'.html');
   }
   function loadNotes(e) {
     Idx = $(e).parent().data('idx');
