@@ -270,12 +270,12 @@ Pump Style
   
   function unitPowerRating() {
     const dlg = $('#unit_power_rating');
-    $('[name=power_rating]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input').val()*7457)/10000);
+    $('[name=power_rating]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input').val()*.7457*10000)/10000);
     dlg[0].close();
   }
   function unitFlow() {
     const dlg = $('#unit_flow')
-    $('[name=flow]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input[type=number]').val()*7457)/10000);
+    $('[name=flow]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input[type=number]').val()*.0630901966667*10000)/10000);
     dlg[0].close();
   }
 
