@@ -70,11 +70,23 @@ Pump Style
 </select><br>
 <hr>  
 
-<dialog>
+<dialog id=unit_power_rating>
   Enter value in horsepower (HP)
   <input><br>
   <button onclick='this.parentElement.close()'>CANCEL</button>
-  <button onclick='cvt(this)'>CONVERT</button> 
+  <button onclick='unitPowerRating()'>CONVERT</button> 
+</dialog>
+
+<dialog id=unit_flow>
+  Choose units<br>
+  <input name=units type="radio" checked><em>gpm</em><br>
+  <input name=units type="radio"><em>MGD</em><br>
+  <input name=units type="radio"><em>m^3/hr</em><br>
+  <br>
+  Enter value<br>
+  <input type=number><br>
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+  <button onclick='unitFlow()'>CONVERT</button> 
 </dialog>
 
 <table>
@@ -134,7 +146,7 @@ Pump Style
     </tr>      
     <tr>
       <td><span>Power Rating</span> <em>(kW)</em></td>
-      <td><input name='power_rating' type="number"><button onclick=cvtDlg(this)><i class="fa fa-calculator"/></button>
+      <td><input name='power_rating' type="number"><button onclick=showUnit(this,'#unit_power_rating')><i class="fa fa-calculator"/></button>
       </td>
     </tr>
     <tr>
@@ -179,8 +191,8 @@ Pump Style
       <td class='th'>Field</td><td/>
     </tr>        
     <tr>
-      <td>Flow rate</td>
-      <td><input name='flow' type="number" onchange="pumpEff(this)"></td>
+      <td><span>Flow rate</span> <em>(L/s)</em></td>
+      <td><input name='flow' type="number" onchange="pumpEff(this)"><button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button></td>
     </tr>
     <tr>
       <td>Head</td>
@@ -250,17 +262,23 @@ Pump Style
   </tbody>
 </table>
 <script>
-  function cvt(e) {
-    const dlg = $(e).parent();
+  function showUnit(e,sel) {
+    const dlg = $(sel);
+    dlg[0].showModal();
+    dlg.data('idx',$(e).parent().index());
+  }
+  
+  function unitPowerRating() {
+    const dlg = $('#unit_power_rating');
     $('[name=power_rating]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input').val()*7457)/10000);
     dlg[0].close();
-    dlg.remove();
   }
-  function cvtDlg(e) {
-    const dlg = $('dialog').clone().insertAfter(e);
-    dlg[0].show();
-    dlg.data('idx',dlg.parent().index());
+  function unitFlow() {
+    const dlg = $('#unit_flow')
+    $('[name=flow]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input[type=number]').val()*7457)/10000);
+    dlg[0].close();
   }
+
   function rm(e) {
     $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
     $(e).parent().remove();
