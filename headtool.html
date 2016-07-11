@@ -16,6 +16,7 @@
 	}
 	.results table {
 		background-color: lightgray;
+		padding-bottom: .5rem;
 	}
 	.results td {
 		padding-left: 1rem;
@@ -31,9 +32,11 @@
 	<tr>
 		<td>
 			Suction pipe diameter <em>(mm)</em><br>
-			<input type=number/><br>
+			<input name=id_suc type=number/>
+			<button onclick=showUnit(this,'#unit_mm')><i class="fa fa-calculator"/></button><br>
 			Discharge pipe diameter <em>(mm)</em><br>
-			<input type=number/><br>
+			<input type=number/>
+			<button onclick=showUnit(this,'#unit_mm')><i class="fa fa-calculator"/></button><br>
 			Suction gauge pressure <em>(kPa)</em><br>
 			<input type=number/><br>
 			Discharge gauge pressure <em>(kPa)</em><br>
@@ -81,16 +84,32 @@
 					<td>Pump head</td>
 					<td class=result>52028</td>
 				</tr>
-			</table>	
+			</table>
 			<button onclick='Back()'>CANCEL</button> <button onclick='Back()'>ACCEPT</button>	
 		</td>
 	</tr>
 </table>
 
-
+<dialog id=unit_mm>
+  Enter value in inches<br>
+  <input><br>
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+  <button onclick='unitMM()'>CONVERT</button> 
+</dialog>
 
 
 
 <script>
+	function showUnit(e,sel) {
+	    const dlg = $(sel);
+	    dlg.find('input:not([type=radio])').val('');
+	    dlg[0].showModal();
+	    dlg.data('src',$(e));
+	}
+	function unitMM() {
+	    const dlg = $('#unit_mm');
+	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*25.4*10000)/10000);
+	    dlg[0].close();
+	}
 
 </script>
