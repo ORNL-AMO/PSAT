@@ -6,49 +6,91 @@
 	input {
 		margin-bottom: 1rem;
 	}
-	.result {
-		box-shadow: 1px 1px 2px 0 #707070;
-		background-color: ghostwhite;
-	}
 	
+	.layout {
+		width: 100%;
+	}
+	.results {
+		vertical-align: bottom;
+		
+	}
+	.results table {
+		background-color: lightgray;
+	}
+	.results td {
+		padding-left: 1rem;
+	}
+	.result {
+		color: green;
+		font-weight: bold;
+	}
 }
 </style>
 <h1>Head Tool</h1>
-Suction pipe diameter (ID)<br>
-<input type=number/> <em>mm</em><br>
-Discharge pipe diameter (ID)<br>
-<input type=number/> <em>mm</em><br>
-Suction gauge pressure (Ps)<br>
-<input type=number/> <em>kPa</em><br>
-Discharge gauge pressure (Pd)<br>
-<input type=number/> <em>kPa</em><br>
-Suction gauge elevation (Zs)<br>
-<input type=number/> <em>m</em><br>
-Discharge gauge elevation (Zd)<br>
-<input type=number/> <em>m</em><br>
-Suction line loss coefficients (Ks)<br>
-<input type=number/><br>
-Discharge line loss coefficients (Kd)<br>
-<input type=number/><br>
-Fluid specific gravity<br>
-<input type=number/><br>
-Flow rate<br>
-<input type=number/> <em>L/s</em><br>
-Differential elevation head<br>
-<input class=result disabled="" type=number/> <em>m</em><br>
-Differential pressure head<br>
-<input class=result disabled="" type=number/> <em>m</em><br>
-Differential velocity head<br>
-<input class=result disabled="" type=number/> <em>m</em><br>
-Estimated suction friction head<br>
-<input class=result disabled="" type=number/> <em>m</em><br>
-Estimated discharge friction head<br>
-<input class=result disabled="" type=number/> <em>m</em><br>
-<span style='color:green'>Pump head</span><br>
-<input style='background-color: lightgray' class=result disabled="" type=number/> <em>ft</em><br>
+<table class=layout>
+	<tr>
+		<td>
+			Suction pipe diameter <em>(mm)</em><br>
+			<input type=number/><br>
+			Discharge pipe diameter <em>(mm)</em><br>
+			<input type=number/><br>
+			Suction gauge pressure <em>(kPa)</em><br>
+			<input type=number/><br>
+			Discharge gauge pressure <em>(kPa)</em><br>
+			<input type=number/><br>
+			Suction gauge elevation <em>(m)</em><br>
+			<input type=number/><br>
+			Discharge gauge elevation <em>(m)</em><br>
+			<input type=number/><br>
+			Suction line loss coefficients<br>
+			<input type=number/><br>
+			Discharge line loss coefficients<br>
+			<input type=number/><br>
+			Fluid specific gravity<br>
+			<input type=number/><br>
+			Flow rate <em>L/s</em><br>
+			<input type=number/><br>					
+		</td>
+		<td class=results>
+			<table>
+				<tr>
+					<th>Head</th>
+					<th>Result <em>(m)</em></th>
+				</tr>
+				<tr>
+					<td>Differential elevation head</td>
+					<td>0</td>
+				</tr>
+				<tr>
+					<td>Differential pressure head</td>
+					<td>12.16</td>
+				</tr>
+				<tr>
+					<td>Differential velocity head</td>
+					<td>17792</td>
+				</tr>
+				<tr>
+					<td>Estimated suction friction head</td>
+					<td>72144.50</td>
+				</tr>
+				<tr>
+					<td>Estimated discharge friction head</td>
+					<td>62080</td>
+				</tr>
+				<tr>
+					<td>Pump head</td>
+					<td class=result>52028</td>
+				</tr>
+			</table>	
+			<button onclick='Back()'>CANCEL</button> <button onclick='Back()'>ACCEPT</button>	
+		</td>
+	</tr>
+</table>
 
 
-<button onclick='Back()'>CANCEL</button> <button onclick='Back()'>ACCEPT</button>
+
+
+
 <script>
 
 </script>
