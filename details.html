@@ -1,7 +1,8 @@
 
 <style scoped=scoped>     
-  em {
+  em, dialog label {
     font-size: .75rem;
+    font-style: italic;
   } 
   tbody tr:nth-child(odd) {
     background-color: lightgray;
@@ -71,7 +72,7 @@ Pump Style
 <hr>  
 
 <dialog id=unit_power_rating>
-  Enter value in horsepower (HP)
+  Enter value in horsepower (HP)<br>
   <input><br>
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unitPowerRating()'>CONVERT</button> 
@@ -79,14 +80,24 @@ Pump Style
 
 <dialog id=unit_flow>
   Choose units<br>
-  <input name=units type="radio" checked><em>gpm</em><br>
-  <input name=units type="radio"><em>MGD</em><br>
-  <input name=units type="radio"><em>m^3/hr</em><br>
+  <label>
+    <input name=units value=.0630901966667 type="radio" checked> gpm
+  </label><br>
+  <label>
+    <input name=units value=43.8126364 type="radio"> MGD
+  </label><br>
+  <label>
+    <input name=units value=0.277778 type="radio"> m^3/hr
+  </label><br>
+  
+  
   <br>
   Enter value<br>
-  <input type=number><br>
+  <input>
+  <p/>
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unitFlow()'>CONVERT</button> 
+  
 </dialog>
 
 <table>
@@ -264,6 +275,7 @@ Pump Style
 <script>
   function showUnit(e,sel) {
     const dlg = $(sel);
+    dlg.find('input:not([type=radio])').val('');
     dlg[0].showModal();
     dlg.data('idx',$(e).parent().index());
   }
@@ -275,7 +287,8 @@ Pump Style
   }
   function unitFlow() {
     const dlg = $('#unit_flow')
-    $('[name=flow]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input[type=number]').val()*.0630901966667*10000)/10000);
+    $('[name=flow]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
+    debugger;
     dlg[0].close();
   }
 
