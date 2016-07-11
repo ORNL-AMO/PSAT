@@ -68,7 +68,15 @@ Pump Style
   <option>Large end suction</option>
   <option>Specified optimal eff</option>
 </select><br>
-<hr>          
+<hr>  
+
+<dialog>
+  Enter value in horsepower (HP)
+  <input><br>
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+  <button onclick='cvt(this)'>CONVERT</button> 
+</dialog>
+
 <table>
   <thead>
     <tr>
@@ -86,7 +94,7 @@ Pump Style
   </thead>
   <tbody>
     <tr>
-      <td>Pump <em>(rpm)</em></td><td><input name='pump_rpm' type="number"></td>
+      <td><span>Pump</span> <em>(rpm)</em></td><td><input name='pump_rpm' type="number"></td>
     </tr>
     <tr>
       <td>Drive</td>
@@ -98,7 +106,7 @@ Pump Style
       </td>
     </tr>
     <tr>
-      <td>Kinematic Viscosity <em>(cS)</em></td>
+      <td><span>Kinematic Viscosity</span> <em>(cS)</em></td>
       <td><input name='viscosity' type="number"></td>
     </tr>
     <tr>
@@ -116,7 +124,7 @@ Pump Style
     <tr>
       <td class='th'>Motor</td><td/>
     </tr>
-      <td>Line freq <em>(Hz)</em></td>
+      <td><span>Line freq</span> <em>(Hz)</em></td>
       <td> 
         <select name='line'>
           <option>50</option>
@@ -125,11 +133,12 @@ Pump Style
       </td>
     </tr>      
     <tr>
-      <td>Power Rating <em>(kW)</em></td>
-      <td><input name='power_rating' type="number"><button onclick=cvt(this)><i class="fa fa-calculator"/></button></td>
+      <td><span>Power Rating</span> <em>(kW)</em></td>
+      <td><input name='power_rating' type="number"><button onclick=cvtDlg(this)><i class="fa fa-calculator"/></button>
+      </td>
     </tr>
     <tr>
-      <td>Motor rpm</td>
+      <td><span>Motor</span> <em>(rpm)</em></td>
       <td><input name='motor_rpm' type="number"></td>
     </tr>
     <tr>
@@ -152,7 +161,7 @@ Pump Style
       <td><input name='amps' type="number"><button>EST</button></td>
     </tr>
     <tr>
-      <td>Size margin</td>
+      <td><span>Size margin</span> <em>(%)</em></td>
       <td><input name='margin' type="number"></td>
     </tr>
     <tr>
@@ -242,10 +251,15 @@ Pump Style
 </table>
 <script>
   function cvt(e) {
-    if(prompt('Convert FROM Horsepower (HP)?')) {debugger;
-      let el=$(e).prev();
-      el.val(Math.round(el.val()*7457)/10000);
-    };    
+    const dlg = $(e).parent();
+    $('[name=power_rating]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input').val()*7457)/10000);
+    dlg[0].close();
+    dlg.remove();
+  }
+  function cvtDlg(e) {
+    const dlg = $('dialog').clone().insertAfter(e);
+    dlg[0].show();
+    dlg.data('idx',dlg.parent().index());
   }
   function rm(e) {
     $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
