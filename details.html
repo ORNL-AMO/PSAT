@@ -72,10 +72,17 @@ Pump Style
 <hr>  
 
 <dialog id=unit_power_rating>
-  Enter value in horsepower (HP)<br>
+  Enter value in horsepower <em>(HP)</em><br>
   <input><br>
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unitPowerRating()'>CONVERT</button> 
+</dialog>
+
+<dialog id=unit_head>
+  Enter value in feet <em>(ft)</em><br>
+  <input><br>
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+  <button onclick='unitHead()'>CONVERT</button> 
 </dialog>
 
 <dialog id=unit_flow>
@@ -157,7 +164,9 @@ Pump Style
     </tr>      
     <tr>
       <td><span>Power Rating</span> <em>(kW)</em></td>
-      <td><input name='power_rating' type="number"><button onclick=showUnit(this,'#unit_power_rating')><i class="fa fa-calculator"/></button>
+      <td>
+        <input name='power_rating' type="number">
+        <button onclick=showUnit(this,'#unit_power_rating')><i class="fa fa-calculator"/></button>
       </td>
     </tr>
     <tr>
@@ -181,7 +190,7 @@ Pump Style
     </tr>
     <tr>
       <td>Full-load amps</td>
-      <td><input name='amps' type="number"><button>EST</button></td>
+      <td><input name='amps' type="number"> <button>EST</button></td>
     </tr>
     <tr>
       <td><span>Size margin</span> <em>(%)</em></td>
@@ -203,11 +212,15 @@ Pump Style
     </tr>        
     <tr>
       <td><span>Flow rate</span> <em>(L/s)</em></td>
-      <td><input name='flow' type="number" onchange="pumpEff(this)"><button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button></td>
+      <td><input name='flow' type="number" onchange="pumpEff(this)"> <button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button></td>
     </tr>
     <tr>
       <td>Head</td>
-      <td><input name='head' type="number"><button onclick='load("headtool")'><i class="fa fa-wrench"/></button></td>
+      <td>
+        <input name='head' type="number">
+        <button onclick=showUnit(this,'#unit_head')><i class="fa fa-calculator"/></button>
+        <button onclick='load("headtool")'><i class="fa fa-wrench"/></button>
+      </td>
     </tr>       
     <tr>
       <td>Load estimate method</td>
@@ -285,6 +298,13 @@ Pump Style
     $('[name=power_rating]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input').val()*.745699872*10000)/10000);
     dlg[0].close();
   }
+  
+  function unitHead() {
+    const dlg = $('#unit_head');
+    $('[name=head]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
+    dlg[0].close();
+  }
+
   function unitFlow() {
     const dlg = $('#unit_flow')
     $('[name=flow]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
