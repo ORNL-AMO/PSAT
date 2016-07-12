@@ -3,7 +3,7 @@
 		font-size: smaller;
 		font-weight: lighter;
 	}
-	input:not(:last-child) {
+	table input {
 		margin-bottom: .75rem;
 	}	
 	.results {
@@ -50,8 +50,9 @@
 			<input type=number/><br>
 			Fluid specific gravity<br>
 			<input type=number/><br>
-			Flow rate <em>L/s</em><br>
-			<input type=number/>				
+			Flow rate <em>(L/s)</em><br>
+			<input style='margin-bottom: 0' type=number/>
+			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>				
 		</td>
 		<td class=results>
 			<table>
@@ -114,6 +115,24 @@
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unit_kPa()'>CONVERT</button> 
 </dialog>
+<dialog id=unit_flow>
+  Choose units<br>
+  <label>
+    <input name=units value=.0630901966667 type="radio" checked> gpm
+  </label><br>
+  <label>
+    <input name=units value=43.8126364 type="radio"> MGD
+  </label><br>
+  <label>
+    <input name=units value=0.277778 type="radio"> m^3/hr
+  </label><br>
+  <br>
+  Enter value<br>
+  <input>
+  <p/>
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+  <button onclick='unitFlow()'>CONVERT</button> 
+</dialog>
 
 <script>
 	function showUnit(e,sel) {
@@ -133,10 +152,14 @@
 	    dlg[0].close();
 	}
 	function unit_m() {
-	    const dlg = $('#unit_m');
+	    const dlg = $('#unit_flow');
 	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
 	    dlg[0].close();
 	}
-
+	function unitFlow() {
+	    const dlg = $('#unit_flow')
+	    dlg.data('src').prev().val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
+	    dlg[0].close();
+  	}
 
 </script>
