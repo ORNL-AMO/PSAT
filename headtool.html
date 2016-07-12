@@ -38,9 +38,11 @@
 			<input type=number/>
 			<button onclick=showUnit(this,'#unit_mm')><i class="fa fa-calculator"/></button><br>
 			Suction gauge pressure <em>(kPa)</em><br>
-			<input type=number/><br>
+			<input type=number/>
+			<button onclick=showUnit(this,'#unit_kPa')><i class="fa fa-calculator"/></button><br>
 			Discharge gauge pressure <em>(kPa)</em><br>
-			<input type=number/><br>
+			<input type=number/>
+			<button onclick=showUnit(this,'#unit_kPa')><i class="fa fa-calculator"/></button><br>
 			Suction gauge elevation <em>(m)</em><br>
 			<input type=number/><br>
 			Discharge gauge elevation <em>(m)</em><br>
@@ -96,8 +98,12 @@
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unitMM()'>CONVERT</button> 
 </dialog>
-
-
+<dialog id=unit_kPa>
+  Enter value in pounds per square inch <em>(psig)</em><br>
+  <input><br>
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+  <button onclick='unit_kPa()'>CONVERT</button> 
+</dialog>
 
 <script>
 	function showUnit(e,sel) {
@@ -109,6 +115,11 @@
 	function unitMM() {
 	    const dlg = $('#unit_mm');
 	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*25.4*10000)/10000);
+	    dlg[0].close();
+	}
+	function unit_kPa() {
+	    const dlg = $('#unit_kPa');
+	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*6.89476*10000)/10000);
 	    dlg[0].close();
 	}
 
