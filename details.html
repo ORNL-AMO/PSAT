@@ -323,8 +323,8 @@ Pump Style
     LS.setItem('conditions',JSON.stringify(Cond));
   }
   function load(nm) {
-    Main = $('body').contents().detach();    
-    $('body').load(nm+'.html');
+    Main = $('#container').contents().detach();    
+    $('#container').load(nm+'.html');
   }
   function loadNotes(e) {
     Idx = $(e).parent().data('idx');

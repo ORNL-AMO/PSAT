@@ -44,15 +44,16 @@
       Cond = JSON.parse(LS.getItem('conditions')) || []
 
       $(document).ready(function() {
-        $('body').load('details.html');
+        $('#container').load('details.html');
       });
       
       function Back() {
-        $('body').html(Main);
-        $('body').append($('body script').remove());       
-
+        $('#container').html(Main);
+        $('#container').append($('#container script').remove());       
       }
     </script>
   </head>
-  <body/>
+  <body>  
+    <div id=container></div>
+  </body>
 </html>
