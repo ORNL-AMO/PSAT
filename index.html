@@ -38,20 +38,20 @@
       }
     </style>
     <script>
-      function unitFlow() {debugger;
+      function unitFlow() {
         const dlg = $('#unit_flow');
-        target(dlg.data('src')).val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
+        target(dlg).val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
         dlg[0].close();
       }
-      function showUnit(e,sel) {
+      function showUnit(e,sel) {debugger;
         const dlg = $(sel);
         dlg.find('input:not([type=radio])').val('');
         dlg[0].showModal();
         dlg.data('src',$(e));
       }
-    function target(e) {
-      return e.prev();
-    }
+      function target(dlg) {
+        return dlg.data('src').prev();
+      }
 
       $ = require('jquery');
       Bridge = require('./build/Release/bridge');

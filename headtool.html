@@ -115,45 +115,23 @@
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unit_kPa()'>CONVERT</button> 
 </dialog>
-<!-- <dialog id=unit_flow>
-  Choose units<br>
-  <label>
-    <input name=units value=.0630901966667 type="radio" checked> gpm
-  </label><br>
-  <label>
-    <input name=units value=43.8126364 type="radio"> MGD
-  </label><br>
-  <label>
-    <input name=units value=0.277778 type="radio"> m^3/hr
-  </label><br>
-  <br>
-  Enter value<br>
-  <input>
-  <p/>
-  <button onclick='this.parentElement.close()'>CANCEL</button>
-  <button onclick='unitFlow()'>CONVERT</button> 
-</dialog> -->
+
 
 <script>
 	function unitMM() {
 	    const dlg = $('#unit_mm');
-	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*25.4*10000)/10000);
+	    target(dlg).val(Math.round(dlg.find('input').val()*25.4*10000)/10000);
 	    dlg[0].close();
 	}
 	function unit_kPa() {
 	    const dlg = $('#unit_kPa');
-	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*6.89476*10000)/10000);
+	    target(dlg).val(Math.round(dlg.find('input').val()*6.89476*10000)/10000);
 	    dlg[0].close();
 	}
 	function unit_m() {
-	    const dlg = $('#unit_flow');
-	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
+	    const dlg = $('#unit_m');
+	    target(dlg).val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
 	    dlg[0].close();
 	}
-	// function unitFlow() {
-	//     const dlg = $('#unit_flow');
-	//     dlg.data('src').prev().val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
-	//     dlg[0].close();
- //  	}
-  	
+	
 </script>
