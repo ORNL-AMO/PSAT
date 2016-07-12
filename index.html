@@ -54,6 +54,25 @@
     </script>
   </head>
   <body>  
+    <dialog id='unit_flow'>
+      Choose units<br>
+      <label>
+        <input name=units value=.0630901966667 type="radio" checked> gpm
+      </label><br>
+      <label>
+        <input name=units value=43.8126364 type="radio"> MGD
+      </label><br>
+      <label>
+        <input name=units value=0.277778 type="radio"> m^3/hr
+      </label>
+      <div style='margin:.5rem 0;'>
+        Enter value<br>
+        <input>
+      </div>
+      <button onclick='this.parentElement.close()'>CANCEL</button>
+      <button onclick='unitFlow()'>CONVERT</button> 
+    </dialog>
+
     <div id=container></div>
   </body>
 </html>
