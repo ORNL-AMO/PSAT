@@ -1,9 +1,5 @@
 
-<style scoped=scoped>     
-  em, dialog label {
-    font-size: .75rem;
-    font-style: italic;
-  } 
+<style scoped=scoped>       
   tbody tr:nth-child(odd) {
     background-color: lightgray;
   }
@@ -305,7 +301,6 @@ Pump Style
   function unitFlow() {
     const dlg = $('#unit_flow')
     $('[name=flow]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
-    debugger;
     dlg[0].close();
   }
 
