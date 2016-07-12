@@ -43,7 +43,7 @@
         dlg[0].close();
 
       }      
-      function cvtUnitFlow(dlg) {
+      function CvtUnitFlow(dlg) {
         cvtUnit(dlg,dlg.find(':checked').val());
       }
       function ShowUnit(e,sel) {
@@ -52,6 +52,19 @@
         dlg[0].showModal();
         dlg.data('src',$(e)); 
       }
+      function ShowUnitSgl(e,txt,m) {
+        const dlg = $('#unit_sgl');
+        dlg.find('span').html(txt);
+        dlg.data('m',m);
+        ShowUnit(e,dlg);
+      } 
+      function CvtUnitSgl(dlg) {      
+        cvtUnit(dlg,dlg.data('m'));
+      }
+      function ShowUnit_m(e) {
+        ShowUnitSgl(e,'meters',.3048);
+      }
+
       function target(dlg) {
         return dlg.data('src').prev();
       }
@@ -71,7 +84,13 @@
       }
     </script>
   </head>
-  <body>  
+  <body> 
+    <dialog id=unit_sgl>
+      Enter value in <span></span><br>
+      <input><br>
+      <button onclick='this.parentElement.close()'>CANCEL</button>
+      <button onclick='CvtUnitSgl($(this).parent())'>CONVERT</button> 
+    </dialog> 
     <dialog id='unit_flow'>
       Choose units<br>
       <label>
@@ -88,7 +107,7 @@
         <input>
       </div>
       <button onclick='this.parentElement.close()'>CANCEL</button>
-      <button onclick='cvtUnitFlow($(this).parent())'>CONVERT</button> 
+      <button onclick='CvtUnitFlow($(this).parent())'>CONVERT</button> 
     </dialog>
 
     <div id=container></div>

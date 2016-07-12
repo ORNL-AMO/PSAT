@@ -67,7 +67,7 @@ Pump Style
 </select><br>
 <hr>  
 
-<dialog id=unit_power_rating>
+<!-- <dialog id=unit_power_rating>
   Enter value in horsepower <em>(HP)</em><br>
   <input><br>
   <button onclick='this.parentElement.close()'>CANCEL</button>
@@ -80,7 +80,7 @@ Pump Style
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unitHead()'>CONVERT</button> 
 </dialog>
-
+ -->
 <table>
   <thead>
     <tr>
@@ -192,7 +192,7 @@ Pump Style
       <td>Head</td>
       <td>
         <input name='head' type="number">
-        <button onclick=ShowUnit(this,'#unit_head')><i class="fa fa-calculator"/></button>
+        <button onclick=ShowUnit_m(this)><i class="fa fa-calculator"/></button>
         <button onclick='load("headtool")'><i class="fa fa-wrench"/></button>
       </td>
     </tr>       
@@ -261,18 +261,19 @@ Pump Style
 </table>
 <script>
     
-  function unitPowerRating() {
-    const dlg = $('#unit_power_rating');
-    target(dlg).val(Math.round(dlg.find('input').val()*.745699872*10000)/10000);
-    dlg[0].close();
-  }
+  // function unitPowerRating() {
+  //   const dlg = $('#unit_power_rating');
+  //   target(dlg).val(Math.round(dlg.find('input').val()*.745699872*10000)/10000);
+  //   dlg[0].close();
+  // }
   
-  function unitHead() {
-    const dlg = $('#unit_head');
-    target(dlg).val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
-    dlg[0].close();
-  }
+  // function unitHead() {
+  //   const dlg = $('#unit_head');
+  //   target(dlg).val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
+  //   dlg[0].close();
+  // }
 
+  //function showUnit
   function rm(e) {
     $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
     $(e).parent().remove();
