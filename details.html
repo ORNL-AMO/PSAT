@@ -260,12 +260,12 @@ Pump Style
   </tbody>
 </table>
 <script>
-  function showUnit(e,sel) {
-    const dlg = $(sel);
-    dlg.find('input:not([type=radio])').val('');
-    dlg[0].showModal();
-    dlg.data('idx',$(e).parent().index());
-  }
+  // function showUnit(e,sel) {
+  //   const dlg = $(sel);
+  //   dlg.find('input:not([type=radio])').val('');
+  //   dlg[0].showModal();
+  //   dlg.data('idx',$(e).parent().index());
+  // }
   
   function unitPowerRating() {
     const dlg = $('#unit_power_rating');
@@ -279,11 +279,15 @@ Pump Style
     dlg[0].close();
   }
 
-  function unitFlow() {
-    const dlg = $('#unit_flow')
-    $('[name=flow]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
-    dlg[0].close();
-  }
+  // function unitFlow() {
+  //   const dlg = $('#unit_flow')
+  //   $('[name=flow]').eq(dlg.data('idx')-1).val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
+  //   dlg[0].close();
+  // }
+
+  // function target(e) {
+  //   return $('[name=flow]').eq(e.parent().index()-1);    
+  // }
 
   function rm(e) {
     $(`td:nth-child(${$(e).parent().index()+1})`).remove();    

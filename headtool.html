@@ -115,7 +115,7 @@
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unit_kPa()'>CONVERT</button> 
 </dialog>
-<dialog id=unit_flow>
+<!-- <dialog id=unit_flow>
   Choose units<br>
   <label>
     <input name=units value=.0630901966667 type="radio" checked> gpm
@@ -132,15 +132,9 @@
   <p/>
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unitFlow()'>CONVERT</button> 
-</dialog>
+</dialog> -->
 
 <script>
-	function showUnit(e,sel) {
-	    const dlg = $(sel);
-	    dlg.find('input:not([type=radio])').val('');
-	    dlg[0].showModal();
-	    dlg.data('src',$(e));
-	}
 	function unitMM() {
 	    const dlg = $('#unit_mm');
 	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*25.4*10000)/10000);
@@ -156,10 +150,10 @@
 	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
 	    dlg[0].close();
 	}
-	function unitFlow() {
-	    const dlg = $('#unit_flow')
-	    dlg.data('src').prev().val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
-	    dlg[0].close();
-  	}
-
+	// function unitFlow() {
+	//     const dlg = $('#unit_flow');
+	//     dlg.data('src').prev().val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
+	//     dlg[0].close();
+ //  	}
+  	
 </script>
