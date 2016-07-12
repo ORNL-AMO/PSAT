@@ -140,7 +140,7 @@ Pump Style
       <td><span>Power Rating</span> <em>(kW)</em></td>
       <td>
         <input name='power_rating' type="number">
-        <button onclick=showUnit(this,'#unit_power_rating')><i class="fa fa-calculator"/></button>
+        <button onclick=ShowUnit(this,'#unit_power_rating')><i class="fa fa-calculator"/></button>
       </td>
     </tr>
     <tr>
@@ -186,13 +186,13 @@ Pump Style
     </tr>        
     <tr>
       <td><span>Flow rate</span> <em>(L/s)</em></td>
-      <td><input name='flow' type="number" onchange="pumpEff(this)"> <button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button></td>
+      <td><input name='flow' type="number" onchange="pumpEff(this)"> <button onclick=ShowUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button></td>
     </tr>
     <tr>
       <td>Head</td>
       <td>
         <input name='head' type="number">
-        <button onclick=showUnit(this,'#unit_head')><i class="fa fa-calculator"/></button>
+        <button onclick=ShowUnit(this,'#unit_head')><i class="fa fa-calculator"/></button>
         <button onclick='load("headtool")'><i class="fa fa-wrench"/></button>
       </td>
     </tr>       

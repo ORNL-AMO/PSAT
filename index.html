@@ -38,16 +38,19 @@
       }
     </style>
     <script>
-      function unitFlow() {
-        const dlg = $('#unit_flow');
-        target(dlg).val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
+      function cvtUnit(dlg,m) {        
+        target(dlg).val(Math.round(dlg.find('input:not([type=radio])').val()*m*10000)/10000);        
         dlg[0].close();
+
+      }      
+      function cvtUnitFlow(dlg) {
+        cvtUnit(dlg,dlg.find(':checked').val());
       }
-      function ShowUnitDlg(e,sel) {
+      function ShowUnit(e,sel) {
         const dlg = $(sel);
         dlg.find('input:not([type=radio])').val('');
         dlg[0].showModal();
-        dlg.data('src',$(e));
+        dlg.data('src',$(e)); 
       }
       function target(dlg) {
         return dlg.data('src').prev();
@@ -85,7 +88,7 @@
         <input>
       </div>
       <button onclick='this.parentElement.close()'>CANCEL</button>
-      <button onclick='unitFlow()'>CONVERT</button> 
+      <button onclick='cvtUnitFlow($(this).parent())'>CONVERT</button> 
     </dialog>
 
     <div id=container></div>

@@ -52,7 +52,7 @@
 			<input type=number/><br>
 			Flow rate <em>(L/s)</em><br>
 			<input style='margin-bottom: 0' type=number/>
-			<button onclick=ShowUnitDlg(this,'#unit_flow')><i class="fa fa-calculator"/></button>				
+			<button onclick=ShowUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>				
 		</td>
 		<td class=results>
 			<table>
@@ -100,7 +100,7 @@
   Enter value in <span></span><br>
   <input><br>
   <button onclick='this.parentElement.close()'>CANCEL</button>
-  <button onclick='cvtUnit()'>CONVERT</button> 
+  <button onclick='cvtUnitSgl($(this).parent())'>CONVERT</button> 
 </dialog>
 
 <script>
@@ -108,12 +108,10 @@
 		const dlg = $('#unit');
 		dlg.find('span').html(txt);
 		dlg.data('m',m);
-		ShowUnitDlg(e,dlg);
-	}
-	function cvtUnit() {
-	    const dlg = $('#unit');
-	    target(dlg).val(Math.round(dlg.find('input').val()*dlg.data('m')*10000)/10000);
-	    dlg[0].close();		
+		ShowUnit(e,dlg);
+	}	
+	function cvtUnitSgl(dlg) {	    
+		cvtUnit(dlg,dlg.data('m'));
 	}
 	function showUnit_mm(e) {
 		showUnitSgl(e,'inches',25.4);
