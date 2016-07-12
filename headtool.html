@@ -3,23 +3,18 @@
 		font-size: smaller;
 		font-weight: lighter;
 	}
-	input {
-		margin-bottom: 1rem;
-	}
-	
-	.layout {
-		width: 100%;
-	}
+	input:not(:last-child) {
+		margin-bottom: .75rem;
+	}	
 	.results {
-		vertical-align: bottom;
-		
+		vertical-align: bottom;				
 	}
 	.results table {
 		background-color: lightgray;
-		padding-bottom: .5rem;
-	}
-	.results td {
+	}	
+	.results td, .results th {
 		padding-left: 1rem;
+		text-align: left;
 	}
 	.result {
 		color: green;
@@ -28,7 +23,7 @@
 }
 </style>
 <h1>Head Tool</h1>
-<table class=layout>
+<table style='width: 100%'>
 	<tr>
 		<td>
 			Suction pipe diameter <em>(mm)</em><br>
@@ -44,9 +39,11 @@
 			<input type=number/>
 			<button onclick=showUnit(this,'#unit_kPa')><i class="fa fa-calculator"/></button><br>
 			Suction gauge elevation <em>(m)</em><br>
-			<input type=number/><br>
+			<input type=number/>
+			<button onclick=showUnit(this,'#unit_m')><i class="fa fa-calculator"/></button><br>
 			Discharge gauge elevation <em>(m)</em><br>
-			<input type=number/><br>
+			<input type=number/>
+			<button onclick=showUnit(this,'#unit_m')><i class="fa fa-calculator"/></button><br>
 			Suction line loss coefficients<br>
 			<input type=number/><br>
 			Discharge line loss coefficients<br>
@@ -54,7 +51,7 @@
 			Fluid specific gravity<br>
 			<input type=number/><br>
 			Flow rate <em>L/s</em><br>
-			<input type=number/><br>					
+			<input type=number/>				
 		</td>
 		<td class=results>
 			<table>
@@ -85,18 +82,31 @@
 				<tr>
 					<td>Pump head</td>
 					<td class=result>52028</td>
-				</tr>
+				</tr>				
 			</table>
-			<button onclick='Back()'>CANCEL</button> <button onclick='Back()'>ACCEPT</button>	
+		</td>
+	</tr>
+	<tr>
+		<td/>
+		<td>
+			<button onclick='Back()'>ACCEPT</button>
+			<button onclick='Back()'>CANCEL</button>
 		</td>
 	</tr>
 </table>
+			
 
 <dialog id=unit_mm>
   Enter value in inches<br>
   <input><br>
   <button onclick='this.parentElement.close()'>CANCEL</button>
   <button onclick='unitMM()'>CONVERT</button> 
+</dialog>
+<dialog id=unit_m>
+  Enter value in meters<br>
+  <input><br>
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+  <button onclick='unit_m()'>CONVERT</button> 
 </dialog>
 <dialog id=unit_kPa>
   Enter value in pounds per square inch <em>(psig)</em><br>
@@ -122,5 +132,11 @@
 	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*6.89476*10000)/10000);
 	    dlg[0].close();
 	}
+	function unit_m() {
+	    const dlg = $('#unit_m');
+	    dlg.data('src').prev().val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
+	    dlg[0].close();
+	}
+
 
 </script>
