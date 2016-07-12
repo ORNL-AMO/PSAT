@@ -28,22 +28,22 @@
 		<td>
 			Suction pipe diameter <em>(mm)</em><br>
 			<input name=id_suc type=number/>
-			<button onclick=showUnit(this,'#unit_mm')><i class="fa fa-calculator"/></button><br>
+			<button onclick=showUnit_mm(this)><i class="fa fa-calculator"/></button><br>
 			Discharge pipe diameter <em>(mm)</em><br>
 			<input type=number/>
-			<button onclick=showUnit(this,'#unit_mm')><i class="fa fa-calculator"/></button><br>
+			<button onclick=showUnit_mm(this)><i class="fa fa-calculator"/></button><br>
 			Suction gauge pressure <em>(kPa)</em><br>
 			<input type=number/>
-			<button onclick=showUnit(this,'#unit_kPa')><i class="fa fa-calculator"/></button><br>
+			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
 			Discharge gauge pressure <em>(kPa)</em><br>
 			<input type=number/>
-			<button onclick=showUnit(this,'#unit_kPa')><i class="fa fa-calculator"/></button><br>
+			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
 			Suction gauge elevation <em>(m)</em><br>
 			<input type=number/>
-			<button onclick=showUnit(this,'#unit_m')><i class="fa fa-calculator"/></button><br>
+			<button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button><br>
 			Discharge gauge elevation <em>(m)</em><br>
 			<input type=number/>
-			<button onclick=showUnit(this,'#unit_m')><i class="fa fa-calculator"/></button><br>
+			<button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button><br>
 			Suction line loss coefficients<br>
 			<input type=number/><br>
 			Discharge line loss coefficients<br>
@@ -52,7 +52,7 @@
 			<input type=number/><br>
 			Flow rate <em>(L/s)</em><br>
 			<input style='margin-bottom: 0' type=number/>
-			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>				
+			<button onclick=ShowUnitDlg(this,'#unit_flow')><i class="fa fa-calculator"/></button>				
 		</td>
 		<td class=results>
 			<table>
@@ -96,42 +96,34 @@
 	</tr>
 </table>
 			
-
-<dialog id=unit_mm>
-  Enter value in inches<br>
+<dialog id=unit>
+  Enter value in <span></span><br>
   <input><br>
   <button onclick='this.parentElement.close()'>CANCEL</button>
-  <button onclick='unitMM()'>CONVERT</button> 
+  <button onclick='cvtUnit()'>CONVERT</button> 
 </dialog>
-<dialog id=unit_m>
-  Enter value in meters<br>
-  <input><br>
-  <button onclick='this.parentElement.close()'>CANCEL</button>
-  <button onclick='unit_m()'>CONVERT</button> 
-</dialog>
-<dialog id=unit_kPa>
-  Enter value in pounds per square inch <em>(psig)</em><br>
-  <input><br>
-  <button onclick='this.parentElement.close()'>CANCEL</button>
-  <button onclick='unit_kPa()'>CONVERT</button> 
-</dialog>
-
 
 <script>
-	function unitMM() {
-	    const dlg = $('#unit_mm');
-	    target(dlg).val(Math.round(dlg.find('input').val()*25.4*10000)/10000);
-	    dlg[0].close();
+	function showUnitSgl(e,txt,m) {
+		const dlg = $('#unit');
+		dlg.find('span').html(txt);
+		dlg.data('m',m);
+		ShowUnitDlg(e,dlg);
 	}
-	function unit_kPa() {
-	    const dlg = $('#unit_kPa');
-	    target(dlg).val(Math.round(dlg.find('input').val()*6.89476*10000)/10000);
-	    dlg[0].close();
+	function cvtUnit() {
+	    const dlg = $('#unit');
+	    target(dlg).val(Math.round(dlg.find('input').val()*dlg.data('m')*10000)/10000);
+	    dlg[0].close();		
 	}
-	function unit_m() {
-	    const dlg = $('#unit_m');
-	    target(dlg).val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
-	    dlg[0].close();
+	function showUnit_mm(e) {
+		showUnitSgl(e,'inches',25.4);
 	}
+	function showUnit_kPa(e) {
+		showUnitSgl(e,'pounds per square inch <em>(psig)</em>',6.89476);
+	}
+	function showUnit_m(e) {
+		showUnitSgl(e,'meters',.3048);
+	}
+
 	
 </script>

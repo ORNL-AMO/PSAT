@@ -43,7 +43,7 @@
         target(dlg).val(Math.round(dlg.find('input:not([type=radio])').val()*dlg.find(':checked').val()*10000)/10000);
         dlg[0].close();
       }
-      function showUnit(e,sel) {debugger;
+      function ShowUnitDlg(e,sel) {
         const dlg = $(sel);
         dlg.find('input:not([type=radio])').val('');
         dlg[0].showModal();
