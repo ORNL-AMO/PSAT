@@ -2,7 +2,7 @@
 	li {
 		list-style-type:none;
 	}
-	li>span:not([onclick]),li>button:not([onclick]) {
+	li>span:not([onclick]) {
 		opacity: .6;
 	}	
 	li>span[onclick]:hover {
@@ -60,10 +60,8 @@
 			let nu = $('li').first().clone();
 			nu.find('span').text(e.name);
 			if (th.length>0) {
-				//nu.removeAttr('onclick');
-				nu.find('button').removeAttr('onclick');
-				nu.find('span').removeAttr('onclick');
-					
+				nu.find('button').attr('disabled','');
+				nu.find('span').removeAttr('onclick');					
 			}
 			$('ul').append(nu);		  
 		});		
