@@ -1,0 +1,314 @@
+
+<style scoped=scoped>       
+  tbody tr:nth-child(odd) {
+    background-color: lightgray;
+  }
+  th,.th {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+
+  }
+  td > * {
+    vertical-align: middle;
+  }
+  td:nth-child(2),th:nth-child(2) {
+    display: none;
+  }
+  td.result {
+    position: relative;
+  }
+  td.result span {
+    position: absolute; 
+    left: 50%;
+    bottom: 1px;
+    color: green;
+  }
+  .sum {
+    font-weight: bold;
+  }
+  .sum td:not(:first-child) {
+    color: green;
+  }      
+  td input[type=number] {
+    width:7rem;
+  }
+  td select {
+    width:100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: block;
+  }
+  .vam span, .vam button {
+    vertical-align: middle;
+  }  
+</style>
+
+<table>
+  <thead>
+    <tr>      
+      <th onclick=load('mock')>Pump</th>
+        <th>
+          <button onclick='rm(this)'><i class="fa fa-times"/></button>
+          <span>1</span>
+          <button onclick='save(this);'><i class="fa fa-floppy-o"/></button><button onclick='loadNotes(this)'><i class="fa fa-pencil-square-o"></button></i>
+        </th>
+        <th class='hover' onclick='load("conditions")'><button><i class="fa fa-plus-square"/></button></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span>Style</span></td>
+      <td>
+        <select name='pump_style'>
+          <option>End suction slurry</option>
+          <option>End suction sewage</option>
+          <option>End suction stock</option>
+          <option>API double suction</option>
+          <option>Multistage boiler feed</option>
+          <option>End suction ANSI/API</option>
+          <option>Axial flow</option>
+          <option>Double suction</option>
+          <option>Vertical turbine</option>
+          <option>Large end suction</option>
+          <option>Specified optimal eff</option>
+        </select>
+      </td>
+    </tr>  
+    <tr>
+      <td><span>Speed</span> <em>(rpm)</em></td><td><input name='pump_rpm' type="number"></td>
+    </tr>
+    <tr>
+      <td>Drive</td>
+      <td> 
+        <select name='drive'>
+          <option>Direct drive</option>
+          <option>Belt drive</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><span>Kinematic Viscosity</span> <em>(cS)</em></td>
+      <td><input name='viscosity' type="number"></td>
+    </tr>
+    <tr>
+      <td>Specific Gravity</td>
+      <td><input name='specific_gravity' type="number"></td>
+    </tr>
+    <tr>
+      <td>Number Stages</td>
+      <td><input name='stages' type="number"></td>
+    </tr>
+    <tr>
+      <td>Fixed specific speed?</td>
+      <td><input name='speed' type="checkbox"></td>
+    </tr>
+    <tr>
+      <td class='th'>Motor</td><td/>
+    </tr>
+      <td><span>Line freq</span> <em>(Hz)</em></td>
+      <td> 
+        <select name='line'>
+          <option>50</option>
+          <option>60</option>
+        </select>
+      </td>
+    </tr>      
+    <tr>
+      <td><span>Power Rating</span> <em>(kW)</em></td>
+      <td>
+        <input name='power_rating' type="number">
+        <button onclick='showUnit_kW(this)'><i class="fa fa-calculator"/></button>
+      </td>
+    </tr>
+    <tr>
+      <td><span>Speed</span> <em>(rpm)</em></td>
+      <td><input name='motor_rpm' type="number"></td>
+    </tr>
+    <tr>
+      <td>Efficiency class</td>
+      <td> 
+        <select>
+          <option>Standard</option>
+          <option>Energy</option>
+          <option>Average</option>
+          <option>Specified?</option>
+        </select>
+      </td>
+    </tr>    
+    <tr>
+      <td>Voltage</td>
+      <td><input name='motor_voltage' type="number"></td>
+    </tr>
+    <tr>
+      <td>Full-load amps</td>
+      <td><input name='amps' type="number"> <button>EST</button></td>
+    </tr>
+    <tr>
+      <td><span>Size margin</span> <em>(%)</em></td>
+      <td><input name='margin' type="number"></td>
+    </tr>
+    <tr>
+      <td class='th'>Cost</td><td/>
+    </tr>
+    <tr>
+      <td>Operating fraction</td>
+      <td><input name='fraction' type="number"></td>
+    </tr>
+   <tr>
+      <td>$ / kwhr</td>
+      <td><input name='cost' type="number"></td>
+    </tr>
+    <tr>
+      <td class='th'>Field</td><td/>
+    </tr>        
+    <tr>
+      <td><span>Flow rate</span> <em>(L/s)</em></td>
+      <td><input name='flow' type="number" onchange="pumpEff(this)"> <button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button></td>
+    </tr>
+    <tr>
+      <td><span>Head</span> <em>(m)</em></td>
+      <td>
+        <input name='head' type="number">
+        <button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button>
+        <button onclick='load("headtool")'><i class="fa fa-wrench"/></button>
+      </td>
+    </tr>       
+    <tr>
+      <td>Load estimate method</td>
+      <td> 
+        <select>
+          <option>Power</option>
+          <option>Curent</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Estimated Power</td>
+      <td><input name='est_power' type="number"></td>
+    </tr>
+    <tr>
+      <td>Voltage</td>
+      <td><input name='field_voltage' type="number"></td>
+    </tr>
+    <tr>
+      <td class='th vam'><span>Results</span> <button onclick='load("curve")'><i class="fa fa-line-chart"/></button></td><td></td>
+    </tr>
+    <tr>
+      <td><span>Pump efficiency</span> <em>(%)</em></td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td><span>Motor rated power</span> <em>(kW)</em></td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td><span>Motor shaft power</span> <em>(kW)</em></td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td><span>Pump shaft power</span> <em>(kW)</em></td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td><span>Motor efficiency</span> <em>(%)</em></td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td><span>Motor power factor</span> <em>(%)</em></td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td><span>Motor current</span> <em>(amps)</em></td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td><span>Motor power</span> <em>(kW)</em></td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td><span>Annual energy</span> <em>(MWh)</em></td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td>Annual cost</td><td class='result'><span></span></td>
+    </tr>
+    <tr>
+      <td class=th>Summary</td><td></td>
+    </tr>
+    <tr class=sum>
+      <td>Savings potential</td>
+      <td class='result'><span></span></td>
+    </tr>
+    <tr class=sum>
+      <td>Optimization rating</td>
+      <td class='result'><span></span></td>
+    </tr>
+  </tbody>
+</table>
+<script>    
+  function showUnit_kW(e) {
+    showUnitSgl(e,'horsepower <em>(hp)</em>',.745699872);
+  }
+  function rm(e) {
+    $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
+    $(e).parent().remove();
+  }
+  function save(e) {
+    $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {
+      let v;
+      if ($(el).is(':checkbox')) {
+        v = el.checked;
+      } else if ($(el).is('input')) {
+        v = $(el).val();
+      } else if ($(el).is('select')) {
+        v = $(el).children(':selected').index();
+      }     
+      Cond[$(e).parent().data('idx')][$(el).attr('name')] = v;
+    });
+    saveCond();
+  }
+  function load(nm) {
+    Main = $('#container').contents().detach();    
+    $('#container').load(nm+'.html');
+  }
+  function loadNotes(e) {
+    Idx = $(e).parent().data('idx');
+    load('notes');
+  }
+  function pumpEff(v) {   
+    let i = $(v).parent().index();
+    let r = $('td:contains("Pump efficiency")').parent();
+    r.children().eq(i).html(Bridge.pumpEff($(v).val()));
+  }
+  function setPump() {
+    let th = $('th').filter(function(i,e) {
+      return Idx == $(e).data('idx');
+    });
+    if (th.length == 0) {
+      addPump(Cond[Idx]);
+    } else {
+      $(th).find('span').text(Cond[Idx].name);      
+    }
+  }
+  function addPump(idx,d) {     
+    const thAdd = $('th').last().detach();
+    $('table tr').each(function (i,e) {
+      const newEl = $($(e).children()[1]).clone();
+      $(e).append(newEl);
+      if (i==0) {
+        newEl.find('span').text(d.name);     
+        newEl.data('idx',idx);
+        newEl.after(thAdd);    
+      } else {
+        const inp = newEl.find('[name]');
+        const v = d[inp.attr('name')];
+        if (inp.is(':checkbox')) {
+          inp[0].checked = v;
+        } else if (inp.is('input')) {
+          inp.val(v);
+        } else if (inp.is('select')) {
+          newEl.find('option')[v].selected = true;
+        }
+      }
+    });   
+    pumpEff($('[name=flow]').last());
+  }  
+  $.each(Cond,function(idx,d) {
+    if (d.grid) {
+      addPump(idx,d);
+    }
+  });
+</script>

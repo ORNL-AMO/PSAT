@@ -19,19 +19,26 @@
 <h1>Conditions</h1>
 <ul>
     <li>        	
-    	<input name='speed' type="checkbox">
+    	<input name='speed' type="checkbox" onclick="setGrid(this)">
     	<span onclick='edit(this)'></span>	
     	<button onclick='rm($(this))'><i class="fa fa-times"></i></button>
     </li>
 </ul>
 <hr>
-<button onclick=''><i class="fa fa-table"></i></button>
+<button onclick='grid()'><i class="fa fa-table"></i></button>
 <button onclick='nu()'>NEW</button>
 <button>IMPORT</button>
 <button>IMPORT</button>
 <button onclick='removeAll()'>REMOVE ALL</button>
 
 <script>
+	function setGrid(e) {
+		Cond[$(e).parent().index()-1].grid = e.checked;
+		saveCond();		
+	}
+	function grid() {
+		$('#container').load('grid.html');		
+	}
 	function nu() {
 		Idx = Cond.length;
 		$('#container').load('notes.html');
@@ -66,13 +73,14 @@
 	}
 
 	function start() {
-		$.each(Cond,function(i,e) {		
+		$.each(Cond,function(i,d) {		
 			// let th = Main.find('th').filter(function(j,el) {
 		 //      return i == $(el).data('idx');
 		 //    });
 
 			let nu = $('li').first().clone();
-			nu.find('span').text(e.name);
+			nu.find('span').text(d.name);
+			nu.find('input')[0].checked = d.grid;
 			// if (th.length>0) {
 			// 	nu.find('button').attr('disabled','');
 			// 	nu.find('span').removeAttr('onclick');					
