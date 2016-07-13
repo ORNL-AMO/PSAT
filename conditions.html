@@ -19,7 +19,7 @@
 <h1>Conditions</h1>
 <ul>
     <li>        	
-    	<button onclick='rm(this)'><i class="fa fa-times"/></button>  
+    	<button onclick='rm($(this))'><i class="fa fa-times"/></button>  
     	<span onclick='update(this)'></span>	
     </li>
 </ul>
@@ -44,11 +44,16 @@
 		back();
 	}
 	function rm(e) {
-		let i = $(e).parent().index()-1;
+		let i = e.parent().index()-1;
 		Cond.splice(i,1);
 		saveCond();
-		$(e).parent().remove();
-		//alert('hi');
+		e.parent().remove();
+		Main.find('th').each(function(j,el) {
+			let idx = $(el).data('idx');
+			if (idx>i) {
+				$(el).data('idx',--idx);
+			}
+		});
 	}
 	function update(e) {
 		Idx = $(e).parent().index()-1;
