@@ -263,7 +263,7 @@ Pump Style
       }     
       Cond[$(e).parent().data('idx')][$(el).attr('name')] = v;
     });
-    LS.setItem('conditions',JSON.stringify(Cond));
+    saveCond();
   }
   function load(nm) {
     Main = $('#container').contents().detach();    

@@ -43,8 +43,12 @@
 		$(Main).find('td:nth-child(n+3),th:nth-child(n+3):nth-last-child(n+2)').remove();
 		back();
 	}
-	function rm() {
-		alert('hi');
+	function rm(e) {
+		let i = $(e).parent().index()-1;
+		Cond.splice(i,1);
+		saveCond();
+		$(e).parent().remove();
+		//alert('hi');
 	}
 	function update(e) {
 		Idx = $(e).parent().index()-1;

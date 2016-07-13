@@ -68,7 +68,7 @@
 		$('[name]').each(function(i,e) {
 			Cond[Idx][$(e).attr('name')] = $(e).val();
 		});
-		LS.setItem('conditions',JSON.stringify(Cond));			
+		saveCond();
 		back();
 		setPump();
 	}

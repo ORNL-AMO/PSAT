@@ -64,6 +64,10 @@
       LS = localStorage;
       Cond = JSON.parse(LS.getItem('conditions')) || []
 
+      function saveCond() {
+        LS.setItem('conditions',JSON.stringify(Cond));
+      }
+
       $(document).ready(function() {
         $('#container').load('details.html');
       });
