@@ -2,10 +2,10 @@
 	li {
 		list-style-type:none;
 	}
-	li:not([onclick]) {
+	li>span:not([onclick]),li>button:not([onclick]) {
 		opacity: .6;
 	}	
-	li[onclick]:hover {
+	li>span[onclick]:hover {
 		cursor: pointer;
 		color: dodgerblue;
 	}	
@@ -18,9 +18,9 @@
 </style>
 <h1>Conditions</h1>
 <ul>
-    <li onclick='update(this)'>        	
+    <li>        	
     	<button onclick='rm(this)'><i class="fa fa-times"/></button>  
-    	<span></span>	
+    	<span onclick='update(this)'></span>	
     </li>
 </ul>
 <hr>
@@ -43,8 +43,11 @@
 		$(Main).find('td:nth-child(n+3),th:nth-child(n+3):nth-last-child(n+2)').remove();
 		back();
 	}
+	function rm() {
+		alert('hi');
+	}
 	function update(e) {
-		Idx = $(e).index()-1;
+		Idx = $(e).parent().index()-1;
 		back();
 		setPump();
 	}
@@ -57,7 +60,10 @@
 			let nu = $('li').first().clone();
 			nu.find('span').text(e.name);
 			if (th.length>0) {
-				nu.removeAttr('onclick');
+				//nu.removeAttr('onclick');
+				nu.find('button').removeAttr('onclick');
+				nu.find('span').removeAttr('onclick');
+					
 			}
 			$('ul').append(nu);		  
 		});		
