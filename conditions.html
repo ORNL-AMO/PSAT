@@ -9,9 +9,20 @@
 		cursor: pointer;
 		color: dodgerblue;
 	}	
+	li:first-child {
+		display: none;
+	}
+	li>* {
+		vertical-align: middle;
+	}
 </style>
 <h1>Conditions</h1>
-<ul/>
+<ul>
+    <li onclick='update(this)'>        	
+    	<button onclick='rm(this)'><i class="fa fa-times"/></button>  
+    	<span></span>	
+    </li>
+</ul>
 <hr>
 <button onclick='nu()'>NEW</button>
 <button>IMPORT</button>
@@ -33,7 +44,7 @@
 		back();
 	}
 	function update(e) {
-		Idx = $(e).index();
+		Idx = $(e).index()-1;
 		back();
 		setPump();
 	}
@@ -42,8 +53,13 @@
 			let th = Main.find('th').filter(function(j,el) {
 		      return i == $(el).data('idx');
 		    });
-		    const attr = th.length == 0 ? 'onclick=update(this)' : '';
-		    $('ul').append(`<li title data-x ${attr}>${e.name}</li>`);		  
+
+			let nu = $('li').first().clone();
+			nu.find('span').text(e.name);
+			if (th.length>0) {
+				nu.removeAttr('onclick');
+			}
+			$('ul').append(nu);		  
 		});		
 		if (Cond.length==0) {
 			$('ul').html('<em>None</em>');
