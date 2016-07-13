@@ -41,36 +41,13 @@
   }
   .vam span, .vam button {
     vertical-align: middle;
-  }
-  
+  }  
 </style>
-Units
-<select>
-  <option>gpm, ft, hp</option>
-  <option>MGD, ft, hp</option>
-  <option>L/s, m, kW</option>
-  <option>m<sup>3</sup>/hr, m, kW</option>
-</select>   
-Pump Style
-<select>
-  <option>End suction slurry</option>
-  <option>End suction sewage</option>
-  <option>End suction stock</option>
-  <option>API double suction</option>
-  <option>Multistage boiler feed</option>
-  <option>End suction ANSI/API</option>
-  <option>Axial flow</option>
-  <option>Double suction</option>
-  <option>Vertical turbine</option>
-  <option>Large end suction</option>
-  <option>Specified optimal eff</option>
-</select><br>
-<hr onclick=load('mock')>  
 
 <table>
   <thead>
     <tr>      
-      <th>Pump</th>
+      <th onclick=load('mock')>Pump</th>
         <th>
           <button onclick='rm(this)'><i class="fa fa-times"/></button>
           <span>1</span>
@@ -82,7 +59,25 @@ Pump Style
   </thead>
   <tbody>
     <tr>
-      <td><span>Pump</span> <em>(rpm)</em></td><td><input name='pump_rpm' type="number"></td>
+      <td><span>Style</span></td>
+      <td>
+        <select name='pump_style'>
+          <option>End suction slurry</option>
+          <option>End suction sewage</option>
+          <option>End suction stock</option>
+          <option>API double suction</option>
+          <option>Multistage boiler feed</option>
+          <option>End suction ANSI/API</option>
+          <option>Axial flow</option>
+          <option>Double suction</option>
+          <option>Vertical turbine</option>
+          <option>Large end suction</option>
+          <option>Specified optimal eff</option>
+        </select>
+      </td>
+    </tr>  
+    <tr>
+      <td><span>Speed</span> <em>(rpm)</em></td><td><input name='pump_rpm' type="number"></td>
     </tr>
     <tr>
       <td>Drive</td>
@@ -128,7 +123,7 @@ Pump Style
       </td>
     </tr>
     <tr>
-      <td><span>Motor</span> <em>(rpm)</em></td>
+      <td><span>Speed</span> <em>(rpm)</em></td>
       <td><input name='motor_rpm' type="number"></td>
     </tr>
     <tr>
@@ -173,7 +168,7 @@ Pump Style
       <td><input name='flow' type="number" onchange="pumpEff(this)"> <button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button></td>
     </tr>
     <tr>
-      <td>Head <em>(m)</em></td>
+      <td><span>Head</span> <em>(m)</em></td>
       <td>
         <input name='head' type="number">
         <button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button>
