@@ -11,9 +11,7 @@
       body {
         padding:2.5% 5%;
         background-color: ghostwhite;
-        /*margin:auto;*/
       }
-
       .hover:hover, button:hover {
         cursor: pointer;
         
@@ -28,9 +26,6 @@
       button {
         color: dodgerblue;
       }
-      button:hover {
-        /*border-color: blue;*/
-      }
       input:not([type=radio]) {
         padding: .5em;
         border: solid 1px #fff;
@@ -39,36 +34,31 @@
     </style>
     <script>
       function cvtUnit(dlg,m) {        
-        target(dlg).val(Math.round(dlg.find('input:not([type=radio])').val()*m*10000)/10000);        
+        dlg.data('src').prev().val(Math.round(dlg.find('input:not([type=radio])').val()*m*10000)/10000);        
         dlg[0].close();
 
       }      
-      function CvtUnitFlow(dlg) {
+      function cvtUnitFlow(dlg) {
         cvtUnit(dlg,dlg.find(':checked').val());
       }
-      function ShowUnit(e,sel) {
+      function showUnit(e,sel) {
         const dlg = $(sel);
         dlg.find('input:not([type=radio])').val('');
         dlg[0].showModal();
         dlg.data('src',$(e)); 
       }
-      function ShowUnitSgl(e,txt,m) {
+      function showUnitSgl(e,txt,m) {
         const dlg = $('#unit_sgl');
         dlg.find('span').html(txt);
         dlg.data('m',m);
-        ShowUnit(e,dlg);
+        showUnit(e,dlg);
       } 
-      function CvtUnitSgl(dlg) {      
+      function cvtUnitSgl(dlg) {      
         cvtUnit(dlg,dlg.data('m'));
       }
-      function ShowUnit_m(e) {
-        ShowUnitSgl(e,'meters',.3048);
-      }
-
-      function target(dlg) {
-        return dlg.data('src').prev();
-      }
-
+      function showUnit_m(e) {
+        showUnitSgl(e,'feet',.3048);
+      }      
       $ = require('jquery');
       Bridge = require('./build/Release/bridge');
       LS = localStorage;
@@ -78,7 +68,7 @@
         $('#container').load('details.html');
       });
       
-      function Back() {
+      function back() {
         $('#container').html(Main);
         $('#container').append($('#container script').remove());       
       }
@@ -88,8 +78,8 @@
     <dialog id=unit_sgl>
       Enter value in <span></span><br>
       <input><br>
-      <button onclick='this.parentElement.close()'>CANCEL</button>
-      <button onclick='CvtUnitSgl($(this).parent())'>CONVERT</button> 
+      <button onclick='cvtUnitSgl($(this).parent())'>CONVERT</button>
+      <button onclick='this.parentElement.close()'>CANCEL</button>       
     </dialog> 
     <dialog id='unit_flow'>
       Choose units<br>
@@ -106,8 +96,8 @@
         Enter value<br>
         <input>
       </div>
+      <button onclick='cvtUnitFlow($(this).parent())'>CONVERT</button> 
       <button onclick='this.parentElement.close()'>CANCEL</button>
-      <button onclick='CvtUnitFlow($(this).parent())'>CONVERT</button> 
     </dialog>
 
     <div id=container></div>

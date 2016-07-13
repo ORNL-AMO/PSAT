@@ -13,12 +13,11 @@
 <h1>Conditions</h1>
 <ul/>
 <hr>
-<button onclick='Back()'>CANCEL</button>
 <button onclick='nu()'>NEW</button>
-<button onclick='removeAll()'>REMOVE ALL</button>
 <button>IMPORT</button>
 <button>EXPORT</button>
-
+<button onclick='removeAll()'>REMOVE ALL</button>
+<button onclick='back()'>CANCEL</button>
 
 <script>
 	function nu() {
@@ -31,11 +30,11 @@
 		Idx = 0;
 		start();
 		$(Main).find('td:nth-child(n+3),th:nth-child(n+3):nth-last-child(n+2)').remove();
-		Back();
+		back();
 	}
 	function update(e) {
 		Idx = $(e).index();
-		Back();
+		back();
 		setPump();
 	}
 	function start() {

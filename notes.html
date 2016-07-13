@@ -32,7 +32,7 @@
 	Comments<br>
 	<textarea name='comment' rows=10 cols=100/><br>
 </form>
-<button onclick='save()'>SAVE</button><button onclick='Back()'>CANCEL</button>
+<button onclick='save()'>SAVE</button><button onclick='back()'>CANCEL</button>
 <script>
 	if (Idx<Cond.length) {
 		$('[name]').each(function(i,e) {
@@ -69,7 +69,7 @@
 			Cond[Idx][$(e).attr('name')] = $(e).val();
 		});
 		LS.setItem('conditions',JSON.stringify(Cond));			
-		Back();
+		back();
 		setPump();
 	}
 	

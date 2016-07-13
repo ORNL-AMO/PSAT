@@ -67,25 +67,9 @@ Pump Style
 </select><br>
 <hr>  
 
-<!-- <dialog id=unit_power_rating>
-  Enter value in horsepower <em>(HP)</em><br>
-  <input><br>
-  <button onclick='this.parentElement.close()'>CANCEL</button>
-  <button onclick='unitPowerRating()'>CONVERT</button> 
-</dialog>
-
-<dialog id=unit_head>
-  Enter value in feet <em>(ft)</em><br>
-  <input><br>
-  <button onclick='this.parentElement.close()'>CANCEL</button>
-  <button onclick='unitHead()'>CONVERT</button> 
-</dialog>
- -->
 <table>
   <thead>
-    <tr>
-      <!-- <th>Pump</th><th><button onclick='loadNotes(this)'>1</button></th><th class='hover' onclick='load("conditions")'><button>ADD CONDITION</button></th>
-       -->
+    <tr>      
       <th>Pump</th>
         <th>
           <button onclick='rm(this)'><i class="fa fa-times"/></button>
@@ -140,7 +124,7 @@ Pump Style
       <td><span>Power Rating</span> <em>(kW)</em></td>
       <td>
         <input name='power_rating' type="number">
-        <button onclick=ShowUnit(this,'#unit_power_rating')><i class="fa fa-calculator"/></button>
+        <button onclick='showUnit_kW(this)'><i class="fa fa-calculator"/></button>
       </td>
     </tr>
     <tr>
@@ -186,13 +170,13 @@ Pump Style
     </tr>        
     <tr>
       <td><span>Flow rate</span> <em>(L/s)</em></td>
-      <td><input name='flow' type="number" onchange="pumpEff(this)"> <button onclick=ShowUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button></td>
+      <td><input name='flow' type="number" onchange="pumpEff(this)"> <button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button></td>
     </tr>
     <tr>
-      <td>Head</td>
+      <td>Head <em>(m)</em></td>
       <td>
         <input name='head' type="number">
-        <button onclick=ShowUnit_m(this)><i class="fa fa-calculator"/></button>
+        <button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button>
         <button onclick='load("headtool")'><i class="fa fa-wrench"/></button>
       </td>
     </tr>       
@@ -259,21 +243,10 @@ Pump Style
     </tr>
   </tbody>
 </table>
-<script>
-    
-  // function unitPowerRating() {
-  //   const dlg = $('#unit_power_rating');
-  //   target(dlg).val(Math.round(dlg.find('input').val()*.745699872*10000)/10000);
-  //   dlg[0].close();
-  // }
-  
-  // function unitHead() {
-  //   const dlg = $('#unit_head');
-  //   target(dlg).val(Math.round(dlg.find('input').val()*.3048*10000)/10000);
-  //   dlg[0].close();
-  // }
-
-  //function showUnit
+<script>    
+  function showUnit_kW(e) {
+    showUnitSgl(e,'horsepower <em>(hp)</em>',.745699872);
+  }
   function rm(e) {
     $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
     $(e).parent().remove();

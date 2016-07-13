@@ -40,10 +40,10 @@
 			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
 			Suction gauge elevation <em>(m)</em><br>
 			<input type=number/>
-			<button onclick=ShowUnit_m(this)><i class="fa fa-calculator"/></button><br>
+			<button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button><br>
 			Discharge gauge elevation <em>(m)</em><br>
 			<input type=number/>
-			<button onclick=ShowUnit_m(this)><i class="fa fa-calculator"/></button><br>
+			<button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button><br>
 			Suction line loss coefficients<br>
 			<input type=number/><br>
 			Discharge line loss coefficients<br>
@@ -52,7 +52,7 @@
 			<input type=number/><br>
 			Flow rate <em>(L/s)</em><br>
 			<input style='margin-bottom: 0' type=number/>
-			<button onclick=ShowUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>				
+			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>	
 		</td>
 		<td class=results>
 			<table>
@@ -90,8 +90,8 @@
 	<tr>
 		<td/>
 		<td>
-			<button onclick='Back()'>ACCEPT</button>
-			<button onclick='Back()'>CANCEL</button>
+			<button onclick='back()'>ACCEPT</button>
+			<button onclick='back()'>CANCEL</button>
 		</td>
 	</tr>
 </table>
