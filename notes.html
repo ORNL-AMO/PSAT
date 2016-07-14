@@ -41,9 +41,10 @@
 	} else {
 		$('[name=name]').val('Condition ' + (Idx+1));
 	}
-	function prev() {debugger;
+	function prev() {
 		if (Back) {
 			back();
+			setPump();
 		} else {
 			main();
 		}
