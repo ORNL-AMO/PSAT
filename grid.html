@@ -47,21 +47,6 @@
   }
 </style>
 <button onclick='main()'><i class="fa fa-long-arrow-left"></i></button>
-
-<dialog id='io'>
-  <label>
-    <input name=saveopt type="radio" checked> Save
-  </label>  
-  <label>
-    <input name=saveopt type="radio"> Save as Default
-  </label>
-  <label>
-    <input name=saveopt type="radio"> Load from Default
-  </label>
-  <button onclick='io()'>ACCEPT</button> 
-  <button onclick='this.parentElement.close()'>CANCEL</button>
-</dialog>
-
 <table>
   <thead>
     <tr>      
@@ -254,6 +239,20 @@
     </tr>
   </tbody>
 </table>
+<dialog id='io'>
+  <label>
+    <input name=saveopt type="radio" checked> Save
+  </label>  
+  <label>
+    <input name=saveopt type="radio"> Save as Default
+  </label>
+  <label>
+    <input name=saveopt type="radio"> Load from Default
+  </label>
+  <button onclick='io($(this.parentElement))'>ACCEPT</button> 
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+</dialog>
+
 <script>    
   function showUnit_kW(e) {
     showUnitSgl(e,'horsepower <em>(hp)</em>',.745699872);
@@ -267,20 +266,23 @@
     $('#io')[0].showModal();
     $('#io').data('src',$(e));
   }
-  function io() {
-    let v,d={},e=$('#io').data('src');
-    switch($('#io').find(':checked').parent().index()) {
+  function colData(e,d) {
+    $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {            
+      if ($(el).is(':checkbox')) {
+        v = el.checked;
+      } else if ($(el).is('input')) {
+        v = $(el).val();
+      } else if ($(el).is('select')) {
+        v = $(el).children(':selected').index();
+      }     
+      d[$(el).attr('name')] = v;
+    });    
+  }
+  function io(dlg) {
+    let v,d={},e=dlg.data('src');
+    switch(dlg.find(':checked').parent().index()) {
         case 1:
-          $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {            
-            if ($(el).is(':checkbox')) {
-              v = el.checked;
-            } else if ($(el).is('input')) {
-              v = $(el).val();
-            } else if ($(el).is('select')) {
-              v = $(el).children(':selected').index();
-            }     
-            d[$(el).attr('name')] = v;
-          });
+          colData(e,d);
           LS.setItem('default',JSON.stringify(d));
           break;
         case 2:
@@ -297,23 +299,11 @@
           });
           break;
         default:
-            save($('#io').data('src'));
+          colData(e,d);
+          $.extend(Cond[$(e).parent().data('idx')],d);
+          saveCond();
     }
-    $('#io')[0].close(); 
-  }
-  function save(e) {
-    $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {
-      let v;
-      if ($(el).is(':checkbox')) {
-        v = el.checked;
-      } else if ($(el).is('input')) {
-        v = $(el).val();
-      } else if ($(el).is('select')) {
-        v = $(el).children(':selected').index();
-      }     
-      Cond[$(e).parent().data('idx')][$(el).attr('name')] = v;
-    });
-    saveCond();
+    dlg[0].close(); 
   }
   function backload(nm) {
     Grid = $('#container').contents().detach();    
