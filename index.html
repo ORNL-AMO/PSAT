@@ -69,13 +69,17 @@
       }  
 
       $(document).ready(function() {
-        back();
+        main();
         // $('#container').load('conditions.html');
       });
 
-      function back() {
+      function main() {
         $('#container').load('conditions.html');
-      }      
+      }
+      function back() {
+        $('#container').html(Back);
+        $('#container').append($('#container script').remove());  
+    }      
       // function back() {
       //   $('#container').html(Main);
       //   $('#container').append($('#container script').remove());       

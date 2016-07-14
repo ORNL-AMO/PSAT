@@ -28,7 +28,7 @@
 <button onclick='grid()'><i class="fa fa-table"></i></button>
 <button onclick='nu()'>NEW</button>
 <button>IMPORT</button>
-<button>IMPORT</button>
+<button>EXPORT</button>
 <button onclick='removeAll()'>REMOVE ALL</button>
 
 <script>
@@ -40,6 +40,7 @@
 		$('#container').load('grid.html');		
 	}
 	function nu() {
+		Back = null;
 		Idx = Cond.length;
 		$('#container').load('notes.html');
 	}
@@ -69,10 +70,11 @@
 	// }
 	function edit(e) {
 		Idx = $(e).parent().index()-1;
+		Back = null;
 		$('#container').load('notes.html');
 	}
 
-	function start() {
+	function start() {		
 		$.each(Cond,function(i,d) {		
 			// let th = Main.find('th').filter(function(j,el) {
 		 //      return i == $(el).data('idx');

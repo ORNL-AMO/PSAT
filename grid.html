@@ -43,7 +43,7 @@
     vertical-align: middle;
   }  
 </style>
-
+<button onclick='main()'><i class="fa fa-long-arrow-left"></i></button>
 <table>
   <thead>
     <tr>      
@@ -51,9 +51,9 @@
         <th>
           <button onclick='rm(this)'><i class="fa fa-times"/></button>
           <span>1</span>
-          <button onclick='save(this);'><i class="fa fa-floppy-o"/></button><button onclick='loadNotes(this)'><i class="fa fa-pencil-square-o"></button></i>
+          <button onclick='save(this);'><i class="fa fa-floppy-o"/></button><button onclick='edit(this)'><i class="fa fa-pencil-square-o"></button></i>
         </th>
-        <th class='hover' onclick='load("conditions")'><button><i class="fa fa-plus-square"/></button></th>
+        <!-- <th class='hover' onclick='load("conditions")'><button><i class="fa fa-plus-square"/></button></th> -->
       
     </tr>
   </thead>
@@ -243,6 +243,7 @@
     showUnitSgl(e,'horsepower <em>(hp)</em>',.745699872);
   }
   function rm(e) {
+    Cond[$(e).parent().data('idx')].grid = false;
     $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
     $(e).parent().remove();
   }
@@ -261,10 +262,10 @@
     saveCond();
   }
   function load(nm) {
-    Main = $('#container').contents().detach();    
+    Back = $('#container').contents().detach();    
     $('#container').load(nm+'.html');
   }
-  function loadNotes(e) {
+  function edit(e) {
     Idx = $(e).parent().data('idx');
     load('notes');
   }
@@ -284,14 +285,14 @@
     }
   }
   function addPump(idx,d) {     
-    const thAdd = $('th').last().detach();
+    //const thAdd = $('th').last().detach();
     $('table tr').each(function (i,e) {
       const newEl = $($(e).children()[1]).clone();
       $(e).append(newEl);
       if (i==0) {
         newEl.find('span').text(d.name);     
         newEl.data('idx',idx);
-        newEl.after(thAdd);    
+        //newEl.after(thAdd);    
       } else {
         const inp = newEl.find('[name]');
         const v = d[inp.attr('name')];
@@ -305,10 +306,17 @@
       }
     });   
     pumpEff($('[name=flow]').last());
-  }  
-  $.each(Cond,function(idx,d) {
-    if (d.grid) {
-      addPump(idx,d);
-    }
-  });
+  }
+
+  if ($('th').length<=2) {
+    $.each(Cond,function(idx,d) {
+      if (d.grid) {
+        addPump(idx,d);
+      }
+    });    
+  } else {
+    setPump();
+  }
+
+
 </script>

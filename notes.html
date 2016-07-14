@@ -14,7 +14,7 @@
 </style>
 
 
-<button onclick='back()'><i class="fa fa-long-arrow-left"/></button>
+<button onclick='prev()'><i class="fa fa-long-arrow-left"/></button>
 <h1>Notes</h1>
 <form>
 	Name<br>
@@ -41,7 +41,13 @@
 	} else {
 		$('[name=name]').val('Condition ' + (Idx+1));
 	}
-
+	function prev() {debugger;
+		if (Back) {
+			back();
+		} else {
+			main();
+		}
+	}
 	function save() {
 		if (Idx == Cond.length) {
 			Cond.push({
@@ -72,7 +78,7 @@
 			Cond[Idx][$(e).attr('name')] = $(e).val();
 		});
 		saveCond();
-		back();
+		prev();
 		//setPump();
 	}
 	
