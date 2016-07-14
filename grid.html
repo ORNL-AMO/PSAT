@@ -41,17 +41,35 @@
   }
   .vam span, .vam button {
     vertical-align: middle;
-  }  
+  }
+  #io label {
+    display: block;
+  }
 </style>
 <button onclick='main()'><i class="fa fa-long-arrow-left"></i></button>
+
+<dialog id='io'>
+  <label>
+    <input name=saveopt type="radio" checked> Save
+  </label>  
+  <label>
+    <input name=saveopt type="radio"> Save as Default
+  </label>
+  <label>
+    <input name=saveopt type="radio"> Load from Default
+  </label>
+  <button onclick='io()'>ACCEPT</button> 
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+</dialog>
+
 <table>
   <thead>
     <tr>      
       <th onclick=backload('mock')>Pump</th>
         <th>
           <button onclick='rm(this)'><i class="fa fa-times"/></button>
-          <span>1</span>
-          <button onclick='save(this);'><i class="fa fa-floppy-o"/></button><button onclick='edit(this)'><i class="fa fa-pencil-square-o"></button></i>
+          <span></span>
+          <button onclick='showIO(this);'><i class="fa fa-floppy-o"></i></button><button onclick='edit(this)'><i class="fa fa-pencil-square-o"></i></button>
         </th>      
     </tr>
   </thead>
@@ -244,6 +262,23 @@
     Cond[$(e).parent().data('idx')].grid = false;
     $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
     $(e).parent().remove();
+  }
+  function showIO(e) {
+    $('#io')[0].showModal();
+    $('#io').data('src',$(e));
+  }
+  function io() {
+    switch($('#io').find(':checked').parent().index()) {
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        default:
+            save($('#io').data('src'));
+    }
+    $('#io')[0].close(); 
   }
   function save(e) {
     $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {
