@@ -279,49 +279,8 @@
     let r = $('td:contains("Pump efficiency")').parent();
     r.children().eq(i).html(Bridge.pumpEff($(v).val()));
   }
-  function setPump() {
-    let th = $('th').filter(function(i,e) {
-      return Idx == $(e).data('idx');
-    });
-    if (th.length == 0) {
-      //addPump(Cond[Idx]);
-    } else {
-      $(th).find('span').text(Cond[Idx].name);      
-    }
-  }
-  function addPump(idx,d) {     
-    //const thAdd = $('th').last().detach();
-    $('table tr').each(function (i,e) {
-      const newEl = $($(e).children()[1]).clone();
-      $(e).append(newEl);
-      if (i==0) {
-        newEl.find('span').text(d.name);     
-        newEl.data('idx',idx);
-        //newEl.after(thAdd);    
-      } else {
-        const inp = newEl.find('[name]');
-        const v = d[inp.attr('name')];
-        if (inp.is(':checkbox')) {
-          inp[0].checked = v;
-        } else if (inp.is('input')) {
-          inp.val(v);
-        } else if (inp.is('select')) {
-          newEl.find('option')[v].selected = true;
-        }
-      }
-    });   
-    pumpEff($('[name=flow]').last());
-  }
-
-  if ($('th').length<=2) {
-    $.each(Cond,function(idx,d) {
-      if (d.grid) {
-        addPump(idx,d);
-      }
-    });    
-  } else {
-    //setPump();
-  }
+  
+  
 
 
 </script>

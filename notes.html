@@ -44,7 +44,9 @@
 	function prev() {
 		if (window['Grid']) {
 			backToGrid();
-			setPump();
+			$('th:gt(1)').each(function(i,e) {
+        		$(e).find('span').text(Cond[$(e).data('idx')].name);
+    		});
 		} else {
 			main();
 		}

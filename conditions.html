@@ -40,7 +40,31 @@
 		saveCond();		
 	}
 	function grid() {
-		$('#container').load('grid.html');		
+		$('#container').load('grid.html', function() {
+		    $.each(Cond,function(idx,d) {
+		      if (d.grid) {
+		            $('table tr').each(function (i,e) {
+						const newEl = $($(e).children()[1]).clone();
+						$(e).append(newEl);
+						if (i==0) {
+							newEl.find('span').text(d.name);     
+							newEl.data('idx',idx);
+						} else {
+							const inp = newEl.find('[name]');
+							const v = d[inp.attr('name')];
+							if (inp.is(':checkbox')) {
+							  inp[0].checked = v;
+							} else if (inp.is('input')) {
+							  inp.val(v);
+							} else if (inp.is('select')) {
+							  newEl.find('option')[v].selected = true;
+							}
+						}
+					});   
+				    pumpEff($('[name=flow]').last());
+		      }
+		    });    		  
+		});		
 	}
 	function nu() {
 		Idx = Cond.length;
