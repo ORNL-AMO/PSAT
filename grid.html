@@ -268,13 +268,34 @@
     $('#io').data('src',$(e));
   }
   function io() {
+    let v,d={},e=$('#io').data('src');
     switch($('#io').find(':checked').parent().index()) {
         case 1:
-
-            break;
+          $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {            
+            if ($(el).is(':checkbox')) {
+              v = el.checked;
+            } else if ($(el).is('input')) {
+              v = $(el).val();
+            } else if ($(el).is('select')) {
+              v = $(el).children(':selected').index();
+            }     
+            d[$(el).attr('name')] = v;
+          });
+          LS.setItem('default',JSON.stringify(d));
+          break;
         case 2:
-
-            break;
+          d = JSON.parse(LS.getItem('default'));
+          $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {            
+            v = d[$(el).attr('name')];
+            if ($(el).is(':checkbox')) {
+              el.checked = v;
+            } else if ($(el).is('input')) {
+              $(el).val(v);
+            } else if ($(el).is('select')) {
+              $(el).find('option')[v].selected = true;
+            }     
+          });
+          break;
         default:
             save($('#io').data('src'));
     }
