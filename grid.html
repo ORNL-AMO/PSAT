@@ -259,15 +259,21 @@
   }
   function rm(e) {
     Cond[$(e).parent().data('idx')].grid = false;
-    $(`td:nth-child(${$(e).parent().index()+1})`).remove();    
+    //$(`td:nth-child(${$(e).parent().index()+1})`).remove();   
+    tdsForCol(e).remove(); 
     $(e).parent().remove();
   }
   function showIO(e) {
     $('#io')[0].showModal();
     $('#io').data('src',$(e));
   }
+  function tdsForCol(e) {
+    return $(`td:nth-child(${$(e).parent().index()+1})`);
+  }
   function colData(e,d) {
-    $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {            
+    tdsForCol(e).find('[name]').each(function(i,el) { 
+
+//    $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {            
       if ($(el).is(':checkbox')) {
         v = el.checked;
       } else if ($(el).is('input')) {
@@ -287,7 +293,7 @@
           break;
         case 2:
           d = JSON.parse(LS.getItem('default'));
-          $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {            
+          tdsForCol(e).find('[name]').each(function(i,el) {          
             v = d[$(el).attr('name')];
             if ($(el).is(':checkbox')) {
               el.checked = v;
