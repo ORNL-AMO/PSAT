@@ -42,8 +42,8 @@
 		$('[name=name]').val('Condition ' + (Idx+1));
 	}
 	function prev() {
-		if (Back) {
-			back();
+		if (window['Grid']) {
+			backToGrid();
 			setPump();
 		} else {
 			main();

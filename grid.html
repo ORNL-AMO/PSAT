@@ -47,7 +47,7 @@
 <table>
   <thead>
     <tr>      
-      <th onclick=load('mock')>Pump</th>
+      <th onclick=backload('mock')>Pump</th>
         <th>
           <button onclick='rm(this)'><i class="fa fa-times"/></button>
           <span>1</span>
@@ -172,7 +172,7 @@
       <td>
         <input name='head' type="number">
         <button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button>
-        <button onclick='load("headtool")'><i class="fa fa-wrench"/></button>
+        <button onclick='backload("headtool")'><i class="fa fa-wrench"/></button>
       </td>
     </tr>       
     <tr>
@@ -193,7 +193,7 @@
       <td><input name='field_voltage' type="number"></td>
     </tr>
     <tr>
-      <td class='th vam'><span>Results</span> <button onclick='load("curve")'><i class="fa fa-line-chart"/></button></td><td></td>
+      <td class='th vam'><span>Results</span> <button onclick='backload("curve")'><i class="fa fa-line-chart"/></button></td><td></td>
     </tr>
     <tr>
       <td><span>Pump efficiency</span> <em>(%)</em></td><td class='result'><span></span></td>
@@ -261,13 +261,18 @@
     });
     saveCond();
   }
-  function load(nm) {
-    Back = $('#container').contents().detach();    
+  function backload(nm) {
+    Grid = $('#container').contents().detach();    
     $('#container').load(nm+'.html');
   }
+  function backToGrid() {
+    $('#container').html(Grid);
+    $('#container').append($('#container script').remove());  
+    delete Grid;
+  }      
   function edit(e) {
     Idx = $(e).parent().data('idx');
-    load('notes');
+    backload('notes');
   }
   function pumpEff(v) {   
     let i = $(v).parent().index();
