@@ -27,7 +27,6 @@
     	<button onclick='rm($(this))'><i class="fa fa-times"></i></button>
     </li>
 </ul>
-<!-- <hr> -->
 <button onclick='grid()'><i class="fa fa-table"></i></button>
 <button onclick='nu()'>NEW</button>
 <button>IMPORT</button>
@@ -75,7 +74,6 @@
 		Cond = [];
 		Idx = 0;
 		start();
-		//$(Main).find('td:nth-child(n+3),th:nth-child(n+3):nth-last-child(n+2)').remove();		
 	}
 	function rm(e) {
 		let i = e.parent().index()-1;
@@ -89,29 +87,15 @@
 			}
 		});
 	}
-	// function update(e) {
-	// 	Idx = $(e).parent().index()-1;
-	// 	back();
-	// 	setPump();
-	// }
 	function edit(e) {
 		Idx = $(e).parent().index()-1;
 		$('#container').load('notes.html');
 	}
-
 	function start() {		
 		$.each(Cond,function(i,d) {		
-			// let th = Main.find('th').filter(function(j,el) {
-		 //      return i == $(el).data('idx');
-		 //    });
-
 			let nu = $('li').first().clone();
 			nu.find('span').text(d.name);
 			nu.find('input')[0].checked = d.grid;
-			// if (th.length>0) {
-			// 	nu.find('button').attr('disabled','');
-			// 	nu.find('span').removeAttr('onclick');					
-			// }
 			$('ul').append(nu);		  
 		});		
 		if (Cond.length==0) {
@@ -119,5 +103,4 @@
 		}		
 	}
 	start();
-
 </script>

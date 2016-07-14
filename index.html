@@ -36,7 +36,6 @@
       function cvtUnit(dlg,m) {        
         dlg.data('src').prev().val(Math.round(dlg.find('input:not([type=radio])').val()*m*10000)/10000);        
         dlg[0].close();
-
       }      
       function cvtUnitFlow(dlg) {
         cvtUnit(dlg,dlg.find(':checked').val());
@@ -59,28 +58,20 @@
       function showUnit_m(e) {
         showUnitSgl(e,'feet',.3048);
       }      
+      function saveCond() {
+        LS.setItem('conditions',JSON.stringify(Cond));
+      }  
+      function main() {
+        $('#container').load('conditions.html');
+      }      
       $ = require('jquery');
       Bridge = require('./build/Release/bridge');
       LS = localStorage;
       Cond = JSON.parse(LS.getItem('conditions')) || []
 
-      function saveCond() {
-        LS.setItem('conditions',JSON.stringify(Cond));
-      }  
-
       $(document).ready(function() {
         main();
-        // $('#container').load('conditions.html');
       });
-
-      function main() {
-        $('#container').load('conditions.html');
-      }
-      
-      // function back() {
-      //   $('#container').html(Main);
-      //   $('#container').append($('#container script').remove());       
-      // }
     </script>
   </head>
   <body> 
