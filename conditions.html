@@ -27,6 +27,7 @@
     	<button onclick='rm($(this))'><i class="fa fa-times"></i></button>
     </li>
 </ul>
+<button onclick='uncheck()'><i class="fa fa-check-square"></i></button>
 <button onclick='grid()'><i class="fa fa-table"></i></button>
 <button onclick='nu()'>NEW</button>
 <button>IMPORT</button>
@@ -34,6 +35,13 @@
 <button onclick='removeAll()'>REMOVE ALL</button>
 
 <script>
+	function uncheck() {
+		$(':checkbox').prop('checked',false);
+		$.each(Cond,function(i,d) {
+			d.grid = false;
+		});
+		saveCond();
+	}
 	function setGrid(e) {
 		Cond[$(e).parent().index()-1].grid = e.checked;
 		saveCond();		
