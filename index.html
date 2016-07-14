@@ -32,6 +32,34 @@
         box-shadow: inset 1px 1px 2px 0 #707070;
       }
     </style>
+  </head>
+  <body> 
+    <dialog id=unit_sgl>
+      Enter value in <span></span><br>
+      <input><br>
+      <button onclick='cvtUnitSgl($(this).parent())'>CONVERT</button>
+      <button onclick='this.parentElement.close()'>CANCEL</button>       
+    </dialog> 
+    <dialog id='unit_flow'>
+      Choose units<br>
+      <label>
+        <input name=units value=.0630901966667 type="radio" checked> gpm
+      </label><br>
+      <label>
+        <input name=units value=43.8126364 type="radio"> MGD
+      </label><br>
+      <label>
+        <input name=units value=0.277778 type="radio"> m^3/hr
+      </label>
+      <div style='margin:.5rem 0;'>
+        Enter value<br>
+        <input>
+      </div>
+      <button onclick='cvtUnitFlow($(this).parent())'>CONVERT</button> 
+      <button onclick='this.parentElement.close()'>CANCEL</button>
+    </dialog>
+
+    <div id=container></div>
     <script>
       function cvtUnit(dlg,m) {        
         dlg.data('src').prev().val(Math.round(dlg.find('input:not([type=radio])').val()*m*10000)/10000);        
@@ -73,33 +101,5 @@
         main();
       });
     </script>
-  </head>
-  <body> 
-    <dialog id=unit_sgl>
-      Enter value in <span></span><br>
-      <input><br>
-      <button onclick='cvtUnitSgl($(this).parent())'>CONVERT</button>
-      <button onclick='this.parentElement.close()'>CANCEL</button>       
-    </dialog> 
-    <dialog id='unit_flow'>
-      Choose units<br>
-      <label>
-        <input name=units value=.0630901966667 type="radio" checked> gpm
-      </label><br>
-      <label>
-        <input name=units value=43.8126364 type="radio"> MGD
-      </label><br>
-      <label>
-        <input name=units value=0.277778 type="radio"> m^3/hr
-      </label>
-      <div style='margin:.5rem 0;'>
-        Enter value<br>
-        <input>
-      </div>
-      <button onclick='cvtUnitFlow($(this).parent())'>CONVERT</button> 
-      <button onclick='this.parentElement.close()'>CANCEL</button>
-    </dialog>
-
-    <div id=container></div>
   </body>
 </html>

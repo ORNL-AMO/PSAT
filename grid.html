@@ -52,9 +52,7 @@
           <button onclick='rm(this)'><i class="fa fa-times"/></button>
           <span>1</span>
           <button onclick='save(this);'><i class="fa fa-floppy-o"/></button><button onclick='edit(this)'><i class="fa fa-pencil-square-o"></button></i>
-        </th>
-        <!-- <th class='hover' onclick='load("conditions")'><button><i class="fa fa-plus-square"/></button></th> -->
-      
+        </th>      
     </tr>
   </thead>
   <tbody>
@@ -278,9 +276,5 @@
     let i = $(v).parent().index();
     let r = $('td:contains("Pump efficiency")').parent();
     r.children().eq(i).html(Bridge.pumpEff($(v).val()));
-  }
-  
-  
-
-
+  }  
 </script>
