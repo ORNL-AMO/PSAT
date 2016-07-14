@@ -44,7 +44,7 @@
 		    $.each(Cond,function(idx,d) {
 		      if (d.grid) {
 		            $('table tr').each(function (i,e) {
-						const newEl = $($(e).children()[1]).clone();
+						const newEl = $(e).children().eq(1).clone();						
 						$(e).append(newEl);
 						if (i==0) {
 							newEl.find('span').text(d.name);     
