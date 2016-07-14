@@ -259,7 +259,6 @@
   }
   function rm(e) {
     Cond[$(e).parent().data('idx')].grid = false;
-    //$(`td:nth-child(${$(e).parent().index()+1})`).remove();   
     tdsForCol(e).remove(); 
     $(e).parent().remove();
   }
@@ -270,10 +269,9 @@
   function tdsForCol(e) {
     return $(`td:nth-child(${$(e).parent().index()+1})`);
   }
-  function colData(e,d) {
-    tdsForCol(e).find('[name]').each(function(i,el) { 
-
-//    $('td:nth-child('+($(e).parent().index()+1)+') [name]').each(function(i,el) {            
+  function colData(e) {
+    let v,d={};
+    tdsForCol(e).find('[name]').each(function(i,el) {       
       if ($(el).is(':checkbox')) {
         v = el.checked;
       } else if ($(el).is('input')) {
@@ -282,17 +280,17 @@
         v = $(el).children(':selected').index();
       }     
       d[$(el).attr('name')] = v;
-    });    
+    }); 
+    return d;   
   }
   function io(dlg) {
-    let v,d={},e=dlg.data('src');
+    let e = dlg.data('src');
     switch(dlg.find(':checked').parent().index()) {
         case 1:
-          colData(e,d);
-          LS.setItem('default',JSON.stringify(d));
+          LS.setItem('default',JSON.stringify(colData(e)));
           break;
         case 2:
-          d = JSON.parse(LS.getItem('default'));
+          let v,d = JSON.parse(LS.getItem('default'));
           tdsForCol(e).find('[name]').each(function(i,el) {          
             v = d[$(el).attr('name')];
             if ($(el).is(':checkbox')) {
@@ -305,8 +303,7 @@
           });
           break;
         default:
-          colData(e,d);
-          $.extend(Cond[$(e).parent().data('idx')],d);
+          $.extend(Cond[$(e).parent().data('idx')],colData(e));
           saveCond();
     }
     dlg[0].close(); 
