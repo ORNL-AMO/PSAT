@@ -54,31 +54,7 @@
 	}
 	function save() {
 		if (Idx == Cond.length) {
-			Cond.push($.extend({
-				pump_style: 5,
-				pump_rpm: 1780,
-				drive: 0,
-				viscosity: 1,
-				specific_gravity: 1,
-				stages: 1,
-				speed: true,
-				line: 1,
-				power_rating: 30,
-				motor_rpm: 1780,
-				efficiency: 0,
-				motor_voltage: 460,
-				amps: 225.4,
-				margin: 0,
-				fraction: 1,
-				cost: .05,
-				flow: 2000,
-				head: 277,
-				load_method: 0,
-				est_power: 150,
-				field_voltage: 460,
-
-				grid: false				
-			}, loadProp('defaults')))
+			Cond.push(loadProp('defaults'));
 		};				
 		$('[name]').each(function(i,e) {
 			Cond[Idx][$(e).attr('name')] = $(e).val();
