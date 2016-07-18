@@ -34,10 +34,10 @@
 			<input type=number/>
 			<button onclick=showUnit_mm(this)><i class="fa fa-calculator"/></button><br>
 			Suction gauge pressure <em>(kPa)</em><br>
-			<input type=number/>
+			<input id=Ps type=number/>
 			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
 			Discharge gauge pressure <em>(kPa)</em><br>
-			<input type=number/>
+			<input id=Pd type=number/>
 			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
 			Suction gauge elevation <em>(m)</em><br>
 			<input id=Zs type=number/>
@@ -107,6 +107,8 @@
 	}
 	function calc() {
 		$('.results td:contains(elevation)').next().text(rnd($('#Zd').val()-$('#Zs').val()));
+		$('.results td:contains(pressure)').next().text(rnd($('#Pd').val()-$('#Ps').val()));
+			
 	}
 
 </script>
