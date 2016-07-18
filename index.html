@@ -89,13 +89,16 @@
       function saveCond() {
         LS.setItem('conditions',JSON.stringify(Cond));
       }  
+      function loadProp(nm) {
+        return JSON.parse(LS.getItem(nm));
+      }
       function main() {
         $('#container').load('conditions.html');
       }      
       $ = require('jquery');
       Bridge = require('./build/Release/bridge');
       LS = localStorage;
-      Cond = JSON.parse(LS.getItem('conditions')) || []
+      Cond = loadProp('conditions') || []
 
       $(document).ready(function() {
         main();

@@ -287,10 +287,10 @@
     let e = dlg.data('src');
     switch(dlg.find(':checked').parent().index()) {
         case 1:
-          LS.setItem('default',JSON.stringify(colData(e)));
+          LS.setItem('defaults',JSON.stringify(colData(e)));
           break;
         case 2:
-          let v,d = JSON.parse(LS.getItem('default'));
+          let v,d = loadProp('defaults');
           tdsForCol(e).find('[name]').each(function(i,el) {          
             v = d[$(el).attr('name')];
             if ($(el).is(':checkbox')) {

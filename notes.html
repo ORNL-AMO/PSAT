@@ -78,7 +78,7 @@
 				field_voltage: 460,
 
 				grid: false				
-			},JSON.parse(LS.getItem('default'))))
+			}, loadProp('defaults')))
 		};				
 		$('[name]').each(function(i,e) {
 			Cond[Idx][$(e).attr('name')] = $(e).val();
