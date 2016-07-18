@@ -61,8 +61,11 @@
 
     <div id=container></div>
     <script>
+      function rnd(v) {
+        return Math.round(v*10000)/10000;
+      }
       function cvtUnit(dlg,m) {        
-        dlg.data('src').prev().val(Math.round(dlg.find('input:not([type=radio])').val()*m*10000)/10000);        
+        dlg.data('src').prev().val(rnd(dlg.find('input:not([type=radio])').val()*m));        
         dlg[0].close();
       }      
       function cvtUnitFlow(dlg) {

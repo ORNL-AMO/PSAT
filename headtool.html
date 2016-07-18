@@ -40,17 +40,17 @@
 			<input type=number/>
 			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
 			Suction gauge elevation <em>(m)</em><br>
-			<input type=number/>
+			<input id=Zs type=number/>
 			<button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button><br>
 			Discharge gauge elevation <em>(m)</em><br>
-			<input type=number/>
+			<input id=Zd type=number/>
 			<button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button><br>
 			Suction line loss coefficients<br>
 			<input type=number/><br>
 			Discharge line loss coefficients<br>
 			<input type=number/><br>
 			Fluid specific gravity<br>
-			<input type=number/><br>
+			<input name='specific_gravity' type=number/><br>
 			Flow rate <em>(L/s)</em><br>
 			<input style='margin-bottom: 0' type=number/>
 			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>	
@@ -91,6 +91,7 @@
 	<tr>
 		<td/>
 		<td>
+			<button onclick='calc()'>CALCULATE</button>
 			<button onclick='back()'>ACCEPT</button>			
 		</td>
 	</tr>
@@ -104,5 +105,8 @@
 	function showUnit_kPa(e) {
 		showUnitSgl(e,'pounds per square inch <em>(psig)</em>',6.89476);
 	}
-	
+	function calc() {
+		$('.results td:contains(elevation)').next().text(rnd($('#Zd').val()-$('#Zs').val()));
+	}
+
 </script>
