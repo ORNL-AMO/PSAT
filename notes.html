@@ -54,7 +54,7 @@
 	}
 	function save() {
 		if (Idx == Cond.length) {
-			Cond.push({
+			Cond.push($.extend({
 				pump_style: 5,
 				pump_rpm: 1780,
 				drive: 0,
@@ -78,8 +78,8 @@
 				field_voltage: 460,
 
 				grid: false				
-			});
-		}				
+			},JSON.parse(LS.getItem('default'))))
+		};				
 		$('[name]').each(function(i,e) {
 			Cond[Idx][$(e).attr('name')] = $(e).val();
 		});
