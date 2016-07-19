@@ -28,10 +28,10 @@
 	<tr>
 		<td>
 			Suction pipe diameter <em>(mm)</em><br>
-			<input name=id_suc type=number/>
+			<input id=Ds type=number/>
 			<button onclick=showUnit_mm(this)><i class="fa fa-calculator"/></button><br>
 			Discharge pipe diameter <em>(mm)</em><br>
-			<input type=number/>
+			<input id=Dd type=number/>
 			<button onclick=showUnit_mm(this)><i class="fa fa-calculator"/></button><br>
 			Suction gauge pressure <em>(kPa)</em><br>
 			<input id=Ps type=number/>
@@ -46,14 +46,14 @@
 			<input id=Zd type=number/>
 			<button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button><br>
 			Suction line loss coefficients<br>
-			<input type=number/><br>
+			<input id=Ks type=number/><br>
 			Discharge line loss coefficients<br>
-			<input type=number/><br>
-			Fluid specific gravity<br>
+			<input id=Kd type=number/><br>
+			<!-- Fluid specific gravity<br>
 			<input name='specific_gravity' type=number/><br>
 			Flow rate <em>(L/s)</em><br>
 			<input style='margin-bottom: 0' type=number/>
-			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>	
+			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>	 -->
 		</td>
 		<td class=results>
 			<table>
@@ -105,9 +105,35 @@
 	function showUnit_kPa(e) {
 		showUnitSgl(e,'pounds per square inch <em>(psig)</em>',6.89476);
 	}
+	function v(d,flow) {
+		return flow / (Math.PI*(d/2)*(d/2));
+	}
+	G = 9.80665;
+	function vHd(v) {
+		return v*v/2/G;
+	}
+	function r(txt,v) {
+		$(`.results td:contains(${txt})`).next().text(rnd(v));
+	}
 	function calc() {
-		$('.results td:contains(elevation)').next().text(rnd($('#Zd').val()-$('#Zs').val()));
-		$('.results td:contains(pressure)').next().text(rnd($('#Pd').val()-$('#Ps').val()));
+		let flow = 3000*.001, spec_grav=1,
+			elevHd = $('#Zd').val()-$('#Zs').val(),
+			presHd = ($('#Pd').val()-$('#Ps').val())/G/spec_grav,			
+			vHdS = vHd(v($('#Ds').val()/1000,flow)), 
+			vHdD = vHd(v($('#Dd').val()/1000,flow)),
+			vHdDif = vHdD-vHdS,
+			sucHd = $('#Ks').val()*vHdS,
+			disHd = $('#Kd').val()*vHdD,
+			hd = elevHd + presHd + flow + vHdDif + sucHd + disHd;
+
+		r('elevation',elevHd);		
+		r('pressure',presHd);
+		r('velocity',vHdDif);
+		r('suction',sucHd);
+		r('discharge',disHd);
+		r('Pump',hd);
+
+
 			
 	}
 
