@@ -31,11 +31,24 @@
 <button onclick='grid()'><i class="fa fa-table"></i></button>
 <button onclick='nu()'>NEW</button>
 <button>IMPORT</button>
-<button>EXPORT</button>
+<button onclick="xport()">EXPORT</button>
 <button onclick='removeAll()'>REMOVE ALL</button>
 <button onclick='restoreDefaults()'>RESTORE DEFAULTS</button>
 
 <script>
+	function xport() {
+		var txt='h1\th2\th3\n';
+		$.each(Cond,function(i,d) {
+			txt += i+'\t';
+		});
+		txt+='\n';
+		for(var prop in Cond[0]){
+			txt += prop + '\t';
+
+		}
+		const fs = require('fs');
+		fs.writeFile('hello.tsv',txt);
+	}
 	function uncheck() {
 		$(':checkbox').prop('checked',false);
 		$.each(Cond,function(i,d) {
