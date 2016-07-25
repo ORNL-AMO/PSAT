@@ -45,6 +45,11 @@
   #io label {
     display: block;
   }
+  .split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 </style>
 <button onclick='main()'><i class="fa fa-long-arrow-left"></i></button>
 <table>
@@ -78,7 +83,7 @@
       </td>
     </tr>  
     <tr>
-      <td><span>Speed</span> <em>(rpm)</em></td><td><input name='pump_rpm' type="number"></td>
+      <td><div class="split">Speed <em>(rpm)</em></div></td><td><input name='pump_rpm' type="number"></td>
     </tr>
     <tr>
       <td>Drive</td>
@@ -165,7 +170,7 @@
       <td class='th'>Field</td><td/>
     </tr>        
     <tr>
-      <td><div style="display: flex; justify-content: space-between">Flow rate <button>L/s</button></div></td>
+      <td><div class="split">Flow rate <button>L/s</button></div></td>
       <td><input name='flow' type="number" onchange="pumpEff(this)"></td>
     </tr>
     <tr>
