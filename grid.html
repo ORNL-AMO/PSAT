@@ -275,11 +275,16 @@
 
 <script>
   function cvtUnits() {
+    loadProp('units');
     saveProp('units',$('#units :checked').parent().index()-1);
+    $('[name=power_rating]:gt(0)').each(function (i,e) {
+      $(e).val(3);
+    });
     $('#units')[0].close();
   }
   function showUnits() {
     alert(loadProp('units'));
+    $('#units :input').get(loadProp('units')).checked=true;
     $('#units')[0].showModal();
   }
   function showUnit_kW(e) {
