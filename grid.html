@@ -122,7 +122,7 @@
       </td>
     </tr>      
     <tr>
-      <td><div>Power Rating <button>kW</button></div></td>
+      <td><div>Power Rating <button onclick="showUnits()">kW</button></div></td>
       <td>
         <input name='power_rating' type="number">
       </td>
@@ -255,8 +255,28 @@
   <button onclick='io($(this.parentElement))'>ACCEPT</button> 
   <button onclick='this.parentElement.close()'>CANCEL</button>
 </dialog>
+<dialog id='units'>
+  Choose units<br>
+  <label>
+    <input name=units value=.0630901966667 type="radio" checked> L/s, m, kW
+  </label><br>
+  <label>
+    <input name=units value=43.8126364 type="radio"> m^3/hr, m, kW
+  </label><br>
+  <label>
+    <input name=units value=0.277778 type="radio"> gpm, ft, hp
+  </label><br>
+  <label>
+    <input name=units value=0.277778 type="radio"> MGD, ft, hp
+  </label><br>
+  <button onclick='cvtUnitFlow($(this).parent())'>CONVERT</button>
+  <button onclick='this.parentElement.close()'>CANCEL</button>
+</dialog>
 
-<script>    
+<script>
+  function showUnits() {
+    $('#units')[0].showModal();
+  }
   function showUnit_kW(e) {
     showUnitSgl(e,'horsepower <em>(hp)</em>',.745699872);
   }
