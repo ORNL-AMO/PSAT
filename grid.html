@@ -42,7 +42,7 @@
   .vam span, .vam button {
     vertical-align: middle;
   }
-  #io label {
+  dialog label {
     display: block;
   }
   td>div {
@@ -259,22 +259,27 @@
   Choose units<br>
   <label>
     <input name=units value=.0630901966667 type="radio" checked> L/s, m, kW
-  </label><br>
+  </label>
   <label>
     <input name=units value=43.8126364 type="radio"> m^3/hr, m, kW
-  </label><br>
+  </label>
   <label>
     <input name=units value=0.277778 type="radio"> gpm, ft, hp
-  </label><br>
+  </label>
   <label>
     <input name=units value=0.277778 type="radio"> MGD, ft, hp
-  </label><br>
-  <button onclick='cvtUnitFlow($(this).parent())'>CONVERT</button>
+  </label>
+  <button onclick='cvtUnits($(this).parent())'>CONVERT</button>
   <button onclick='this.parentElement.close()'>CANCEL</button>
 </dialog>
 
 <script>
+  function cvtUnits() {
+    saveProp('units',$('#units :checked').parent().index()-1);
+    $('#units')[0].close();
+  }
   function showUnits() {
+    alert(loadProp('units'));
     $('#units')[0].showModal();
   }
   function showUnit_kW(e) {
@@ -313,7 +318,7 @@
           saveProp('defaults',colData(e));
           break;
         case 2:
-          let v,d = loadProp('defaults');
+          let v,d = loadProp('defaultCondition');
           tdsForCol(e).find('[name]').each(function(i,el) {          
             v = d[$(el).attr('name')];
             if ($(el).is(':checkbox')) {

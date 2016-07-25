@@ -99,7 +99,7 @@
         LS.setItem(nm,JSON.stringify(v));
       }      
       function restoreDefaults() {
-        saveProp('defaults', {
+        saveProp('defaultCondition', {
           pump_style: 5,
           pump_rpm: 1780,
           drive: 0,
@@ -124,6 +124,7 @@
 
           grid: false       
         });
+        saveProp('units',0);
       }
       function load(nm,fn) {
         $('#container').load(nm+'.html',fn);

@@ -54,7 +54,7 @@
 	}
 	function save() {
 		if (Idx == Cond.length) {
-			Cond.push(loadProp('defaults'));
+			Cond.push(loadProp('defaultCondition'));
 		};				
 		$('[name]').each(function(i,e) {
 			Cond[Idx][$(e).attr('name')] = $(e).val();
