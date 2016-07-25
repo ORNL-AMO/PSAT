@@ -45,7 +45,7 @@
   #io label {
     display: block;
   }
-  .split {
+  td>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -83,7 +83,7 @@
       </td>
     </tr>  
     <tr>
-      <td><div class="split">Speed <em>(rpm)</em></div></td><td><input name='pump_rpm' type="number"></td>
+      <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rpm' type="number"></td>
     </tr>
     <tr>
       <td>Drive</td>
@@ -95,7 +95,7 @@
       </td>
     </tr>
     <tr>
-      <td><div class="split">Kinematic Viscosity <em>(cS)</em></div></td>
+      <td><div>Kinematic Viscosity <em>(cS)</em></div></td>
       <td><input name='viscosity' type="number"></td>
     </tr>
     <tr>
@@ -113,7 +113,7 @@
     <tr>
       <td class='th'>Motor</td><td/>
     </tr>
-      <td><span>Line freq</span> <em>(Hz)</em></td>
+      <td><div>Line freq <em>(Hz)</em></div></td>
       <td> 
         <select name='line'>
           <option>50</option>
@@ -122,14 +122,14 @@
       </td>
     </tr>      
     <tr>
-      <td><div class="split">Power Rating <em>(kW)</em></div></td>
+      <td><div>Power Rating <em>(kW)</em></div></td>
       <td>
         <input name='power_rating' type="number">
         <button onclick='showUnit_kW(this)'><i class="fa fa-calculator"/></button>
       </td>
     </tr>
     <tr>
-      <td><span>Speed</span> <em>(rpm)</em></td>
+      <td><div>Speed <em>(rpm)</em></div></td>
       <td><input name='motor_rpm' type="number"></td>
     </tr>
     <tr>
@@ -152,7 +152,7 @@
       <td><input name='amps' type="number"> <button>EST</button></td>
     </tr>
     <tr>
-      <td><span>Size margin</span> <em>(%)</em></td>
+      <td><div>Size margin <em>(%)</em></div></td>
       <td><input name='margin' type="number"></td>
     </tr>
     <tr>
@@ -170,11 +170,11 @@
       <td class='th'>Field</td><td/>
     </tr>        
     <tr>
-      <td><div class="split">Flow rate <button>L/s</button></div></td>
+      <td><div>Flow rate <button>L/s</button></div></td>
       <td><input name='flow' type="number" onchange="pumpEff(this)"></td>
     </tr>
     <tr>
-      <td><span>Head</span> <em>(m)</em></td>
+      <td><div>Head <em>(m)</em></div></td>
       <td>
         <input name='head' type="number">
         <button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button>
@@ -202,31 +202,31 @@
       <td class='th vam'><span>Results</span> <button onclick='backload("curve")'><i class="fa fa-line-chart"/></button></td><td></td>
     </tr>
     <tr>
-      <td><span>Pump efficiency</span> <em>(%)</em></td><td class='result'><span></span></td>
+      <td><div>Pump efficiency <em>(%)</em></div></td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td><span>Motor rated power</span> <em>(kW)</em></td><td class='result'><span></span></td>
+      <td><div>Motor rated power <em>(kW)</em></div></td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td><span>Motor shaft power</span> <em>(kW)</em></td><td class='result'><span></span></td>
+      <td><div>Motor shaft power <em>(kW)</em></div></td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td><span>Pump shaft power</span> <em>(kW)</em></td><td class='result'><span></span></td>
+      <td><div>Pump shaft power <em>(kW)</em></div></td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td><span>Motor efficiency</span> <em>(%)</em></td><td class='result'><span></span></td>
+      <td><div>Motor efficiency <em>(%)</em></div></td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td><span>Motor power factor</span> <em>(%)</em></td><td class='result'><span></span></td>
+      <td><div>Motor power factor <em>(%)</em></div></td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td><span>Motor current</span> <em>(amps)</em></td><td class='result'><span></span></td>
+      <td><div>Motor current <em>(amps)</em></div></td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td><span>Motor power</span> <em>(kW)</em></td><td class='result'><span></span></td>
+      <td><div>Motor power <em>(kW)</em></div></td><td class='result'><span></span></td>
     </tr>
     <tr>
-      <td><span>Annual energy</span> <em>(MWh)</em></td><td class='result'><span></span></td>
+      <td><div>Annual energy <em>(MWh)</em></div></td><td class='result'><span></span></td>
     </tr>
     <tr>
       <td>Annual cost</td><td class='result'><span></span></td>
