@@ -125,8 +125,11 @@
           grid: false       
         });
       }
+      function load(nm,fn) {
+        $('#container').load(nm+'.html',fn);
+      }
       function main() {
-        $('#container').load('conditions.html');
+        load('conditions');
       }      
       $ = require('jquery');
       Bridge = require('./build/Release/bridge');

@@ -310,7 +310,7 @@
   }
   function backload(nm) {
     Grid = $('#container').contents().detach();    
-    $('#container').load(nm+'.html');
+    load(nm);
   }
   function backToGrid() {
     $('#container').html(Grid);

@@ -61,7 +61,7 @@
 		saveCond();		
 	}
 	function grid() {
-		$('#container').load('grid.html', function() {
+		load('grid', function() {
 		    $.each(Cond,function(idx,d) {
 		      if (d.grid) {
 		            $('table tr').each(function (i,e) {
@@ -89,7 +89,7 @@
 	}
 	function nu() {
 		Idx = Cond.length;
-		$('#container').load('notes.html');
+		load('notes');
 	}
 	function removeAll() {
 		LS.removeItem('conditions');
@@ -111,7 +111,7 @@
 	}
 	function edit(e) {
 		Idx = $(e).parent().index()-1;
-		$('#container').load('notes.html');
+		load('notes');
 	}
 	function start() {		
 		$.each(Cond,function(i,d) {		
