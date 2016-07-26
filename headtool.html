@@ -29,9 +29,8 @@
 		<td>
 			Suction pipe diameter<br>
 			<input id=Ds type=number/><br>
-			Suction gauge pressure <em>(kPa)</em><br>
-			<input id=Ps type=number/>
-			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
+			Suction gauge pressure<br>
+			<input id=Ps type=number/><br>
 			Suction gauge elevation<br>
 			<input id=Zs type=number/><br>
 			Suction line loss coefficients<br>
@@ -41,9 +40,8 @@
 
 			Discharge pipe diameter<br>
 			<input id=Dd type=number/><br>
-			Discharge gauge pressure <em>(kPa)</em><br>
-			<input id=Pd type=number/>
-			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
+			Discharge gauge pressure<br>
+			<input id=Pd type=number/><br>
 			Discharge gauge elevation<br>
 			<input id=Zd type=number/><br>
 			Discharge line loss coefficients<br>
@@ -142,6 +140,8 @@
 	txt = units <= 1 ? 'm' : 'ft';
 	hdFldUnit('#Zs',txt);
 	hdFldUnit('#Zd',txt);
-
+	txt = units <= 1 ? 'kPa' : 'psig';
+	hdFldUnit('#Ps',txt);
+	hdFldUnit('#Pd',txt);
 
 </script>
