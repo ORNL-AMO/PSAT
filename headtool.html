@@ -113,6 +113,8 @@
 		$(`.results td:contains(${txt})`).next().text(rnd(v));
 	}
 	function calc() {
+		let f = $(Grid).find('[name=head]');
+		console.log(f);
 		let flow = 3000*.001, spec_grav=1,
 			elevHd = $('#Zd').val()-$('#Zs').val(),
 			presHd = ($('#Pd').val()-$('#Ps').val())/G/spec_grav,			
