@@ -143,7 +143,9 @@
 			uNew = $('table :input').index(this);
 		$.each(Cond,function(i,d) {
 			if (uOld<=1 && uNew >=2) {
-				d.power_rating = d.power_rating / .745699872;
+				d.power_rating = rnd(d.power_rating / .745699872);
+			} else if (uOld>=2 && uNew<=1) {
+				d.power_rating = rnd(d.power_rating * .745699872);
 			}
 		});
 		saveProp('units',uNew);
