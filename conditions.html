@@ -137,8 +137,24 @@
 		Idx = $(e).parent().index()-1;
 		load('notes');
 	}
+	function chgUnit() {
+		const
+			uOld = loadProp('units'),
+			uNew = $('table :input').index(this);
+		$.each(Cond,function(i,d) {
+			if (uOld<=1 && uNew >=2) {
+				d.power_rating = d.power_rating / .745699872;
+			}
+		});
+		saveProp('units',uNew);
+		saveCond();
+	}
 	function start() {
-		$('table :input').get(loadProp('units')).checked=true;
+		const radUnits = $('table :input');
+		radUnits.get(loadProp('units')).checked=true;
+		radUnits.click(chgUnit);
+		radUnits.attr('name','unit');
+
 		$.each(Cond,function(i,d) {		
 			let nu = $('li').first().clone();
 			nu.find('span').text(d.name);
