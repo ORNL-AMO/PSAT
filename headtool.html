@@ -130,18 +130,16 @@
 		r('discharge',disHd);
 		r('Pump',hd);
 	}
-	function hdFldUnit(sel,txt) {
-		$(sel).after(` <em>(${txt})</em>`);
+	function hdFldUnit(s,txt) {
+		$(`#${s}s`).after(` <em>(${txt})</em>`);
+		$(`#${s}d`).after(` <em>(${txt})</em>`);
 	}
 	units = loadProp('units');
 	txt = units <= 1 ? 'mm' : 'inches';
-	hdFldUnit('#Ds',txt);
-	hdFldUnit('#Dd',txt);
+	hdFldUnit('D',txt);
 	txt = units <= 1 ? 'm' : 'ft';
-	hdFldUnit('#Zs',txt);
-	hdFldUnit('#Zd',txt);
+	hdFldUnit('Z',txt);
 	txt = units <= 1 ? 'kPa' : 'psig';
-	hdFldUnit('#Ps',txt);
-	hdFldUnit('#Pd',txt);
+	hdFldUnit('P',txt);
 
 </script>
