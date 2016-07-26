@@ -18,7 +18,32 @@
 	li>* {
 		vertical-align: middle;
 	}
-</style> 
+	th:not(first-child),td:nth-child(n+1) {
+		padding-right: 2rem;
+	}
+</style>
+<h1>Units</h1>
+<table style="text-align: left">
+	<tr>
+		<th>Flow</th>
+		<th></th>
+		<th>Distance</th>
+		<th>Power</th>
+	</tr>
+	<tr>
+		<td><label><input type="radio"> L/s</label></td>
+		<td><label><input type="radio"> m^3/hr</label></td>
+		<td>m</td>
+		<td>kW</td>
+	</tr>
+	<tr>
+		<td><label><input type="radio"> gpm</label></td>
+		<td><label><input type="radio"> MGD</label></td>
+		<td>ft</td>
+		<td>hp</td>
+	</tr>
+</table>
+<!--<hr>-->
 <h1>Conditions</h1>
 <ul>
     <li>        	
