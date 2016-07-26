@@ -329,7 +329,7 @@
             if ($(el).is(':checkbox')) {
               el.checked = v;
             } else if ($(el).is('input')) {
-              $(el).val(v);
+              $(el).val(rnd(v));
             } else if ($(el).is('select')) {
               $(el).find('option')[v].selected = true;
             }     

@@ -103,7 +103,7 @@
 							if (inp.is(':checkbox')) {
 							  inp[0].checked = v;
 							} else if (inp.is('input')) {
-							  inp.val(v);
+							  inp.val(rnd(v));
 							} else if (inp.is('select')) {
 							  newEl.find('option')[v].selected = true;
 							}
@@ -152,7 +152,7 @@
 			}
 			const cvtFlow = [1,0.277778,.0630902,43.8126364];
 			d.flow *= cvtFlow[uOld];
-			d.flow = rnd(d.flow / cvtFlow[uNew]);
+			d.flow /= cvtFlow[uNew];
 		});
 		saveProp('units',uNew);
 		saveCond();
