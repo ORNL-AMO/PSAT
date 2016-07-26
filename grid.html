@@ -173,7 +173,7 @@
       <td><input name='flow' type="number" onchange="pumpEff(this)"></td>
     </tr>
     <tr>
-      <td><div>Head <em>(m)</em></div></td>
+      <td><div>Head</div></td>
       <td>
         <input name='head' type="number">
         <button onclick='backload("headtool")'><i class="fa fa-wrench"/></button>
@@ -360,7 +360,8 @@
     r.children().eq(i).html(Bridge.pumpEff($(v).val()));
   }
   units = loadProp('units');
-  $('div:contains(Power Rating)').append(`<em>(${units<=1 ? 'kW' : 'hp'})</em>`)
+  $('div:contains(Power Rating)').append(`<em>(${units<=1 ? 'kW' : 'hp'})</em>`);
+  $('div:contains(Head)').append(`<em>(${units<=1 ? 'm' : 'ft'})</em>`);
   $('div:contains(Flow)').append(`<em>(${['L/s','m^3/hr','gpm','MGD'][units]})</em>`);
 
 </script>
