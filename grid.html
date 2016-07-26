@@ -359,22 +359,8 @@
     let r = $('td:contains("Pump efficiency")').parent();
     r.children().eq(i).html(Bridge.pumpEff($(v).val()));
   }
-  $('div:contains(Power Rating)').append(`<em>(${loadProp('units')<=1 ? 'kW' : 'hp'})</em>`)
-
-  var u;
-  switch(loadProp('units')) {
-    case 0:
-      u='L/s';
-      break;
-    case 1:
-      u='m^3/hr';
-      break;
-    case 2:
-      u='gpm';
-      break;
-    case 3:
-      u='MGD';
-  }
-  $('div:contains(Flow)').append(`<em>(${u})</em>`)
+  units = loadProp('units');
+  $('div:contains(Power Rating)').append(`<em>(${units<=1 ? 'kW' : 'hp'})</em>`)
+  $('div:contains(Flow)').append(`<em>(${['L/s','m^3/hr','gpm','MGD'][units]})</em>`);
 
 </script>

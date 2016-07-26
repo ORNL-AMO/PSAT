@@ -150,27 +150,9 @@
 			} else if (uOld>=2 && uNew<=1) {
 				d.power_rating = rnd(d.power_rating * .745699872);
 			}
-			switch (uOld) {
-				case 1:
-					d.flow *= 0.277778;
-					break;
-				case 2:
-					d.flow *= .0630901966667;
-					break;
-				case 3:
-					d.flow *= 43.8126364;
-			}
-			switch (uNew) {
-				case 1:
-					d.flow /= 0.277778;
-					break;
-				case 2:
-					d.flow /= .0630901966667;
-					break;
-				case 3:
-					d.flow /= 43.8126364;
-			}
-			d.flow = rnd(d.flow);
+			const cvtFlow = [1,0.277778,.0630902,43.8126364];
+			d.flow *= cvtFlow[uOld];
+			d.flow = rnd(d.flow / cvtFlow[uNew]);
 		});
 		saveProp('units',uNew);
 		saveCond();
