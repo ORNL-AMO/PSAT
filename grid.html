@@ -122,7 +122,7 @@
       </td>
     </tr>      
     <tr>
-      <td><div>Power Rating <em>(kW)</em></div></td>
+      <td><div>Power Rating</div></td>
       <td>
         <input name='power_rating' type="number">
       </td>
@@ -347,7 +347,7 @@
   }
   function backToGrid() {
     $('#container').html(Grid);
-    $('#container').append($('#container script').remove());  
+//  $('#container').append($('#container script').remove());
     delete Grid;
   }      
   function edit(e) {
@@ -358,5 +358,6 @@
     let i = $(v).parent().index();
     let r = $('td:contains("Pump efficiency")').parent();
     r.children().eq(i).html(Bridge.pumpEff($(v).val()));
-  }  
+  }
+  $('div:contains(Power Rating)').append(`<em>(${loadProp('units')<=1 ? 'kW' : 'hp'})</em>`)
 </script>
