@@ -169,7 +169,7 @@
       <td class='th'>Field</td><td/>
     </tr>        
     <tr>
-      <td><div>Flow rate <em>(L/s)</em></div></td>
+      <td><div>Flow rate</td>
       <td><input name='flow' type="number" onchange="pumpEff(this)"></td>
     </tr>
     <tr>
@@ -360,4 +360,21 @@
     r.children().eq(i).html(Bridge.pumpEff($(v).val()));
   }
   $('div:contains(Power Rating)').append(`<em>(${loadProp('units')<=1 ? 'kW' : 'hp'})</em>`)
+
+  var u;
+  switch(loadProp('units')) {
+    case 0:
+      u='L/s';
+      break;
+    case 1:
+      u='m^3/hr';
+      break;
+    case 2:
+      u='gpm';
+      break;
+    case 3:
+      u='MGD';
+  }
+  $('div:contains(Flow)').append(`<em>(${u})</em>`)
+
 </script>
