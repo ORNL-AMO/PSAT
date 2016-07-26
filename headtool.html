@@ -32,9 +32,8 @@
 			Suction gauge pressure <em>(kPa)</em><br>
 			<input id=Ps type=number/>
 			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
-			Suction gauge elevation <em>(m)</em><br>
-			<input id=Zs type=number/>
-			<button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button><br>
+			Suction gauge elevation<br>
+			<input id=Zs type=number/><br>
 			Suction line loss coefficients<br>
 			<input id=Ks type=number/><br>
 
@@ -45,9 +44,8 @@
 			Discharge gauge pressure <em>(kPa)</em><br>
 			<input id=Pd type=number/>
 			<button onclick=showUnit_kPa(this)><i class="fa fa-calculator"/></button><br>
-			Discharge gauge elevation <em>(m)</em><br>
-			<input id=Zd type=number/>
-			<button onclick=showUnit_m(this)><i class="fa fa-calculator"/></button><br>
+			Discharge gauge elevation<br>
+			<input id=Zd type=number/><br>
 			Discharge line loss coefficients<br>
 			<input id=Kd type=number/><br>
 			<!-- Fluid specific gravity<br>
@@ -134,10 +132,16 @@
 		r('discharge',disHd);
 		r('Pump',hd);
 	}
+	function hdFldUnit(sel,txt) {
+		$(sel).after(` <em>(${txt})</em>`);
+	}
 	units = loadProp('units');
 	txt = units <= 1 ? 'mm' : 'inches';
-	unitTxt = ` <em>(${txt})</em>`
-	$('#Ds').after(unitTxt);
-	$('#Dd').after(unitTxt);
+	hdFldUnit('#Ds',txt);
+	hdFldUnit('#Dd',txt);
+	txt = units <= 1 ? 'm' : 'ft';
+	hdFldUnit('#Zs',txt);
+	hdFldUnit('#Zd',txt);
+
 
 </script>
