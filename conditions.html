@@ -145,20 +145,21 @@
 			uOld = loadProp('units'),
 			uNew = $('table :input').index(this);
 		$.each(Cond,function(i,d) {
-			if (uOld<=1 && uNew >=2) {
-				d.power_rating /= .745699872;
-			} else if (uOld>=2 && uNew<=1) {
-				d.power_rating *= .745699872;
+			const hp2kw = .745699872;
+			if (uOld>=2 && uNew<=1) {
+				d.power_rating *= hp2kw;
+			} else if (uOld<=1 && uNew >=2) {
+				d.power_rating /= hp2kw;
 			}
 			const cvtFlow = [1,0.277778,.0630902,43.8126364];
 			d.flow *= cvtFlow[uOld];
 			d.flow /= cvtFlow[uNew];
-			if (uOld<=1 && uNew >=2) {
-				d.head /= .3048;
-			} else if (uOld>=2 && uNew<=1) {
-				d.head *= .3048;
+			const ft2m = .3048;
+			if (uOld>=2 && uNew<=1) {
+				d.head *= ft2m;
+			} else if (uOld<=1 && uNew >=2) {
+				d.head /= ft2m;
 			}
-
 		});
 		saveProp('units',uNew);
 		saveCond();
