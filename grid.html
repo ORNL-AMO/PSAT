@@ -351,10 +351,9 @@
     delete Grid;
   }
   function gotoHead(e) {
-    //alert($('[name=flow]').eq($(e).parent().index()-1).val());
-    alert($('[name=specific_gravity]').eq($(e).parent().index()-1).val());
-
-    //backload("headtool");
+    Flow = $('[name=flow]').eq($(e).parent().index()-1).val();
+    SG = $('[name=specific_gravity]').eq($(e).parent().index()-1).val();
+    backload("headtool");
   }
   function edit(e) {
     Idx = $(e).parent().data('idx');
