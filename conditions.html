@@ -137,7 +137,8 @@
 		Idx = $(e).parent().index()-1;
 		load('notes');
 	}
-	function start() {		
+	function start() {
+		$('table :input').get(loadProp('units')).checked=true;
 		$.each(Cond,function(i,d) {		
 			let nu = $('li').first().clone();
 			nu.find('span').text(d.name);
