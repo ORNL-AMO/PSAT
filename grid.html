@@ -350,9 +350,13 @@
 //  $('#container').append($('#container script').remove());
     delete Grid;
   }
+  function getColFld(nm,e) {
+    return $(`[name=${nm}]`).eq($(e).parent().index()-1);
+  }
   function gotoHead(e) {
-    Flow = $('[name=flow]').eq($(e).parent().index()-1).val();
-    SG = $('[name=specific_gravity]').eq($(e).parent().index()-1).val();
+    Flow = getColFld('flow',e).val();
+    SG = getColFld('specific_gravity',e).val();
+    HeadEl = getColFld('head',e);
     backload("headtool");
   }
   function edit(e) {

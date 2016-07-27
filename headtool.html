@@ -89,7 +89,7 @@
 		<td/>
 		<td>
 			<button onclick='calc()'>CALCULATE</button>
-			<button onclick='back()'>ACCEPT</button>			
+			<button onclick='accept()'>ACCEPT</button>
 		</td>
 	</tr>
 </table>
@@ -123,15 +123,15 @@
 			vHdD = vHd(v($('#Dd').val()/distF,flow)),
 			vHdDif = vHdD-vHdS,
 			sucHd = $('#Ks').val()*vHdS,
-			disHd = $('#Kd').val()*vHdD,
-			hd = elevHd + presHd + flow + vHdDif + sucHd + disHd;
-debugger;
+			disHd = $('#Kd').val()*vHdD;
+		Head = elevHd + presHd + flow + vHdDif + sucHd + disHd;
+//debugger;
 		r('elevation',elevHd);		
 		r('pressure',presHd);
 		r('velocity',vHdDif);
 		r('suction',sucHd);
 		r('discharge',disHd);
-		r('Pump',hd);
+		r('Pump',Head);
 	}
 	function em(t) {
 		return ` <em>(${t})</em>`;
@@ -140,6 +140,11 @@ debugger;
 		$(`#${s}s`).after(em(txt));
 		$(`#${s}d`).after(em(txt));
 	}
+	function accept() {
+		HeadEl.val(rnd(Head));
+		backToGrid();
+	}
+
 	Units = loadProp('units');
 	txt = Units <= 1 ? 'mm' : 'inches';
 	hdFldUnit('D',txt);
