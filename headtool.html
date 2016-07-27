@@ -36,7 +36,7 @@
 			Suction line loss coefficients<br>
 			<input id=Ks type=number/><br>
 
-			<label><input type=checkbox> Suction tank</label><br>
+			<label><input onclick='suction()' type=checkbox> Suction tank</label><br>
 
 			Discharge pipe diameter<br>
 			<input id=Dd type=number/><br>
@@ -112,7 +112,7 @@
 		$(`.results td:contains(${txt})`).next().text(rnd(v));
 	}
 	function calc() {
-		const cvtFlow = [.001,3600,0.00222801,1.54722865];
+		const cvtFlow = [.001,0.000277778,0.00222801,1.54722865];
 		G = Units<=1 ? 9.8065 : 32.1740;
 		const presF = Units<=1 ? 0.1019977334 : 2.30665873688;
 		let flow = Flow*cvtFlow[Units],
