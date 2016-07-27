@@ -30,7 +30,7 @@
 			Suction pipe diameter<br>
 			<input id=Ds><br>
 			<label>Suction tank<br>
-				<input onclick='suction(this)' type=checkbox>
+				<input id=suc onclick='suction(this)' type=checkbox>
 			</label><br>
 			<div id="sucGauge">
 				Suction gauge pressure<br>
@@ -42,7 +42,7 @@
 				Suction tank gas overpressure<br>
 				<input id=Pg_s><br>
 				Suction tank fluid surface elevation<br>
-				<input id=Zs_s><br>
+				<input id=Ztnk_s><br>
 			</div>
 			Suction line loss coefficients<br>
 			<input id=Ks><br>
@@ -133,7 +133,7 @@
 		G = Units<=1 ? 9.8065 : 32.1740;
 		const presF = Units<=1 ? 0.1019977334 : 2.30665873688;
 		let flow = Flow*cvtFlow[Units],
-			elevHd = $('#Zd').val()-$('#Zs').val(),
+			elevHd = $('#Zd').val()-$($('#suc')[0].checked ? '#Ztnk_s' : '#Zs').val(),
 			presHd = ($('#Pd').val()-$('#Ps').val())*presF/SG,
 			distF = Units<=1 ? 1000 : 12;
 			vHdS = vHd(v($('#Ds').val()/distF,flow)),
@@ -166,7 +166,7 @@
 	hdFldUnit('D',txt);
 	txt = Units <= 1 ? 'm' : 'ft';
 	hdFldUnit('Z',txt);
-	hdFldUnit('Zs_',txt);
+	hdFldUnit('Ztnk_s',txt);
 	$('.results th').last().append(em(txt));
 	txt = Units <= 1 ? 'kPa' : 'psig';
 	hdFldUnit('P',txt);
