@@ -133,8 +133,9 @@
 		G = Units<=1 ? 9.8065 : 32.1740;
 		const presF = Units<=1 ? 0.1019977334 : 2.30665873688;
 		let flow = Flow*cvtFlow[Units],
-			elevHd = $('#Zd').val()-$($('#suc')[0].checked ? '#Ztnk_s' : '#Zs').val(),
-			presHd = ($('#Pd').val()-$('#Ps').val())*presF/SG,
+			sucTnk = $('#suc')[0].checked,
+			elevHd = $('#Zd').val()-$(sucTnk ? '#Ztnk_s' : '#Zs').val(),
+			presHd = ($('#Pd').val()-$(sucTnk ? '#Pg_s' : '#Ps').val())*presF/SG,
 			distF = Units<=1 ? 1000 : 12;
 			vHdS = vHd(v($('#Ds').val()/distF,flow)),
 			vHdD = vHd(v($('#Dd').val()/distF,flow)),
@@ -166,7 +167,7 @@
 	hdFldUnit('D',txt);
 	txt = Units <= 1 ? 'm' : 'ft';
 	hdFldUnit('Z',txt);
-	hdFldUnit('Ztnk_s',txt);
+	hdFldUnit('Ztnk_',txt);
 	$('.results th').last().append(em(txt));
 	txt = Units <= 1 ? 'kPa' : 'psig';
 	hdFldUnit('P',txt);
