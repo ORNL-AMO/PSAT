@@ -29,8 +29,9 @@
 		<td>
 			Suction pipe diameter<br>
 			<input id=Ds><br>
-
-			<label><input onclick='suction(this)' type=checkbox> Suction tank</label><br>
+			<label>Suction tank<br>
+				<input onclick='suction(this)' type=checkbox>
+			</label><br>
 			<div id="sucGauge">
 				Suction gauge pressure<br>
 				<input id=Ps><br>
@@ -39,9 +40,9 @@
 			</div>
 			<div id="sucTank" style="display: none">
 				Suction tank gas overpressure<br>
-				<input id=Pg><br>
+				<input id=Pg_s><br>
 				Suction tank fluid surface elevation<br>
-				<input id=Zs><br>
+				<input id=Zs_s><br>
 			</div>
 			Suction line loss coefficients<br>
 			<input id=Ks><br>
@@ -67,27 +68,27 @@
 				</tr>
 				<tr>
 					<td>Differential elevation head</td>
-					<td>0</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Differential pressure head</td>
-					<td>12.16</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Differential velocity head</td>
-					<td>17792</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Estimated suction friction head</td>
-					<td>72144.50</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Estimated discharge friction head</td>
-					<td>62080</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Pump head</td>
-					<td class=result>52028</td>
+					<td class=result></td>
 				</tr>				
 			</table>
 		</td>
@@ -141,8 +142,7 @@
 			sucHd = $('#Ks').val()*vHdS,
 			disHd = $('#Kd').val()*vHdD;
 		Head = elevHd + presHd + flow + vHdDif + sucHd + disHd;
-//debugger;
-		r('elevation',elevHd);		
+		r('elevation',elevHd);
 		r('pressure',presHd);
 		r('velocity',vHdDif);
 		r('suction',sucHd);
@@ -166,8 +166,10 @@
 	hdFldUnit('D',txt);
 	txt = Units <= 1 ? 'm' : 'ft';
 	hdFldUnit('Z',txt);
+	hdFldUnit('Zs_',txt);
 	$('.results th').last().append(em(txt));
 	txt = Units <= 1 ? 'kPa' : 'psig';
 	hdFldUnit('P',txt);
+	hdFldUnit('Pg_',txt);
 
 </script>
