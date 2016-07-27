@@ -61,6 +61,7 @@
 			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>	 -->
 		</td>
 		<td class=results>
+			Flow: <span id="flow" style="padding-right: 2rem;"/>Specific Gravity: <span id="sg"></span>
 			<table>
 				<tr>
 					<th>Head</th>
@@ -172,5 +173,6 @@
 	txt = Units <= 1 ? 'kPa' : 'psig';
 	hdFldUnit('P',txt);
 	hdFldUnit('Pg_',txt);
-
+	$('#flow').text(Flow);
+	$('#sg').text(SG);
 </script>
