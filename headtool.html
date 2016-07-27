@@ -139,7 +139,7 @@
 			distF = Units<=1 ? 1000 : 12;
 			vHdS = vHd(v($('#Ds').val()/distF,flow)),
 			vHdD = vHd(v($('#Dd').val()/distF,flow)),
-			vHdDif = vHdD-vHdS,
+			vHdDif = vHdD - (sucTnk ? 0 : vHdS),
 			sucHd = $('#Ks').val()*vHdS,
 			disHd = $('#Kd').val()*vHdD;
 		Head = elevHd + presHd + flow + vHdDif + sucHd + disHd;
