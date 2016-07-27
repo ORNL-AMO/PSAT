@@ -56,7 +56,7 @@
 			<table>
 				<tr>
 					<th>Head</th>
-					<th>Result <em>(m)</em></th>
+					<th>Result</th>
 				</tr>
 				<tr>
 					<td>Differential elevation head</td>
@@ -105,7 +105,7 @@
 	function v(d,flow) {
 		return flow / (Math.PI*(d/2)*(d/2));
 	}
-	G = 9.80665;
+
 	function vHd(v) {
 		return v*v/2/G;
 	}
@@ -113,11 +113,17 @@
 		$(`.results td:contains(${txt})`).next().text(rnd(v));
 	}
 	function calc() {
-		let f = $(Grid).find('[name=head]');
-		console.log(f);
-		let flow = 3000*.001, spec_grav=1,
+		//let f = $(Grid).find('[name=head]');
+		//console.log(f);
+		alert(Flow);
+		let flow = Flow;
+		//const cvtFlow = [1,0.277778,.0630902,43.8126364];
+		const cvtFlow = [.001,3600,0.00222801,1.54722865];
+		let g = Units<=1 ? 9.8065 : 32.1740;
+
+		let flow = Flow*cvtFlow[Units],
 			elevHd = $('#Zd').val()-$('#Zs').val(),
-			presHd = ($('#Pd').val()-$('#Ps').val())/G/spec_grav,			
+			presHd = ($('#Pd').val()-$('#Ps').val())/g/SG,
 			vHdS = vHd(v($('#Ds').val()/1000,flow)), 
 			vHdD = vHd(v($('#Dd').val()/1000,flow)),
 			vHdDif = vHdD-vHdS,
@@ -132,16 +138,20 @@
 		r('discharge',disHd);
 		r('Pump',hd);
 	}
-	function hdFldUnit(s,txt) {
-		$(`#${s}s`).after(` <em>(${txt})</em>`);
-		$(`#${s}d`).after(` <em>(${txt})</em>`);
+	function em(t) {
+		return ` <em>(${t})</em>`;
 	}
-	units = loadProp('units');
-	txt = units <= 1 ? 'mm' : 'inches';
+	function hdFldUnit(s,txt) {
+		$(`#${s}s`).after(em(txt));
+		$(`#${s}d`).after(em(txt));
+	}
+	Units = loadProp('units');
+	txt = Units <= 1 ? 'mm' : 'inches';
 	hdFldUnit('D',txt);
-	txt = units <= 1 ? 'm' : 'ft';
+	txt = Units <= 1 ? 'm' : 'ft';
 	hdFldUnit('Z',txt);
-	txt = units <= 1 ? 'kPa' : 'psig';
+	$('.results th').last().append(em(txt));
+	txt = Units <= 1 ? 'kPa' : 'psig';
 	hdFldUnit('P',txt);
 
 </script>
