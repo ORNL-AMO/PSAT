@@ -10,10 +10,14 @@
 		vertical-align: bottom;				
 	}
 	.results table {
+		/*background-color: lightgray;*/
+		border-collapse: collapse;
+	}
+	.results tr:nth-child(n+2) {
 		background-color: lightgray;
-	}	
+	}
 	.results td, .results th {
-		padding-left: 1rem;
+		/*padding-left: 1rem;*/
 		text-align: left;
 	}
 	.result {
@@ -61,8 +65,13 @@
 			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>	 -->
 		</td>
 		<td class=results>
-			Flow: <span id="flow" style="padding-right: 2rem;"/>Specific Gravity: <span id="sg"></span>
+
 			<table>
+				<tr>
+					<td>Flow: <span id="flow" style=""/></td>
+					<td>Specific Gravity: <span id="sg"></span></td>
+				</tr>
+			</tr>
 				<tr>
 					<th>Head</th>
 					<th>Result</th>
