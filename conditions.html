@@ -21,11 +21,14 @@
 	th:nth-child(n+2),td:nth-child(n+2) {
 		padding-right: 2rem;
 	}
-	#u2 td:first-child {
+	#u2 td:first-child, #u3 td:first-child {
 		color: green;
 		padding-right: 1rem;
 	}
-	#u2 {
+	#u3 th:not(:first-child) {
+		background-color: gainsboro;
+	}
+	#u2,#u3 {
 		display: none;
 	}
 </style>
@@ -79,8 +82,43 @@
 		<td><label><input name=4 type="radio"> psig</label></td>
 	</tr>
 </table>
+<table id=u3>
+	<tr>
+		<th></th>
+		<th onclick="set1()">1</th>
+		<th onclick="set2()">2</th>
+		<th onclick="set3()">3</th>
+		<th onclick="set4()">4</th>
+	</tr>
+	<tr>
+		<td>Flow</td>
+		<td><label><input checked name=31 type="radio"> L/s</label></td>
+		<td><label><input name=31 type="radio"> m^3/hr</label></td>
+		<td><label><input name=31 type="radio"> gpm</label></td>
+		<td><label><input name=31 type="radio"> MGD</label></td>
+	</tr>
+	<tr>
+		<td>Power</td>
+		<td><label><input checked name=32 type="radio"> kW</label></td>
+		<td></td>
+		<td><label><input name=32 type="radio"> hp</label></td>
+	</tr>
+	<tr>
+		<td>Distance</td>
+		<td><label><input checked name=33 type="radio"> m</label></td>
+		<td></td>
+		<td><label><input name=33 type="radio"> ft</label></td>
+	</tr>
+	<tr>
+		<td>Pressure</td>
+		<td><label><input checked name=34 type="radio"> kPa</label></td>
+		<td></td>
+		<td><label><input name=34 type="radio"> psig</label></td>
+	</tr>
+</table>
+
 <p style="font-size: smaller; color: gray">
-	(<span onclick="u1()">ONE</span> <span onclick="u2()">TWO</span> <span>THREE</span>)
+	(<span onclick="u1()">ONE</span> <span onclick="u2()">TWO</span> <span onclick="u3()">THREE</span>)
 
 </p>
 <h1>Conditions</h1>
@@ -100,13 +138,46 @@
 <button onclick='restoreDefaults()'>RESTORE DEFAULTS</button>
 
 <script>
+	function set1() {
+		$('[name=31]')[0].checked=true;
+		$('[name=32]')[0].checked=true;
+		$('[name=33]')[0].checked=true;
+		$('[name=34]')[0].checked=true;
+	}
+	function set2() {
+		$('[name=31]')[1].checked=true;
+		$('[name=32]')[0].checked=true;
+		$('[name=33]')[0].checked=true;
+		$('[name=34]')[0].checked=true;
+	}
+	function set3() {
+		$('[name=31]')[2].checked=true;
+		$('[name=32]')[1].checked=true;
+		$('[name=33]')[1].checked=true;
+		$('[name=34]')[1].checked=true;
+	}
+	function set4() {
+		$('[name=31]')[3].checked=true;
+		$('[name=32]')[1].checked=true;
+		$('[name=33]')[1].checked=true;
+		$('[name=34]')[1].checked=true;
+	}
+
 	function u1() {
 		$('#u2').hide();
 		$('#u1').show();
+		$('#u3').hide();
+
 	}
 	function u2() {
 		$('#u1').hide();
 		$('#u2').show();
+		$('#u3').hide();
+	}
+	function u3() {
+		$('#u1').hide();
+		$('#u3').show();
+		$('#u2').hide();
 	}
 	function xport() {
 		var txt='h1\th2\th3\n';
