@@ -3,24 +3,22 @@
 		font-size: smaller;
 		font-weight: lighter;
 	}
-	table input {
-		margin-bottom: .75rem;
-	}	
-	.results {
-		vertical-align: bottom;				
-	}
-	.results table {
-		/*background-color: lightgray;*/
+	table {
 		border-collapse: collapse;
 	}
-	.results tr:nth-child(n+2) {
-		background-color: lightgray;
+	table input {
+		margin-bottom: .75rem;
 	}
-	.results td, .results th {
-		/*padding-left: 1rem;*/
+	th {
 		text-align: left;
 	}
-	.result {
+	#results {
+		vertical-align: bottom;
+	}
+	#results tr:nth-child(n+2) {
+		background-color: lightgray;
+	}
+	#result {
 		color: green;
 		font-weight: bold;
 	}
@@ -64,7 +62,7 @@
 			<input style='margin-bottom: 0' type=number/>
 			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>	 -->
 		</td>
-		<td class=results>
+		<td id=results>
 
 			<table>
 				<tr>
@@ -98,7 +96,7 @@
 				</tr>
 				<tr>
 					<td>Pump head</td>
-					<td class=result></td>
+					<td id=result></td>
 				</tr>				
 			</table>
 		</td>
