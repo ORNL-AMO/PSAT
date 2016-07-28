@@ -341,12 +341,17 @@
     dlg[0].close(); 
   }
   function backload(nm) {
-    Grid = $('#container').contents().detach();    
+    Grid = $('#container').contents().detach();
     load(nm);
+    back = backToGrid;
   }
   function backToGrid() {
     $('#container').html(Grid);
     //$('#container').append($('#container script').remove());
+
+    $('th:gt(1)').each(function(i,e) {
+      $(e).find('span').text(Cond[$(e).data('idx')].name);
+    });
     delete Grid;
     back = main;
   }

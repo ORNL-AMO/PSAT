@@ -40,16 +40,6 @@
 	} else {
 		$('[name=name]').val('Condition ' + (Idx+1));
 	}
-	function prev() {
-		if (window['Grid']) {
-			backToGrid();
-			$('th:gt(1)').each(function(i,e) {
-        		$(e).find('span').text(Cond[$(e).data('idx')].name);
-    		});
-		} else {
-			main();
-		}
-	}
 	function save() {
 		if (Idx == Cond.length) {
 			Cond.push(loadProp('defaultCondition'));
@@ -58,8 +48,7 @@
 			Cond[Idx][$(e).attr('name')] = $(e).val();
 		});
 		saveCond();
-		prev();
+		back();
 	}
-	back = prev;
 </script>
 
