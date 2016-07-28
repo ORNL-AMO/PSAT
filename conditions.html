@@ -116,13 +116,23 @@
 		<td><label><input name=34 type="radio"> psig</label></td>
 	</tr>
 </table>
-<table id=u4>
+<div id="u4">
+Measurement System<br>
+<select>
+	<option>1</option>
+	<option>2</option>
+	<option>3</option>
+	<option>4</option>
+	<option>Custom</option>
+</select>
+<table>
 	<tr>
 		<th></th>
-		<th onclick="set1()">1</th>
-		<th onclick="set2()">2</th>
-		<th onclick="set3()">3</th>
-		<th onclick="set4()">4</th>
+		<th onclick="">1</th>
+		<th onclick="">2</th>
+		<th onclick="">3</th>
+		<th onclick="">4</th>
+		<th onclick="">Custom</th>
 	</tr>
 	<tr>
 		<td>Flow</td>
@@ -130,6 +140,14 @@
 		<td>m^3/hr</td>
 		<td>gpm</td>
 		<td>MGD</td>
+		<td>
+			<select>
+				<option>L/s</option>
+				<option>m^3/hr</option>
+				<option>gpm</option>
+				<option>MGD</option>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<td>Power</td>
@@ -137,6 +155,12 @@
 		<td>kW</td>
 		<td>hp</td>
 		<td>hp</td>
+		<td>
+			<select>
+				<option>kW</option>
+				<option>hp</option>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<td>Distance</td>
@@ -144,6 +168,12 @@
 		<td>m</td>
 		<td>ft</td>
 		<td>ft</td>
+		<td>
+			<select>
+				<option>m</option>
+				<option>ft</option>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<td>Pressure</td>
@@ -151,10 +181,15 @@
 		<td>kPa</td>
 		<td>psig</td>
 		<td>psig</td>
-
+		<td>
+			<select>
+				<option>kPa</option>
+				<option>psig</option>
+			</select>
+		</td>
 	</tr>
 </table>
-
+</div>
 <p style="font-size: smaller; color: gray">
 	(<span onclick="u1()">ONE</span> <span onclick="u2()">TWO</span> <span onclick="u3()">THREE</span> <span onclick="u4()">FOUR</span>)
 
