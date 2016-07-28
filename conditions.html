@@ -21,9 +21,17 @@
 	th:nth-child(n+2),td:nth-child(n+2) {
 		padding-right: 2rem;
 	}
+	#u2 td:first-child {
+		color: green;
+		padding-right: 1rem;
+	}
+	#u2 {
+		display: none;
+	}
 </style>
+
 <h1>Units</h1>
-<table style="text-align: left">
+<table id=u1 style="text-align: left">
 	<tr>
 		<th>Flow</th>
 		<th></th>
@@ -46,30 +54,35 @@
 		<td>psig</td>
 	</tr>
 </table>
-<!--<table style="text-align: left;">-->
-	<!--<tr>-->
-		<!--<td>Flow</td>-->
-		<!--<td><label><input type="radio"> L/s</label></td>-->
-		<!--<td><label><input type="radio"> m^3/hr</label></td>-->
-		<!--<td><label><input type="radio"> gpm</label></td>-->
-		<!--<td><label><input type="radio"> MGD</label></td>-->
-	<!--</tr>-->
-	<!--<tr>-->
-		<!--<td>Power</td>-->
-		<!--<td><label><input type="radio"> kW</label></td>-->
-		<!--<td><label><input type="radio"> hp</label></td>-->
-	<!--</tr>-->
-	<!--<tr>-->
-		<!--<td>Distance</td>-->
-		<!--<td><label><input type="radio"> m</label></td>-->
-		<!--<td><label><input type="radio"> ft</label></td>-->
-	<!--</tr>-->
-	<!--<tr>-->
-		<!--<td>Pressure</td>-->
-		<!--<td><label><input type="radio"> kPa</label></td>-->
-		<!--<td><label><input type="radio"> psig</label></td>-->
-	<!--</tr>-->
-<!--</table>-->
+
+<table id=u2>
+	<tr>
+		<td>Flow</td>
+		<td><label><input checked name=1 type="radio"> L/s</label></td>
+		<td><label><input name=1 type="radio"> m^3/hr</label></td>
+		<td><label><input name=1 type="radio"> gpm</label></td>
+		<td><label><input name=1 type="radio"> MGD</label></td>
+	</tr>
+	<tr>
+		<td>Power</td>
+		<td><label><input checked name=2 type="radio"> kW</label></td>
+		<td><label><input name=2 type="radio"> hp</label></td>
+	</tr>
+	<tr>
+		<td>Distance</td>
+		<td><label><input checked name=3 type="radio"> m</label></td>
+		<td><label><input name=3 type="radio"> ft</label></td>
+	</tr>
+	<tr>
+		<td>Pressure</td>
+		<td><label><input checked name=4 type="radio"> kPa</label></td>
+		<td><label><input name=4 type="radio"> psig</label></td>
+	</tr>
+</table>
+<p style="font-size: smaller; color: gray">
+	(<span onclick="u1()">ONE</span> <span onclick="u2()">TWO</span> <span>THREE</span>)
+
+</p>
 <h1>Conditions</h1>
 <ul>
     <li>        	
@@ -87,6 +100,14 @@
 <button onclick='restoreDefaults()'>RESTORE DEFAULTS</button>
 
 <script>
+	function u1() {
+		$('#u2').hide();
+		$('#u1').show();
+	}
+	function u2() {
+		$('#u1').hide();
+		$('#u2').show();
+	}
 	function xport() {
 		var txt='h1\th2\th3\n';
 		$.each(Cond,function(i,d) {
@@ -189,7 +210,7 @@
 		saveCond();
 	}
 	function start() {
-		const radUnits = $('table :input');
+		const radUnits = $('#u1 :input');
 		radUnits.get(loadProp('units')).checked=true;
 		radUnits.click(chgUnit);
 		radUnits.attr('name','unit');
