@@ -294,19 +294,20 @@
   }
   function rm(e) {
     Cond[$(e).parent().data('idx')].grid = false;
-    tdsForCol(e).remove(); 
+    col(e).remove();
     $(e).parent().remove();
   }
   function showIO(e) {
     $('#io')[0].showModal();
     $('#io').data('src',$(e));
   }
-  function tdsForCol(e) {
+  function col(e) {
     return $(`td:nth-child(${$(e).parent().index()+1})`);
   }
+
   function colData(e) {
     let v,d={};
-    tdsForCol(e).find('[name]').each(function(i,el) {       
+    col(e).find('[name]').each(function(i,el) {
       if ($(el).is(':checkbox')) {
         v = el.checked;
       } else if ($(el).is('input')) {
@@ -326,7 +327,7 @@
           break;
         case 2:
           let v,d = loadProp('defaultCondition');
-          tdsForCol(e).find('[name]').each(function(i,el) {          
+          col(e).find('[name]').each(function(i,el) {
             v = d[$(el).attr('name')];
             if ($(el).is(':checkbox')) {
               el.checked = v;
