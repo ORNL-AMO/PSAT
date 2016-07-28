@@ -31,6 +31,12 @@
         border: solid 1px #fff;
         box-shadow: inset 1px 1px 2px 0 #707070;
       }
+      #back {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        display: none;
+      }
     </style>
   </head>
   <body> 
@@ -58,7 +64,7 @@
       <button onclick='cvtUnitFlow($(this).parent())'>CONVERT</button> 
       <button onclick='this.parentElement.close()'>CANCEL</button>
     </dialog>
-
+    <button id=back onclick='back()'><i class="fa fa-long-arrow-left fa-lg"></i></button>
     <div id=container></div>
     <script>
       function rnd(v) {
@@ -126,11 +132,19 @@
         });
         saveProp('units',0);
       }
-      function load(nm,fn) {
-        $('#container').load(nm+'.html',fn);
+      function load(nm,bkHide,fn) {
+        back = main;
+        $('#container').load(nm+'.html',function () {
+          if (bkHide) {
+            $('#back').hide();
+          } else {
+            $('#back').show();
+          }
+          if (fn) fn();
+        });
       }
       function main() {
-        load('conditions');
+        load('conditions',true);
       }      
       $ = require('jquery');
       Bridge = require('./build/Release/bridge');

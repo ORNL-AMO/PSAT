@@ -27,7 +27,6 @@
 	}
 }
 </style>
-<button onclick='backToGrid()'><i class="fa fa-long-arrow-left"></i></button>
 <h1>Head Tool</h1>
 <table style='width: 100%'>
 	<tr>
@@ -173,7 +172,8 @@
 		HeadEl.val(rnd(Head));
 		backToGrid();
 	}
-
+	back = backToGrid;
+	
 	Units = loadProp('units');
 	txt = Units <= 1 ? 'mm' : 'inches';
 	hdFldUnit('D',txt);

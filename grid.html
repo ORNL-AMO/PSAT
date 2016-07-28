@@ -51,7 +51,6 @@
     align-items: center;
   }
 </style>
-<button onclick='main()'><i class="fa fa-long-arrow-left"></i></button>
 <table>
   <thead>
     <tr>      
@@ -347,8 +346,9 @@
   }
   function backToGrid() {
     $('#container').html(Grid);
-//  $('#container').append($('#container script').remove());
+    //$('#container').append($('#container script').remove());
     delete Grid;
+    back = main;
   }
   function getColFld(nm,e) {
     return $(`[name=${nm}]`).eq($(e).parent().index()-1);

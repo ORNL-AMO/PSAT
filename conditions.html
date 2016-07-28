@@ -287,7 +287,7 @@ Measurement System<br>
 		saveCond();		
 	}
 	function grid() {
-		load('grid', function() {
+		load('grid', false, function() {
 		    $.each(Cond,function(idx,d) {
 		      if (d.grid) {
 		            $('table tr').each(function (i,e) {
