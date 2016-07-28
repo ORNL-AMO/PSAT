@@ -21,14 +21,14 @@
 	th:nth-child(n+2),td:nth-child(n+2) {
 		padding-right: 2rem;
 	}
-	#u2 td:first-child, #u3 td:first-child {
+	#u2 td:first-child, #u3 td:first-child, #u4 td:first-child {
 		color: green;
 		padding-right: 1rem;
 	}
 	#u3 th:not(:first-child) {
 		background-color: gainsboro;
 	}
-	#u2,#u3 {
+	#u2,#u3,#u4 {
 		display: none;
 	}
 </style>
@@ -116,9 +116,47 @@
 		<td><label><input name=34 type="radio"> psig</label></td>
 	</tr>
 </table>
+<table id=u4>
+	<tr>
+		<th></th>
+		<th onclick="set1()">1</th>
+		<th onclick="set2()">2</th>
+		<th onclick="set3()">3</th>
+		<th onclick="set4()">4</th>
+	</tr>
+	<tr>
+		<td>Flow</td>
+		<td>L/s</td>
+		<td>m^3/hr</td>
+		<td>gpm</td>
+		<td>MGD</td>
+	</tr>
+	<tr>
+		<td>Power</td>
+		<td>kW</td>
+		<td>kW</td>
+		<td>hp</td>
+		<td>hp</td>
+	</tr>
+	<tr>
+		<td>Distance</td>
+		<td>m</td>
+		<td>m</td>
+		<td>ft</td>
+		<td>ft</td>
+	</tr>
+	<tr>
+		<td>Pressure</td>
+		<td>kPa</td>
+		<td>kPa</td>
+		<td>psig</td>
+		<td>psig</td>
+
+	</tr>
+</table>
 
 <p style="font-size: smaller; color: gray">
-	(<span onclick="u1()">ONE</span> <span onclick="u2()">TWO</span> <span onclick="u3()">THREE</span>)
+	(<span onclick="u1()">ONE</span> <span onclick="u2()">TWO</span> <span onclick="u3()">THREE</span> <span onclick="u4()">FOUR</span>)
 
 </p>
 <h1>Conditions</h1>
@@ -167,18 +205,28 @@
 		$('#u2').hide();
 		$('#u1').show();
 		$('#u3').hide();
-
+		$('#u4').hide();
 	}
 	function u2() {
 		$('#u1').hide();
 		$('#u2').show();
 		$('#u3').hide();
+		$('#u4').hide();
+
 	}
 	function u3() {
 		$('#u1').hide();
 		$('#u3').show();
 		$('#u2').hide();
+		$('#u4').hide();
 	}
+	function u4() {
+		$('#u1').hide();
+		$('#u4').show();
+		$('#u2').hide();
+		$('#u3').hide();
+	}
+
 	function xport() {
 		var txt='h1\th2\th3\n';
 		$.each(Cond,function(i,d) {
