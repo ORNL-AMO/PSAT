@@ -186,4 +186,8 @@
 	hdFldUnit('Pg_',txt);
 	$('#flow').text(Flow);
 	$('#sg').text(SG);
+	$('input').change(function () {
+		$('#results td:nth-child(2):gt(0)').text('');
+		$('#accept').hide();
+	});
 </script>
