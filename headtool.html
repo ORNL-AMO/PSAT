@@ -15,6 +15,9 @@
 	#results {
 		vertical-align: bottom;
 	}
+	#results td:first-child {
+		padding-right: 1rem;
+	}
 	#results tr:nth-child(n+2) {
 		background-color: lightgray;
 	}
@@ -105,7 +108,7 @@
 		<td/>
 		<td>
 			<button onclick='calc()'>CALCULATE</button>
-			<button onclick='accept()'>ACCEPT</button>
+			<button id=accept onclick='accept()' style="display: none">ACCEPT</button>
 		</td>
 	</tr>
 </table>
@@ -134,7 +137,7 @@
 		return v*v/2/G;
 	}
 	function r(txt,v) {
-		$(`.results td:contains(${txt})`).next().text(rnd(v));
+		$(`#results td:contains(${txt})`).next().text(rnd(v));
 	}
 	function calc() {
 		const cvtFlow = [.001,0.000277778,0.00222801,1.54722865];
@@ -157,6 +160,7 @@
 		r('suction',sucHd);
 		r('discharge',disHd);
 		r('Pump',Head);
+		$('#accept').show();
 	}
 	function em(t) {
 		return ` <em>(${t})</em>`;
@@ -176,7 +180,7 @@
 	txt = Units <= 1 ? 'm' : 'ft';
 	hdFldUnit('Z',txt);
 	hdFldUnit('Ztnk_',txt);
-	$('.results th').last().append(em(txt));
+	$('#results th').last().append(em(txt));
 	txt = Units <= 1 ? 'kPa' : 'psig';
 	hdFldUnit('P',txt);
 	hdFldUnit('Pg_',txt);
