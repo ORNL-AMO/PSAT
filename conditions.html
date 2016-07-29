@@ -283,7 +283,7 @@ Measurement System<br>
 		saveCond();
 	}
 	function setGrid(e) {
-		Cond[$(e).parent().index()-1].grid = e.checked;
+		Cond[parIdx(e,-1)].grid = e.checked;
 		saveCond();		
 	}
 	function grid() {
@@ -324,7 +324,7 @@ Measurement System<br>
 		start();
 	}
 	function rm(e) {
-		let i = e.parent().index()-1;
+		let i = parIdx(e,-1);
 		Cond.splice(i,1);
 		saveCond();
 		e.parent().remove();
@@ -336,7 +336,7 @@ Measurement System<br>
 		});
 	}
 	function edit(e) {
-		Idx = $(e).parent().index()-1;
+		Idx = parIdx(e,-1);
 		load('notes');
 	}
 	function chgUnit() {

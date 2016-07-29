@@ -94,7 +94,10 @@
       }
       function showUnit_m(e) {
         showUnitSgl(e,'feet',.3048);
-      }      
+      }
+      function parIdx(e,a=0) {
+        return $(e).parent().index()+a;
+      }
       function saveCond() {
         saveProp('conditions',Cond);
       }  
