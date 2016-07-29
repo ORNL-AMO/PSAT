@@ -164,7 +164,7 @@
 	function em(t) {
 		return ` <em>(${t})</em>`;
 	}
-	function hdFldUnit(s,txt) {
+	function hdFldUnit(s) {
 		$(`#${s}s`).after(em(txt));
 		$(`#${s}d`).after(em(txt));
 	}
@@ -172,17 +172,15 @@
 		HeadEl.val(rnd(Head));
 		backToGrid();
 	}
-
-	Units = loadProp('units');
 	txt = Units <= 1 ? 'mm' : 'inches';
-	hdFldUnit('D',txt);
+	hdFldUnit('D');
 	txt = Units <= 1 ? 'm' : 'ft';
-	hdFldUnit('Z',txt);
-	hdFldUnit('Ztnk_',txt);
+	hdFldUnit('Z');
+	hdFldUnit('Ztnk_');
 	$('#results th').last().append(em(txt));
 	txt = Units <= 1 ? 'kPa' : 'psig';
-	hdFldUnit('P',txt);
-	hdFldUnit('Pg_',txt);
+	hdFldUnit('P');
+	hdFldUnit('Pg_');
 	$('#flow').text(Flow);
 	$('#sg').text(SG);
 	$('input').change(function () {

@@ -340,32 +340,31 @@ Measurement System<br>
 		load('notes');
 	}
 	function chgUnit() {
-		const
-			uOld = loadProp('units'),
-			uNew = $('table :input').index(this);
+		const uOld = loadProp('units');
+		Units = $('table :input').index(this);
 		$.each(Cond,function(i,d) {
 			const hp2kw = .745699872;
-			if (uOld>=2 && uNew<=1) {
+			if (uOld>=2 && Units<=1) {
 				d.power_rating *= hp2kw;
-			} else if (uOld<=1 && uNew >=2) {
+			} else if (uOld<=1 && Units >=2) {
 				d.power_rating /= hp2kw;
 			}
 			const cvtFlow = [1,0.277778,.0630902,43.8126364];
 			d.flow *= cvtFlow[uOld];
-			d.flow /= cvtFlow[uNew];
+			d.flow /= cvtFlow[Units];
 			const ft2m = .3048;
-			if (uOld>=2 && uNew<=1) {
+			if (uOld>=2 && Units<=1) {
 				d.head *= ft2m;
-			} else if (uOld<=1 && uNew >=2) {
+			} else if (uOld<=1 && Units >=2) {
 				d.head /= ft2m;
 			}
 		});
-		saveProp('units',uNew);
+		saveProp('units',Units);
 		saveCond();
 	}
 	function start() {
 		const radUnits = $('#u1 :input');
-		radUnits.get(loadProp('units')).checked=true;
+		radUnits.get(Units).checked=true;
 		radUnits.click(chgUnit);
 		radUnits.attr('name','unit');
 
@@ -379,5 +378,6 @@ Measurement System<br>
 			$('ul').html('<em>None</em>');
 		}		
 	}
+	Units = loadProp('units');
 	start();
 </script>

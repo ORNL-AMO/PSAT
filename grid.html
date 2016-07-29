@@ -257,37 +257,8 @@
   <button onclick='io($(this.parentElement))'>ACCEPT</button> 
   <button onclick='this.parentElement.close()'>CANCEL</button>
 </dialog>
-<dialog id='units'>
-  Choose units<br>
-  <label>
-    <input name=units value=.0630901966667 type="radio" checked> L/s, m, kW
-  </label>
-  <label>
-    <input name=units value=43.8126364 type="radio"> m^3/hr, m, kW
-  </label>
-  <label>
-    <input name=units value=0.277778 type="radio"> gpm, ft, hp
-  </label>
-  <label>
-    <input name=units value=0.277778 type="radio"> MGD, ft, hp
-  </label>
-  <button onclick='cvtUnits($(this).parent())'>CONVERT</button>
-  <button onclick='this.parentElement.close()'>CANCEL</button>
-</dialog>
 
 <script>
-  function cvtUnits() {
-    saveProp('units',parIdx($('#units :checked'),-1));
-    $('[name=power_rating]:gt(0)').each(function (i,e) {
-      $(e).val(3);
-    });
-    $('#units')[0].close();
-  }
-  function showUnits() {
-    alert(loadProp('units'));
-    $('#units :input').get(loadProp('units')).checked=true;
-    $('#units')[0].showModal();
-  }
   function showUnit_kW(e) {
     showUnitSgl(e,'horsepower <em>(hp)</em>',.745699872);
   }
@@ -376,16 +347,15 @@
   function fldUnit(nm) {
     $(`td>div:contains(${nm})`).last().append(`<em>(${txt})</em>`);;
   }
-  units = loadProp('units');
-  txt = units <= 1 ? 'kW' : 'hp';
+  txt = Units <= 1 ? 'kW' : 'hp';
   fldUnit('Power Rating');
   fldUnit('Motor rated');
   fldUnit('Motor shaft');
   fldUnit('Pump shaft');
   fldUnit('Motor power');
-  txt = units <= 1 ? 'm' : 'ft';
+  txt = Units <= 1 ? 'm' : 'ft';
   fldUnit('Head');
-  txt = ['L/s', 'm^3/hr', 'gpm', 'MGD'][units];
+  txt = ['L/s', 'm^3/hr', 'gpm', 'MGD'][Units];
   fldUnit('Flow');
 
 </script>
