@@ -373,19 +373,19 @@
   function pumpEff(v) {
     $('td:contains("Pump efficiency")').parent().children().eq(parIdx(v)).html(Bridge.pumpEff($(v).val()));
   }
-  function fldUnit(nm,txt) {
+  function fldUnit(nm) {
     $(`td>div:contains(${nm})`).last().append(`<em>(${txt})</em>`);;
   }
-
   units = loadProp('units');
   txt = units <= 1 ? 'kW' : 'hp';
-  fldUnit('Power Rating', txt);
-  fldUnit('Motor rated', txt);
-  fldUnit('Motor shaft', txt);
-  fldUnit('Pump shaft', txt);
-  fldUnit('Motor power', txt);
-
-  fldUnit('Head', units <= 1 ? 'm' : 'ft');
-  fldUnit('Flow', ['L/s', 'm^3/hr', 'gpm', 'MGD'][units]);
+  fldUnit('Power Rating');
+  fldUnit('Motor rated');
+  fldUnit('Motor shaft');
+  fldUnit('Pump shaft');
+  fldUnit('Motor power');
+  txt = units <= 1 ? 'm' : 'ft';
+  fldUnit('Head');
+  txt = ['L/s', 'm^3/hr', 'gpm', 'MGD'][units];
+  fldUnit('Flow');
 
 </script>
