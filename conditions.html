@@ -300,7 +300,7 @@ Measurement System<br>
 							const inp = newEl.find('[name]');
 							const v = d[inp.attr('name')];
 							if (inp.is(':checkbox')) {
-							  inp[0].checked = v;
+							  dom(inp).checked = v;
 							} else if (inp.is('input')) {
 							  inp.val(rnd(v));
 							} else if (inp.is('select')) {
@@ -371,7 +371,7 @@ Measurement System<br>
 		$.each(Cond,function(i,d) {		
 			let nu = $('li').first().clone();
 			nu.find('span').text(d.name);
-			nu.find('input')[0].checked = d.grid;
+			dom(nu.find('input')).checked = d.grid;
 			$('ul').append(nu);		  
 		});		
 		if (Cond.length==0) {
