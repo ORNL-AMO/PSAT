@@ -262,13 +262,16 @@
   function showUnit_kW(e) {
     showUnitSgl(e,'horsepower <em>(hp)</em>',.745699872);
   }
+  function colCond(e) {
+    return Cond[$(e).parent().data('idx')];
+  }
   function rm(e) {
-    Cond[$(e).parent().data('idx')].grid = false;
+    colCond(e).grid = false;
     col(e).remove();
     $(e).parent().remove();
   }
   function showIO(e) {
-    $('#io')[0].showModal();
+    dom('#io').showModal();
     $('#io').data('src',$(e));
   }
   function col(e) {
@@ -311,10 +314,10 @@
           });
           break;
         default:
-          $.extend(Cond[$(e).parent().data('idx')],colData(e));
+          $.extend(colCond(e),colData(e));
           saveCond();
     }
-    dlg[0].close(); 
+    dom(dlg).close(); 
   }
   function backload(nm) {
     Grid = $('#container').contents().detach();
@@ -325,8 +328,9 @@
     $('#container').html(Grid);
     //$('#container').append($('#container script').remove());
 
-    $('th:gt(1)').each(function(i,e) {
-      $(e).find('span').text(Cond[$(e).data('idx')].name);
+    $('th:gt(1)>span').each(function(i,e) {
+      debugger;
+      $(e).text(colCond(e).name);
     });
     delete Grid;
     back = main;
@@ -345,7 +349,7 @@
     $('td:contains("Pump efficiency")').parent().children().eq(parIdx(v)).html(Bridge.pumpEff($(v).val()));
   }
   function fldUnit(nm) {
-    $(`td>div:contains(${nm})`).last().append(`<em>(${txt})</em>`);;
+    $(`td>div:contains(${nm})`).last().append(`<em>(${txt})</em>`);
   }
   txt = Units <= 1 ? 'kW' : 'hp';
   fldUnit('Power Rating');

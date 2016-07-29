@@ -67,6 +67,9 @@
     <button id=back onclick='back()'><i class="fa fa-long-arrow-left fa-lg"></i></button>
     <div id=container></div>
     <script>
+      function dom(e) {
+        return $(e)[0];
+      }
       function rnd(v) {
         return Math.round(v*10000)/10000;
       }
