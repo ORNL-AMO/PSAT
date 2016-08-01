@@ -36,16 +36,10 @@
 
 <h1>Units</h1>
 <div id="units">
-<label><input type=radio name=unit_sys></input> Metric</label>
+<label><input checked type=radio name=unit_sys onchange='chgUnitSys()'></input> Metric</label>
 <label><input type=radio name=unit_sys></input> Imperial</label>
 <label><input type=radio name=unit_sys></input> Custom</label>
 <p>
-
-<!-- <select onchange='chgUnitSys()'>
-	<option>Metric</option>
-	<option>Imperial</option>
-	<option>Custom</option>
-</select> -->
 <table>
 	<tr>
 		<th></th>
@@ -118,9 +112,6 @@
 <button onclick='restoreDefaults()'>RESTORE DEFAULTS</button>
 
 <script>
-	function chgUnitSys() {
-
-	}
 
 	function xport() {
 		var txt='h1\th2\th3\n';
@@ -239,5 +230,8 @@
 		}		
 	}
 	Units = loadProp('units');
+	$('#units [type=radio]').change(function() {
+		alert('hi')
+	}); 
 	start();
 </script>
