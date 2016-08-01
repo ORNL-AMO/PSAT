@@ -230,8 +230,14 @@
 		}		
 	}
 	Units = loadProp('units');
-	$('#units [type=radio]').change(function() {
-		alert('hi')
+	$('#units [type=radio]').click(function() {
+		if (parIdx(this)==2) {
+			$('#units th:last-child,#units td:last-child').show();
+		} else {
+			$('#units th:last-child,#units td:last-child').hide();
+		}
+		
+		//alert('hi')
 	}); 
 	start();
 </script>
