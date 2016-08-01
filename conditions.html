@@ -219,39 +219,57 @@
 		saveProp('units',Units);
 		saveCond();
 	}
+
+	function chgUnits(nu) {
+		$.each(Cond,function(i,d) {//debugger;
+			const cvtFlow = [0.277778,1,.0630902,43.8126364];
+
+			d.flow *= cvtFlow[Units[0]];
+			d.flow /= cvtFlow[nu[0]];
+			
+			const hp2kw = .745699872;
+			if (Units[1]==1 && nu[1]==0) {
+				d.power_rating *= hp2kw;
+			} else if (Units[1]==0 && nu[1]==1) {
+				d.power_rating /= hp2kw;
+			}
+			
+			const ft2m = .3048;
+			if (Units[2]==1 && nu[2]==0) {
+				d.head *= ft2m;
+			} else if (Units[2]==0 && nu[2]==1) {
+				d.head /= ft2m;
+			}
+		});
+		Units = nu;
+		saveProp('units',Units);
+		saveCond();
+	}
+	function shade(n) {
+		$('td').removeClass('shade');
+		$(`#units td:nth-child(${n})`).addClass('shade');		
+	}
 	function start() {
 		$('#units [type=radio]').change(function() {
 			const lastCol = $('#units th:last-child,#units td:last-child');
 			switch (parIdx(this)) {
 				case 0:
-					Units=[0,0,0,0];
 					lastCol.hide();
-					$('td').removeClass('shade');
-					$('#units td:nth-child(2)').addClass('shade');
+					shade(2);
+					chgUnits([0,0,0,0]);
 					break;
 				case 1:
-					Units=[2,1,1,1];
 					lastCol.hide();
-					$('td').removeClass('shade');
-					$('#units td:nth-child(3)').addClass('shade');
+					shade(3);
+					chgUnits([2,1,1,1]);
 					break;
 				case 2:
 					lastCol.find('select').each(function(i,e) {
 						$(e).find('option')[Units[i]].selected = true;
 					});
-					$('td').removeClass('shade');
-					$('#units td:nth-child(4)').addClass('shade');
+					shade(4);
 					lastCol.show();				
 			}
-			// if (parIdx(this)==2) {
-			// 	lastCol.find('select').each(function(i,e) {
-			// 		$(e).find('option')[Units[i]].selected = true;
-			// 	});
-			// 	lastCol.show();
-			// } else {
-			// 	lastCol.hide();
-			// 	alert(parIdx(this));
-			// }
 		}); 
 
 		$.each(Cond,function(i,d) {		
