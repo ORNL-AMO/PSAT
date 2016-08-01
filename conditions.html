@@ -36,7 +36,7 @@
 
 <h1>Units</h1>
 <div id="units">
-<label><input checked type=radio name=unit_sys onchange='chgUnitSys()'></input> Metric</label>
+<label><input checked type=radio name=unit_sys></input> Metric</label>
 <label><input type=radio name=unit_sys></input> Imperial</label>
 <label><input type=radio name=unit_sys></input> Custom</label>
 <p>
@@ -214,10 +214,17 @@
 		saveCond();
 	}
 	function start() {
-		const radUnits = $('#u1 :input');
-		radUnits.get(Units).checked=true;
-		radUnits.click(chgUnit);
-		radUnits.attr('name','unit');
+		$('#units [type=radio]').change(function() {
+			const lastCol = $('#units th:last-child,#units td:last-child');
+			if (parIdx(this)==2) {
+				lastCol.find('select').each(function(i,e) {
+					$(e).find('option')[Units[i]].selected = true;
+				});
+				lastCol.show();
+			} else {
+				lastCol.hide();
+			}
+		}); 
 
 		$.each(Cond,function(i,d) {		
 			let nu = $('li').first().clone();
@@ -230,15 +237,6 @@
 		}		
 	}
 	Units = loadProp('units');
-	$('#units [type=radio]').click(function() {
-		const lastCol = $('#units th:last-child,#units td:last-child');
-		if (parIdx(this)==2) {
-			lastCol.show();
-		} else {
-			lastCol.hide();
-		}
-		
-		//alert('hi')
-	}); 
+	Units = [0,0,0,0];
 	start();
 </script>
