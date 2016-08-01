@@ -21,125 +21,33 @@
 	th:nth-child(n+2),td:nth-child(n+2) {
 		padding-right: 2rem;
 	}
-	#u2 td:first-child, #u3 td:first-child, #u4 td:first-child {
+	#units td:first-child {
 		color: green;
 		padding-right: 1rem;
 	}
-	#u3 th:not(:first-child) {
-		background-color: gainsboro;
-	}
-	#u2,#u3,#u4 {
-		display: none;
-	}
+	
+	
 </style>
 
 <h1>Units</h1>
-<table id=u1 style="text-align: left">
-	<tr>
-		<th>Flow</th>
-		<th></th>
-		<th>Distance</th>
-		<th>Power</th>
-		<th>Pressure</th>
-	</tr>
-	<tr>
-		<td style="padding-right: 1rem"><label><input type="radio"> L/s</label></td>
-		<td><label><input type="radio"> m^3/hr</label></td>
-		<td>m</td>
-		<td>kW</td>
-		<td>kPa</td>
-	</tr>
-	<tr>
-		<td><label><input type="radio"> gpm</label></td>
-		<td><label><input type="radio"> MGD</label></td>
-		<td>ft</td>
-		<td>hp</td>
-		<td>psig</td>
-	</tr>
-</table>
-
-<table id=u2>
-	<tr>
-		<td>Flow</td>
-		<td><label><input checked name=1 type="radio"> L/s</label></td>
-		<td><label><input name=1 type="radio"> m^3/hr</label></td>
-		<td><label><input name=1 type="radio"> gpm</label></td>
-		<td><label><input name=1 type="radio"> MGD</label></td>
-	</tr>
-	<tr>
-		<td>Power</td>
-		<td><label><input checked name=2 type="radio"> kW</label></td>
-		<td><label><input name=2 type="radio"> hp</label></td>
-	</tr>
-	<tr>
-		<td>Distance</td>
-		<td><label><input checked name=3 type="radio"> m</label></td>
-		<td><label><input name=3 type="radio"> ft</label></td>
-	</tr>
-	<tr>
-		<td>Pressure</td>
-		<td><label><input checked name=4 type="radio"> kPa</label></td>
-		<td><label><input name=4 type="radio"> psig</label></td>
-	</tr>
-</table>
-<table id=u3>
-	<tr>
-		<th></th>
-		<th onclick="set1()">1</th>
-		<th onclick="set2()">2</th>
-		<th onclick="set3()">3</th>
-		<th onclick="set4()">4</th>
-	</tr>
-	<tr>
-		<td>Flow</td>
-		<td><label><input checked name=31 type="radio"> L/s</label></td>
-		<td><label><input name=31 type="radio"> m^3/hr</label></td>
-		<td><label><input name=31 type="radio"> gpm</label></td>
-		<td><label><input name=31 type="radio"> MGD</label></td>
-	</tr>
-	<tr>
-		<td>Power</td>
-		<td><label><input checked name=32 type="radio"> kW</label></td>
-		<td></td>
-		<td><label><input name=32 type="radio"> hp</label></td>
-	</tr>
-	<tr>
-		<td>Distance</td>
-		<td><label><input checked name=33 type="radio"> m</label></td>
-		<td></td>
-		<td><label><input name=33 type="radio"> ft</label></td>
-	</tr>
-	<tr>
-		<td>Pressure</td>
-		<td><label><input checked name=34 type="radio"> kPa</label></td>
-		<td></td>
-		<td><label><input name=34 type="radio"> psig</label></td>
-	</tr>
-</table>
-<div id="u4">
+<div id="units">
 Measurement System<br>
 <select>
-	<option>1</option>
-	<option>2</option>
-	<option>3</option>
-	<option>4</option>
+	<option>Metric</option>
+	<option>Imperial</option>
 	<option>Custom</option>
 </select>
 <table>
 	<tr>
 		<th></th>
-		<th onclick="">1</th>
-		<th onclick="">2</th>
-		<th onclick="">3</th>
-		<th onclick="">4</th>
-		<th onclick="">Custom</th>
+		<th>Metric</th>
+		<th>Imperial</th>
+		<th>Custom</th>
 	</tr>
 	<tr>
 		<td>Flow</td>
-		<td>L/s</td>
 		<td>m^3/hr</td>
 		<td>gpm</td>
-		<td>MGD</td>
 		<td>
 			<select>
 				<option>L/s</option>
@@ -152,8 +60,6 @@ Measurement System<br>
 	<tr>
 		<td>Power</td>
 		<td>kW</td>
-		<td>kW</td>
-		<td>hp</td>
 		<td>hp</td>
 		<td>
 			<select>
@@ -165,8 +71,6 @@ Measurement System<br>
 	<tr>
 		<td>Distance</td>
 		<td>m</td>
-		<td>m</td>
-		<td>ft</td>
 		<td>ft</td>
 		<td>
 			<select>
@@ -178,8 +82,6 @@ Measurement System<br>
 	<tr>
 		<td>Pressure</td>
 		<td>kPa</td>
-		<td>kPa</td>
-		<td>psig</td>
 		<td>psig</td>
 		<td>
 			<select>
@@ -190,10 +92,6 @@ Measurement System<br>
 	</tr>
 </table>
 </div>
-<p style="font-size: smaller; color: gray">
-	(<span onclick="u1()">ONE</span> <span onclick="u2()">TWO</span> <span onclick="u3()">THREE</span> <span onclick="u4()">FOUR</span>)
-
-</p>
 <h1>Conditions</h1>
 <ul>
     <li>        	
