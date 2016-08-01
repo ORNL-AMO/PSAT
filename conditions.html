@@ -19,7 +19,8 @@
 		vertical-align: middle;
 	}
 	th:nth-child(n+2),td:nth-child(n+2) {
-		padding-right: 2rem;
+		padding-right: 1rem;
+		padding-left: 1rem;
 	}
 	#units td:first-child {
 		color: green;
@@ -31,7 +32,12 @@
 	#units label {
 		padding-right: 1rem;
 	}
-	
+	#units table {
+		border-collapse: collapse;
+	}
+	.shade {
+		background-color: lightgray;
+	}	
 </style>
 
 <h1>Units</h1>
@@ -53,8 +59,8 @@
 		<td>gpm</td>
 		<td>
 			<select>
-				<option>L/s</option>
 				<option>m^3/hr</option>
+				<option>L/s</option>
 				<option>gpm</option>
 				<option>MGD</option>
 			</select>
@@ -216,14 +222,31 @@
 	function start() {
 		$('#units [type=radio]').change(function() {
 			const lastCol = $('#units th:last-child,#units td:last-child');
-			if (parIdx(this)==2) {
-				lastCol.find('select').each(function(i,e) {
-					$(e).find('option')[Units[i]].selected = true;
-				});
-				lastCol.show();
-			} else {
-				lastCol.hide();
+			switch (parIdx(this)) {
+				case 0:
+					Units=[0,0,0,0];
+					lastCol.hide();
+					$('#units td:nth-child(2)').addClass('shade');
+					break;
+				case 1:
+					Units=[2,1,1,1];
+					lastCol.hide();
+					break;
+				case 2:
+					lastCol.find('select').each(function(i,e) {
+						$(e).find('option')[Units[i]].selected = true;
+					});
+					lastCol.show();				
 			}
+			// if (parIdx(this)==2) {
+			// 	lastCol.find('select').each(function(i,e) {
+			// 		$(e).find('option')[Units[i]].selected = true;
+			// 	});
+			// 	lastCol.show();
+			// } else {
+			// 	lastCol.hide();
+			// 	alert(parIdx(this));
+			// }
 		}); 
 
 		$.each(Cond,function(i,d) {		
