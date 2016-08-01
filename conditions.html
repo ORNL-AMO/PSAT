@@ -231,10 +231,11 @@
 	}
 	Units = loadProp('units');
 	$('#units [type=radio]').click(function() {
+		const lastCol = $('#units th:last-child,#units td:last-child');
 		if (parIdx(this)==2) {
-			$('#units th:last-child,#units td:last-child').show();
+			lastCol.show();
 		} else {
-			$('#units th:last-child,#units td:last-child').hide();
+			lastCol.hide();
 		}
 		
 		//alert('hi')
