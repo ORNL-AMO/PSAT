@@ -5,7 +5,7 @@ App = Electron.app
 require('electron-reload')(__dirname);
 
 App.on('ready', function() {
-  Win = new Electron.BrowserWindow({width: 1280, height: 1024});
+  Win = new Electron.BrowserWindow({width: 800, height: 600});
   Win.loadURL(`file://${__dirname}/index.html`);
 })
 
