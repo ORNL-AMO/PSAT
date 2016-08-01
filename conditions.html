@@ -25,18 +25,24 @@
 		color: green;
 		padding-right: 1rem;
 	}
-	
+	#units td:last-child, #units th:last-child {
+		display: none;
+	}
 	
 </style>
 
 <h1>Units</h1>
 <div id="units">
-Measurement System<br>
-<select>
+<label><input type=radio name=unit_sys></input> Metric</label>
+<label><input type=radio name=unit_sys></input> Imperial</label>
+<label><input type=radio name=unit_sys></input> Custom</label>
+<p>
+
+<!-- <select onchange='chgUnitSys()'>
 	<option>Metric</option>
 	<option>Imperial</option>
 	<option>Custom</option>
-</select>
+</select> -->
 <table>
 	<tr>
 		<th></th>
@@ -109,55 +115,8 @@ Measurement System<br>
 <button onclick='restoreDefaults()'>RESTORE DEFAULTS</button>
 
 <script>
-	function set1() {
-		$('[name=31]')[0].checked=true;
-		$('[name=32]')[0].checked=true;
-		$('[name=33]')[0].checked=true;
-		$('[name=34]')[0].checked=true;
-	}
-	function set2() {
-		$('[name=31]')[1].checked=true;
-		$('[name=32]')[0].checked=true;
-		$('[name=33]')[0].checked=true;
-		$('[name=34]')[0].checked=true;
-	}
-	function set3() {
-		$('[name=31]')[2].checked=true;
-		$('[name=32]')[1].checked=true;
-		$('[name=33]')[1].checked=true;
-		$('[name=34]')[1].checked=true;
-	}
-	function set4() {
-		$('[name=31]')[3].checked=true;
-		$('[name=32]')[1].checked=true;
-		$('[name=33]')[1].checked=true;
-		$('[name=34]')[1].checked=true;
-	}
+	function chgUnitSys() {
 
-	function u1() {
-		$('#u2').hide();
-		$('#u1').show();
-		$('#u3').hide();
-		$('#u4').hide();
-	}
-	function u2() {
-		$('#u1').hide();
-		$('#u2').show();
-		$('#u3').hide();
-		$('#u4').hide();
-
-	}
-	function u3() {
-		$('#u1').hide();
-		$('#u3').show();
-		$('#u2').hide();
-		$('#u4').hide();
-	}
-	function u4() {
-		$('#u1').hide();
-		$('#u4').show();
-		$('#u2').hide();
-		$('#u3').hide();
 	}
 
 	function xport() {
