@@ -136,7 +136,8 @@
 
           grid: false       
         });
-        saveProp('units',[0,0,0,0]);
+        alert('wtf');
+        saveProp('units',[0,0,0,0]);//TODO existing cond? cvt? eek!
       }
       function load(nm,bkHide,fn) {
         back = main;
@@ -156,7 +157,7 @@
       Bridge = require('./build/Release/bridge');
       LS = localStorage;
       Cond = loadProp('conditions') || []
-      if (loadProp('defaults')===null) {
+      if (loadProp('defaultCondition')===null) {
         restoreDefaults();
       }
       $(document).ready(function() {

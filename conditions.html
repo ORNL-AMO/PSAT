@@ -266,6 +266,9 @@
 		} else {
 			//$('#units select option')[2].selected=true;
 			$('#units input')[2].checked = true;
+			lastCol.find('select').each(function(i,e) {
+				$(e).find('option')[Units[i]].selected = true;
+			});
 			shade(4);
 			lastCol.show();
 		}
@@ -290,7 +293,27 @@
 					lastCol.show();				
 			}
 		}); 
-
+		$('select').change(function() {
+			const nu=Units.slice();
+			switch($('select').index(this)) {
+				case 0:					
+					nu[0]=$(this).children(':selected').index();
+					chgUnits(nu);
+					break;
+				case 1:
+					nu[1]=$(this).children(':selected').index();
+					chgUnits(nu);				
+					break;
+				case 2:
+					nu[2]=$(this).children(':selected').index();
+					chgUnits(nu);				
+					break;
+				case 3:
+					nu[3]=$(this).children(':selected').index();
+					chgUnits(nu);				
+					break;				
+			}
+		});
 		$.each(Cond,function(i,d) {		
 			let nu = $('li').first().clone();
 			nu.find('span').text(d.name);
@@ -302,5 +325,8 @@
 		}		
 	}
 	Units = loadProp('units');
+	//debugger;
+	//saveProp('units',[1,0,0,0]);
+
 	start();
 </script>
