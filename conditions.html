@@ -45,12 +45,12 @@
 
 <h1>Units</h1>
 <div id="units">
-<!-- <span>Measurement System</span><br>
-<select>
-	<option>Metric</option>
-	<option>Imperial</option>
-	<option>Custom</option>
-</select> -->
+	<!-- <span>Measurement System</span><br>
+	<select>
+		<option>Metric</option>
+		<option>Imperial</option>
+		<option>Custom</option>
+	</select> -->
 	<label><input type=radio name=unit_sys></input> Metric</label>
 	<label><input type=radio name=unit_sys></input> Imperial</label>
 	<label><input type=radio name=unit_sys></input> Custom</label>
@@ -194,12 +194,6 @@
 		Cond.splice(i,1);
 		saveCond();
 		e.parent().remove();
-		Main.find('th').each(function(j,el) {
-			let idx = $(el).data('idx');
-			if (idx>i) {
-				$(el).data('idx',--idx);
-			}
-		});
 	}
 	function edit(e) {
 		Idx = parIdx(e,-1);
