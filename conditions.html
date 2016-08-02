@@ -225,21 +225,21 @@
 
 	function chgUnits(nu) {
 		$.each(Cond,function(i,d) {
-			const cvtFlow = [1,694.4422834,4.402867544,15.85032316];
+			const cvtFlow = {gpm:1,MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316};
 			d.flow *= cvtFlow[Units[0]];
 			d.flow /= cvtFlow[nu[0]];
 			
 			const kw2hp = 1.341022218;
-			if (Units[1]==1 && nu[1]==0) {
+			if (Units[1]=='kW' && nu[1]=='hp') {
 				d.power_rating *= kw2hp;
-			} else if (Units[1]==0 && nu[1]==1) {
+			} else if (Units[1]=='hp' && nu[1]=='kW') {
 				d.power_rating /= kw2hp;
 			}
 			
 			const m2ft = 3.280839895;
-			if (Units[2]==1 && nu[2]==0) {
+			if (Units[2]=='m' && nu[2]=='ft') {
 				d.head *= m2ft;
-			} else if (Units[2]==0 && nu[2]==1) {
+			} else if (Units[2]=='ft' && nu[2]=='m') {
 				d.head /= m2ft;
 			}
 		});
@@ -253,12 +253,12 @@
 	}
 	function start() {
 		const lastCol = $('#units th:last-child,#units td:last-child');
-		if (Units.toString()=='0,0,0,0') {
+		if (Units.toString()=='gpm,hp,ft,psig') {
 			//$('#units select option')[0].selected=true;
 			$('#units input')[0].checked = true;
 			shade(2);
 			//lastCol.hide();
-		} else if (Units.toString()=='2,1,1,1') {
+		} else if (Units.toString()=='m^3/hr,kW,m,kPa') {
 			//$('#units select option')[1].selected=true;
 			$('#units input')[1].checked = true;
 			shade(3);
@@ -267,7 +267,8 @@
 			//$('#units select option')[2].selected=true;
 			$('#units input')[2].checked = true;
 			lastCol.find('select').each(function(i,e) {
-				$(e).children()[Units[i]].selected = true;
+				$(e).val(Units[i]);
+				// $(e).children()[Units[i]].selected = true;
 			});
 			shade(4);
 			lastCol.show();
@@ -278,16 +279,17 @@
 				case 0:
 					lastCol.hide();
 					shade(2);
-					chgUnits([0,0,0,0]);
+					chgUnits(['gpm','hp','ft','psig']);
 					break;
 				case 1:
 					lastCol.hide();
 					shade(3);
-					chgUnits([2,1,1,1]);
+					chgUnits(['m^3/hr','kW','m','kPa']);
 					break;
 				case 2:
 					lastCol.find('select').each(function(i,e) {
-						$(e).children()[Units[i]].selected = true;
+						$(e).val(Units[i]);
+						//$(e).children()[Units[i]].selected = true;
 					});
 					shade(4);
 					lastCol.show();				
@@ -295,7 +297,7 @@
 		}); 
 		$('select').change(function() {
 			const nu=Units.slice();
-			nu[$('select').index(this)]=$(this).children(':selected').index();
+			nu[0]=$(this).val();
 			chgUnits(nu);
 		});
 		$.each(Cond,function(i,d) {		

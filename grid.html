@@ -350,15 +350,15 @@
   function fldUnit(nm) {
     $(`td>div:contains(${nm})`).last().append(`<em>(${txt})</em>`);
   }
-  txt = Units[1] == 0 ? 'hp' : 'kW';
+  txt = Units[1];
   fldUnit('Power Rating');
   fldUnit('Motor rated');
   fldUnit('Motor shaft');
   fldUnit('Pump shaft');
   fldUnit('Motor power');
-  txt = Units[2] == 0 ? 'ft' : 'm';
+  txt = Units[2];
   fldUnit('Head');
-  txt = ['gpm','MGD','m^3/hr','L/s'][Units[0]];
+  txt = Units[0];
   fldUnit('Flow');
 
 </script>
