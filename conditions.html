@@ -225,23 +225,22 @@
 
 	function chgUnits(nu) {
 		$.each(Cond,function(i,d) {
-			const cvtFlow = [0.277778,1,.0630902,43.8126364];
-
+			const cvtFlow = [1,694.4422834,4.402867544,15.85032316];
 			d.flow *= cvtFlow[Units[0]];
 			d.flow /= cvtFlow[nu[0]];
 			
-			const hp2kw = .745699872;
+			const kw2hp = 1.341022218;
 			if (Units[1]==1 && nu[1]==0) {
-				d.power_rating *= hp2kw;
+				d.power_rating *= kw2hp;
 			} else if (Units[1]==0 && nu[1]==1) {
-				d.power_rating /= hp2kw;
+				d.power_rating /= kw2hp;
 			}
 			
-			const ft2m = .3048;
+			const m2ft = 3.280839895;
 			if (Units[2]==1 && nu[2]==0) {
-				d.head *= ft2m;
+				d.head *= m2ft;
 			} else if (Units[2]==0 && nu[2]==1) {
-				d.head /= ft2m;
+				d.head /= m2ft;
 			}
 		});
 		Units = nu;
