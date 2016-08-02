@@ -295,24 +295,8 @@
 		}); 
 		$('select').change(function() {
 			const nu=Units.slice();
-			switch($('select').index(this)) {
-				case 0:					
-					nu[0]=$(this).children(':selected').index();
-					chgUnits(nu);
-					break;
-				case 1:
-					nu[1]=$(this).children(':selected').index();
-					chgUnits(nu);				
-					break;
-				case 2:
-					nu[2]=$(this).children(':selected').index();
-					chgUnits(nu);				
-					break;
-				case 3:
-					nu[3]=$(this).children(':selected').index();
-					chgUnits(nu);				
-					break;				
-			}
+			nu[$('select').index(this)]=$(this).children(':selected').index();
+			chgUnits(nu);
 		});
 		$.each(Cond,function(i,d) {		
 			let nu = $('li').first().clone();
