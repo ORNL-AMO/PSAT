@@ -172,13 +172,13 @@
 		HeadEl.val(rnd(Head));
 		backToGrid();
 	}
-	txt = Units <= 1 ? 'mm' : 'inches';
+	txt = Units[2] == 1 ? 'inches' : 'mm';
 	hdFldUnit('D');
-	txt = Units <= 1 ? 'm' : 'ft';
+	txt = Units[2] == 1 ? 'ft' : 'm';
 	hdFldUnit('Z');
 	hdFldUnit('Ztnk_');
 	$('#results th').last().append(em(txt));
-	txt = Units <= 1 ? 'kPa' : 'psig';
+	txt = Units[3] == 1 ? 'psig' : 'kPa';
 	hdFldUnit('P');
 	hdFldUnit('Pg_');
 	$('#flow').text(Flow);

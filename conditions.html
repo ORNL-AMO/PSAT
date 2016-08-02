@@ -42,10 +42,16 @@
 
 <h1>Units</h1>
 <div id="units">
-<label><input checked type=radio name=unit_sys></input> Metric</label>
-<label><input type=radio name=unit_sys></input> Imperial</label>
+<!-- <span>Measurement System</span><br>
+<select>
+	<option>Metric</option>
+	<option>Imperial</option>
+	<option>Custom</option>
+</select> -->
+<label><input type=radio name=unit_sys></input> Metric</label><br>
+<label><input type=radio name=unit_sys></input> Imperial</label><br>
 <label><input type=radio name=unit_sys></input> Custom</label>
-<p>
+ <p>
 <table>
 	<tr>
 		<th></th>
@@ -250,9 +256,19 @@
 		$(`#units td:nth-child(${n})`).addClass('shade');		
 	}
 	function start() {
-		$('#units [type=radio]').change(function() {
+		if (Units.toString()=='0,0,0,0') {
+			//$('#units select option')[0].selected=true;
+			$('#units input')[0].checked = true;
+		} else if (Units.toString()=='2,1,1,1') {
+			//$('#units select option')[1].selected=true;
+			$('#units input')[1].checked = true;
+		} else {
+			//$('#units select option')[2].selected=true;
+			$('#units input')[2].checked = true;
+		}
+		$('#units select').change(function() {
 			const lastCol = $('#units th:last-child,#units td:last-child');
-			switch (parIdx(this)) {
+			switch ($(this).children(':selected').index()) {
 				case 0:
 					lastCol.hide();
 					shade(2);
@@ -283,6 +299,6 @@
 		}		
 	}
 	Units = loadProp('units');
-	Units = [0,0,0,0];
+	
 	start();
 </script>
