@@ -35,6 +35,9 @@
 	#units table {
 		border-collapse: collapse;
 	}
+	#units label {
+		display: block;
+	}
 	.shade {
 		background-color: lightgray;
 	}	
@@ -48,9 +51,9 @@
 	<option>Imperial</option>
 	<option>Custom</option>
 </select> -->
-<label><input type=radio name=unit_sys></input> Metric</label><br>
-<label><input type=radio name=unit_sys></input> Imperial</label><br>
-<label><input type=radio name=unit_sys></input> Custom</label>
+	<label><input type=radio name=unit_sys></input> Metric</label>
+	<label><input type=radio name=unit_sys></input> Imperial</label>
+	<label><input type=radio name=unit_sys></input> Custom</label>
  <p>
 <table>
 	<tr>
@@ -256,19 +259,26 @@
 		$(`#units td:nth-child(${n})`).addClass('shade');		
 	}
 	function start() {
+		const lastCol = $('#units th:last-child,#units td:last-child');
 		if (Units.toString()=='0,0,0,0') {
 			//$('#units select option')[0].selected=true;
 			$('#units input')[0].checked = true;
+			shade(2);
+			//lastCol.hide();
 		} else if (Units.toString()=='2,1,1,1') {
 			//$('#units select option')[1].selected=true;
 			$('#units input')[1].checked = true;
+			shade(3);
+			//lastCol.hide();
 		} else {
 			//$('#units select option')[2].selected=true;
 			$('#units input')[2].checked = true;
+			shade(4);
+			lastCol.show();
 		}
-		$('#units select').change(function() {
-			const lastCol = $('#units th:last-child,#units td:last-child');
-			switch ($(this).children(':selected').index()) {
+		$('#units [type=radio]').change(function() {
+			// switch ($(this).children(':selected').index()) {
+			switch (parIdx(this)) {
 				case 0:
 					lastCol.hide();
 					shade(2);
