@@ -309,7 +309,7 @@
             } else if ($(el).is('input')) {
               $(el).val(rnd(v));
             } else if ($(el).is('select')) {
-              $(el).find('option')[v].selected = true;
+              $(el).chldren()[v].selected = true;
             }     
           });
           break;
