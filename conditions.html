@@ -267,7 +267,7 @@
 			//$('#units select option')[2].selected=true;
 			$('#units input')[2].checked = true;
 			lastCol.find('select').each(function(i,e) {
-				$(e).find('option')[Units[i]].selected = true;
+				$(e).children()[Units[i]].selected = true;
 			});
 			shade(4);
 			lastCol.show();
@@ -287,7 +287,7 @@
 					break;
 				case 2:
 					lastCol.find('select').each(function(i,e) {
-						$(e).find('option')[Units[i]].selected = true;
+						$(e).children()[Units[i]].selected = true;
 					});
 					shade(4);
 					lastCol.show();				
