@@ -329,7 +329,6 @@
     //$('#container').append($('#container script').remove());
 
     $('th:gt(1)>span').each(function(i,e) {
-      debugger;
       $(e).text(colCond(e).name);
     });
     delete Grid;
@@ -351,15 +350,15 @@
   function fldUnit(nm) {
     $(`td>div:contains(${nm})`).last().append(`<em>(${txt})</em>`);
   }
-  txt = Units <= 1 ? 'kW' : 'hp';
+  txt = Units[1] == 1 ? 'hp' : 'kW';
   fldUnit('Power Rating');
   fldUnit('Motor rated');
   fldUnit('Motor shaft');
   fldUnit('Pump shaft');
   fldUnit('Motor power');
-  txt = Units <= 1 ? 'm' : 'ft';
+  txt = Units[2] == 1 ? 'ft' : 'm';
   fldUnit('Head');
-  txt = ['L/s', 'm^3/hr', 'gpm', 'MGD'][Units];
+  txt = ['m^3/hr', 'L/s', 'gpm', 'MGD'][Units[0]];
   fldUnit('Flow');
 
 </script>

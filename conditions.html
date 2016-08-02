@@ -227,7 +227,7 @@
 	}
 
 	function chgUnits(nu) {
-		$.each(Cond,function(i,d) {//debugger;
+		$.each(Cond,function(i,d) {
 			const cvtFlow = [0.277778,1,.0630902,43.8126364];
 
 			d.flow *= cvtFlow[Units[0]];
@@ -299,6 +299,5 @@
 		}		
 	}
 	Units = loadProp('units');
-	
 	start();
 </script>
