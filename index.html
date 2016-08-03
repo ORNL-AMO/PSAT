@@ -73,6 +73,16 @@
       function rnd(v) {
         return Math.round(v*10000)/10000;
       }
+      function cvt(d,nm,i,nu,m) {
+        if (m[Units[i]]) {
+          d[nm] *= m[Units[i]];
+        }
+        if (m[nu[i]]) {
+          d[nm] /= m[nu[i]];
+        }
+      }
+      CVT_FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316}
+
       function cvtUnit(dlg,m) {        
         dlg.data('src').prev().val(rnd(dlg.find('input:not([type=radio])').val()*m));        
         dlg[0].close();

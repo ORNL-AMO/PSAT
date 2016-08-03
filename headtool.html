@@ -139,16 +139,20 @@
 		$(`#results td:contains(${txt})`).next().text(rnd(v));
 	}
 	function calc() {
-		const cvtFlow = [.001,0.000277778,0.00222801,1.54722865];
+		//const cvtFlow = [.001,0.000277778,0.00222801,1.54722865];
+		//const cvtFlow = {gpm: 0.00222801, MGD:1.54722865,'m^3/hr':0.000277778,'L/s':.001}; 
+		let fObj={flow:Flow}
+		cvt(fObj,'flow',0,['m^3/hr'],CVT_FLOW);
+				
 		G = Units<=1 ? 9.8065 : 32.1740;
 		const presF = Units<=1 ? 0.1019977334 : 2.30665873688;
-		let flow = Flow*cvtFlow[Units],
+		let 
 			sucTnk = dom('#suc').checked,
 			elevHd = $('#Zd').val()-$(sucTnk ? '#Ztnk_s' : '#Zs').val(),
 			presHd = ($('#Pd').val()-$(sucTnk ? '#Pg_s' : '#Ps').val())*presF/SG,
 			distF = Units<=1 ? 1000 : 12;
-			vHdS = vHd(v($('#Ds').val()/distF,flow)),
-			vHdD = vHd(v($('#Dd').val()/distF,flow)),
+			vHdS = vHd(v($('#Ds').val()/distF,fObj.flow)),
+			vHdD = vHd(v($('#Dd').val()/distF,fObj.flow)),
 			vHdDif = vHdD - (sucTnk ? 0 : vHdS),
 			sucHd = $('#Ks').val()*vHdS,
 			disHd = $('#Kd').val()*vHdD;
