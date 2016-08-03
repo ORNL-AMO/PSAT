@@ -141,15 +141,25 @@
 	function calc() {
 		//const cvtFlow = [.001,0.000277778,0.00222801,1.54722865];
 		//const cvtFlow = {gpm: 0.00222801, MGD:1.54722865,'m^3/hr':0.000277778,'L/s':.001}; 
-		let fObj={flow:Flow}
+		let fObj={flow:Flow/3600}
 		cvt(fObj,'flow',0,['m^3/hr'],CVT_FLOW);
-				
-		G = Units<=1 ? 9.8065 : 32.1740;
-		const presF = Units<=1 ? 0.1019977334 : 2.30665873688;
+
+		G = Units[3]<=1 ? 9.8065 : 32.1740;
+		const kPa2m = 0.1019977334;
+		let p = $('#Pd').val()-$(sucTnk ? '#Pg_s' : '#Ps').val();
+		let pObj={p:p};
+		cvt(pObj,'p',3,['kPa'],{psig:6.89476});
+		
+		let presHd = pObj.p*kPa2m/SG;
+		let m={m:3.280839895}
+        presHd *= m['m'];
+        if (m[Unit[2]]) {
+          presHd /= m[Unit[2]];
+        }
 		let 
 			sucTnk = dom('#suc').checked,
 			elevHd = $('#Zd').val()-$(sucTnk ? '#Ztnk_s' : '#Zs').val(),
-			presHd = ($('#Pd').val()-$(sucTnk ? '#Pg_s' : '#Ps').val())*presF/SG,
+
 			distF = Units<=1 ? 1000 : 12;
 			vHdS = vHd(v($('#Ds').val()/distF,fObj.flow)),
 			vHdD = vHd(v($('#Dd').val()/distF,fObj.flow)),
