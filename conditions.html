@@ -251,6 +251,12 @@
 		$('td').removeClass('shade');
 		$(`#units td:nth-child(${n})`).addClass('shade');		
 	}
+	function showCus(lastCol) {
+		lastCol.find('select').each(function(i,e) {
+			$(e).val(Units[i]);
+		});
+		lastCol.show();		
+	}
 	function start() {
 		const lastCol = $('#units th:last-child,#units td:last-child');
 		const i;
@@ -263,10 +269,7 @@
 				break;
 			default:
 				i=2;
-				lastCol.find('select').each(function(i,e) {
-					$(e).val(Units[i]);
-				});
-				lastCol.show();
+				showCus(lastCol);
 		}
 		$('#units input')[i].checked = true;
 		shade(i+2);
@@ -276,22 +279,16 @@
 			switch (parIdx(this)) {
 				case 0:
 					lastCol.hide();
-					shade(2);
 					chgUnits(['gpm','hp','ft','psig']);
 					break;
 				case 1:
 					lastCol.hide();
-					shade(3);
 					chgUnits(['m^3/hr','kW','m','kPa']);
 					break;
 				case 2:
-					lastCol.find('select').each(function(i,e) {
-						$(e).val(Units[i]);
-						//$(e).children()[Units[i]].selected = true;
-					});
-					shade(4);
-					lastCol.show();				
+					showCus(lastCol);
 			}
+			shade(parIdx(this)+2);
 		}); 
 		$('select').change(function() {
 			const nu=Units.slice();
