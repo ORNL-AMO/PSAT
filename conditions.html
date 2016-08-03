@@ -199,20 +199,22 @@
 		Idx = parIdx(e,-1);
 		load('notes');
 	}
-	
 	function cvt(d,nm,i,nu,m) {
-		d[nm] *= m[Units[i]];
-		d[nm] /= m[nu[i]];
+		if (m[Units[i]]) {
+			d[nm] *= m[Units[i]];
+		}
+		if (m[nu[i]]) {
+			d[nm] /= m[nu[i]];
+		}
 	}
-
 	function chgUnits(nu) {
 		$.each(Cond,function(i,d) {
 			cvt(d,'flow',0,nu,
-				{gpm:1,MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316});
+				{MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316});
 
-			cvt(d,'power_rating',1,nu,{hp:1,kW:1.341022218});
+			cvt(d,'power_rating',1,nu,{kW:1.341022218});
 
-			cvt(d,'head',2,nu,{ft:1,m:3.280839895});
+			cvt(d,'head',2,nu,{m:3.280839895});
 
 		});
 		Units = nu;
