@@ -199,49 +199,21 @@
 		Idx = parIdx(e,-1);
 		load('notes');
 	}
-	function chgUnit() {
-		const uOld = loadProp('units');
-		Units = $('table :input').index(this);
-		$.each(Cond,function(i,d) {
-			const hp2kw = .745699872;
-			if (uOld>=2 && Units<=1) {
-				d.power_rating *= hp2kw;
-			} else if (uOld<=1 && Units >=2) {
-				d.power_rating /= hp2kw;
-			}
-			const cvtFlow = [1,0.277778,.0630902,43.8126364];
-			d.flow *= cvtFlow[uOld];
-			d.flow /= cvtFlow[Units];
-			const ft2m = .3048;
-			if (uOld>=2 && Units<=1) {
-				d.head *= ft2m;
-			} else if (uOld<=1 && Units >=2) {
-				d.head /= ft2m;
-			}
-		});
-		saveProp('units',Units);
-		saveCond();
+	
+	function cvt(d,nm,i,nu,m) {
+		d[nm] *= m[Units[i]];
+		d[nm] /= m[nu[i]];
 	}
 
 	function chgUnits(nu) {
 		$.each(Cond,function(i,d) {
-			const cvtFlow = {gpm:1,MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316};
-			d.flow *= cvtFlow[Units[0]];
-			d.flow /= cvtFlow[nu[0]];
-			
-			const kw2hp = 1.341022218;
-			if (Units[1]=='kW' && nu[1]=='hp') {
-				d.power_rating *= kw2hp;
-			} else if (Units[1]=='hp' && nu[1]=='kW') {
-				d.power_rating /= kw2hp;
-			}
-			
-			const m2ft = 3.280839895;
-			if (Units[2]=='m' && nu[2]=='ft') {
-				d.head *= m2ft;
-			} else if (Units[2]=='ft' && nu[2]=='m') {
-				d.head /= m2ft;
-			}
+			cvt(d,'flow',0,nu,
+				{gpm:1,MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316});
+
+			cvt(d,'power_rating',1,nu,{hp:1,kW:1.341022218});
+
+			cvt(d,'head',2,nu,{ft:1,m:3.280839895});
+
 		});
 		Units = nu;
 		saveProp('units',Units);
