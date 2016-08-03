@@ -253,26 +253,24 @@
 	}
 	function start() {
 		const lastCol = $('#units th:last-child,#units td:last-child');
-		if (Units.toString()=='gpm,hp,ft,psig') {
-			//$('#units select option')[0].selected=true;
-			$('#units input')[0].checked = true;
-			shade(2);
-			//lastCol.hide();
-		} else if (Units.toString()=='m^3/hr,kW,m,kPa') {
-			//$('#units select option')[1].selected=true;
-			$('#units input')[1].checked = true;
-			shade(3);
-			//lastCol.hide();
-		} else {
-			//$('#units select option')[2].selected=true;
-			$('#units input')[2].checked = true;
-			lastCol.find('select').each(function(i,e) {
-				$(e).val(Units[i]);
-				// $(e).children()[Units[i]].selected = true;
-			});
-			shade(4);
-			lastCol.show();
+		const i;
+		switch (Units.toString()) {
+			case 'gpm,hp,ft,psig':
+				i=0;
+				break;
+			case 'm^3/hr,kW,m,kPa':
+				i=1;
+				break;
+			default:
+				i=2;
+				lastCol.find('select').each(function(i,e) {
+					$(e).val(Units[i]);
+				});
+				lastCol.show();
 		}
+		$('#units input')[i].checked = true;
+		shade(i+2);
+				
 		$('#units [type=radio]').change(function() {
 			// switch ($(this).children(':selected').index()) {
 			switch (parIdx(this)) {
