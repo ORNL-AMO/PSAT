@@ -259,12 +259,13 @@
 	}
 	function start() {
 		const lastCol = $('#units th:last-child,#units td:last-child');
+		const met = ['m^3/hr','kW','m','kPa'];
 		let i;
 		switch (Units.toString()) {
-			case 'gpm,hp,ft,psig':
+			case IMP.toString():
 				i=0;
 				break;
-			case 'm^3/hr,kW,m,kPa':
+			case met.toString():
 				i=1;
 				break;
 			default:
@@ -274,16 +275,15 @@
 		$('#units :radio')[i].checked = true;
 		shade(i+2);
 				
-		$('#units :radio').change(function() {
-			// switch ($(this).children(':selected').index()) {
+		$('#units :radio').change(function() {			
 			switch (parIdx(this)) {
 				case 0:
 					lastCol.hide();
-					chgUnits(['gpm','hp','ft','psig']);
+					chgUnits(IMP);
 					break;
 				case 1:
 					lastCol.hide();
-					chgUnits(['m^3/hr','kW','m','kPa']);
+					chgUnits(met);
 					break;
 				case 2:
 					showCus(lastCol);
@@ -306,8 +306,6 @@
 		}		
 	}
 	Units = loadProp('units');
-	//debugger;
-	//saveProp('units',[1,0,0,0]);
 
 	start();
 </script>
