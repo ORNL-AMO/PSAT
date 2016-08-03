@@ -51,8 +51,8 @@
 		<option>Imperial</option>
 		<option>Custom</option>
 	</select> -->
-	<label><input type=radio name=unit_sys></input> Imperial</label>
-	<label><input type=radio name=unit_sys></input> Metric</label>
+	<label><input type=radio name=unit_sys value='gpm,hp,ft,psig'></input> Imperial</label>
+	<label><input type=radio name=unit_sys value='m^3/hr,kW,m,kPa'></input> Metric</label>
 	<label><input type=radio name=unit_sys></input> Custom</label>
  <p>
 <table>
@@ -259,7 +259,7 @@
 	}
 	function start() {
 		const lastCol = $('#units th:last-child,#units td:last-child');
-		const i;
+		let i;
 		switch (Units.toString()) {
 			case 'gpm,hp,ft,psig':
 				i=0;
