@@ -25,6 +25,7 @@
 		color: green;
 		font-weight: bold;
 	}
+	
 }
 </style>
 <h1>Head Tool</h1>
@@ -189,7 +190,7 @@
 	_txt = Units[3];
 	hdFldUnit('P');
 	hdFldUnit('Pg_');
-	$('#flow').text(Flow);
+	$('#flow').html(Flow+em(Units[0]));
 	$('#sg').text(SG);
 	$('input').change(function () {
 		$('#results td:nth-child(2):gt(0)').text('');
