@@ -199,13 +199,16 @@
 		Idx = parIdx(e,-1);
 		load('notes');
 	}
-	function chgUnits(nu) {
+    function cvtObj(d,nm,i,nunits,m) {
+        d[nm] = cvt(d[nm],i,nunits[i],m);
+    }
+	function chgUnits(nunits) {
 		$.each(Cond,function(i,d) {
-			cvt(d,'flow',0,nu,CVT_FLOW);
-			cvt(d,'power_rating',1,nu,{kW:1.341022218});
-			cvt(d,'head',2,nu,{m:3.280839895});
+			cvtObj(d,'flow',0,nunits,CVT_FLOW);
+			cvtObj(d,'power_rating',1,nunits,{kW:1.341022218});
+			cvtObj(d,'head',2,nunits,{m:3.280839895});
 		});
-		Units = nu;
+		Units = nunits;
 		saveProp('units',Units);
 		saveCond();
 	}

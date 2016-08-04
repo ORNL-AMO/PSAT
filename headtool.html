@@ -132,37 +132,31 @@
 	function v(d,flow) {
 		return flow / (Math.PI*(d/2)*(d/2));
 	}
-	function vHd(v) {
-		return v*v/2/G;
+	function vHd(v,g) {
+		return v*v/2/g;
 	}
 	function r(txt,v) {
 		$(`#results td:contains(${txt})`).next().text(rnd(v));
 	}
 	function calc() {
-		//const cvtFlow = [.001,0.000277778,0.00222801,1.54722865];
-		//const cvtFlow = {gpm: 0.00222801, MGD:1.54722865,'m^3/hr':0.000277778,'L/s':.001}; 
-		let fObj={flow:Flow/3600}
-		cvt(fObj,'flow',0,['m^3/hr'],CVT_FLOW);
-
-		G = Units[3]<=1 ? 9.8065 : 32.1740;
-		const kPa2m = 0.1019977334;
-		let p = $('#Pd').val()-$(sucTnk ? '#Pg_s' : '#Ps').val();
-		let pObj={p:p};
-		cvt(pObj,'p',3,['kPa'],{psig:6.89476});
-		
-		let presHd = pObj.p*kPa2m/SG;
-		let m={m:3.280839895}
-        presHd *= m['m'];
-        if (m[Unit[2]]) {
-          presHd /= m[Unit[2]];
+        let flowU, distF, g;
+        if (Units[2]=='ft') {
+			flowU='ft^3/s';
+			g=32.1740;
+			distF=12;
+        } else {//m
+			flowU='m^3/s';
+			g=9.8065;
+			distF = 1000;
         }
 		let 
+			flow = cvt(Flow,0,flowU,CVT_FLOW),
 			sucTnk = dom('#suc').checked,
 			elevHd = $('#Zd').val()-$(sucTnk ? '#Ztnk_s' : '#Zs').val(),
-
-			distF = Units<=1 ? 1000 : 12;
-			vHdS = vHd(v($('#Ds').val()/distF,fObj.flow)),
-			vHdD = vHd(v($('#Dd').val()/distF,fObj.flow)),
+			presHd = cvt($('#Pd').val()-$(sucTnk ? '#Pg_s' : '#Ps').val(),3,Units[2],
+				{kPa:0.145037738007,m:1.42197020632,ft:0.433527501928})/SG,
+			vHdS = vHd(v($('#Ds').val()/distF,flow),g),
+			vHdD = vHd(v($('#Dd').val()/distF,flow),g),
 			vHdDif = vHdD - (sucTnk ? 0 : vHdS),
 			sucHd = $('#Ks').val()*vHdS,
 			disHd = $('#Kd').val()*vHdD;
@@ -179,20 +173,20 @@
 		return ` <em>(${t})</em>`;
 	}
 	function hdFldUnit(s) {
-		$(`#${s}s`).after(em(txt));
-		$(`#${s}d`).after(em(txt));
+		$(`#${s}s`).after(em(_txt));
+		$(`#${s}d`).after(em(_txt));
 	}
 	function accept() {
 		HeadEl.val(rnd(Head));
 		backToGrid();
 	}
-	txt = Units[2] == 'ft' ? 'inches' : 'mm';
+	_txt = Units[2] == 'ft' ? 'inches' : 'mm';
 	hdFldUnit('D');
-	txt = Units[2];
+	_txt = Units[2];
 	hdFldUnit('Z');
 	hdFldUnit('Ztnk_');
-	$('#results th').last().append(em(txt));
-	txt = Units[3];
+	$('#results th').last().append(em(_txt));
+	_txt = Units[3];
 	hdFldUnit('P');
 	hdFldUnit('Pg_');
 	$('#flow').text(Flow);
