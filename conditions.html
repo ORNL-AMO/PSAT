@@ -255,9 +255,9 @@
 			}
 			shade(parIdx(this,2));
 		}); 
-		$('select').change(function() {
+		$('#units select').change(function() {
 			const nu=Units.slice();
-			nu[0]=$(this).val();
+			nu[$('#units select').index(this)]=$(this).val();
 			chgUnits(nu);
 		});
 		$.each(Cond,function(i,d) {		
