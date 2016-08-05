@@ -189,6 +189,10 @@
 		Idx = 0;
 		start();
 	}
+	function reset() {
+		loadData(true);
+		main();
+	}
 	function rm(e) {
 		let i = parIdx(e,-1);
 		Cond.splice(i,1);
@@ -203,13 +207,12 @@
         d[nm] = cvt(d[nm],i,nunits[i],m);
     }
 	function chgUnits(nunits) {
-		let def=loadProp('defaultCondition');
-		$.each(Cond.concat([def]),function(i,d) {
+		$.each(Cond.concat([DefCond]),function(i,d) {
 			cvtObj(d,'flow',0,nunits,CVT_FLOW);
 			cvtObj(d,'power_rating',1,nunits,{kW:1.341022218});
 			cvtObj(d,'head',2,nunits,{m:3.280839895});
 		});
-		saveProp('defaultCondition',def);
+		saveProp('defaultCondition',DefCond);
 		Units = nunits;
 		saveProp('units',Units);
 		saveCond();

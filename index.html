@@ -123,34 +123,39 @@
         LS.setItem(nm,JSON.stringify(v));
       }
       IMP = ['gpm','hp','ft','psig'];      
-      function reset() {
-        saveProp('defaultCondition', {
-          pump_style: 5,
-          pump_rpm: 1780,
-          drive: 0,
-          viscosity: 1,
-          specific_gravity: 1,
-          stages: 1,
-          speed: true,
-          line: 1,
-          power_rating: 30,
-          motor_rpm: 1780,
-          efficiency: 0,
-          motor_voltage: 460,
-          amps: 225.4,
-          margin: 0,
-          fraction: 1,
-          cost: .05,
-          flow: 2000,
-          head: 277,
-          load_method: 0,
-          est_power: 150,
-          field_voltage: 460,
+      function loadData(reset) {
+        if (reset) {
+          saveProp('defaultCondition', {
+            pump_style: 5,
+            pump_rpm: 1780,
+            drive: 0,
+            viscosity: 1,
+            specific_gravity: 1,
+            stages: 1,
+            speed: true,
+            line: 1,
+            power_rating: 30,
+            motor_rpm: 1780,
+            efficiency: 0,
+            motor_voltage: 460,
+            amps: 225.4,
+            margin: 0,
+            fraction: 1,
+            cost: .05,
+            flow: 2000,
+            head: 277,
+            load_method: 0,
+            est_power: 150,
+            field_voltage: 460,
 
-          grid: false       
-        });        
-        saveProp('units',IMP);
-        saveProp('conditions',[]);
+            grid: false       
+          });        
+          saveProp('units',IMP);
+          saveProp('conditions',[]);          
+        }
+        Cond = loadProp('conditions');
+        Units = loadProp('units');
+        return (DefCond= loadProp('defaultCondition'));
       }
       function load(nm,bkHide,fn) {
         back = main;
@@ -170,12 +175,9 @@
       Bridge = require('./build/Release/bridge');
       LS = localStorage;
 
-      if (loadProp('defaultCondition')===null) {
-        reset();
+      if (!loadData()) {
+        loadData(true);
       }
-      Cond = loadProp('conditions');
-      Units = loadProp('units');
-      DefCond= loadProp('defaultCondition');
       
       $(document).ready(function() {
         main();

@@ -298,12 +298,13 @@
     let e = dlg.data('src');
     switch(parIdx(dlg.find(':checked'))) {
         case 1:
-          saveProp('defaults',colData(e));
+          DefCond = colData(e);
+          saveProp('defaults',DefCond);
           break;
         case 2:
-          let v,d = loadProp('defaultCondition');
+          let v;
           colFlds(e).each(function(i,el) {
-            v = d[$(el).attr('name')];
+            v = DefCond[$(el).attr('name')];
             if ($(el).is(':checkbox')) {
               el.checked = v;
             } else if ($(el).is('input')) {
