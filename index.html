@@ -123,7 +123,7 @@
         LS.setItem(nm,JSON.stringify(v));
       }
       IMP = ['gpm','hp','ft','psig'];      
-      function restoreDefaults() {
+      function reset() {
         saveProp('defaultCondition', {
           pump_style: 5,
           pump_rpm: 1780,
@@ -149,7 +149,8 @@
 
           grid: false       
         });        
-        saveProp('units',IMP);//TODO existing cond? cvt? eek!
+        saveProp('units',IMP);
+        saveProp('conditions',[]);
       }
       function load(nm,bkHide,fn) {
         back = main;
@@ -168,10 +169,14 @@
       $ = require('jquery');
       Bridge = require('./build/Release/bridge');
       LS = localStorage;
-      Cond = loadProp('conditions') || []
+
       if (loadProp('defaultCondition')===null) {
-        restoreDefaults();
+        reset();
       }
+      Cond = loadProp('conditions');
+      Units = loadProp('units');
+      DefCond= loadProp('defaultCondition');
+      
       $(document).ready(function() {
         main();
       });

@@ -124,7 +124,7 @@
 <button>IMPORT</button>
 <button onclick="xport()">EXPORT</button>
 <button onclick='removeAll()'>REMOVE ALL</button>
-<button onclick='restoreDefaults()'>RESTORE DEFAULTS</button>
+<button onclick='reset()'>RESET</button>
 
 <script>
 
@@ -184,7 +184,7 @@
 		load('notes');
 	}
 	function removeAll() {
-		LS.removeItem('conditions');
+		LS.removeItem('conditions');//OOPS
 		Cond = [];
 		Idx = 0;
 		start();
@@ -203,11 +203,13 @@
         d[nm] = cvt(d[nm],i,nunits[i],m);
     }
 	function chgUnits(nunits) {
-		$.each(Cond,function(i,d) {
+		let def=loadProp('defaultCondition');
+		$.each(Cond.concat([def]),function(i,d) {
 			cvtObj(d,'flow',0,nunits,CVT_FLOW);
 			cvtObj(d,'power_rating',1,nunits,{kW:1.341022218});
 			cvtObj(d,'head',2,nunits,{m:3.280839895});
 		});
+		saveProp('defaultCondition',def);
 		Units = nunits;
 		saveProp('units',Units);
 		saveCond();
@@ -270,7 +272,7 @@
 			$('ul').html('<em>None</em>');
 		}		
 	}
-	Units = loadProp('units');
+	
 
 	start();
 </script>
