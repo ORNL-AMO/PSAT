@@ -42,7 +42,7 @@
 	}
 	function save() {
 		if (Idx == Cond.length) {
-			Cond.push(DefCond);
+			Cond.push(loadProp('defCond'));
 		};				
 		$('[name]').each(function(i,e) {
 			Cond[Idx][$(e).attr('name')] = $(e).val();

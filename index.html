@@ -40,30 +40,6 @@
     </style>
   </head>
   <body> 
-    <dialog id=unit_sgl>
-      Enter value in <span></span><br>
-      <input><br>
-      <button onclick='cvtUnitSgl($(this).parent())'>CONVERT</button>
-      <button onclick='this.parentElement.close()'>CANCEL</button>       
-    </dialog> 
-    <dialog id='unit_flow'>
-      Choose units<br>
-      <label>
-        <input name=units value=.0630901966667 type="radio" checked> gpm
-      </label><br>
-      <label>
-        <input name=units value=43.8126364 type="radio"> MGD
-      </label><br>
-      <label>
-        <input name=units value=0.277778 type="radio"> m^3/hr
-      </label>
-      <div style='margin:.5rem 0;'>
-        Enter value<br>
-        <input>
-      </div>
-      <button onclick='cvtUnitFlow($(this).parent())'>CONVERT</button> 
-      <button onclick='this.parentElement.close()'>CANCEL</button>
-    </dialog>
     <button id=back onclick='back()'><i class="fa fa-long-arrow-left fa-lg"></i></button>
     <div id=container></div>
     <script>
@@ -125,7 +101,7 @@
       IMP = ['gpm','hp','ft','psig'];      
       function loadData(reset) {
         if (reset) {
-          saveProp('defaultCondition', {
+          saveProp('defCond', {
             pump_style: 5,
             pump_rpm: 1780,
             drive: 0,
@@ -155,7 +131,7 @@
         }
         Cond = loadProp('conditions');
         Units = loadProp('units');
-        return (DefCond= loadProp('defaultCondition'));
+        return (DefCond= loadProp('defCond'));
       }
       function load(nm,bkHide,fn) {
         back = main;
@@ -174,11 +150,9 @@
       $ = require('jquery');
       Bridge = require('./build/Release/bridge');
       LS = localStorage;
-
       if (!loadData()) {
         loadData(true);
       }
-      
       $(document).ready(function() {
         main();
       });
