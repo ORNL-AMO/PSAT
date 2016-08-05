@@ -121,26 +121,34 @@
 <button onclick='uncheck()'><i class="fa fa-check-square"></i></button>
 <button onclick='grid()'><i class="fa fa-table"></i></button>
 <button onclick='nu()'>NEW</button>
-<button>IMPORT</button>
-<button onclick="xport()">EXPORT</button>
+<button onclick="inprt()">IMPORT</button>
+<button onclick="xprt()">EXPORT</button>
 <button onclick='removeAll()'>REMOVE ALL</button>
 <button onclick='reset()'>RESET</button>
 
 <script>
-
-	function xport() {
-		var txt='h1\th2\th3\n';
-		$.each(Cond,function(i,d) {
-			txt += i+'\t';
-		});
-		txt+='\n';
+	function xprt() {
+		if (Cond.length==0) {
+			return;//TODO hide btn
+		}
+		var txt='';
 		for(var prop in Cond[0]){
 			txt += prop + '\t';
-
 		}
+		$.each(Cond,function(i,d) {
+			txt+='\n';
+			for(var prop in d)	{
+				txt += d[prop] + '\t';			
+			}
+		});
 		const fs = require('fs');
 		fs.writeFile('hello.tsv',txt);
 	}
+	function inprt() {
+		const fs = require('fs');
+		console.log(fs.readFileSync('hello.tsv','utf8'));
+		
+	}	
 	function uncheck() {
 		$(':checkbox').prop('checked',false);
 		$.each(Cond,function(i,d) {
