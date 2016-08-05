@@ -131,23 +131,30 @@
 		if (Cond.length==0) {
 			return;//TODO hide btn
 		}
-		var txt='';
-		for(var prop in Cond[0]){
-			txt += prop + '\t';
-		}
-		$.each(Cond,function(i,d) {
-			txt+='\n';
-			for(var prop in d)	{
-				txt += d[prop] + '\t';			
-			}
-		});
-		const fs = require('fs');
-		fs.writeFile('hello.tsv',txt);
+		const hd=Object.keys(Cond[0]).sort();
+		var txt=hd.join('\t');
+		Cond.forEach(function(d,i) {
+			txt+='\n'+
+				hd.map((nm,i)=> {
+					return d[nm];
+				}).join('\t');
+		});		
+		require('fs').writeFile('hello.tsv',txt);
 	}
 	function inprt() {
-		const fs = require('fs');
-		console.log(fs.readFileSync('hello.tsv','utf8'));
-		
+		const 
+			fs = require('fs'),
+			lines=fs.readFileSync('hello.tsv','utf8').split('\n'),
+			hd=lines[0].split('\t');
+		Cond=[];
+		lines.slice(1).forEach((ln,row)=>{
+			Cond.push({});
+			ln.split('\t').forEach((v,i)=>{//debugger;
+				Cond[row][hd[i]]=v;
+			});
+		});
+		saveCond();
+		main();	
 	}	
 	function uncheck() {
 		$(':checkbox').prop('checked',false);
@@ -195,7 +202,7 @@
 		LS.removeItem('conditions');//OOPS
 		Cond = [];
 		Idx = 0;
-		start();
+		main();
 	}
 	function reset() {
 		loadData(true);
