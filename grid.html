@@ -137,12 +137,13 @@
     <tr>
       <td>Efficiency class</td>
       <td> 
-        <select name='efficiency'>
+        <select name='efficiency_class'>
           <option>Standard</option>
           <option>Energy</option>
           <option>Average</option>
-          <option>Specified?</option>
+          <option>Custom</option>
         </select>
+        <input name='efficiency'></input>
       </td>
     </tr>    
     <tr>
@@ -305,6 +306,7 @@
         case 2:
           let v;
           colFlds(e).each(function(i,el) {
+            debugger;
             v = DefCond[$(el).attr('name')];
             if ($(el).is(':checkbox')) {
               el.checked = v;
