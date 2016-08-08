@@ -201,8 +201,9 @@
 								} else if (ctl.is('input')) {
 								  ctl.val(rnd(v));
 								} else if (ctl.is('select')) {
-								  newEl.find('option')[v].selected = true;
+								  newEl.find('option')[v].selected = true;								  
 								}
+								ctl.trigger('change');
 							});
 						}
 					});   

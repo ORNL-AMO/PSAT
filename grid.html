@@ -137,13 +137,13 @@
     <tr>
       <td>Efficiency class</td>
       <td> 
-        <select name='efficiency_class'>
+        <select name='efficiency_class' onchange='effChg(this)'>
           <option>Standard</option>
           <option>Energy</option>
           <option>Average</option>
           <option>Custom</option>
         </select>
-        <input name='efficiency'></input>
+        <input class=hide name='efficiency'></input>
       </td>
     </tr>    
     <tr>
@@ -261,6 +261,13 @@
 </dialog>
 
 <script>
+  function effChg(e) {
+    if ($(e).val()=='Custom') {
+      $(e).next().show();      
+    } else {
+      $(e).next().hide();
+    }
+  }
   function showUnit_kW(e) {
     showUnitSgl(e,'horsepower <em>(hp)</em>',.745699872);
   }
@@ -305,8 +312,7 @@
           break;
         case 2:
           let v;
-          colFlds(e).each(function(i,el) {
-            debugger;
+          colFlds(e).each(function(i,el) {            
             v = DefCond[$(el).attr('name')];
             if ($(el).is(':checkbox')) {
               el.checked = v;
@@ -314,7 +320,8 @@
               $(el).val(rnd(v));
             } else if ($(el).is('select')) {
               $(el).children()[v].selected = true;
-            }     
+            }
+            $(el).trigger('change');     
           });
           break;
         default:
