@@ -1,4 +1,6 @@
+0
+["L/s","kW","m","kPa"]
 amps	comment	cost	date	drive	efficiency	est_power	facility	field_voltage	flow	fraction	grid	head	line	load_method	margin	motor_rpm	motor_voltage	name	power_rating	pump_rpm	pump_style	specific_gravity	speed	stages	system	viscosity
-225.4		0.05		0	0	150		460	2000	1	false	277	1	0	0	1780	460	Condition 1	30	1780	5	1	true	1		1
-225.4		0.05		0	0	150		460	2000	1	false	277	1	0	0	1780	460	Condition 2	30	1780	5	1	true	1		1
-225.4		0.05		0	0	150		460	1500	1	true	277	1	0	0	1780	460	Condition 3	30	1780	5	1	true	1		1
+225.4		0.05		0	0	150		460	126.18039265263788	1	false	84.42960000033771	1	0	0	1780	460	Condition 1	22.37099400541028	1780	5	1	true	1		1
+225.4		0.05		0	0	150		460	126.18039265263788	1	false	84.42960000033771	1	0	0	1780	460	Condition 2	22.37099400541028	1780	5	1	true	1		1
+225.4		0.05		0	0	150		460	126.18039265263788	1	false	84.42960000033771	1	0	0	1780	460	Condition 3	22.37099400541028	1780	5	1	true	1		1

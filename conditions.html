@@ -135,7 +135,7 @@
 			return;//TODO hide btn
 		}
 		const hd=Object.keys(Cond[0]).sort();
-		var txt=hd.join('\t');
+		var txt=0+'\n'+JSON.stringify(Units)+'\n'+hd.join('\t');
 		Cond.forEach(function(d,i) {
 			txt+='\n'+
 				hd.map((nm,i)=> {
@@ -148,9 +148,10 @@
 		const 
 			fs = require('fs'),
 			lines=fs.readFileSync('hello.tsv','utf8').split('\n'),
-			hd=lines[0].split('\t');
+			hd=lines[2].split('\t');
 		Cond=[];
-		lines.slice(1).forEach((ln,row)=>{
+		Units=JSON.parse(lines[1]);
+		lines.slice(3).forEach((ln,row)=>{
 			Cond.push({});
 			ln.split('\t').forEach((v,i)=>{//debugger;
 				Cond[row][hd[i]]=v;
