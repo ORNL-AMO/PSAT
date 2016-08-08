@@ -311,18 +311,7 @@
           saveProp('defCond',DefCond);
           break;
         case 2:
-          let v;
-          colFlds(e).each(function(i,el) {            
-            v = DefCond[$(el).attr('name')];
-            if ($(el).is(':checkbox')) {
-              el.checked = v;
-            } else if ($(el).is('input')) {
-              $(el).val(rnd(v));
-            } else if ($(el).is('select')) {
-              $(el).children()[v].selected = true;
-            }
-            $(el).trigger('change');     
-          });
+          setCtls(colFlds(e),DefCond);
           break;
         default:
           $.extend(colCond(e),colData(e));

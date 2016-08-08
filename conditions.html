@@ -194,17 +194,7 @@
 							newEl.find('span').text(d.name);     
 							newEl.data('idx',idx);
 						} else {
-							newEl.find('[name]').each((j,e2)=>{
-								const ctl = $(e2), v = d[ctl.attr('name')];
-								if (ctl.is(':checkbox')) {
-								  dom(ctl).checked = v;
-								} else if (ctl.is('input')) {
-								  ctl.val(rnd(v));
-								} else if (ctl.is('select')) {
-								  newEl.find('option')[v].selected = true;								  
-								}
-								ctl.trigger('change');
-							});
+							setCtls(newEl.find('[name]'),d);
 						}
 					});   
 				    pumpEff($('[name=flow]').last());

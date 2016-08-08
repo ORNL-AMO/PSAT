@@ -52,6 +52,23 @@
       function rnd(v) {
         return Math.round(v*10000)/10000;
       }
+      function setCtls(ctls,d) {
+        ctls.each((j,e)=>{
+          const ctl = $(e), v = d[ctl.attr('name')];
+          switch (e.tagName) {
+            case 'CHECKBOX':
+              e.checked = v;
+              break;
+            case 'SELECT':
+              ctl.find('option')[v].selected = true;
+              break;
+            case 'INPUT':
+              ctl.val(rnd(v));
+              break;
+          }
+          ctl.trigger('change');
+        });
+      }
       CVT_FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
         'm^3/s':15850.32316, 'ft^3/s':448.8311693};
 
