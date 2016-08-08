@@ -151,32 +151,28 @@
 		}); 
 	}
 	function inprt() {
-
 		const {dialog} = require('electron').remote
 		dialog.showOpenDialog({ filters: [{ name: 'text', extensions: ['tsv'] }]},
-			function (fileNames) {
-				if (fileNames === undefined) return;
-				var fileName = fileNames[0];
-				fs.readFile(fileName, 'utf-8', function (err, data) {
-					document.getElementById("editor").value = data;
-				});
+			function (fn) {
+				if (fn ) {
+					const 
+						fs = require('fs'),
+						lines=fs.readFileSync(fn[0],'utf8').split('\n'),
+						hd=lines[2].split('\t');
+					Cond=[];
+					Units=JSON.parse(lines[1]);
+					lines.slice(3).forEach((ln,row)=>{
+						Cond.push({});
+						ln.split('\t').forEach((v,i)=>{//debugger;
+							Cond[row][hd[i]]=v;
+						});
+					});
+					saveCond();
+					main();	
+
+				}
 			}
 		); 
-return;
-		const 
-			fs = require('fs'),
-			lines=fs.readFileSync('hello.tsv','utf8').split('\n'),
-			hd=lines[2].split('\t');
-		Cond=[];
-		Units=JSON.parse(lines[1]);
-		lines.slice(3).forEach((ln,row)=>{
-			Cond.push({});
-			ln.split('\t').forEach((v,i)=>{//debugger;
-				Cond[row][hd[i]]=v;
-			});
-		});
-		saveCond();
-		main();	
 	}	
 	function uncheck() {
 		$(':checkbox').prop('checked',false);
