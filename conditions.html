@@ -119,6 +119,7 @@
     	<input name='speed' type="checkbox" onclick="setGrid(this)">
     	<span onclick='edit(this)'></span>	
     	<button onclick='rm($(this))'><i class="fa fa-times"></i></button>
+    	<button onclick='cp($(this))'><i class="fa fa-plus"></i></button>
     </li>
 </ul>
 <button onclick='uncheck()'><i class="fa fa-check-square"></i></button>
@@ -224,10 +225,16 @@
 		main();
 	}
 	function rm(e) {
-		let i = parIdx(e,-1);
-		Cond.splice(i,1);
+		Cond.splice(parIdx(e,-1),1);
 		saveCond();
 		e.parent().remove();
+	}
+	function cp(e) {
+		let o=$.extend({},Cond[parIdx(e,-1)]);
+		o.name+=' (copy)';
+		Cond.push(o);
+		saveCond();
+		main();
 	}
 	function edit(e) {
 		Idx = parIdx(e,-1);
