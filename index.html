@@ -147,9 +147,12 @@
       function main() {
         load('conditions',true);
       }      
-      $ = require('jquery');
+
+      Dlg=require('electron').remote.dialog;
       Bridge = require('./build/Release/bridge');
       LS = localStorage;
+      $ = require('jquery');
+      
       if (!loadData()) {
         loadData(true);
       }

@@ -133,9 +133,8 @@
 	function xprt() {		
 		if (Cond.length==0) {
 			return;//TODO hide btn
-		}
-		require('electron').remote.dialog.showSaveDialog(
-			{ filters: [{ name: 'text', extensions: ['tsv'] }]},
+		}		
+		Dlg.showSaveDialog(DlgFilter,
 			function (fn) {
 				if (fn) {
 					const hd=Object.keys(Cond[0]).sort();
@@ -151,8 +150,7 @@
 		}); 
 	}
 	function inprt() {
-		const {dialog} = require('electron').remote
-		dialog.showOpenDialog({ filters: [{ name: 'text', extensions: ['tsv'] }]},
+		Dlg.showOpenDialog(DlgFilter,
 			function (fn) {
 				if (fn ) {
 					const 
@@ -169,7 +167,6 @@
 					});
 					saveCond();
 					main();	
-
 				}
 			}
 		); 
@@ -309,6 +306,6 @@
 		}		
 	}
 	
-
+	DlgFilter={filters: [{ name: 'Tab Separated Values', extensions: ['tsv'] }]};
 	start();
 </script>
