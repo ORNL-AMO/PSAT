@@ -292,13 +292,16 @@
   function colData(e) {
     let v,d={};
     colFlds(e).each(function(i,el) {
-      if ($(el).is(':checkbox')) {
-        v = el.checked;
-      } else if ($(el).is('input')) {
-        v = $(el).val();
-      } else if ($(el).is('select')) {
-        v = $(el).children(':selected').index();
-      }     
+      switch (el.tagName) {
+        case 'INPUT':
+          v = $(el).val();
+          break;
+        case 'CHECKBOX':
+          v = el.checked;
+          break;
+        case 'SELECT':
+          v = $(el).children(':selected').index();
+      }
       d[$(el).attr('name')] = v;
     }); 
     return d;   

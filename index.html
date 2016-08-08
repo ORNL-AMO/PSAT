@@ -56,15 +56,14 @@
         ctls.each((j,e)=>{
           const ctl = $(e), v = d[ctl.attr('name')];
           switch (e.tagName) {
+            case 'INPUT':
+              ctl.val(rnd(v));
+              break;
             case 'CHECKBOX':
               e.checked = v;
               break;
             case 'SELECT':
               ctl.find('option')[v].selected = true;
-              break;
-            case 'INPUT':
-              ctl.val(rnd(v));
-              break;
           }
           ctl.trigger('change');
         });
