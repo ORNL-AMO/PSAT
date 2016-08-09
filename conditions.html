@@ -118,7 +118,7 @@
 </div>
 <h1>Conditions</h1>
 <!-- <button onclick='uncheck()'><i class="fa fa-check-square"></i></button> -->
-<input class=gt0 name='speed' type="checkbox" checked></input>
+<input class=gt0 name='speed' type="checkbox" checked onclick='chkAll(this)'></input>
 <ul>
     <li>        	
     	<input name='speed' type="checkbox" onclick="setGrid(this)">
@@ -173,12 +173,13 @@
 			}
 		); 
 	}	
-	function uncheck() {
-		$(':checkbox').prop('checked',false);
+	function chkAll(e) {
+		$(':checkbox').prop('checked',e.checked);
 		$.each(Cond,function(i,d) {
-			d.grid = false;
+			d.grid = e.checked;
 		});
 		saveCond();
+		setGridBtn();
 	}
 	function setGrid(e) {
 		Cond[parIdx(e,-1)].grid = e.checked;
@@ -222,6 +223,7 @@
 		Cond.splice(parIdx(e,-1),1);
 		saveCond();
 		e.parent().remove();
+		setGridBtn();
 	}
 	function cp(e) {
 		let o=$.extend({},Cond[parIdx(e,-1)]);
