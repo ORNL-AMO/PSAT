@@ -136,9 +136,6 @@
 
 <script>
 	function xprt() {		
-		if (Cond.length==0) {
-			return;//TODO hide btn
-		}		
 		Dlg.showSaveDialog(DlgFilter,
 			function (fn) {
 				if (fn) {
@@ -176,6 +173,9 @@
 			}
 		); 
 	}	
+	function listIdx(e) {
+		return parIdx(e.parentElement,-2);
+	}
 	function chkAll(e) {
 		$(':checkbox').prop('checked',e.checked);
 		$.each(Cond,function(i,d) {
@@ -185,7 +185,7 @@
 		setGridBtn();
 	}
 	function setGrid(e) {
-		Cond[parIdx(e.parentElement,-2)].grid = e.checked;
+		Cond[listIdx(e)].grid = e.checked;
 		saveCond();
 		setGridBtn();		
 	}
@@ -222,12 +222,12 @@
 		main();
 	}
 	function rm(e) {
-		Cond.splice(parIdx(e.parentElement,-2),1);
+		Cond.splice(listIdx(e),1);
 		saveCond();
 		main();
 	}
 	function cp(e) {
-		let o=$.extend({},Cond[parIdx(e.parentElement,-2)]);
+		let o=$.extend({},Cond[listIdx(e)]);
 		o.name+=' (copy)';
 		Cond.push(o);
 		saveCond();
