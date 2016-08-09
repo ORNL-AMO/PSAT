@@ -86,7 +86,7 @@
       </td>
     </tr>  
     <tr>
-      <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rpm' type="number"></td>
+      <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rpm'></td>
     </tr>
     <tr>
       <td>Drive</td>
@@ -99,19 +99,19 @@
     </tr>
     <tr>
       <td><div>Kinematic Viscosity <em>(cS)</em></div></td>
-      <td><input name='viscosity' type="number"></td>
+      <td><input name='viscosity'></td>
     </tr>
     <tr>
       <td>Specific Gravity</td>
-      <td><input name='specific_gravity' type="number"></td>
+      <td><input name='specific_gravity'></td>
     </tr>
     <tr>
       <td>Number Stages</td>
-      <td><input name='stages' type="number"></td>
+      <td><input name='stages'></td>
     </tr>
     <tr>
       <td>Fixed specific speed?</td>
-      <td><input name='speed' type="checkbox"></td>
+      <td><input name='speed'></td>
     </tr>
     <tr>
       <td class='th'>Motor</td><td/>
@@ -127,12 +127,12 @@
     <tr>
       <td><div>Power Rating</div></td>
       <td>
-        <input name='power_rating' type="number">
+        <input name='power_rating'>
       </td>
     </tr>
     <tr>
       <td><div>Speed <em>(rpm)</em></div></td>
-      <td><input name='motor_rpm' type="number"></td>
+      <td><input name='motor_rpm'></td>
     </tr>
     <tr>
       <td>Efficiency class</td>
@@ -148,38 +148,38 @@
     </tr>    
     <tr>
       <td>Voltage</td>
-      <td><input name='motor_voltage' type="number"></td>
+      <td><input name='motor_voltage'></td>
     </tr>
     <tr>
       <td>Full-load amps</td>
-      <td><input name='amps' type="number"> <button>EST</button></td>
+      <td><input name='amps'> <button>EST</button></td>
     </tr>
     <tr>
       <td><div>Size margin <em>(%)</em></div></td>
-      <td><input name='margin' type="number"></td>
+      <td><input name='margin'></td>
     </tr>
     <tr>
       <td class='th'>Cost</td><td/>
     </tr>
     <tr>
       <td>Operating fraction</td>
-      <td><input name='fraction' type="number"></td>
+      <td><input name='fraction'></td>
     </tr>
    <tr>
       <td>$ / kwhr</td>
-      <td><input name='cost' type="number"></td>
+      <td><input name='cost'></td>
     </tr>
     <tr>
       <td class='th'>Field</td><td/>
     </tr>        
     <tr>
       <td><div>Flow rate</td>
-      <td><input name='flow' type="number" onchange="pumpEff(this)"></td>
+      <td><input name='flow' onchange="pumpEff(this)"></td>
     </tr>
     <tr>
       <td><div>Head</div></td>
       <td>
-        <input name='head' type="number">
+        <input name='head'>
         <button onclick='gotoHead(this)'><i class="fa fa-wrench"/></button>
       </td>
     </tr>       
@@ -194,11 +194,11 @@
     </tr>
     <tr>
       <td>Estimated Power</td>
-      <td><input name='est_power' type="number"></td>
+      <td><input name='est_power'></td>
     </tr>
     <tr>
       <td>Voltage</td>
-      <td><input name='field_voltage' type="number"></td>
+      <td><input name='field_voltage'></td>
     </tr>
     <tr>
       <td class='th vam'><span>Results</span> <button onclick='backload("curve")'><i class="fa fa-line-chart"/></button></td><td></td>
