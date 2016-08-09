@@ -1,6 +1,7 @@
 <style scoped>
 	ul {
 		padding-left: 0;
+		margin-top: 0;
 	}
 	li {
 		list-style-type:none;
@@ -45,7 +46,9 @@
 		background-color: lightgray;
 	}	
 </style>
-
+<button onclick='reset()'>RESET</button>
+<button onclick="inprt()">IMPORT</button>
+<button class=gt0 onclick="xprt()">EXPORT</button>
 <h1>Units</h1>
 <div id="units">
 	<!-- <span>Measurement System</span><br>
@@ -114,6 +117,8 @@
 </table>
 </div>
 <h1>Conditions</h1>
+<!-- <button onclick='uncheck()'><i class="fa fa-check-square"></i></button> -->
+<input class=gt0 name='speed' type="checkbox" checked></input>
 <ul>
     <li>        	
     	<input name='speed' type="checkbox" onclick="setGrid(this)">
@@ -122,13 +127,9 @@
     	<button onclick='cp($(this))'><i class="fa fa-plus"></i></button>
     </li>
 </ul>
-<button onclick='uncheck()'><i class="fa fa-check-square"></i></button>
-<button onclick='grid()'><i class="fa fa-table"></i></button>
 <button onclick='nu()'>NEW</button>
-<button onclick="inprt()">IMPORT</button>
-<button onclick="xprt()">EXPORT</button>
-<button onclick='removeAll()'>REMOVE ALL</button>
-<button onclick='reset()'>RESET</button>
+<button class=gt0 onclick='removeAll()'>REMOVE ALL</button>
+<button id=grid onclick='grid()'><i class="fa fa-table"></i></button>
 
 <script>
 	function xprt() {		
@@ -302,6 +303,7 @@
 		});		
 		if (Cond.length==0) {
 			$('ul').html('<em>None</em>');
+			$('.gt0').hide();
 		}		
 	}
 	
