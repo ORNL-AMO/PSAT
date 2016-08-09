@@ -25,7 +25,6 @@
 		color: green;
 		font-weight: bold;
 	}
-
 }
 </style>
 <h1>Head Tool</h1>
@@ -59,14 +58,8 @@
 			<input id=Zd><br>
 			Discharge line loss coefficients<br>
 			<input id=Kd><br>
-			<!-- Fluid specific gravity<br>
-			<input name='specific_gravity' type=number/><br>
-			Flow rate <em>(L/s)</em><br>
-			<input style='margin-bottom: 0' type=number/>
-			<button onclick=showUnit(this,'#unit_flow')><i class="fa fa-calculator"/></button>	 -->
 		</td>
 		<td id=results>
-
 			<table>
 				<tr>
 					<td>Flow: <span id="flow" style=""/></td>
@@ -123,12 +116,6 @@
 			$('#sucGauge').show();
 			$('#sucTank').hide();
 		}
-	}
-	function showUnit_mm(e) {
-		showUnitSgl(e,'inches',25.4);
-	}
-	function showUnit_kPa(e) {
-		showUnitSgl(e,'pounds per square inch <em>(psig)</em>',6.89476);
 	}
 	function v(d,flow) {
 		return flow / (Math.PI*(d/2)*(d/2));
