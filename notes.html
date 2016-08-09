@@ -39,6 +39,9 @@
 		});				
 	} else {
 		$('[name=name]').val('Condition ' + (Idx+1));
+		const dt = new Date();
+    	dt.setMinutes(dt.getMinutes()-dt.getTimezoneOffset());
+    	$('[name=date]').val(dt.toJSON().slice(0,10));		
 	}
 	function save() {
 		if (Idx == Cond.length) {
