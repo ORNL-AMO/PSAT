@@ -19,7 +19,7 @@
 	li>* {
 		vertical-align: middle;
 	}
-	th:nth-child(n+2),td:nth-child(n+2) {
+	#units th:nth-child(n+2),#units td:nth-child(n+2) {
 		padding-right: 1rem;
 		padding-left: 1rem;
 	}
@@ -44,83 +44,94 @@
 	}
 	.shade {
 		background-color: lightgray;
-	}	
+	}
+	#cond tr:first-child {
+		display: none;
+	}
+	#cond td:nth-child(2):hover {
+		background-color: lightgray;
+		cursor: pointer;
+	}
 </style>
 <button onclick='reset()'>RESET</button>
-<button onclick="inprt()">IMPORT</button>
+<button onclick="imprt()">IMPORT</button>
 <button class=gt0 onclick="xprt()">EXPORT</button>
 <h1>Units</h1>
 <div id="units">
 	<label><input type=radio name=unit_sys></input> Imperial</label>
 	<label><input type=radio name=unit_sys></input> Metric</label>
 	<label><input type=radio name=unit_sys></input> Custom</label>
- <p>
-<table>
-	<tr>
-		<th></th>
-		<th>Imperial</th>
-		<th>Metric</th>
-		<th>Custom</th>
-	</tr>
-	<tr>
-		<td>Flow</td>
-		<td>gpm</td>
-		<td>m^3/hr</td>
-		<td>
-			<select>
-				<option>gpm</option>
-				<option>MGD</option>
-				<option>m^3/hr</option>
-				<option>L/s</option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>Power</td>
-		<td>hp</td>
-		<td>kW</td>
-		<td>
-			<select>
-				<option>hp</option>
-				<option>kW</option>				
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>Distance</td>
-		<td>ft</td>
-		<td>m</td>
-		<td>
-			<select>
-				<option>ft</option>
-				<option>m</option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>Pressure</td>
-		<td>psig</td>
-		<td>kPa</td>
-		<td>
-			<select>
-				<option>psig</option>
-				<option>kPa</option>
-			</select>
-		</td>
-	</tr>
-</table>
+	<p>
+	<table>
+		<tr>
+			<th></th>
+			<th>Imperial</th>
+			<th>Metric</th>
+			<th>Custom</th>
+		</tr>
+		<tr>
+			<td>Flow</td>
+			<td>gpm</td>
+			<td>m^3/hr</td>
+			<td>
+				<select>
+					<option>gpm</option>
+					<option>MGD</option>
+					<option>m^3/hr</option>
+					<option>L/s</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Power</td>
+			<td>hp</td>
+			<td>kW</td>
+			<td>
+				<select>
+					<option>hp</option>
+					<option>kW</option>				
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Distance</td>
+			<td>ft</td>
+			<td>m</td>
+			<td>
+				<select>
+					<option>ft</option>
+					<option>m</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Pressure</td>
+			<td>psig</td>
+			<td>kPa</td>
+			<td>
+				<select>
+					<option>psig</option>
+					<option>kPa</option>
+				</select>
+			</td>
+		</tr>
+	</table>
 </div>
 <h1>Conditions</h1>
 <!-- <button onclick='uncheck()'><i class="fa fa-check-square"></i></button> -->
-<input class=gt0 name='speed' type="checkbox" checked onclick='chkAll(this)'></input>
-<ul>
-    <li>        	
-    	<input name='speed' type="checkbox" onclick="setGrid(this)">
-    	<span onclick='edit(this)'></span>	
-    	<button onclick='rm($(this))'><i class="fa fa-times"></i></button>
-    	<button onclick='cp($(this))'><i class="fa fa-plus"></i></button>
-    </li>
-</ul>
+
+<table id=cond>
+	<tr>
+		<td><input type="checkbox" onclick="setGrid(this)"></td>
+		<td onclick='edit(this)'></td>
+		<td><button onclick='rm(this)'><i class="fa fa-times"></i></button></td>
+		<td><button onclick='cp(this)'><i class="fa fa-plus"></i></button></td>
+	</tr>
+	<tr>
+		<td><input class=gt0 type="checkbox" checked onclick='chkAll(this)'></input></td>
+	</tr>
+</table>
+<p>
 <button class=prime onclick='nu()'>NEW</button>
 <button class=gt0 onclick='removeAll()'>REMOVE ALL</button>
 <button class=prime id=grid onclick='grid()'><i class="fa fa-table"></i></button>
@@ -145,7 +156,7 @@
 				}
 		}); 
 	}
-	function inprt() {
+	function imprt() {
 		Dlg.showOpenDialog(DlgFilter,
 			function (fn) {
 				if (fn ) {
@@ -176,7 +187,7 @@
 		setGridBtn();
 	}
 	function setGrid(e) {
-		Cond[parIdx(e,-1)].grid = e.checked;
+		Cond[parIdx(e.parentElement,-2)].grid = e.checked;
 		saveCond();
 		setGridBtn();		
 	}
@@ -213,19 +224,19 @@
 		main();
 	}
 	function rm(e) {
-		Cond.splice(parIdx(e,-1),1);
+		Cond.splice(parIdx(e.parentElement,-2),1);
 		saveCond();
 		main();
 	}
 	function cp(e) {
-		let o=$.extend({},Cond[parIdx(e,-1)]);
+		let o=$.extend({},Cond[parIdx(e.parentElement,-2)]);
 		o.name+=' (copy)';
 		Cond.push(o);
 		saveCond();
 		main();
 	}
 	function edit(e) {
-		Idx = parIdx(e,-1);
+		Idx = parIdx(e,-2);
 		load('notes');
 	}
     function cvtObj(d,nm,i,nunits,m) {
@@ -253,7 +264,7 @@
 		lastCol.show();		
 	}
 	function setGridBtn() {
-		if ($('ul :checked').length>0) {
+		if ($('#cond :checkbox:gt(1):checked').length>0) {
 			$('#grid').show();
 		} else {
 			$('#grid').hide();
@@ -299,13 +310,14 @@
 			chgUnits(nu);
 		});
 		$.each(Cond,function(i,d) {		
-			let nu = $('li').first().clone();
-			nu.find('span').text(d.name);
-			dom(nu.find('input')).checked = d.grid;
-			$('ul').append(nu);		  
+			const nu = $('#cond tr').first().clone();
+			nu.children().eq(1).text(d.name);
+			nu.find(':checkbox').prop('checked',d.grid);
+			$('#cond').append(nu);		  
+
 		});		
 		if (Cond.length==0) {
-			$('ul').html('<em>None</em>');
+			$('#cond').html('<em>None</em>');
 			$('.gt0').hide();
 		}		
 		setGridBtn();
