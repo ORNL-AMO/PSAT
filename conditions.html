@@ -204,9 +204,8 @@
 		load('notes');
 	}
 	function removeAll() {
-		LS.removeItem('conditions');//OOPS
 		Cond = [];
-		Idx = 0;
+		saveCond();
 		main();
 	}
 	function reset() {
