@@ -135,6 +135,101 @@
 <button class=prime id=grid onclick='grid()'><i class="fa fa-table"></i></button>
 
 <script>
+	function listIdx(e) {
+		return parIdx(e.parentElement,-2);
+	}
+	function chkAll(e) {
+		$(':checkbox').prop('checked',e.checked);
+		$.each(Cond,function(i,d) {
+			d.grid = e.checked;
+		});
+		saveCond();
+		setGridBtn();
+	}
+	function setGrid(e) {
+		Cond[listIdx(e)].grid = e.checked;
+		saveCond();
+		setGridBtn();		
+	}
+	function grid() {
+		load('grid', false, function() {
+		    $.each(Cond,function(idx,d) {
+		      if (d.grid) {
+		            $('table tr').each(function (i,e) {
+						const newEl = $(e).children().eq(1).clone();						
+						$(e).append(newEl);
+						if (i==0) {
+							newEl.find('span').text(d.name);     
+							newEl.data('idx',idx);
+						} else {
+							setCtls(newEl.find('[name]'),d);
+						}
+					});   
+				    pumpEff($('[name=flow]').last());
+		      }
+		    });    		  
+		});		
+	}
+	function setGridBtn() {
+		if ($('#cond :checkbox:gt(1):checked').length>0) {
+			$('#grid').show();
+		} else {
+			$('#grid').hide();
+		}
+	}
+	function rm(e) {
+		Cond.splice(listIdx(e),1);
+		saveCond();
+		main();
+	}
+	function removeAll() {
+		Cond = [];
+		saveCond();
+		main();
+	}
+	function cp(e) {
+		let o=$.extend({},Cond[listIdx(e)]);
+		o.name+=' (copy)';
+		Cond.push(o);
+		saveCond();
+		main();
+	}
+	function edit(e) {
+		Idx = parIdx(e,-2);
+		load('notes');
+	}
+	function nu() {
+		Idx = Cond.length;
+		load('notes');
+	}
+	function reset() {
+		loadData(true);
+		main();
+	}
+    function cvtObj(d,nm,i,nunits,m) {
+        d[nm] = cvt(d[nm],i,nunits[i],m);
+    }
+	function chgUnits(nunits) {
+		$.each(Cond.concat([DefCond]),function(i,d) {
+			cvtObj(d,'flow',0,nunits,CVT_FLOW);
+			cvtObj(d,'power_rating',1,nunits,{kW:1.341022218});
+			cvtObj(d,'head',2,nunits,{m:3.280839895});
+		});
+		saveProp('defCond',DefCond);
+		Units = nunits;
+		saveProp('units',Units);
+		saveCond();
+	}
+	function shade(n) {
+		$('td').removeClass('shade');
+		$(`#units td:nth-child(${n})`).addClass('shade');		
+	}
+	function showCus(lastCol) {
+		lastCol.find('select').each(function(i,e) {
+			$(e).val(Units[i]);
+		});
+		lastCol.show();		
+	}
 	function xprt() {		
 		Dlg.showSaveDialog(DlgFilter,
 			function (fn) {
@@ -172,103 +267,7 @@
 				}
 			}
 		); 
-	}	
-	function listIdx(e) {
-		return parIdx(e.parentElement,-2);
-	}
-	function chkAll(e) {
-		$(':checkbox').prop('checked',e.checked);
-		$.each(Cond,function(i,d) {
-			d.grid = e.checked;
-		});
-		saveCond();
-		setGridBtn();
-	}
-	function setGrid(e) {
-		Cond[listIdx(e)].grid = e.checked;
-		saveCond();
-		setGridBtn();		
-	}
-	function grid() {
-		load('grid', false, function() {
-		    $.each(Cond,function(idx,d) {
-		      if (d.grid) {
-		            $('table tr').each(function (i,e) {
-						const newEl = $(e).children().eq(1).clone();						
-						$(e).append(newEl);
-						if (i==0) {
-							newEl.find('span').text(d.name);     
-							newEl.data('idx',idx);
-						} else {
-							setCtls(newEl.find('[name]'),d);
-						}
-					});   
-				    pumpEff($('[name=flow]').last());
-		      }
-		    });    		  
-		});		
-	}
-	function nu() {
-		Idx = Cond.length;
-		load('notes');
-	}
-	function removeAll() {
-		Cond = [];
-		saveCond();
-		main();
-	}
-	function reset() {
-		loadData(true);
-		main();
-	}
-	function rm(e) {
-		Cond.splice(listIdx(e),1);
-		saveCond();
-		main();
-	}
-	function cp(e) {
-		let o=$.extend({},Cond[listIdx(e)]);
-		o.name+=' (copy)';
-		Cond.push(o);
-		saveCond();
-		main();
-	}
-	function edit(e) {
-		Idx = parIdx(e,-2);
-		load('notes');
-	}
-    function cvtObj(d,nm,i,nunits,m) {
-        d[nm] = cvt(d[nm],i,nunits[i],m);
-    }
-	function chgUnits(nunits) {
-		$.each(Cond.concat([DefCond]),function(i,d) {
-			cvtObj(d,'flow',0,nunits,CVT_FLOW);
-			cvtObj(d,'power_rating',1,nunits,{kW:1.341022218});
-			cvtObj(d,'head',2,nunits,{m:3.280839895});
-		});
-		saveProp('defCond',DefCond);
-		Units = nunits;
-		saveProp('units',Units);
-		saveCond();
-	}
-	function shade(n) {
-		$('td').removeClass('shade');
-		$(`#units td:nth-child(${n})`).addClass('shade');		
-	}
-	function showCus(lastCol) {
-		lastCol.find('select').each(function(i,e) {
-			$(e).val(Units[i]);
-		});
-		lastCol.show();		
-	}
-	function setGridBtn() {
-		if ($('#cond :checkbox:gt(1):checked').length>0) {
-			$('#grid').show();
-		} else {
-			$('#grid').hide();
-		}
-
-	}
+	}		
 	function start() {
 		const lastCol = $('#units th:last-child,#units td:last-child');
 		const met = ['m^3/hr','kW','m','kPa'];
