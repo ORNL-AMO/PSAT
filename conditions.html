@@ -182,7 +182,8 @@
 	}
 	function setGrid(e) {
 		Cond[parIdx(e,-1)].grid = e.checked;
-		saveCond();		
+		saveCond();
+		setGridBtn();		
 	}
 	function grid() {
 		load('grid', false, function() {
@@ -257,6 +258,14 @@
 		});
 		lastCol.show();		
 	}
+	function setGridBtn() {
+		if ($('ul :checked').length>0) {
+			$('#grid').show();
+		} else {
+			$('#grid').hide();
+		}
+
+	}
 	function start() {
 		const lastCol = $('#units th:last-child,#units td:last-child');
 		const met = ['m^3/hr','kW','m','kPa'];
@@ -305,6 +314,7 @@
 			$('ul').html('<em>None</em>');
 			$('.gt0').hide();
 		}		
+		setGridBtn();
 	}
 	
 	DlgFilter={filters: [{ name: 'Tab Separated Values', extensions: ['tsv'] }]};
