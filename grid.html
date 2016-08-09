@@ -364,4 +364,23 @@
   txt = Units[0];
   fldUnit('Flow');
 
+  $.each(Cond,function(idx,d) {
+    if (d.grid) {
+          $('table tr').each(function (i,e) {
+            const newEl = $(e).children().eq(1).clone();            
+            $(e).append(newEl);
+            if (i==0) {
+              newEl.find('span').text(d.name);     
+              newEl.data('idx',idx);
+            } else {
+              setCtls(newEl.find('[name]'),d);
+            }
+          });   
+          pumpEff($('[name=flow]').last());
+    }
+  });         
+
+  $('[name=head]').last().change(function() {
+    alert('hi');
+  });
 </script>

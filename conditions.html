@@ -155,23 +155,7 @@
 		setGridBtn();		
 	}
 	function grid() {
-		load('grid', false, function() {
-		    $.each(Cond,function(idx,d) {
-		      if (d.grid) {
-		            $('table tr').each(function (i,e) {
-						const newEl = $(e).children().eq(1).clone();						
-						$(e).append(newEl);
-						if (i==0) {
-							newEl.find('span').text(d.name);     
-							newEl.data('idx',idx);
-						} else {
-							setCtls(newEl.find('[name]'),d);
-						}
-					});   
-				    pumpEff($('[name=flow]').last());
-		      }
-		    });    		  
-		});		
+		load('grid');		
 	}
 	function setGridBtn() {
 		if ($('#cond :checkbox:gt(1):checked').length>0) {
