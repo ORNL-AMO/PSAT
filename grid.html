@@ -55,7 +55,7 @@
     color: green;
   }
 </style>
-<table>
+<table id=grid>
   <thead>
     <tr>      
       <th onclick=backload('mock')>Pump</th>
@@ -307,7 +307,7 @@
     return d;   
   }
   function io(dlg) {
-    let e = dlg.data('src');
+    let e = dlg.data('src');debugger;
     switch(parIdx(dlg.find(':checked'))) {
         case 1:
           DefCond = colData(e);
@@ -315,12 +315,15 @@
           break;
         case 2:
           setCtls(colFlds(e),DefCond);
+          $('.ioBtn').eq(parIdx(e,-1)).addClass('prime');
           break;
         default:
           $.extend(colCond(e),colData(e));
           saveCond();
+          $('.ioBtn').eq(parIdx(e,-1)).removeClass('prime');
     }
     dom(dlg).close(); 
+
   }
   function backload(nm) {
     Grid = $('#container').contents().detach();
@@ -380,7 +383,7 @@
     }
   });         
 
-  $('[name]').change(function() {
+  $('#grid [name]').change(function() {
     $('.ioBtn').eq(parIdx(this,-1)).addClass('prime');
   });
 </script>
