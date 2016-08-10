@@ -261,6 +261,10 @@
 </dialog>
 
 <script>
+  function colCond(e) {
+    return Cond[$(e).parent().data('idx')];
+  }  
+  
   function effChg(e) {
     if ($(e).val()=='Custom') {
       $(e).next().show();      
@@ -268,20 +272,50 @@
       $(e).next().hide();
     }
   }
-  function showUnit_kW(e) {
-    showUnitSgl(e,'horsepower <em>(hp)</em>',.745699872);
+
+  function gotoHead(e) {
+    Flow = colFlds(e,'flow').val();
+    SG = colFlds(e,'specific_gravity',e).val();
+    HeadEl = colFlds(e,'head');
+    backload("headtool");
   }
-  function colCond(e) {
-    return Cond[$(e).parent().data('idx')];
+  function edit(e) {
+    Idx = $(e).parent().data('idx');
+    backload('notes');
   }
+  function backload(nm) {
+    Grid = $('#container').contents().detach();
+    load(nm);
+    back = backToGrid;
+  }
+  function backToGrid() {
+    $('#container').html(Grid);
+    //$('#container').append($('#container script').remove());
+
+    $('th:gt(1)>span').each(function(i,e) {
+      $(e).text(colCond(e).name);
+    });
+    delete Grid;
+    back = main;
+  }
+
+  function pumpEff(v) {
+    $('td:contains("Pump efficiency")').parent().children().eq(parIdx(v)).html(Bridge.pumpEff($(v).val()));
+  }
+
   function rm(e) {
     colCond(e).grid = false;
     col(e).remove();
     $(e).parent().remove();
   }
+
+
   function showIO(e) {
     dom('#io').showModal();
     $('#io').data('src',$(e));
+  }
+  function ioBtn(e) {
+    return $('.ioBtn').eq(parIdx(e,-1));
   }
   function col(e) {
     return $(`td:nth-child(${parIdx(e,1)})`);
@@ -324,39 +358,9 @@
     }
     dom(dlg).close(); 
   }
-  function backload(nm) {
-    Grid = $('#container').contents().detach();
-    load(nm);
-    back = backToGrid;
-  }
-  function backToGrid() {
-    $('#container').html(Grid);
-    //$('#container').append($('#container script').remove());
 
-    $('th:gt(1)>span').each(function(i,e) {
-      $(e).text(colCond(e).name);
-    });
-    delete Grid;
-    back = main;
-  }
-  function gotoHead(e) {
-    Flow = colFlds(e,'flow').val();
-    SG = colFlds(e,'specific_gravity',e).val();
-    HeadEl = colFlds(e,'head');
-    backload("headtool");
-  }
-  function edit(e) {
-    Idx = $(e).parent().data('idx');
-    backload('notes');
-  }
-  function pumpEff(v) {
-    $('td:contains("Pump efficiency")').parent().children().eq(parIdx(v)).html(Bridge.pumpEff($(v).val()));
-  }
   function fldUnit(nm) {
     $(`td>div:contains(${nm})`).last().append(`<em>(${txt})</em>`);
-  }
-  function ioBtn(e) {
-    return $('.ioBtn').eq(parIdx(e,-1));
   }
   txt = Units[1];
   fldUnit('Power Rating');
