@@ -69,14 +69,14 @@
       function setCtls(ctls,d) {
         ctls.each((j,e)=>{
           const ctl = $(e), v = d[ctl.attr('name')];
-          switch (e.tagName) {
-            case 'INPUT':
+          switch (e.type) {
+            case 'text':case 'number':
               ctl.val(rnd(v));
               break;
-            case 'CHECKBOX':
+            case 'checkbox':
               e.checked = v;
               break;
-            case 'SELECT':
+            case 'select-one':
               ctl.find('option')[v].selected = true;
           }
           ctl.trigger('change');
@@ -116,7 +116,7 @@
             viscosity: 1,
             specific_gravity: 1,
             stages: 1,
-            speed: true,
+            speed: false,
             line: 1,
             power_rating: 30,
             motor_rpm: 1780,
