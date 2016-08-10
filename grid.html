@@ -143,7 +143,7 @@
           <option>Average</option>
           <option>Custom</option>
         </select>
-        <input class=hide name='efficiency'></input>
+        <input name='efficiency'></input>
       </td>
     </tr>    
     <tr>
@@ -264,7 +264,7 @@
   function colCond(e) {
     return Cond[$(e).parent().data('idx')];
   }  
-  
+
   function effChg(e) {
     if ($(e).val()=='Custom') {
       $(e).next().show();      
