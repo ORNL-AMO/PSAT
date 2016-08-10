@@ -307,7 +307,7 @@
     return d;   
   }
   function io(dlg) {
-    let e = dlg.data('src');debugger;
+    let e = dlg.data('src');
     switch(parIdx(dlg.find(':checked'))) {
         case 1:
           DefCond = colData(e);
@@ -315,15 +315,14 @@
           break;
         case 2:
           setCtls(colFlds(e),DefCond);
-          $('.ioBtn').eq(parIdx(e,-1)).addClass('prime');
+          ioBtn(e).addClass('prime');
           break;
         default:
           $.extend(colCond(e),colData(e));
           saveCond();
-          $('.ioBtn').eq(parIdx(e,-1)).removeClass('prime');
+          ioBtn(e).removeClass('prime');
     }
     dom(dlg).close(); 
-
   }
   function backload(nm) {
     Grid = $('#container').contents().detach();
@@ -356,6 +355,9 @@
   function fldUnit(nm) {
     $(`td>div:contains(${nm})`).last().append(`<em>(${txt})</em>`);
   }
+  function ioBtn(e) {
+    return $('.ioBtn').eq(parIdx(e,-1));
+  }
   txt = Units[1];
   fldUnit('Power Rating');
   fldUnit('Motor rated');
@@ -384,6 +386,6 @@
   });         
 
   $('#grid [name]').change(function() {
-    $('.ioBtn').eq(parIdx(this,-1)).addClass('prime');
+    ioBtn(this).addClass('prime');
   });
 </script>
