@@ -43,196 +43,193 @@
     background-color: lightgray;
   }
 </style>
-<table id=grid>
-  
-    <tr>      
-      <th onclick=backload('mock')>Pump</th>
-        <th>
-          <button onclick='rm(this)'><i class="fa fa-times"/></button>
-          <span></span>
-          <button class=ioBtn onclick='showIO(this);'><i class="fa fa-floppy-o"></i></button><button onclick='edit(this)'><i class="fa fa-pencil-square-o"></i></button>
-        </th>      
-    </tr>
-  
-  
-    <tr>
-      <td><span>Style</span></td>
-      <td>
-        <select name='pump_style'>
-          <option>End suction slurry</option>
-          <option>End suction sewage</option>
-          <option>End suction stock</option>
-          <option>API double suction</option>
-          <option>Multistage boiler feed</option>
-          <option>End suction ANSI/API</option>
-          <option>Axial flow</option>
-          <option>Double suction</option>
-          <option>Vertical turbine</option>
-          <option>Large end suction</option>
-          <option>Specified optimal eff</option>
-        </select>
-      </td>
-    </tr>  
-    <tr>
-      <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rpm'></td>
-    </tr>
-    <tr>
-      <td>Drive</td>
-      <td> 
-        <select name='drive'>
-          <option>Direct drive</option>
-          <option>Belt drive</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td><div>Kinematic Viscosity <em>(cS)</em></div></td>
-      <td><input name='viscosity'></td>
-    </tr>
-    <tr>
-      <td>Specific Gravity</td>
-      <td><input name='specific_gravity'></td>
-    </tr>
-    <tr>
-      <td>Number Stages</td>
-      <td><input name='stages' type=number></td>
-    </tr>
-    <tr>
-      <td>Fixed specific speed?</td>
-      <td><input name='speed' type=checkbox></td>
-    </tr>
-    <tr>
-      <td class='th'>Motor</td><td/>
-    </tr>
-      <td><div>Line freq <em>(Hz)</em></div></td>
-      <td> 
-        <select name='line'>
-          <option>50</option>
-          <option>60</option>
-        </select>
-      </td>
-    </tr>      
-    <tr>
-      <td><div>Power Rating</div></td>
-      <td>
-        <input name='power_rating'>
-      </td>
-    </tr>
-    <tr>
-      <td><div>Speed <em>(rpm)</em></div></td>
-      <td><input name='motor_rpm'></td>
-    </tr>
-    <tr>
-      <td>Efficiency class</td>
-      <td> 
-        <select name='efficiency_class' onchange='effChg(this)'>
-          <option>Standard</option>
-          <option>Energy</option>
-          <option>Average</option>
-          <option>Custom</option>
-        </select>
-        <input name='efficiency'></input>
-      </td>
-    </tr>    
-    <tr>
-      <td>Voltage</td>
-      <td><input name='motor_voltage'></td>
-    </tr>
-    <tr>
-      <td>Full-load amps</td>
-      <td><input name='amps'> <button>EST</button></td>
-    </tr>
-    <tr>
-      <td><div>Size margin <em>(%)</em></div></td>
-      <td><input name='margin'></td>
-    </tr>
-    <tr>
-      <td class='th'>Cost</td><td/>
-    </tr>
-    <tr>
-      <td>Operating fraction</td>
-      <td><input name='fraction'></td>
-    </tr>
-   <tr>
-      <td>$ / kwhr</td>
-      <td><input name='cost'></td>
-    </tr>
-    <tr>
-      <td class='th'>Field</td><td/>
-    </tr>        
-    <tr>
-      <td><div>Flow rate</td>
-      <td><input name='flow' onchange="pumpEff(this)"></td>
-    </tr>
-    <tr>
-      <td><div>Head</div></td>
-      <td>
-        <input name='head'>
-        <button onclick='gotoHead(this)'><i class="fa fa-wrench"/></button>
-      </td>
-    </tr>       
-    <tr>
-      <td>Load estimate method</td>
-      <td> 
-        <select name='load_method'>
-          <option>Power</option>
-          <option>Current</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>Estimated Power</td>
-      <td><input name='est_power'></td>
-    </tr>
-    <tr>
-      <td>Voltage</td>
-      <td><input name='field_voltage'></td>
-    </tr>
-    <tr>
-      <td class='th vam'><span>Results</span> <button onclick='backload("curve")'><i class="fa fa-line-chart"/></button></td><td></td>
-    </tr>
-    <tr>
-      <td><div>Pump efficiency <em>(%)</em></div></td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td><div>Motor rated power</div></td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td><div>Motor shaft power</div></td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td><div>Pump shaft power</div></td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td><div>Motor efficiency <em>(%)</em></div></td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td><div>Motor power factor <em>(%)</em></div></td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td><div>Motor current <em>(amps)</em></div></td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td><div>Motor power</div></td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td><div>Annual energy <em>(MWh)</em></div></td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td>Annual cost</td><td class='result'><span></span></td>
-    </tr>
-    <tr>
-      <td class=th>Summary</td><td></td>
-    </tr>
-    <tr class=sum>
-      <td>Savings potential</td>
-      <td class='result'><span></span></td>
-    </tr>
-    <tr class=sum>
-      <td>Optimization rating</td>
-      <td class='result'><span></span></td>
-    </tr>
-  
+<table id=grid>  
+  <tr>      
+    <th onclick=backload('mock')>Pump</th>
+      <th>
+        <button onclick='rm(this)'><i class="fa fa-times"/></button>
+        <button onclick='edit(this)'><i class="fa fa-pencil-square-o"></i></button>
+        <button class=ioBtn onclick='showIO(this);'><i class="fa fa-floppy-o"></i></button><br>
+        <span></span>
+      </th>      
+  </tr>
+  <tr>
+    <td><span>Style</span></td>
+    <td>
+      <select name='pump_style'>
+        <option>End suction slurry</option>
+        <option>End suction sewage</option>
+        <option>End suction stock</option>
+        <option>API double suction</option>
+        <option>Multistage boiler feed</option>
+        <option>End suction ANSI/API</option>
+        <option>Axial flow</option>
+        <option>Double suction</option>
+        <option>Vertical turbine</option>
+        <option>Large end suction</option>
+        <option>Specified optimal eff</option>
+      </select>
+    </td>
+  </tr>  
+  <tr>
+    <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rpm'></td>
+  </tr>
+  <tr>
+    <td>Drive</td>
+    <td> 
+      <select name='drive'>
+        <option>Direct drive</option>
+        <option>Belt drive</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td><div>Kinematic Viscosity <em>(cS)</em></div></td>
+    <td><input name='viscosity'></td>
+  </tr>
+  <tr>
+    <td>Specific Gravity</td>
+    <td><input name='specific_gravity'></td>
+  </tr>
+  <tr>
+    <td>Number Stages</td>
+    <td><input name='stages' type=number></td>
+  </tr>
+  <tr>
+    <td>Fixed specific speed?</td>
+    <td><input name='speed' type=checkbox></td>
+  </tr>
+  <tr>
+    <td class='th'>Motor</td><td/>
+  </tr>
+    <td><div>Line freq <em>(Hz)</em></div></td>
+    <td> 
+      <select name='line'>
+        <option>50</option>
+        <option>60</option>
+      </select>
+    </td>
+  </tr>      
+  <tr>
+    <td><div>Power Rating</div></td>
+    <td>
+      <input name='power_rating'>
+    </td>
+  </tr>
+  <tr>
+    <td><div>Speed <em>(rpm)</em></div></td>
+    <td><input name='motor_rpm'></td>
+  </tr>
+  <tr>
+    <td>Efficiency class</td>
+    <td> 
+      <select name='efficiency_class' onchange='effChg(this)'>
+        <option>Standard</option>
+        <option>Energy</option>
+        <option>Average</option>
+        <option>Custom</option>
+      </select>
+      <input name='efficiency'></input>
+    </td>
+  </tr>    
+  <tr>
+    <td>Voltage</td>
+    <td><input name='motor_voltage'></td>
+  </tr>
+  <tr>
+    <td>Full-load amps</td>
+    <td><input name='amps'> <button>EST</button></td>
+  </tr>
+  <tr>
+    <td><div>Size margin <em>(%)</em></div></td>
+    <td><input name='margin'></td>
+  </tr>
+  <tr>
+    <td class='th'>Cost</td><td/>
+  </tr>
+  <tr>
+    <td>Operating fraction</td>
+    <td><input name='fraction'></td>
+  </tr>
+ <tr>
+    <td>$ / kwhr</td>
+    <td><input name='cost'></td>
+  </tr>
+  <tr>
+    <td class='th'>Field</td><td/>
+  </tr>        
+  <tr>
+    <td><div>Flow rate</td>
+    <td><input name='flow' onchange="pumpEff(this)"></td>
+  </tr>
+  <tr>
+    <td><div>Head</div></td>
+    <td>
+      <input name='head'>
+      <button onclick='gotoHead(this)'><i class="fa fa-wrench"/></button>
+    </td>
+  </tr>       
+  <tr>
+    <td>Load estimate method</td>
+    <td> 
+      <select name='load_method'>
+        <option>Power</option>
+        <option>Current</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>Estimated Power</td>
+    <td><input name='est_power'></td>
+  </tr>
+  <tr>
+    <td>Voltage</td>
+    <td><input name='field_voltage'></td>
+  </tr>
+  <tr>
+    <td class='th vam'><span>Results</span> <button onclick='backload("curve")'><i class="fa fa-line-chart"/></button></td><td></td>
+  </tr>
+  <tr>
+    <td><div>Pump efficiency <em>(%)</em></div></td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td><div>Motor rated power</div></td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td><div>Motor shaft power</div></td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td><div>Pump shaft power</div></td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td><div>Motor efficiency <em>(%)</em></div></td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td><div>Motor power factor <em>(%)</em></div></td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td><div>Motor current <em>(amps)</em></div></td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td><div>Motor power</div></td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td><div>Annual energy <em>(MWh)</em></div></td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td>Annual cost</td><td class='result'><span></span></td>
+  </tr>
+  <tr>
+    <td class=th>Summary</td><td></td>
+  </tr>
+  <tr class=sum>
+    <td>Savings potential</td>
+    <td class='result'><span></span></td>
+  </tr>
+  <tr class=sum>
+    <td>Optimization rating</td>
+    <td class='result'><span></span></td>
+  </tr>
 </table>
 <dialog id='io'>
   <label>
