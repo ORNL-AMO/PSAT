@@ -42,7 +42,7 @@
 </style>
 <table id=grid>  
   <tr>      
-    <th onclick=backload('mock')>Pump</th>
+    <th onclick=backload('mock')>Pump</th style='vertical-align: bottom'>
       <th>
         <button onclick='rm(this)'><i class="fa fa-times"/></button>
         <button onclick='edit(this)'><i class="fa fa-pencil-square-o"></i></button>
@@ -184,7 +184,13 @@
     <td><input name='field_voltage'></td>
   </tr>
   <tr>
-    <td class='th vam'><span>Results</span> <button onclick='backload("curve")'><i class="fa fa-line-chart"/></button></td><td></td>
+    <td class='th'>
+      <span>Results</span>
+      <button onclick='backload("curve")'>
+        <i class="fa fa-line-chart"/>
+      </button>
+    </td>
+    <td></td>
   </tr>
   <tr>
     <td><div>Pump efficiency <em>(%)</em></div></td><td class='result'><span></span></td>
