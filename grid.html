@@ -53,12 +53,12 @@
     white-space: nowrap;
 
   }
-  tbody tr:nth-child(odd) {
+  tr:nth-child(even) {
     background-color: lightgray;
   }
 </style>
 <table id=grid>
-  <thead>
+  
     <tr>      
       <th onclick=backload('mock')>Pump</th>
         <th>
@@ -67,8 +67,8 @@
           <button class=ioBtn onclick='showIO(this);'><i class="fa fa-floppy-o"></i></button><button onclick='edit(this)'><i class="fa fa-pencil-square-o"></i></button>
         </th>      
     </tr>
-  </thead>
-  <tbody>
+  
+  
     <tr>
       <td><span>Style</span></td>
       <td>
@@ -246,7 +246,7 @@
       <td>Optimization rating</td>
       <td class='result'><span></span></td>
     </tr>
-  </tbody>
+  
 </table>
 <dialog id='io'>
   <label>
