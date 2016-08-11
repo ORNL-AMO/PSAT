@@ -1,7 +1,50 @@
 
 <style scoped=scoped>       
-  tbody tr:nth-child(odd) {
-    background-color: lightgray;
+  .sum {
+    font-weight: bold;
+  }
+  .sum td:not(:first-child) {
+    color: green;
+  }      
+  .vam span, .vam button {
+    vertical-align: middle;
+  }
+
+  dialog label {
+    display: block;
+  }
+
+  td.result span {
+    position: absolute; 
+    left: 50%;
+    bottom: 1px;
+    color: green;
+  }
+  td.result {
+    position: relative;
+  }
+  td>div>em {
+    color: green;
+  }
+  td>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }  
+  td select {
+    width:100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: block;
+  }
+  td input[type=number] {
+    width:7rem;
+  }
+  td:nth-child(2),th:nth-child(2) {
+    display: none;
+  }
+  td > * {
+    vertical-align: middle;
   }
   th,.th {
     color: green;
@@ -10,49 +53,8 @@
     white-space: nowrap;
 
   }
-  td > * {
-    vertical-align: middle;
-  }
-  td:nth-child(2),th:nth-child(2) {
-    display: none;
-  }
-  td.result {
-    position: relative;
-  }
-  td.result span {
-    position: absolute; 
-    left: 50%;
-    bottom: 1px;
-    color: green;
-  }
-  .sum {
-    font-weight: bold;
-  }
-  .sum td:not(:first-child) {
-    color: green;
-  }      
-  td input[type=number] {
-    width:7rem;
-  }
-  td select {
-    width:100%;
-    padding-left: 5px;
-    padding-right: 5px;
-    display: block;
-  }
-  .vam span, .vam button {
-    vertical-align: middle;
-  }
-  dialog label {
-    display: block;
-  }
-  td>div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  td>div>em {
-    color: green;
+  tbody tr:nth-child(odd) {
+    background-color: lightgray;
   }
 </style>
 <table id=grid>
