@@ -8,8 +8,8 @@
         font-size: .75rem;
         font-style: italic;
       }
-      label {
-        display: block;
+      label:hover {
+        cursor: pointer;
       }
       label > * {
         vertical-align: middle;
@@ -18,13 +18,17 @@
         margin-top: 0;
         margin-bottom: 3px;
       }
+      label {
+        display: block;
+      }
+
+      [type=checkbox]:hover {
+        cursor: pointer;
+      }
       input:not([type=radio]) {
         padding: .5em;
         border: solid 1px #fff;
         box-shadow: inset 1px 1px 2px 0 #707070;
-      }
-      [type=radio]:hover,[type=checkbox]:hover {
-        cursor: pointer;
       }
 
       .prime {
