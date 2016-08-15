@@ -85,8 +85,8 @@
         return Math.round(v*10000)/10000;
       }
 
-      function nm(nm) {
-        return $(`[name=${nm}]`);
+      function nm(nm='',e=document) {
+        return $(e).find(`[name=${nm}]`.replace('=]',']'));              
       }
       function setCtls(ctls,d) {
         ctls.each((j,e)=>{

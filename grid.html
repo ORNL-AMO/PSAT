@@ -261,9 +261,9 @@
   }
 
   function gotoHead(e) {
-    Flow = colFlds(e,'flow').val();
-    SG = colFlds(e,'specific_gravity',e).val();
-    HeadEl = colFlds(e,'head');
+    Flow = nm('flow',col(e)).val();
+    SG = nm('specific_gravity',col(e)).val();
+    HeadEl = nm('head',col(e));
     backload("headtool");
   }
   function edit(e) {
@@ -307,8 +307,11 @@
   function col(e) {
     return $(`td:nth-child(${parIdx(e,1)})`);
   }
-  function colFlds(e,t) {
-    return col(e).find(`[name${t ? ('='+t) : ''}]`);
+  function colFlds(e) {
+    return nm(undefined,col(e));
+    // return col(e).find(`[name]`);
+    //return nm(t,col(e))
+    //return col(e).find(`[name${t ? ('='+t) : ''}]`);
   }
   function colData(e) {
     let v,d={};
@@ -368,15 +371,16 @@
             if (i==0) {
               newEl.find('span').text(d.name);     
               newEl.data('idx',idx);
-            } else {
-              setCtls(newEl.find('[name]'),d);
+            } else {              
+              setCtls(nm(undefined,newEl),d);
+              
             }
           });   
-          pumpEff($('[name=flow]').last());
+          pumpEff(nm('flow').last());
     }
   });         
 
-  $('#grid [name]').change(function() {
+  nm(undefined,'#grid').change(function() {
     ioBtn(this).addClass('prime');
   });
 </script>
