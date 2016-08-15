@@ -81,12 +81,10 @@
     <button id=back onclick='back()'><i class="fa fa-long-arrow-left fa-lg"></i></button>
     <div id=container></div>
     <script>
-      function dom(e) {
-        return $(e)[0];
-      }
       function rnd(v) {
         return Math.round(v*10000)/10000;
       }
+
       function setCtls(ctls,d) {
         ctls.each((j,e)=>{
           const ctl = $(e), v = d[ctl.attr('name')];
@@ -103,6 +101,13 @@
           ctl.trigger('change');
         });
       }
+      function parIdx(e,a=0) {
+        return $(e).parent().index()+a;
+      }
+      function dom(e) {
+        return $(e)[0];
+      }
+
       CVT_FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
         'm^3/s':15850.32316, 'ft^3/s':448.8311693};
 
@@ -115,9 +120,21 @@
         }
         return v;
       }
-      function parIdx(e,a=0) {
-        return $(e).parent().index()+a;
+      
+      function main() {
+        load('conditions',true);
+      }      
+      function load(nm,bkHide) {
+        back = main;
+        $('#container').load(nm+'.html',function () {
+          if (bkHide) {
+            $('#back').hide();
+          } else {
+            $('#back').show();
+          }
+        });
       }
+
       function saveCond() {
         saveProp('conditions',Cond);
       }  
@@ -127,6 +144,7 @@
       function saveProp(nm,v) {
         LS.setItem(nm,JSON.stringify(v));
       }
+
       IMP = ['gpm','hp','ft','psig'];      
       function loadData(reset) {
         if (reset) {
@@ -163,20 +181,6 @@
         Units = loadProp('units');
         return (DefCond= loadProp('defCond'));
       }
-      function load(nm,bkHide) {
-        back = main;
-        $('#container').load(nm+'.html',function () {
-          if (bkHide) {
-            $('#back').hide();
-          } else {
-            $('#back').show();
-          }
-        });
-      }
-      function main() {
-        load('conditions',true);
-      }      
-
       Dlg=require('electron').remote.dialog;
       Bridge = require('./build/Release/bridge');
       LS = localStorage;
