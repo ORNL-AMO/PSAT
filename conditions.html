@@ -1,27 +1,12 @@
 <style scoped>
-	ul {
-		padding-left: 0;
-		margin-top: 0;
+	.shade {
+		background-color: lightgray;
 	}
-	li {
-		list-style-type:none;
-	}
-	li>span:not([onclick]) {
-		opacity: .6;
-	}	
-	li>span[onclick]:hover {
-		cursor: pointer;
-		color: dodgerblue;
-	}	
-	li:first-child {
-		display: none;
-	}
-	li>* {
+	#units select {
 		vertical-align: middle;
 	}
-	#units th:nth-child(n+2),#units td:nth-child(n+2) {
+	#units label {
 		padding-right: 1rem;
-		padding-left: 1rem;
 	}
 	#units td:first-child {
 		color: green;
@@ -30,18 +15,14 @@
 	#units td:last-child, #units th:last-child {
 		display: none;
 	}
-	#units label {
+	#units th:nth-child(n+2),#units td:nth-child(n+2) {
 		padding-right: 1rem;
+		padding-left: 1rem;
 	}
 	#units table {
 		border-collapse: collapse;
 	}
-	#units select {
-		vertical-align: middle;
-	}
-	.shade {
-		background-color: lightgray;
-	}
+	
 	#cond tr:first-child {
 		display: none;
 	}
