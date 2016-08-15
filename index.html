@@ -84,8 +84,10 @@
       function rnd(v) {
         return Math.round(v*10000)/10000;
       }
-
-      function nm(nm='',e=document) {
+      function nmAll(e) {
+        return nm('',e);
+      }
+      function nm(nm,e=document) {
         return $(e).find(`[name=${nm}]`.replace('=]',']'));              
       }
       function setCtls(ctls,d) {

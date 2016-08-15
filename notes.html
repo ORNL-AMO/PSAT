@@ -34,7 +34,7 @@
 <button class=prime onclick='save()'>SAVE</button>
 <script>
 	if (Idx<Cond.length) {
-		nm().each(function(i,e) {
+		nmAll().each(function(i,e) {
 			$(e).val(Cond[Idx][$(e).attr('name')]);
 		});				
 	} else {
@@ -47,7 +47,7 @@
 		if (Idx == Cond.length) {
 			Cond.push(loadProp('defCond'));
 		};				
-		nm().each(function(i,e) {
+		nmAll().each(function(i,e) {
 			Cond[Idx][$(e).attr('name')] = $(e).val();
 		});
 		saveCond();

@@ -308,10 +308,7 @@
     return $(`td:nth-child(${parIdx(e,1)})`);
   }
   function colFlds(e) {
-    return nm(undefined,col(e));
-    // return col(e).find(`[name]`);
-    //return nm(t,col(e))
-    //return col(e).find(`[name${t ? ('='+t) : ''}]`);
+    return nmAll(col(e));
   }
   function colData(e) {
     let v,d={};
@@ -372,7 +369,7 @@
               newEl.find('span').text(d.name);     
               newEl.data('idx',idx);
             } else {              
-              setCtls(nm(undefined,newEl),d);
+              setCtls(nmAll(newEl),d);
               
             }
           });   
@@ -380,7 +377,7 @@
     }
   });         
 
-  nm(undefined,'#grid').change(function() {
+  nmAll('#grid').change(function() {
     ioBtn(this).addClass('prime');
   });
 </script>
