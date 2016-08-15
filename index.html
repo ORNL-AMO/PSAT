@@ -85,6 +85,9 @@
         return Math.round(v*10000)/10000;
       }
 
+      function nm(nm) {
+        return $(`[name=${nm}]`);
+      }
       function setCtls(ctls,d) {
         ctls.each((j,e)=>{
           const ctl = $(e), v = d[ctl.attr('name')];

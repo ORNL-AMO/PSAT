@@ -32,32 +32,32 @@
 	<tr>
 		<td>
 			Suction pipe diameter<br>
-			<input id=Ds><br>
+			<input name=Ds><br>
 			<label>Suction tank<br>
-				<input id=suc onclick='suction(this)' type=checkbox>
+				<input name=suc onclick='suction(this)' type=checkbox>
 			</label>
 			<div id="sucGauge">
 				Suction gauge pressure<br>
-				<input id=Ps><br>
+				<input name=Ps><br>
 				Suction gauge elevation<br>
-				<input id=Zs><br>
+				<input name=Zs><br>
 			</div>
 			<div id="sucTank" style="display: none">
 				Suction tank gas overpressure<br>
-				<input id=Pg_s><br>
+				<input name=Pg_s><br>
 				Suction tank fluid surface elevation<br>
-				<input id=Ztnk_s><br>
+				<input name=Ztnk_s><br>
 			</div>
 			Suction line loss coefficients<br>
-			<input id=Ks><br>
+			<input name=Ks><br>
 			Discharge pipe diameter<br>
-			<input id=Dd><br>
+			<input name=Dd><br>
 			Discharge gauge pressure<br>
-			<input id=Pd><br>
+			<input name=Pd><br>
 			Discharge gauge elevation<br>
-			<input id=Zd><br>
+			<input name=Zd><br>
 			Discharge line loss coefficients<br>
-			<input id=Kd><br>
+			<input name=Kd><br>
 		</td>
 		<td id=results>
 			<table>
@@ -127,6 +127,8 @@
 		$(`#results td:contains(${txt})`).next().text(isNaN(v) ? '' : rnd(v));
 	}
 	function calc() {
+
+
         let flowU, distF, g;
         if (Units[2]=='ft') {
 			flowU='ft^3/s';
@@ -139,15 +141,15 @@
         }
 		let 
 			flow = cvt(Flow,0,flowU,CVT_FLOW),
-			sucTnk = dom('#suc').checked,
-			elevHd = $('#Zd').val()-$(sucTnk ? '#Ztnk_s' : '#Zs').val(),
-			presHd = cvt($('#Pd').val()-$(sucTnk ? '#Pg_s' : '#Ps').val(),3,Units[2],
+			sucTnk = dom(nm('suc')).checked,
+			elevHd = nm('Zd').val()-(sucTnk ? nm('Ztnk_s') : nm('Zs')).val(),
+			presHd = cvt(nm('Pd').val()-(sucTnk ? nm('Pg_s') : nm('Ps')).val(),3,Units[2],
 				{kPa:0.145037738007,m:1.42197020632,ft:0.433527501928})/SG,
-			vHdS = vHd(v($('#Ds').val()/distF,flow),g),
-			vHdD = vHd(v($('#Dd').val()/distF,flow),g),
+			vHdS = vHd(v(nm('Ds').val()/distF,flow),g),
+			vHdD = vHd(v(nm('Dd').val()/distF,flow),g),
 			vHdDif = vHdD - (sucTnk ? 0 : vHdS),
-			sucHd = $('#Ks').val()*vHdS,
-			disHd = $('#Kd').val()*vHdD;
+			sucHd = nm('Ks').val()*vHdS,
+			disHd = nm('Kd').val()*vHdD;
 		Head = elevHd + presHd + vHdDif + sucHd + disHd;
 		r('elevation',elevHd);
 		r('pressure',presHd);
@@ -161,8 +163,8 @@
 		return ` <em>(${t})</em>`;
 	}
 	function hdFldUnit(s) {
-		$(`#${s}s`).after(em(_txt));
-		$(`#${s}d`).after(em(_txt));
+		nm(`${s}s`).after(em(_txt));
+		nm(`${s}d`).after(em(_txt));
 	}
 	function accept() {
 		HeadEl.val(rnd(Head));
