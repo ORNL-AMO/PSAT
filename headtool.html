@@ -127,8 +127,6 @@
 		$(`#results td:contains(${txt})`).next().text(isNaN(v) ? '' : rnd(v));
 	}
 	function calc() {
-
-
         let flowU, distF, g;
         if (Units[2]=='ft') {
 			flowU='ft^3/s';
@@ -158,6 +156,11 @@
 		r('discharge',disHd);
 		r('Pump',Head);
 		$('#accept').show();
+
+		nmAll().each((i,e)=> {
+			HeadTool[$(e).attr('name')]=$(e).val();
+		});
+		saveProp('headtool',HeadTool);
 	}
 	function em(t) {
 		return ` <em>(${t})</em>`;
@@ -185,4 +188,8 @@
 		$('#results td:nth-child(2):gt(0)').text('');
 		$('#accept').hide();
 	});
+	nmAll().each((i,e)=> {
+		$(e).val(HeadTool[$(e).attr('name')]);		
+	})
+
 </script>
