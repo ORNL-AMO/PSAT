@@ -178,6 +178,10 @@
 			cvtObj(d,'head',2,nunits,{m:3.280839895});
 		});
 		saveProp('defCond',DefCond);
+		cvtObj(HeadTool,'Ps',3,nunits,{kPa:0.145037738007});
+		cvtObj(HeadTool,'Pd',3,nunits,{kPa:0.145037738007});
+		cvtObj(HeadTool,'Pg_s',3,nunits,{kPa:0.145037738007});
+		saveProp('headtool',HeadTool);
 		Units = nunits;
 		saveProp('units',Units);
 		saveCond();

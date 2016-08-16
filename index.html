@@ -134,11 +134,13 @@
         'm^3/s':15850.32316, 'ft^3/s':448.8311693};
 
       function cvt(v,i,nu,m) {
-        if (m[Units[i]]) {
-          v *= m[Units[i]];
-        }
-        if (m[nu]) {
-          v /= m[nu];
+        if ($.isNumeric(v)) {
+          if (m[Units[i]]) {
+            v *= m[Units[i]];
+          }
+          if (m[nu]) {
+            v /= m[nu];
+          }
         }
         return v;
       }
