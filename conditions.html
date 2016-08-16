@@ -197,7 +197,7 @@
 			function (fn) {
 				if (fn) {
 					const hd=Object.keys(Cond[0]).sort();
-					var txt=0+'\n'+JSON.stringify(Units)+'\n'+JSON.stringify(HeadTool)+'\n'+hd.join('\t');
+					var txt=JSON.stringify([0,Units,HeadTool])+'\n'+hd.join('\t');
 					Cond.forEach(function(d,i) {
 						txt+='\n'+
 							hd.map((nm,i)=> {
@@ -215,11 +215,10 @@
 					const 
 						fs = require('fs'),
 						lines=fs.readFileSync(fn[0],'utf8').split('\n'),
-						hd=lines[3].split('\t');
+						hd=lines[1].split('\t');
 					Cond=[];
-					Units=JSON.parse(lines[1]);
-					HeadTool=JSON.parse(lines[2]);
-					lines.slice(4).forEach((ln,row)=>{
+					[,Units,HeadTool]=JSON.parse(lines[0]);					
+					lines.slice(2).forEach((ln,row)=>{
 						Cond.push({});
 						ln.split('\t').forEach((v,i)=>{
 							Cond[row][hd[i]]=v;
