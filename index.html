@@ -82,7 +82,7 @@
     <div id=container></div>
     <script>
       function rnd(v) {
-        return Math.round(v*10000)/10000;
+        return $.isNumeric(v) ? Math.round(v*10000)/10000 : v;
       }
       function nmAll(e) {
         return nm('',e);

@@ -124,7 +124,7 @@
 		return v*v/2/g;
 	}
 	function r(txt,v) {
-		$(`#results td:contains(${txt})`).next().text(isNaN(v) ? '' : rnd(v));
+		$(`#results td:contains(${txt})`).next().text(rnd(v));
 	}
 	function calc() {
         let flowU, distF, g;
