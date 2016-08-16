@@ -310,28 +310,11 @@
   function colFlds(e) {
     return nmAll(col(e));
   }
-  function colData(e) {
-    let v,d={};
-    colFlds(e).each(function(i,el) {
-      switch (el.type) {
-        case 'text':case 'number':
-          v = $(el).val();
-          break;
-        case 'checkbox':
-          v = el.checked;
-          break;
-        case 'select-one':
-          v = $(el).children(':selected').index();
-      }
-      d[$(el).attr('name')] = v;
-    }); 
-    return d;   
-  }
   function io(dlg) {
     let e = dlg.data('src');
     switch(parIdx(dlg.find(':checked'))) {
         case 1:
-          DefCond = colData(e);
+          setData(colFlds(e),DefCond);
           saveProp('defCond',DefCond);
           break;
         case 2:
@@ -339,7 +322,7 @@
           ioBtn(e).addClass('prime');
           break;
         default:
-          $.extend(colCond(e),colData(e));
+          setData(colFlds(e),colCond(e));          
           saveCond();
           ioBtn(e).removeClass('prime');
     }

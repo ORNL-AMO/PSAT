@@ -156,10 +156,8 @@
 		r('discharge',disHd);
 		r('Pump',Head);
 		$('#accept').show();
-
-		nmAll().each((i,e)=> {
-			HeadTool[$(e).attr('name')]=$(e).val();
-		});
+		
+		setData(nmAll(),HeadTool);
 		saveProp('headtool',HeadTool);
 	}
 	function em(t) {
@@ -188,8 +186,5 @@
 		$('#results td:nth-child(2):gt(0)').text('');
 		$('#accept').hide();
 	});
-	nmAll().each((i,e)=> {
-		$(e).val(HeadTool[$(e).attr('name')]);		
-	})
-
+	setCtls(nmAll(),HeadTool);
 </script>
