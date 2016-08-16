@@ -168,28 +168,25 @@
 		loadData(true);
 		main();
 	}
-    function cvtObj(d,nm,i,nunits,m) {
-        d[nm] = cvt(d[nm],i,nunits[i],m);
+    function cvtObj(d,nm,i,m) {
+        d[nm] = cvt(d[nm],i,_nunits[i],m);
     }
-	function cvtObjHd(nm,i,m) {
-		cvtObj(HeadTool,nm,i,_nunits,m)
+	function cvtObjHd(nms,i,m) {
+		nms.forEach((nm)=>{
+			cvtObj(HeadTool,nm,i,m)
+		})
 	}
 	function chgUnits(nunits) {
 		_nunits=nunits;
 		$.each(Cond.concat([DefCond]),function(i,d) {
-			cvtObj(d,'flow',0,nunits,CVT_FLOW);
-			cvtObj(d,'power_rating',1,nunits,{kW:1.341022218});
-			cvtObj(d,'head',2,nunits,{m:3.280839895});
+			cvtObj(d,'flow',0,CVT_FLOW);
+			cvtObj(d,'power_rating',1,{kW:1.341022218});
+			cvtObj(d,'head',2,{m:3.280839895});
 		});
 		saveProp('defCond',DefCond);
-		cvtObjHd('Ds',2,{m:.03937007874});
-		cvtObjHd('Dd',2,{m:.03937007874});		
-		cvtObjHd('Ps',3,{kPa:0.145037738007});
-		cvtObjHd('Pg_s',3,{kPa:0.145037738007});
-		cvtObjHd('Pd',3,{kPa:0.145037738007});		
-		cvtObjHd('Zs',2,{m:3.280839895});
-		cvtObjHd('Ztnk_s',2,{m:3.280839895});
-		cvtObjHd('Zd',2,{m:3.280839895});
+		cvtObjHd(['Ds','Dd'],2,{m:.03937007874});		
+		cvtObjHd(['Ps','Pg_s','Pd'],3,{kPa:0.145037738007});
+		cvtObjHd(['Zs','Ztnk_s','Zd'],2,{m:3.280839895});
 		saveProp('headtool',HeadTool);
 		Units = nunits;
 		saveProp('units',Units);
