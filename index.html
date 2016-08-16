@@ -106,7 +106,7 @@
           d[$(el).attr('name')] = v;
         }); 
       }     
-      function setCtls(d,e) {
+      function setCtls(d,el) {
         nmAll(el).each((j,e)=>{
           const ctl = $(e), v = d[ctl.attr('name')];
           switch (e.type) {
