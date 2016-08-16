@@ -168,16 +168,16 @@
 		loadData(true);
 		main();
 	}
-    function cvtObj(d,nm,i,m) {
-        d[nm] = cvt(d[nm],i,_nunits[i],m);
-    }
-	function cvtObjHd(nms,i,m) {
-		nms.forEach((nm)=>{
-			cvtObj(HeadTool,nm,i,m)
-		})
-	}
+    
 	function chgUnits(nunits) {
-		_nunits=nunits;
+		function cvtObj(d,nm,i,m) {
+        	d[nm] = cvt(d[nm],i,nunits[i],m);
+    	}
+		function cvtObjHd(nms,i,m) {
+			nms.forEach((nm)=>{
+				cvtObj(HeadTool,nm,i,m)
+			})
+		}
 		$.each(Cond.concat([DefCond]),function(i,d) {
 			cvtObj(d,'flow',0,CVT_FLOW);
 			cvtObj(d,'power_rating',1,{kW:1.341022218});
@@ -202,6 +202,7 @@
 		});
 		lastCol.show();		
 	}
+	
 	function xprt() {		
 		Dlg.showSaveDialog(DlgFilter,
 			function (fn) {
