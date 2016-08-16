@@ -311,15 +311,15 @@
     let e = dlg.data('src');
     switch(parIdx(dlg.find(':checked'))) {
         case 1:
-          setData(col(e),DefCond);
+          setData(DefCond,col(e));
           saveProp('defCond',DefCond);
           break;
         case 2:
-          setCtls(col(e),DefCond);
+          setCtls(DefCond,col(e));
           ioBtn(e).addClass('prime');
           break;
         default:
-          setData(col(e),colCond(e));          
+          setData(colCond(e),col(e));          
           saveCond();
           ioBtn(e).removeClass('prime');
     }
@@ -349,7 +349,7 @@
               newEl.find('span').text(d.name);     
               newEl.data('idx',idx);
             } else {              
-              setCtls(newEl,d);
+              setCtls(d,newEl);
               
             }
           });   
