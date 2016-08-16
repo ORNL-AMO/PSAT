@@ -106,8 +106,8 @@
           d[$(el).attr('name')] = v;
         }); 
       }     
-      function setCtls(ctls,d) {
-        ctls.each((j,e)=>{
+      function setCtls(el,d) {
+        nmAll(el).each((j,e)=>{
           const ctl = $(e), v = d[ctl.attr('name')];
           switch (e.type) {
             case 'text':case 'number':

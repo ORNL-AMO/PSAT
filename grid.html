@@ -315,7 +315,7 @@
           saveProp('defCond',DefCond);
           break;
         case 2:
-          setCtls(colFlds(e),DefCond);
+          setCtls(col(e),DefCond);
           ioBtn(e).addClass('prime');
           break;
         default:
@@ -349,7 +349,7 @@
               newEl.find('span').text(d.name);     
               newEl.data('idx',idx);
             } else {              
-              setCtls(nmAll(newEl),d);
+              setCtls(newEl,d);
               
             }
           });   
