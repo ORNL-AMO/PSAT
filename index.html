@@ -109,6 +109,7 @@
       function setCtls(d,el) {
         nmAll(el).each((j,e)=>{
           const ctl = $(e), v = d[ctl.attr('name')];
+          if (v===undefined) return;
           switch (e.type) {
             case 'text':case 'number':
               ctl.val(rnd(v));
