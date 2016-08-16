@@ -176,7 +176,7 @@
 		function cvtObjHd(nms,i,m) {
 			nms.forEach((nm)=>{
 				cvtObj(HeadTool,nm,i,m)
-			})
+			});
 		}
 		$.each(Cond.concat([DefCond]),function(i,d) {
 			cvtObj(d,'flow',0,CVT_FLOW);
@@ -202,7 +202,7 @@
 		});
 		lastCol.show();		
 	}
-	
+
 	function xprt() {		
 		Dlg.showSaveDialog(DlgFilter,
 			function (fn) {
