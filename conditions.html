@@ -195,16 +195,18 @@
 	function xprt() {		
 		Dlg.showSaveDialog(DlgFilter,
 			function (fn) {
-				if (fn) {
-					const hd=Object.keys(Cond[0]).sort();
-					var txt=JSON.stringify([0,Units,HeadTool])+'\n'+hd.join('\t');
+				if (fn) {					
+					const 
+						hd=Object.keys(Cond[0]).sort(),
+						lines=[JSON.stringify([0,Units,HeadTool]),hd.join('\t')];
 					Cond.forEach(function(d,i) {
-						txt+='\n'+
+						lines.push(
 							hd.map((nm,i)=> {
 								return d[nm];
 							}).join('\t');
+						)
 					});		
-					require('fs').writeFile(fn,txt);				
+					require('fs').writeFile(fn,lines.join('\n'));				
 				}
 		}); 
 	}
