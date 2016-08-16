@@ -203,8 +203,8 @@
 						lines.push(
 							hd.map((nm,i)=> {
 								return d[nm];
-							}).join('\t');
-						)
+							}).join('\t')
+						);
 					});		
 					require('fs').writeFile(fn,lines.join('\n'));				
 				}
