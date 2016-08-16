@@ -90,9 +90,9 @@
       function nm(nm,e=document) {
         return $(e).find(`[name=${nm}]`.replace('=]',']'));              
       }
-      function setData(ctls,d) {
+      function setData(e,d) {
         let v;
-        ctls.each(function(i,el) {
+        nmAll(e).each(function(i,el) {
           switch (el.type) {
             case 'text':case 'number':
               v = $(el).val();

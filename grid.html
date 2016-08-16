@@ -307,14 +307,11 @@
   function col(e) {
     return $(`td:nth-child(${parIdx(e,1)})`);
   }
-  function colFlds(e) {
-    return nmAll(col(e));
-  }
   function io(dlg) {
     let e = dlg.data('src');
     switch(parIdx(dlg.find(':checked'))) {
         case 1:
-          setData(colFlds(e),DefCond);
+          setData(col(e),DefCond);
           saveProp('defCond',DefCond);
           break;
         case 2:
@@ -322,7 +319,7 @@
           ioBtn(e).addClass('prime');
           break;
         default:
-          setData(colFlds(e),colCond(e));          
+          setData(col(e),colCond(e));          
           saveCond();
           ioBtn(e).removeClass('prime');
     }
