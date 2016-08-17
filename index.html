@@ -203,11 +203,11 @@
           });        
           saveProp('units',IMP);
           saveProp('conditions',[]);
-          saveProp('headtool',{Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1});          
+          saveProp('headTool',{Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1});          
         }
         Cond = loadProp('conditions');
         Units = loadProp('units');
-        HeadTool = loadProp('headtool');
+        HeadTool = loadProp('headTool');
         return (DefCond= loadProp('defCond'));
       }
       Dlg=require('electron').remote.dialog;
