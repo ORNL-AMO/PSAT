@@ -35,7 +35,7 @@
 <script>
 	if (Idx<Cond.length) {
 		nmAll().each(function(i,e) {
-			$(e).val(Cond[Idx][$(e).attr('name')]);
+			$(e).val(Cond[Idx][nmGet(e)]);
 		});				
 	} else {
 		nm('name').val('Condition ' + (Idx+1));
@@ -48,7 +48,7 @@
 			Cond.push(loadProp('defCond'));
 		};				
 		nmAll().each(function(i,e) {
-			Cond[Idx][$(e).attr('name')] = $(e).val();
+			Cond[Idx][nmGet(e)] = $(e).val();
 		});
 		saveCond();
 		back();

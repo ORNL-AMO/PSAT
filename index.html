@@ -84,6 +84,9 @@
       function rnd(v) {
         return $.isNumeric(v) ? Math.round(v*10000)/10000 : v;
       }
+      function nmGet(e) {
+        return $(e).attr('name');
+      }
       function nmAll(e) {
         return nm('',e);
       }
@@ -103,12 +106,12 @@
             case 'select-one':
               v = $(el).children(':selected').index();
           }
-          d[$(el).attr('name')] = v;
+          d[nmGet(el)] = v;
         }); 
       }     
       function setCtls(d,el) {
         nmAll(el).each((j,e)=>{
-          const ctl = $(e), v = d[ctl.attr('name')];
+          const ctl = $(e), v = d[nmGet(ctl)];
           if (v===undefined) return;
           switch (e.type) {
             case 'text':case 'number':
