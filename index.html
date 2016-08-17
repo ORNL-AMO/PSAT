@@ -162,6 +162,9 @@
         });
       }
 
+      function saveHd(d=HeadTool) {
+        saveProp('headTool',d);
+      }
       function saveCond() {
         saveProp('conditions',Cond);
       }  
@@ -203,7 +206,7 @@
           });        
           saveProp('units',IMP);
           saveProp('conditions',[]);
-          saveProp('headTool',{Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1});          
+          saveHd({Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1});          
         }
         Cond = loadProp('conditions');
         Units = loadProp('units');
