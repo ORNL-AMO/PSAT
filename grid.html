@@ -15,6 +15,11 @@
   td.result {
     position: relative;
   }*/
+
+  #results~tr {
+    display:none;
+  }
+
   td>div>em {
     color: green;
   }
@@ -182,12 +187,15 @@
     <td>Voltage</td>
     <td><input name='field_voltage'></td>
   </tr>
-  <tr>
+  <tr id=results>
     <td class='th'>
+      <div>
+      <button><i class="fa fa-plus"/></button>
       <span>Results</span>
-      <button style='line-height: 100%' onclick='backload("curve")'>
+      <button onclick='backload("curve")'>
         <i class="fa fa-line-chart"/>
       </button>
+      </div>
     </td>
     <td></td>
   </tr>
