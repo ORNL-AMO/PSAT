@@ -161,7 +161,7 @@
   </tr>        
   <tr>
     <td><div>Flow rate</td>
-    <td><input name='flow' onchange="pumpEff(this)"></td>
+    <td><input name='flow'></td>
   </tr>
   <tr>
     <td><div>Head</div></td>
@@ -190,7 +190,7 @@
   <tr id=results>
     <td class='th'>
       <div>
-      <button><i class="fa fa-plus"/></button>
+      <button onclick=results()><i class="fa fa-plus"/></button>
       <span>Results</span>
       <button onclick='backload("curve")'>
         <i class="fa fa-line-chart"/>
@@ -256,6 +256,10 @@
 </dialog>
 
 <script>
+  function results() {
+    $('#results~tr').show();
+  }
+
   function colCond(e) {
     return Cond[$(e).parent().data('idx')];
   }  
@@ -292,10 +296,6 @@
     });
     delete Grid;
     back = main;
-  }
-
-  function pumpEff(v) {
-    $('td:contains("Pump efficiency")').parent().children().eq(parIdx(v)).html(Bridge.pumpEff($(v).val()));
   }
 
   function rm(e) {
@@ -361,7 +361,6 @@
               
             }
           });   
-          pumpEff(nm('flow').last());
     }
   });         
 
