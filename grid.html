@@ -242,7 +242,7 @@
 <script>
   function results() {
     $('tr:contains("Pump efficiency") td:gt(1)').each((i,e)=>{
-      $(e).text('123 / 321');
+      $(e).html(123+`<span>${456}</span>`);
     });
     $('#results~tr').show();
   }
