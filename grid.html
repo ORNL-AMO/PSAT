@@ -1,21 +1,5 @@
 
 <style scoped=scoped>       
-  /*.sum {
-    font-weight: bold;
-  }
-  .sum td:not(:first-child) {
-    color: green;
-  }      
-    td.result span {
-    position: absolute; 
-    left: 50%;
-    bottom: 1px;
-    color: green;
-  }
-  td.result {
-    position: relative;
-  }*/
-
   #results~tr {
     display:none;
   }
@@ -200,10 +184,10 @@
     <td></td>
   </tr>
   <tr>
-    <td><div>Pump efficiency <em>(%)</em></div></td><td class='result'><span></span></td>
+    <td><div>Pump efficiency <em>(%)</em></div></td><td><span></span></td>
   </tr>
   <tr>
-    <td><div>Motor rated power</div></td><td class='result'><span></span></td>
+    <td><div>Motor rated power</div></td><td><span></span></td>
   </tr>
   <tr>
     <td><div>Motor shaft power</div></td><td class='result'><span></span></td>
@@ -257,6 +241,9 @@
 
 <script>
   function results() {
+    $('tr:contains("Pump efficiency") td:gt(1)').each((i,e)=>{
+      $(e).text('123 / 321');
+    });
     $('#results~tr').show();
   }
 
