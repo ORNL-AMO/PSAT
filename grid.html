@@ -242,7 +242,7 @@
 <script>
   function results() {
     $('tr:contains("Pump efficiency") td:gt(1)').each((i,e)=>{
-      $(e).html(123+`<span>${456}</span>`);
+      $(e).html(`<div style='justify-content:space-around'>${123} <span style='color: green'>${456}</span></div>`);
     });
     $('#results~tr').show();
   }
