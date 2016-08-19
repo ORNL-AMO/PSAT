@@ -251,7 +251,9 @@
   }
   function results() {
     r('Pump efficiency',Bridge.pumpEff(),456);
-    r('Motor rated power',83948.23,1928.6);    
+    r('Motor rated power',Bridge.mrp(),1928.6);    
+
+    // r('Motor rated power',83948.23,1928.6);    
 
     $('#results,#results~tr').show();
     $('p button').hide();

@@ -1,6 +1,6 @@
 #include <node.h>
 #include "../api/Calculator/PumpEfficiency.h"
-// #include "../api/Calculator/PumpEfficiency.h"
+#include "../api/Calculator/MotorRatedPower.h"
 
 using v8::FunctionCallbackInfo;
 using v8::Local;
@@ -15,8 +15,14 @@ void Method(const FunctionCallbackInfo<Value>& args) {
   args.GetReturnValue().Set(p->calculate());
 }
 
+void Method2(const FunctionCallbackInfo<Value>& args) {
+  auto *m = new MotorRatedPower(123);
+  args.GetReturnValue().Set(m->calculate());
+}
+
 void init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "pumpEff", Method);
+  NODE_SET_METHOD(exports, "mrp", Method2);  
 }
 
 NODE_MODULE(bridge, init)
