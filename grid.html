@@ -244,13 +244,15 @@
 </dialog>
 
 <script>
+  function r(nm,v1,v2) {
+    $(`tr:contains(${nm}) td:gt(1)`).each((i,e)=>{
+      $(e).html(`<div><span>${v1} </span><span style='color: green'>${v2}</span></div>`);
+    });
+  }
   function results() {
-    $('tr:contains("Pump efficiency") td:gt(1)').each((i,e)=>{
-      $(e).html(`<div><span>${123} </span><span style='color: green'>${456}</span></div>`);
-    });
-    $('tr:contains("Motor rated power") td:gt(1)').each((i,e)=>{
-      $(e).html(`<div><span>${83948.23}</span><span style='color: green'>${1928.6}</span></div>`);
-    });
+    r('Pump efficiency',123,456);
+    r('Motor rated power',83948.23,1928.6);    
+
     $('#results,#results~tr').show();
     $('p button').hide();
   }
