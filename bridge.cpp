@@ -18,10 +18,15 @@ void Method2(const FunctionCallbackInfo<Value>& args) {
 void Results(const FunctionCallbackInfo<Value>& args) {
   Isolate* iso = args.GetIsolate();
   Local<Array> r = Array::New(iso);
-  r->Set(0,Number::New(iso,99));
+
   auto *p = new PumpEfficiency();
-  double d = args[0]->NumberValue();
-  //double r[] = {123,456,789};
+  r->Set(0,Number::New(iso,p->calculate()));
+  r->Set(1,Number::New(iso,99));
+  
+  auto *m = new MotorRatedPower(123);
+  r->Set(2,Number::New(iso,m->calculate()));
+  r->Set(3,Number::New(iso,91));
+  
   args.GetReturnValue().Set(r);
 }
 
