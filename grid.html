@@ -244,14 +244,20 @@
 </dialog>
 
 <script>
-  function r(nm,i,i2) {
-    $(`tr:contains(${nm}) td:gt(1)`).each((i,e)=>{
-      $(e).html(`<div><span>${Bridge.results()[i]} </span><span style='color: green'>${Bridge.results()[i2]}</span></div>`);
-    });
-  }
   function results() {
-    r('Pump efficiency',0,1);
-    r('Motor rated power',2,3);    
+    let j=0;
+    function r(nm) {
+      results=Bridge.results();      
+      $(`tr:contains(${nm}) td:gt(1)`).each((i,e)=>{
+        
+        $(e).html(`<div><span>${results[j]}</span>
+          <span style='color: green'>${results[j+1]}</span></div>`);
+      });
+      j=j+2;
+    }
+
+    r('Pump efficiency');
+    r('Motor rated power');    
     $('#results,#results~tr').show();
     $('p button').hide();
   }
