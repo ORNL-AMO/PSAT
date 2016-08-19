@@ -3,7 +3,9 @@
   #results~tr {
     display:none;
   }
-
+  #results td:not(:first-child) span,#results~tr span {
+    width:50%;
+  }
   td>div>em {
     color: green;
   }
@@ -174,20 +176,20 @@
   <tr id=results>
     <td class='th'>
       <div>
-      <button onclick=results()><i class="fa fa-plus"/></button>
-      <span>Results</span>
-      <button onclick='backload("curve")'>
-        <i class="fa fa-line-chart"/>
-      </button>
+        <button onclick=results()><i class="fa fa-plus"/></button>
+        <span>Results</span>
+        <button onclick='backload("curve")'>
+          <i class="fa fa-line-chart"/>
+        </button>
       </div>
     </td>
-    <td></td>
+    <td><div style='color:green;'><span>Actual</span><span>Optimal</span></div></td>
   </tr>
   <tr>
-    <td><div>Pump efficiency <em>(%)</em></div></td><td><span></span></td>
+    <td><div>Pump efficiency <em>(%)</em></div></td><td></td>
   </tr>
   <tr>
-    <td><div>Motor rated power</div></td><td><span></span></td>
+    <td><div>Motor rated power</div></td><td></td>
   </tr>
   <tr>
     <td><div>Motor shaft power</div></td><td class='result'><span></span></td>
@@ -242,7 +244,10 @@
 <script>
   function results() {
     $('tr:contains("Pump efficiency") td:gt(1)').each((i,e)=>{
-      $(e).html(`<div style='justify-content:space-around'>${123} <span style='color: green'>${456}</span></div>`);
+      $(e).html(`<div><span>${123} </span><span style='color: green'>${456}</span></div>`);
+    });
+    $('tr:contains("Motor rated power") td:gt(1)').each((i,e)=>{
+      $(e).html(`<div><span>${83948.23}</span><span style='color: green'>${1928.6}</span></div>`);
     });
     $('#results~tr').show();
   }

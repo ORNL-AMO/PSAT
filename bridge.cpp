@@ -12,7 +12,7 @@ using v8::Value;
 void Method(const FunctionCallbackInfo<Value>& args) {
   auto *p = new PumpEfficiency();
   double d = args[0]->NumberValue();
-  args.GetReturnValue().Set(p->calculate(d));
+  args.GetReturnValue().Set(p->calculate());
 }
 
 void init(Local<Object> exports) {
