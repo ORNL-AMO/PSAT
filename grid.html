@@ -1,6 +1,6 @@
 
 <style scoped=scoped>       
-  #results~tr {
+  #results,#results~tr {
     display:none;
   }
   #results td:not(:first-child) span,#results~tr span {
@@ -227,6 +227,9 @@
     <td class='result'><span></span></td>
   </tr>
 </table>
+<p>
+  <button onclick="results()">RESULTS</button>
+</p>
 <dialog id='io'>
   <label>
     <input name=saveopt type="radio" checked> Save
@@ -249,7 +252,8 @@
     $('tr:contains("Motor rated power") td:gt(1)').each((i,e)=>{
       $(e).html(`<div><span>${83948.23}</span><span style='color: green'>${1928.6}</span></div>`);
     });
-    $('#results~tr').show();
+    $('#results,#results~tr').show();
+    $('p button').hide();
   }
 
   function colCond(e) {
