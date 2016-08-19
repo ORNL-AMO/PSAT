@@ -20,9 +20,16 @@ void Method2(const FunctionCallbackInfo<Value>& args) {
   args.GetReturnValue().Set(m->calculate());
 }
 
+void results(const FunctionCallbackInfo<Value>& args) {
+  auto *p = new PumpEfficiency();
+  double d = args[0]->NumberValue();
+  args.GetReturnValue().Set(p->calculate());
+}
+
 void init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "pumpEff", Method);
-  NODE_SET_METHOD(exports, "mrp", Method2);  
+  NODE_SET_METHOD(exports, "mrp", Method2);
+  NODE_SET_METHOD(exports, "results", results);    
 }
 
 NODE_MODULE(bridge, init)
