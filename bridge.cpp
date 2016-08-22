@@ -48,8 +48,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   set((new MotorPower(0,0,0,0))->calculate(),(new OptimalMotorPower(0,0))->calculate());
   set((new AnnualEnergy(0,0))->calculate(),(new AnnualEnergy(0,0))->calculate());
   set((new AnnualCost(0,0))->calculate(),(new AnnualCost(0,0))->calculate());
-  set((new AnnualSavingsPotential(0,0))->calculate(),99);
-  set((new OptimizationRating(0,0))->calculate(),99);
+  set(99,(new AnnualSavingsPotential(0,0))->calculate());
+  set(99,(new OptimizationRating(0,0))->calculate());
 
   args.GetReturnValue().Set(r);
 }
