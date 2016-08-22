@@ -4,6 +4,9 @@
 #include "../api/Calculator/OptimalPumpEfficiency.h"
 #include "../api/Calculator/MotorRatedPower.h"
 #include "../api/Calculator/OptimalMotorRatedPower.h"
+#include "../api/Calculator/MotorShaftPower.h"
+#include "../api/Calculator/OptimalMotorShaftPower.h"
+
 
 
 
@@ -22,11 +25,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
 
   set((new PumpEfficiency(0,0,0,0))->calculate(),
     (new OptimalPumpEfficiency(Pump::Style::END_SUCTION_SLURRY,0,0,0,0,0,Pump::Speed::FIXED_SPECIFIC_SPEED))->calculate());
-  
   set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
-
-  set(234,432); 
-  set(666,667);
+  set((new MotorShaftPower(0,0))->calculate(),(new OptimalMotorShaftPower(0,Pump::Drive::DIRECT_DRIVE))->calculate());
 
   args.GetReturnValue().Set(r);
 }
