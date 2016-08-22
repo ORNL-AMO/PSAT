@@ -19,7 +19,7 @@
 #include "../api/AnnualEnergy.h"
 #include "../api/AnnualCost.h"
 #include "../api/AnnualSavingsPotential.h"
-// #include "../api/Calculator/OptimalMotorRatedPower.h"
+#include "../api//OptimizationRating.h"
 
 
 using namespace v8;
@@ -49,7 +49,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   set((new AnnualEnergy(0,0))->calculate(),(new AnnualEnergy(0,0))->calculate());
   set((new AnnualCost(0,0))->calculate(),(new AnnualCost(0,0))->calculate());
   set((new AnnualSavingsPotential(0,0))->calculate(),99);
-  //set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
+  set((new OptimizationRating(0,0))->calculate(),99);
 
   args.GetReturnValue().Set(r);
 }
