@@ -12,8 +12,15 @@
 #include "../api/Calculator/OptimalMotorEfficiency.h"
 #include "../api/Calculator/MotorPowerFactor.h"
 #include "../api/Calculator/OptimalMotorPowerFactor.h"
+#include "../api/Calculator/MotorCurrent.h"
+#include "../api/Calculator/OptimalMotorCurrent.h"
 
-
+// #include "../api/Calculator/MotorRatedPower.h"
+// #include "../api/Calculator/OptimalMotorRatedPower.h"
+// #include "../api/Calculator/MotorRatedPower.h"
+// #include "../api/Calculator/OptimalMotorRatedPower.h"
+// #include "../api/Calculator/MotorRatedPower.h"
+// #include "../api/Calculator/OptimalMotorRatedPower.h"
 
 
 using namespace v8;
@@ -38,6 +45,11 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new OptimalMotorEfficiency(0,0))->calculate());
   set((new MotorPowerFactor(0,0,Motor::EfficiencyClass::STANDARD,0,FieldData::LoadEstimationMethod::POWER,0,0,0))->calculate(),
     (new OptimalMotorPowerFactor(0,0))->calculate());
+  set((new MotorCurrent(0,0,0))->calculate(),(new OptimalMotorCurrent(0,0))->calculate());
+
+// set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
+// set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
+// set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
 
   args.GetReturnValue().Set(r);
 }
