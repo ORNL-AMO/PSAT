@@ -214,8 +214,8 @@
   <tr>
     <td>Annual cost</td><td></td>
   </tr>
-  <tr>
-    <td class=th>Summary</td><td></td>
+  <tr class=th>
+    <td>Summary</td><td></td>
   </tr>
   <tr class=sum>
     <td>Savings potential</td>
@@ -249,7 +249,7 @@
       const col=$(`td:nth-child(${$(e).index()+1})`),
         r=Bridge.results(nm('stages',col).val());
       let j=0;;
-      col.filter('#results~tr td').each((i,e)=>{
+      col.filter('#results~tr:not(.th) td').each((i,e)=>{
         $(e).html(`<div><span>${r[2*i]}</span>
                         <span style='color: green'>${r[2*i+1]}</span></div>`);
       });
