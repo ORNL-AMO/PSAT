@@ -10,7 +10,8 @@
 #include "../api/Calculator/OptimalPumpShaftPower.h"
 #include "../api/Calculator/MotorEfficiency.h"
 #include "../api/Calculator/OptimalMotorEfficiency.h"
-
+#include "../api/Calculator/MotorPowerFactor.h"
+#include "../api/Calculator/OptimalMotorPowerFactor.h"
 
 
 
@@ -35,6 +36,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   set((new PumpShaftPower(0,Pump::Drive::DIRECT_DRIVE))->calculate(),(new OptimalPumpShaftPower(0,0,0,0))->calculate());
   set((new MotorEfficiency(0,0,Motor::EfficiencyClass::STANDARD,0,FieldData::LoadEstimationMethod::POWER,0,0,0))->calculate(),
     (new OptimalMotorEfficiency(0,0))->calculate());
+  set((new MotorPowerFactor(0,0,Motor::EfficiencyClass::STANDARD,0,FieldData::LoadEstimationMethod::POWER,0,0,0))->calculate(),
+    (new OptimalMotorPowerFactor(0,0))->calculate());
 
   args.GetReturnValue().Set(r);
 }
