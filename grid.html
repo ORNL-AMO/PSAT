@@ -244,20 +244,17 @@
 </dialog>
 
 <script>
+  
   function results() {
-    let j=0;
-    function r(nm) {
-      results=Bridge.results();      
-      $(`tr:contains(${nm}) td:gt(1)`).each((i,e)=>{
-        
-        $(e).html(`<div><span>${results[j]}</span>
-          <span style='color: green'>${results[j+1]}</span></div>`);
+    $('th:gt(1)').each((i,e)=>{
+      const col=$(`td:nth-child(${$(e).index()+1})`),
+        r=Bridge.results(nm('stages',col).val());
+      let j=0;;
+      col.filter('#results~tr td').each((i,e)=>{
+        $(e).html(`<div><span>${r[2*i]}</span>
+                        <span style='color: green'>${r[2*i+1]}</span></div>`);
       });
-      j=j+2;
-    }
-
-    r('Pump efficiency');
-    r('Motor rated power');    
+    });
     $('#results,#results~tr').show();
     $('p button').hide();
   }
