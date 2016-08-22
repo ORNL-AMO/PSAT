@@ -1,6 +1,9 @@
 #include <node.h>
+#include "../api//Pump.h"
 #include "../api/Calculator/PumpEfficiency.h"
+#include "../api/Calculator/OptimalPumpEfficiency.h"
 #include "../api/Calculator/MotorRatedPower.h"
+
 
 using namespace v8;
 
@@ -15,8 +18,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   r = Array::New(iso);
 
-  auto *p = new PumpEfficiency(0,0,0,0);
-  set(p->calculate(),99);
+  set((new PumpEfficiency(0,0,0,0))->calculate(),
+    (new OptimalPumpEfficiency(Pump::Style::END_SUCTION_SLURRY,0,0,0,0,0,Pump::Speed::FIXED_SPECIFIC_SPEED))->calculate());
   
   auto *m = new MotorRatedPower(123);
   set(m->calculate(),91);
