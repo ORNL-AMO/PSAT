@@ -4,24 +4,26 @@
 
 using namespace v8;
 
+Local<Array> r;
+Isolate* iso;
+
+void set(double v1, double v2) {
+  r->Set(r->Length(),Number::New(iso,v1));
+  r->Set(r->Length(),Number::New(iso,v2));
+}
 void Results(const FunctionCallbackInfo<Value>& args) {
-  Isolate* iso = args.GetIsolate();
-  Local<Array> r = Array::New(iso);
+  iso = args.GetIsolate();
+  r = Array::New(iso);
 
   auto *p = new PumpEfficiency(0,0,0,0);
-  r->Set(0,Number::New(iso,p->calculate()));
-  r->Set(1,Number::New(iso,99));
+  set(p->calculate(),99);
   
   auto *m = new MotorRatedPower(123);
-  r->Set(2,Number::New(iso,m->calculate()));
-  r->Set(3,Number::New(iso,91));
-  
-  r->Set(4,Number::New(iso,234));
-  r->Set(5,Number::New(iso,432));
+  set(m->calculate(),91);
 
-  r->Set(6,Number::New(iso,345));
-  r->Set(7,Number::New(iso,76.24));
-  
+  set(234,432); 
+  set(666,667);
+
   args.GetReturnValue().Set(r);
 }
 
