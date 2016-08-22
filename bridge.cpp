@@ -18,8 +18,7 @@
 #include "../api/Calculator/OptimalMotorPower.h"
 #include "../api/AnnualEnergy.h"
 #include "../api/AnnualCost.h"
-
-// #include "../api/Calculator/MotorRatedPower.h"
+#include "../api/AnnualSavingsPotential.h"
 // #include "../api/Calculator/OptimalMotorRatedPower.h"
 
 
@@ -49,9 +48,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   set((new MotorPower(0,0,0,0))->calculate(),(new OptimalMotorPower(0,0))->calculate());
   set((new AnnualEnergy(0,0))->calculate(),(new AnnualEnergy(0,0))->calculate());
   set((new AnnualCost(0,0))->calculate(),(new AnnualCost(0,0))->calculate());
-
-// set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
-// set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
+  set((new AnnualSavingsPotential(0,0))->calculate(),99);
+  //set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
 
   args.GetReturnValue().Set(r);
 }
