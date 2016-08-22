@@ -18,6 +18,9 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   
   r->Set(4,Number::New(iso,234));
   r->Set(5,Number::New(iso,432));
+
+  r->Set(6,Number::New(iso,345));
+  r->Set(7,Number::New(iso,76.24));
   
   args.GetReturnValue().Set(r);
 }
