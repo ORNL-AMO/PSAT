@@ -1,5 +1,5 @@
 #include <node.h>
-#include "../api//Pump.h"
+#include "../api/Pump.h"
 #include "../api/Calculator/PumpEfficiency.h"
 #include "../api/Calculator/OptimalPumpEfficiency.h"
 #include "../api/Calculator/MotorRatedPower.h"
@@ -16,9 +16,9 @@
 #include "../api/Calculator/OptimalMotorCurrent.h"
 #include "../api/Calculator/MotorPower.h"
 #include "../api/Calculator/OptimalMotorPower.h"
+#include "../api/AnnualEnergy.h"
+#include "../api/AnnualCost.h"
 
-// #include "../api/Calculator/MotorRatedPower.h"
-// #include "../api/Calculator/OptimalMotorRatedPower.h"
 // #include "../api/Calculator/MotorRatedPower.h"
 // #include "../api/Calculator/OptimalMotorRatedPower.h"
 
@@ -47,6 +47,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new OptimalMotorPowerFactor(0,0))->calculate());
   set((new MotorCurrent(0,0,0))->calculate(),(new OptimalMotorCurrent(0,0))->calculate());
   set((new MotorPower(0,0,0,0))->calculate(),(new OptimalMotorPower(0,0))->calculate());
+  set((new AnnualEnergy(0,0))->calculate(),(new OptimalMotorCurrent(0,0))->calculate()*0);
+  set((new AnnualCost(0,0))->calculate(),(new OptimalMotorPower(0,0))->calculate()*0);
 
 // set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
 // set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
