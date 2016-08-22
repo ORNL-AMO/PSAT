@@ -3,6 +3,8 @@
 #include "../api/Calculator/PumpEfficiency.h"
 #include "../api/Calculator/OptimalPumpEfficiency.h"
 #include "../api/Calculator/MotorRatedPower.h"
+#include "../api/Calculator/OptimalMotorRatedPower.h"
+
 
 
 using namespace v8;
@@ -21,8 +23,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   set((new PumpEfficiency(0,0,0,0))->calculate(),
     (new OptimalPumpEfficiency(Pump::Style::END_SUCTION_SLURRY,0,0,0,0,0,Pump::Speed::FIXED_SPECIFIC_SPEED))->calculate());
   
-  auto *m = new MotorRatedPower(123);
-  set(m->calculate(),91);
+  set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
 
   set(234,432); 
   set(666,667);
