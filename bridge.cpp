@@ -52,12 +52,12 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   set((new MotorPower(0,0,0,0))->calculate(),(new OptimalMotorPower(0,0))->calculate());
   set((new AnnualEnergy(0,0))->calculate(),(new AnnualEnergy(0,0))->calculate());
   set((new AnnualCost(0,0))->calculate(),(new AnnualCost(0,0))->calculate());
-  r->Set(r->Length(),String::NewFromUtf8(iso,""));
-  set((new AnnualSavingsPotential(0,0))->calculate());
-  r->Set(r->Length(),String::NewFromUtf8(iso,""));
-  set((new OptimizationRating(0,0))->calculate());
-  // set(-1,(new AnnualSavingsPotential(0,0))->calculate());
-  // set(-1,(new OptimizationRating(0,0))->calculate());
+  // r->Set(r->Length(),String::NewFromUtf8(iso,""));
+  // set((new AnnualSavingsPotential(0,0))->calculate());
+  // r->Set(r->Length(),String::NewFromUtf8(iso,""));
+  // set((new OptimizationRating(0,0))->calculate());
+  set(-1,(new AnnualSavingsPotential(0,0))->calculate());
+  set(-1,(new OptimizationRating(0,0))->calculate());
 
   args.GetReturnValue().Set(r);
 }
