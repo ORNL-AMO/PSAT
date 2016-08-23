@@ -21,11 +21,10 @@
     "start": "electron ."
   },
   "devDependencies": {
-    "electron-prebuilt": "",
+    "electron-prebuilt": "1.2.8",
     "electron-reload": "^1.0.0"
   },
   "dependencies": {
-    "ffi": "",
     "jquery": ""
   }
 }
