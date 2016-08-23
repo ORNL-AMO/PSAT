@@ -1,4 +1,6 @@
 #include <node.h>
+#include <initializer_list>
+
 #include "../api/Pump.h"
 #include "../api/Calculator/PumpEfficiency.h"
 #include "../api/Calculator/OptimalPumpEfficiency.h"
@@ -21,44 +23,45 @@
 #include "../api/AnnualSavingsPotential.h"
 #include "../api//OptimizationRating.h"
 
-
 using namespace v8;
 
 Local<Array> r;
 Isolate* iso;
 
-void set(double v) {
-  r->Set(r->Length(),Number::New(iso,v));
+void set(std::initializer_list <double> args) {
+  for (auto d : args) {
+    r->Set(r->Length(),Number::New(iso,d));
+  }
 }
-void set(double v1, double v2) {
-  set(v1);
-  set(v2);
-}
-
 void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   r = Array::New(iso);
-
-  set((new PumpEfficiency(0,0,0,0))->calculate(),
-    (new OptimalPumpEfficiency(Pump::Style::END_SUCTION_SLURRY,0,0,0,0,0,Pump::Speed::FIXED_SPECIFIC_SPEED))->calculate());
-  set((new MotorRatedPower(0))->calculate(),(new OptimalMotorRatedPower(0,0))->calculate());
-  set((new MotorShaftPower(0,0))->calculate(),(new OptimalMotorShaftPower(0,Pump::Drive::DIRECT_DRIVE))->calculate());
-  set((new PumpShaftPower(0,Pump::Drive::DIRECT_DRIVE))->calculate(),(new OptimalPumpShaftPower(0,0,0,0))->calculate());
-  set((new MotorEfficiency(0,0,Motor::EfficiencyClass::STANDARD,0,FieldData::LoadEstimationMethod::POWER,0,0,0))->calculate(),
-    (new OptimalMotorEfficiency(0,0))->calculate());
-  set((new MotorPowerFactor(0,0,Motor::EfficiencyClass::STANDARD,0,FieldData::LoadEstimationMethod::POWER,0,0,0))->calculate(),
-    (new OptimalMotorPowerFactor(0,0))->calculate());
-  set((new MotorCurrent(0,0,0))->calculate(),(new OptimalMotorCurrent(0,0))->calculate());
-  set((new MotorPower(0,0,0,0))->calculate(),(new OptimalMotorPower(0,0))->calculate());
-  set((new AnnualEnergy(0,0))->calculate(),(new AnnualEnergy(0,0))->calculate());
-  set((new AnnualCost(0,0))->calculate(),(new AnnualCost(0,0))->calculate());
-  // r->Set(r->Length(),String::NewFromUtf8(iso,""));
-  // set((new AnnualSavingsPotential(0,0))->calculate());
-  // r->Set(r->Length(),String::NewFromUtf8(iso,""));
-  // set((new OptimizationRating(0,0))->calculate());
-  set(-1,(new AnnualSavingsPotential(0,0))->calculate());
-  set(-1,(new OptimizationRating(0,0))->calculate());
-
+  set({
+    (new PumpEfficiency(0,0,0,0))->calculate(),
+    (new OptimalPumpEfficiency(Pump::Style::END_SUCTION_SLURRY,0,0,0,0,0,Pump::Speed::FIXED_SPECIFIC_SPEED))->calculate(),
+    (new MotorRatedPower(0))->calculate(),
+    (new OptimalMotorRatedPower(0,0))->calculate(),
+    (new MotorShaftPower(0,0))->calculate(), 
+    (new OptimalMotorShaftPower(0,Pump::Drive::DIRECT_DRIVE))->calculate(),
+    (new PumpShaftPower(0,Pump::Drive::DIRECT_DRIVE))->calculate(),
+    (new OptimalPumpShaftPower(0,0,0,0))->calculate(),
+    (new MotorEfficiency(0,0,Motor::EfficiencyClass::STANDARD,0,FieldData::LoadEstimationMethod::POWER,0,0,0))->calculate(),
+    (new OptimalMotorEfficiency(0,0))->calculate(),
+    (new MotorPowerFactor(0,0,Motor::EfficiencyClass::STANDARD,0,FieldData::LoadEstimationMethod::POWER,0,0,0))->calculate(),
+    (new OptimalMotorPowerFactor(0,0))->calculate(),
+    (new MotorCurrent(0,0,0))->calculate(),
+    (new OptimalMotorCurrent(0,0))->calculate(),
+    (new MotorPower(0,0,0,0))->calculate(),
+    (new OptimalMotorPower(0,0))->calculate(),
+    (new AnnualEnergy(0,0))->calculate(),
+    (new AnnualEnergy(0,0))->calculate(),
+    (new AnnualCost(0,0))->calculate(),
+    (new AnnualCost(0,0))->calculate(),
+    -1,
+    (new AnnualSavingsPotential(0,0))->calculate(),
+    -1,
+    (new OptimizationRating(0,0))->calculate()
+  });
   args.GetReturnValue().Set(r);
 }
 
