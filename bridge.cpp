@@ -43,7 +43,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   inp = args[0]->ToObject();
   set({
     (new PumpEfficiency(get("specific_gravity"),get("flow"),get("head"),get("power_rating")))->calculate(),
-    (new OptimalPumpEfficiency(Pump::Style::END_SUCTION_SLURRY,0,0,0,0,0,Pump::Speed::FIXED_SPECIFIC_SPEED))->calculate(),
+    (new OptimalPumpEfficiency(Pump::Style::END_SUCTION_SLURRY,get("pump_rpm"),get("viscosity"),get("stages"),get("flow"),get("head"),Pump::Speed::FIXED_SPECIFIC_SPEED))->calculate(),
     (new MotorRatedPower(0))->calculate(),
     (new OptimalMotorRatedPower(0,0))->calculate(),
     (new MotorShaftPower(0,0))->calculate(), 
