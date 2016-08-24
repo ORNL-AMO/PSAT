@@ -59,7 +59,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new AnnualCost(0,0))->calculate(),
     -1,
     (new AnnualSavingsPotential(0,0))->calculate(),
-    -1,
+    args[0]->ToObject()->Get(String::NewFromUtf8(iso,"stages"))->NumberValue(), 
     (new OptimizationRating(0,0))->calculate()
   });
   args.GetReturnValue().Set(r);

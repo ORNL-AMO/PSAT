@@ -246,8 +246,13 @@
 <script>
   function results() {
     $('th:gt(1)').each((i,e)=>{
-      const col=$(`td:nth-child(${$(e).index()+1})`),
-        r=Bridge.results(nm('stages',col).val());
+      const col=$(`td:nth-child(${$(e).index()+1})`);
+      const inp={};
+      nmAll(col).each((i,e)=>{
+        inp[nmGet(e)]=$(e).val();
+      });
+      //debugger;
+      const r=Bridge.results(inp);
       let j=0;;
       col.filter('#results~tr:not(.th) td').each((i,e)=>{
         $(e).html(`<div><span>${r[2*i]>=0?r[2*i]:''}</span>
@@ -301,7 +306,6 @@
     col(e).remove();
     $(e).parent().remove();
   }
-
 
   function showIO(e) {
     dom('#io').showModal();
