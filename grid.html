@@ -353,8 +353,7 @@
               newEl.find('span').text(d.name);     
               newEl.data('idx',idx);
             } else {              
-              setCtls(d,newEl);
-              
+              setCtls(d,newEl);              
             }
           });   
     }
@@ -362,5 +361,7 @@
 
   nmAll('#grid').change(function() {
     ioBtn(this).addClass('prime');
+    $('#results,#results~tr').hide();
+    $('p button').show();
   });
 </script>
