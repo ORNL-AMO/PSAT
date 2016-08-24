@@ -321,6 +321,8 @@
         case 2:
           setCtls(DefCond,col(e));
           ioBtn(e).addClass('prime');
+          $('#results,#results~tr').hide();
+          $('p button').show();
           break;
         default:
           setData(colCond(e),col(e));          
