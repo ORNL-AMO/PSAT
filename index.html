@@ -107,7 +107,8 @@
               v = $(el).children(':selected').index();
           }
           d[nmGet(el)] = v;
-        }); 
+        });
+        return d; 
       }     
       function setCtls(d,el) {
         nmAll(el).each((j,e)=>{
