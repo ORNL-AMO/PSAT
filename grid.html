@@ -244,6 +244,10 @@
 </dialog>
 
 <script>
+  function showHdResults(show) {
+    $('#results,#results~tr').toggle(show);
+    $('p button').toggle(!show);
+  }
   function results() {
     $('th:gt(1)').each((i,e)=>{
       const col=$(`td:nth-child(${$(e).index()+1})`),
@@ -253,8 +257,7 @@
                         <span style='color: green'>${r[2*i+1]}</span></div>`);
       });
     });
-    $('#results,#results~tr').show();
-    $('p button').hide();
+    showHdResults(true);
   }
 
   function colCond(e) {
@@ -321,8 +324,7 @@
         case 2:
           setCtls(DefCond,col(e));
           ioBtn(e).addClass('prime');
-          $('#results,#results~tr').hide();
-          $('p button').show();
+          showHdResults()
           break;
         default:
           setData(colCond(e),col(e));          
@@ -363,7 +365,6 @@
 
   nmAll('#grid').change(function() {
     ioBtn(this).addClass('prime');
-    $('#results,#results~tr').hide();
-    $('p button').show();
+    showHdResults();
   });
 </script>
