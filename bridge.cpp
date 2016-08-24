@@ -42,7 +42,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   r = Array::New(iso);
   inp = args[0]->ToObject();
   set({
-    (new PumpEfficiency(0,0,0,0))->calculate(),
+    (new PumpEfficiency(get("specific_gravity"),get("flow"),get("head"),get("power_rating")))->calculate(),
     (new OptimalPumpEfficiency(Pump::Style::END_SUCTION_SLURRY,0,0,0,0,0,Pump::Speed::FIXED_SPECIFIC_SPEED))->calculate(),
     (new MotorRatedPower(0))->calculate(),
     (new OptimalMotorRatedPower(0,0))->calculate(),
@@ -64,7 +64,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new AnnualCost(0,0))->calculate(),
     -1,
     (new AnnualSavingsPotential(0,0))->calculate(),
-    get("stages"),
+    -1,
     (new OptimizationRating(0,0))->calculate()
   });
   args.GetReturnValue().Set(r);
