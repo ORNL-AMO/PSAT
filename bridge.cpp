@@ -27,15 +27,20 @@ using namespace v8;
 
 Local<Array> r;
 Isolate* iso;
+Local<Object> inp;
 
 void set(std::initializer_list <double> args) {
   for (auto d : args) {
     r->Set(r->Length(),Number::New(iso,d));
   }
 }
+double get(const char * nm) {
+  return inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
+}
 void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   r = Array::New(iso);
+  inp = args[0]->ToObject();
   set({
     (new PumpEfficiency(0,0,0,0))->calculate(),
     (new OptimalPumpEfficiency(Pump::Style::END_SUCTION_SLURRY,0,0,0,0,0,Pump::Speed::FIXED_SPECIFIC_SPEED))->calculate(),
@@ -59,7 +64,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new AnnualCost(0,0))->calculate(),
     -1,
     (new AnnualSavingsPotential(0,0))->calculate(),
-    args[0]->ToObject()->Get(String::NewFromUtf8(iso,"stages"))->NumberValue(), 
+    get("stages"),
     (new OptimizationRating(0,0))->calculate()
   });
   args.GetReturnValue().Set(r);
