@@ -41,14 +41,15 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   r = Array::New(iso);
   inp = args[0]->ToObject();
+
   set({
-    (new PumpEfficiency(get("specific_gravity"),get("flow"),get("head"),get("power_rating")))->calculate(),
+    (new PumpEfficiency(get("specific_gravity"),get("flow"),get("head"),0))->calculate(),
     (new OptimalPumpEfficiency(static_cast<Pump::Style>(get("style")),get("pump_rpm"),get("viscosity"),get("stages"),get("flow"),get("head"),static_cast<Pump::Speed>(!get("speed"))))->calculate(),
-    (new MotorRatedPower(0))->calculate(),
-    (new OptimalMotorRatedPower(0,0))->calculate(),
+    (new MotorRatedPower(get("power_rating")))->calculate(),
+    (new OptimalMotorRatedPower(0,get("margin")))->calculate(),
     (new MotorShaftPower(0,0))->calculate(), 
     (new OptimalMotorShaftPower(0,Pump::Drive::DIRECT_DRIVE))->calculate(),
-    (new PumpShaftPower(0,Pump::Drive::DIRECT_DRIVE))->calculate(),
+    (new PumpShaftPower(0,static_cast<Pump::Drive>(get("drive"))))))->calculate(),
     (new OptimalPumpShaftPower(0,0,0,0))->calculate(),
     (new MotorEfficiency(0,0,Motor::EfficiencyClass::STANDARD,0,FieldData::LoadEstimationMethod::POWER,0,0,0))->calculate(),
     (new OptimalMotorEfficiency(0,0))->calculate(),
