@@ -2,7 +2,7 @@
   	"targets": [
 		{
 	    	"target_name": "bridge",
-	    	# 'include_dirs': ['../amo-library'],
+	    	'include_dirs': ['../amo-library'],
 			'sources' : [ 'bridge.cpp','<!@(ls -1 ../amo-library/*.cpp)','<!@(ls -1 ../amo-library/calculator/*.cpp)'],
 			"cflags": ["-Wall","-std=c++11"],  
 			"conditions": [ 
