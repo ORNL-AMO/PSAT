@@ -251,7 +251,9 @@
   function results() {
     $('th:gt(1)').each((i,e)=>{
       const col=$(`td:nth-child(${$(e).index()+1})`),
-        r=Bridge.results(setData({},col));
+        d=setData({},col);
+        d['line']=nm('line',col).val();
+      const r=Bridge.results(d);
       col.filter('#results~tr:not(.th) td').each((i,e)=>{
         $(e).html(`<div><span>${r[2*i]>=0?r[2*i]:''}</span>
                         <span style='color: green'>${r[2*i+1]}</span></div>`);
