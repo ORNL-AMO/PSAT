@@ -53,7 +53,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new OptimalPumpShaftPower(get("flow"),get("head"),get("specific_gravity"),0))->calculate(),
     (new MotorEfficiency(get("line"),get("rpm"),static_cast<Motor::EfficiencyClass>(get("efficiency_class")),get("power_rating"),static_cast<FieldData::LoadEstimationMethod>(get("load_method")),0,0,get("field_voltage")))->calculate(),
     (new OptimalMotorEfficiency(0,0))->calculate(),
-    (new MotorPowerFactor(0,0,Motor::EfficiencyClass::STANDARD,0,FieldData::LoadEstimationMethod::POWER,0,0,0))->calculate(),
+    (new MotorPowerFactor(get("line"),get("rpm"),static_cast<Motor::EfficiencyClass>(get("efficiency_class")),get("power_rating"),static_cast<FieldData::LoadEstimationMethod>(get("load_method")),0,0,get("field_voltage")))->calculate(),
     (new OptimalMotorPowerFactor(0,0))->calculate(),
     (new MotorCurrent(0,0,0))->calculate(),
     (new OptimalMotorCurrent(0,0))->calculate(),
