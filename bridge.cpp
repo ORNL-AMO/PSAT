@@ -45,6 +45,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   auto loadMeth = get("motor_field_power")>0 ? FieldData::LoadEstimationMethod::POWER : FieldData::LoadEstimationMethod::CURRENT;
   auto drive = static_cast<Pump::Drive>(get("drive"));
   auto effCls = static_cast<Motor::EfficiencyClass>(get("efficiency_class"));
+  double mp = get("motor_field_power")>0 ? get("motor_field_power") : (new MotorPower(0,get("motor_field_current"),0,get("field_voltage")))->calculate();//motor power (makes no sense, it IS motor power), motor a, motorpf
+  double mc = get("motor_field_current")>0 ? get("motor_field_current") : (new MotorCurrent(0,get("motor_field_power"),get("field_voltage")))->calculate();//motor a, motor power, recursive arg!!
   set({
     (new PumpEfficiency(get("specific_gravity"),get("flow"),get("head"),0))->calculate(),//pumpShaftPower
     (new OptimalPumpEfficiency(static_cast<Pump::Style>(get("style")),get("pump_rated_speed"),get("viscosity"),get("stages"),get("flow"),get("head"),static_cast<Pump::Speed>(!get("speed"))))->calculate(),//
@@ -60,12 +62,12 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new MotorPowerFactor(get("line"),get("rpm"),effCls,get("power_rating"),
       loadMeth,0,0,get("field_voltage")))->calculate(),//motor kwh,motor a
     (new OptimalMotorPowerFactor(get("motor_rated_power"),0))->calculate(),//motor power
-    (new MotorCurrent(0,0,get("field_voltage")))->calculate(),//motor a, motor power
-    (new OptimalMotorCurrent(0,get("field_voltage")))->calculate(),//motor power
-    (new MotorPower(0,0,0,get("field_voltage")))->calculate(),//motor power (makes no sense, it IS motor power), motor a, motorpf 
+    mc,
+    (new OptimalMotorCurrent(0,get("field_voltage")))->calculate(),//opt motor power
+    mp,
     (new OptimalMotorPower(0,0))->calculate(),//motorshaftpower, motor eff
-    (new AnnualEnergy(0,get("fraction")))->calculate(),//motorpower
-    (new AnnualEnergy(0,get("fraction")))->calculate(),//motorpower
+    (new AnnualEnergy(mp,get("fraction")))->calculate(),//motorpower
+    (new AnnualEnergy(0,get("fraction")))->calculate(),//opt motorpower
     (new AnnualCost(0,get("cost")))->calculate(),//ex ann energy
     (new AnnualCost(0,get("cost")))->calculate(),//opt ann energy
     -1,
