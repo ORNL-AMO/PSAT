@@ -268,6 +268,7 @@
     $('th:gt(1)').each((i,e)=>{
       const col=$(`td:nth-child(${$(e).index()+1})`),
         d=setData({},col);
+        
       d['line'] = nm('line',col).val();
       d['flow'] = cvt(d['flow'],0,'m^3/s',CVT_FLOW);
       d['motor_rated_power'] = cvt(d['motor_rated_power'],1,'kW',{kW:1.341022218});
