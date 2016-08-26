@@ -58,7 +58,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new PumpEfficiency(get("specific_gravity"),get("flow"),get("head"),0))->calculate(),//pumpShaftPower
     (new OptimalPumpEfficiency(static_cast<Pump::Style>(get("style")),
       get("pump_rated_speed"),get("viscosity"),get("stages"),get("flow"),get("head"),static_cast<Pump::Speed>(!get("speed"))))->calculate(),//
-    //get("motor_rated_power"),
+    mp,
     (new OptimalMotorRatedPower(0,get("margin")))->calculate(),//motorshaftpower
     (new MotorShaftPower(0,mp))->calculate(),//motor eff 
     (new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
