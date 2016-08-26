@@ -34,18 +34,18 @@ void set(std::initializer_list <double> args) {
     r->Set(r->Length(),Number::New(iso,d));
   }
 }
-double get(const char * nm) {
+double get(const char *nm) {
   return inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
 }
 void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   r = Array::New(iso);
   inp = args[0]->ToObject();
-
+  
   set({
     (new PumpEfficiency(get("specific_gravity"),get("flow"),get("head"),0))->calculate(),//pumpShaftPower
     (new OptimalPumpEfficiency(static_cast<Pump::Style>(get("style")),get("pump_rated_speed"),get("viscosity"),get("stages"),get("flow"),get("head"),static_cast<Pump::Speed>(!get("speed"))))->calculate(),//
-    (new MotorRatedPower(get("motor_rated_power")))->calculate(),//INPUT, why exist?
+    get("motor_rated_power"),
     (new OptimalMotorRatedPower(0,get("margin")))->calculate(),//motorshaftpower
     (new MotorShaftPower(0,0))->calculate(),//motor eff, motor power (sometimes inp? sometimes calc) 
     (new OptimalMotorShaftPower(0,static_cast<Pump::Drive>(get("drive"))))->calculate(),//pumpshaftpower
