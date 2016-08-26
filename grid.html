@@ -125,7 +125,7 @@
   </tr>
   <tr>
     <td><div>Full-load Current<em>(A)</em></div></td>
-    <td><input name='motor_rated__fla'> <button>EST</button></td>
+    <td><input name='motor_rated_flc'> <button>EST</button></td>
   </tr>
   <tr>
     <td><div>Size margin <em>(%)</em></div></td>
@@ -167,11 +167,11 @@
   </tr>-->
   <tr>
     <td><div>Motor Power</div></td>
-    <td><input name='motor_field_power' onchange="chgPower(this)"></td>
+    <td><input name='motor_field_power'></td>
   </tr>
   <tr>
     <td><div>Motor Current<em>(A)</em></div></td>
-    <td><input name='motor_field_current' onchange="chgCurrent(this)"></td>
+    <td><input name='motor_field_current'></td>
   </tr>
   <tr>
     <td><div>Motor Voltage<em>(V)</em></div></td>
@@ -248,7 +248,6 @@
 </dialog>
 
 <script>
-
   function colCond(e) {
     return Cond[$(e).parent().data('idx')];
   }  
@@ -259,12 +258,6 @@
     } else {
       $(e).next().hide();
     }
-  }
-  function chgPower(e) {
-    nm('motor_field_current',col(e)).val('');
-  }
-  function chgCurrent(e) {
-    nm('motor_field_power',col(e)).val('');  
   }
   
   function showHdResults(show) {
@@ -380,4 +373,11 @@
     ioBtn(this).addClass('prime');
     showHdResults(false);
   });
+  nm('motor_field_power').change(function() {    
+    nm('motor_field_current',col(this)).val('');
+  });
+  nm('motor_field_current').change(function() {    
+    nm('motor_field_power',col(this)).val('');
+  });
+  
 </script>

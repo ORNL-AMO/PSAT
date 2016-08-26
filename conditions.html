@@ -187,7 +187,8 @@
 		}
 		$.each(Cond.concat([DefCond]),function(i,d) {
 			cvtObj(d,'flow',0,CVT_FLOW);
-			cvtObj(d,'power_rating',1,{kW:1.341022218});
+			cvtObj(d,'motor_rated_power',1,{kW:1.341022218});
+			cvtObj(d,'motor_field_power',1,{kW:1.341022218});
 			cvtObj(d,'head',2,{m:3.280839895});
 		});
 		saveProp('defCond',DefCond);
