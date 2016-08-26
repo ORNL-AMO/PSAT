@@ -83,7 +83,7 @@
     <td><input name='stages' type=number></td>
   </tr>
   <tr>
-    <td>Fixed specific speed?</td>
+    <td>Fixed Specific Speed?</td>
     <td><input name='speed' type=checkbox></td>
   </tr>
   <tr>
@@ -108,7 +108,7 @@
     <td><input name='motor_rated_speed'></td>
   </tr>
   <tr>
-    <td>Efficiency class</td>
+    <td>Efficiency Class</td>
     <td> 
       <select name='efficiency_class' onchange='effChg(this)'>
         <option>Standard</option>
@@ -120,11 +120,11 @@
     </td>
   </tr>    
   <tr>
-    <td>Voltage</td>
+    <td><div>Voltage<em>(V)</em></div></td>
     <td><input name='motor_rated_voltage'></td>
   </tr>
   <tr>
-    <td>Full-load amps</td>
+    <td><div>Full-load Current<em>(A)</em></div></td>
     <td><input name='motor_rated__fla'> <button>EST</button></td>
   </tr>
   <tr>
@@ -135,18 +135,18 @@
     <td class='th'>Cost</td><td/>
   </tr>
   <tr>
-    <td>Operating fraction</td>
+    <td>Operating Fraction</td>
     <td><input name='fraction'></td>
   </tr>
  <tr>
-    <td>$ / kwhr</td>
+    <td><div>Energy Cost<em>($/kwhr)</em></td>
     <td><input name='cost'></td>
   </tr>
   <tr>
     <td class='th'>Field</td><td/>
   </tr>        
   <tr>
-    <td><div>Flow rate</td>
+    <td><div>Flow Rate</td>
     <td><input name='flow'></td>
   </tr>
   <tr>
@@ -166,7 +166,7 @@
     </td>
   </tr>-->
   <tr>
-    <td>Motor Power</td>
+    <td><div>Motor Power</div></td>
     <td><input name='motor_field_power' onchange="chgPower(this)"></td>
   </tr>
   <tr>
@@ -189,28 +189,28 @@
     <td><div style='color:green;'><span>Actual</span><span>Optimal</span></div></td>
   </tr>
   <tr>
-    <td><div>Pump efficiency <em>(%)</em></div></td><td></td>
+    <td><div>Pump Efficiency <em>(%)</em></div></td><td></td>
   </tr>
   <tr>
-    <td><div>Motor rated power</div></td><td></td>
+    <td><div>Motor Rated Power</div></td><td></td>
   </tr>
   <tr>
-    <td><div>Motor shaft power</div></td><td></td>
+    <td><div>Motor Shaft Power</div></td><td></td>
   </tr>
   <tr>
-    <td><div>Pump shaft power</div></td><td></td>
+    <td><div>Pump Shaft Power</div></td><td></td>
   </tr>
   <tr>
-    <td><div>Motor efficiency <em>(%)</em></div></td><td></td>
+    <td><div>Motor Efficiency <em>(%)</em></div></td><td></td>
   </tr>
   <tr>
-    <td><div>Motor power factor <em>(%)</em></div></td><td></td>
+    <td><div>Motor Power Factor <em>(%)</em></div></td><td></td>
   </tr>
   <tr>
-    <td><div>Motor current <em>(amps)</em></div></td><td></td>
+    <td><div>Motor Current <em>(amps)</em></div></td><td></td>
   </tr>
   <tr>
-    <td><div>Motor power</div></td><td></td>
+    <td><div>Motor Power</div></td><td></td>
   </tr>
   <tr>
     <td><div>Annual energy <em>(MWh)</em></div></td><td></td>
@@ -348,14 +348,14 @@
   }
 
   function fldUnit(nm) {
-    $(`td>div:contains(${nm})`).last().append(`<em>(${txt})</em>`);
+    $(`td>div:contains(${nm})`).append(`<em>(${txt})</em>`);
   }
   txt = Units[1];
   fldUnit('Power Rating');
-  fldUnit('Motor rated');
-  fldUnit('Motor shaft');
-  fldUnit('Pump shaft');
-  fldUnit('Motor power');
+  fldUnit('Motor Rated');
+  fldUnit('Motor Shaft');
+  fldUnit('Pump Shaft');
+  fldUnit('Motor Power');
   txt = Units[2];
   fldUnit('Head');
   txt = Units[0];
