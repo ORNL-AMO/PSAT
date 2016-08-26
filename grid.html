@@ -59,7 +59,7 @@
     </td>
   </tr>  
   <tr>
-    <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rpm'></td>
+    <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rated_speed'></td>
   </tr>
   <tr>
     <td>Drive</td>
@@ -100,12 +100,12 @@
   <tr>
     <td><div>Power Rating</div></td>
     <td>
-      <input name='power_rating'>
+      <input name='motor_rated_power'>
     </td>
   </tr>
   <tr>
     <td><div>Speed <em>(rpm)</em></div></td>
-    <td><input name='motor_rpm'></td>
+    <td><input name='motor_rated_speed'></td>
   </tr>
   <tr>
     <td>Efficiency class</td>
@@ -121,11 +121,11 @@
   </tr>    
   <tr>
     <td>Voltage</td>
-    <td><input name='motor_voltage'></td>
+    <td><input name='motor_rated_voltage'></td>
   </tr>
   <tr>
     <td>Full-load amps</td>
-    <td><input name='amps'> <button>EST</button></td>
+    <td><input name='motor_rated__fla'> <button>EST</button></td>
   </tr>
   <tr>
     <td><div>Size margin <em>(%)</em></div></td>
@@ -166,12 +166,16 @@
     </td>
   </tr>
   <tr>
-    <td>Estimated Power</td>
-    <td><input name='est_power'></td>
+    <td>Power</td>
+    <td><input name='motor_field_power'></td>
+  </tr>
+  <tr>
+    <td>Current</td>
+    <td><input name='motor_field_current'></td>
   </tr>
   <tr>
     <td>Voltage</td>
-    <td><input name='field_voltage'></td>
+    <td><input name='motor_field_voltage'></td>
   </tr>
   <tr id=results>
     <td class='th'>
