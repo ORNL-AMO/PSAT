@@ -178,7 +178,7 @@
 
 	function cvtObj(d,nms,m,i,nu) {
 		$.makeArray(nms).forEach((nm)=>{
-			d[nm] = cvt(d[nm],i,nu,m);
+			d[nm] = cvt(d[nm],m,i,nu);
 		});
 	}
     
@@ -191,10 +191,9 @@
 			cvtObjArr(d,['motor_rated_power','motor_field_power'],CVT_POWER,1);
 			cvtObjArr(d,'head',CVT_DIST,2);
 		});
-		saveProp('defCond',DefCond);
-		cvtObjArr(HeadTool,['Ds','Dd'],CVT_DIST,2);		
-		cvtObjArr(HeadTool,['Ps','Pg_s','Pd'],{kPa:0.145037738007},3);
-		cvtObjArr(HeadTool,['Zs','Ztnk_s','Zd'],CVT_DIST,2);
+		saveProp('defCond',DefCond);debugger;
+		cvtObjArr(HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd'],CVT_DIST,2);		
+		cvtObjArr(HeadTool,['Ps','Pg_s','Pd'],{kPa:0.145037738007},3);		
 		saveHd();
 		Units = nunits;
 		saveProp('units',Units);
