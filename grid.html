@@ -270,11 +270,9 @@
         d=setData({},col);
 
       d['line'] = nm('line',col).val();
-      d['flow'] = cvt(d['flow'],0,'m^3/s',CVT_FLOW);
-      d['motor_rated_power'] = cvt(d['motor_rated_power'],1,'kW',CVT_POWER);
-      d['motor_field_power'] = cvt(d['motor_field_power'],1,'kW',CVT_POWER);
-      d['head'] = cvt(d['head'],2,'m',CVT_DIST);
-      
+      cvtObj(d,'flow',CVT_FLOW,0,'m^3/s');
+      cvtObj(d,['motor_rated_power','motor_field_power'],CVT_POWER,1,'kW');      
+      cvtObj(d,'head',CVT_DIST,2,'m');      
       const r=Bridge.results(d);
       col.filter('#results~tr:not(.th) td').each((i,e)=>{
         $(e).html(`<div><span>${r[2*i]>=0?r[2*i]:''}</span>
