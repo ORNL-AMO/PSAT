@@ -186,7 +186,7 @@
         </button>
       </div>
     </td>
-    <td><div style='color:green;'><span>Actual</span><span>Optimal</span></div></td>
+    <td><div style='color:#5d9300;'><span>Actual</span><span>Optimal</span></div></td>
   </tr>
   <tr>
     <td><div>Pump Efficiency <em>(%)</em></div></td><td></td>
@@ -276,7 +276,7 @@
       const r=Bridge.results(d);
       col.filter('#results~tr:not(.th) td').each((i,e)=>{
         $(e).html(`<div><span>${r[2*i]>=0?r[2*i]:''}</span>
-                        <span style='color: green'>${r[2*i+1]}</span></div>`);
+                        <span style='color:#5d9300'>${r[2*i+1]}</span></div>`);
       });
     });
     showHdResults(true);
