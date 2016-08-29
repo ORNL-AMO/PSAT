@@ -61,23 +61,30 @@
         vertical-align: middle;
       }
 
-      #back {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        display: none;
+      #container {
+        padding:0 5%;
+        background-color: ghostwhite;
+      }
+      #banner {
+        padding:10px 5%;   
+        margin-bottom: 10px;   
+        background-color: #5d9300;
+        box-shadow: 0 3px 3px rgba(0,0,0,.5);
+      }
+      body {
+        margin:0;
       }
       html {
         font-family: sans-serif;
         font-size: 14pt;
       }
-      body {
-        padding:2.5% 5%;
-        background-color: ghostwhite;
-      }
     </style>
   </head>
   <body> 
+    <div id="banner">
+      <img src="logo_eere.png">
+    </div>
+
     <button id=back onclick='back()'><i class="fa fa-long-arrow-left fa-lg"></i></button>
     <div id=container></div>
     <script>
