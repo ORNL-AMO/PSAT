@@ -177,24 +177,20 @@
 	}
     
 	function chgUnits(nunits) {
-		function cvtObj(d,nm,i,m) {
-        	d[nm] = cvt(d[nm],i,nunits[i],m);
-    	}
-		function cvtObjHd(nms,i,m) {
-			nms.forEach((nm)=>{
-				cvtObj(HeadTool,nm,i,m)
+		function cvtObj(d,nms,i,m) {
+			$.makeArray(nms).forEach((nm)=>{
+        		d[nm] = cvt(d[nm],i,nunits[i],m);
 			});
-		}
+    	}
 		$.each(Cond.concat([DefCond]),function(i,d) {
 			cvtObj(d,'flow',0,CVT_FLOW);
-			cvtObj(d,'motor_rated_power',1,{kW:1.341022218});
-			cvtObj(d,'motor_field_power',1,{kW:1.341022218});
-			cvtObj(d,'head',2,{m:3.280839895});
+			cvtObj(d,['motor_rated_power','motor_field_power'],1,CVT_POWER);
+			cvtObj(d,'head',2,CVT_DIST);
 		});
 		saveProp('defCond',DefCond);
-		cvtObjHd(['Ds','Dd'],2,{m:.03937007874});		
-		cvtObjHd(['Ps','Pg_s','Pd'],3,{kPa:0.145037738007});
-		cvtObjHd(['Zs','Ztnk_s','Zd'],2,{m:3.280839895});
+		cvtObj(HeadTool,['Ds','Dd'],2,CVT_DIST);		
+		cvtObj(HeadTool,['Ps','Pg_s','Pd'],3,{kPa:0.145037738007});
+		cvtObj(HeadTool,['Zs','Ztnk_s','Zd'],2,CVT_DIST);
 		saveHd();
 		Units = nunits;
 		saveProp('units',Units);

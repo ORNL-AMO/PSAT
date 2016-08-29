@@ -136,7 +136,9 @@
 
       CVT_FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
         'm^3/s':15850.32316, 'ft^3/s':448.8311693};
-
+      CVT_POWER = {kW:1.341022218}
+      CVT_DIST = {m:3.280839895};
+      
       function cvt(v,i,nu,m) {
         if ($.isNumeric(v)) {
           if (m[Units[i]]) {
