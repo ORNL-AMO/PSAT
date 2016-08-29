@@ -191,7 +191,7 @@
 			cvtObjArr(d,['motor_rated_power','motor_field_power'],CVT_POWER,1);
 			cvtObjArr(d,'head',CVT_DIST,2);
 		});
-		saveProp('defCond',DefCond);debugger;
+		saveProp('defCond',DefCond);
 		cvtObjArr(HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd'],CVT_DIST,2);		
 		cvtObjArr(HeadTool,['Ps','Pg_s','Pd'],{kPa:0.145037738007},3);		
 		saveHd();
