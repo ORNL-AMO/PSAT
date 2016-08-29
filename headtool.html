@@ -138,11 +138,11 @@
 			distF = 1000;
         }
 		let 
-			flow = cvt(Flow,0,flowU,CVT_FLOW),
+			flow = cvt(Flow,CVT_FLOW,0,flowU),
 			sucTnk = dom(nm('suc')).checked,
 			elevHd = nm('Zd').val()-(sucTnk ? nm('Ztnk_s') : nm('Zs')).val(),
-			presHd = cvt(nm('Pd').val()-(sucTnk ? nm('Pg_s') : nm('Ps')).val(),3,Units[2],
-				{kPa:0.145037738007,m:1.42197020632,ft:0.433527501928})/SG,
+			presHd = cvt(nm('Pd').val()-(sucTnk ? nm('Pg_s') : nm('Ps')).val(),
+				{kPa:0.145037738007,m:1.42197020632,ft:0.433527501928}/SG,3,Units[2]),
 			vHdS = vHd(v(nm('Ds').val()/distF,flow),g),
 			vHdD = vHd(v(nm('Dd').val()/distF,flow),g),
 			vHdDif = vHdD - (sucTnk ? 0 : vHdS),
