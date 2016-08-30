@@ -121,7 +121,7 @@
   </tr>    
   <tr>
     <td><div>Voltage<em>(V)</em></div></td>
-    <td><input name='motor_rated_voltage'></td>
+    <td><input name='motor_rated_voltage' onchange='vChg(this)'></td>
   </tr>
   <tr>
     <td><div>Full-load Current<em>(A)</em></div></td>
@@ -260,7 +260,10 @@
     }
   }
   function vChg(e) {
-    if(Math.abs(nm('motor_rated_voltage',col(e)).val()-$(e).val())
+    const fv = nm('motor_field_voltage',col(e));
+
+
+    if(Math.abs(nm('motor_rated_voltage',col(e)).val()-nm('motor_field_voltage',col(e)).val())
       >nm('motor_field_voltage',col(e)).val()*.1) {
       
       nm('motor_field_voltage',col(e)).css('background-color','yellow');
