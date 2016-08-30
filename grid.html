@@ -125,7 +125,7 @@
   </tr>
   <tr>
     <td><div>Full-load Current<em>(A)</em></div></td>
-    <td><input name='motor_rated_flc'> <button>EST</button></td>
+    <td><input name='motor_rated_flc'> <button onclick='estFLA()'>EST</button></td>
   </tr>
   <tr>
     <td><div>Size margin <em>(%)</em></div></td>
@@ -231,7 +231,7 @@
   </tr>
 </table>
 <p>
-  <button onclick="results()">RESULTS</button>
+  <button onclick="results(true)">RESULTS</button>
 </p>
 <dialog id='io'>
   <label>
@@ -266,11 +266,14 @@
   function vChg(e) {
     vdTol('motor_field_voltage',col(e),nm('motor_rated_voltage',col(e)).val(),.1);
   }
+  function estFLA(e) {
+    results(false);
+  }
   function showHdResults(show) {
     $('#results,#results~tr').toggle(show);
     $('p button').toggle(!show);
   }
-  function results() {
+  function results(show) {
     $('th:gt(1)').each((i,e)=>{
       const col=$(`td:nth-child(${$(e).index()+1})`),
         d=setData({},col);
@@ -280,13 +283,15 @@
       cvtObj(d,['motor_rated_power','motor_field_power'],CVT_POWER,1,'kW');      
       cvtObj(d,'head',CVT_DIST,2,'m');    
       const r=Bridge.results(d);
-      col.filter('#results~tr:not(.th) td').each((i,e)=>{
-        $(e).html(`<div><span>${r[2*i]>=0?r[2*i]:''}</span>
-                        <span style='color:#5d9300'>${r[2*i+1]}</span></div>`);
-      });
+      if (show) {
+        col.filter('#results~tr:not(.th) td').each((i,e)=>{
+          $(e).html(`<div><span>${r[2*i]>=0?r[2*i]:''}</span>
+                          <span style='color:#5d9300'>${r[2*i+1]}</span></div>`);
+        });
+      }
       vdTol('motor_rated_flc',col,r.pop(),.5);
     });
-    showHdResults(true);
+    showHdResults(show);
   }
 
   function gotoHead(e) {
