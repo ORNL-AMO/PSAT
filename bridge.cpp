@@ -81,7 +81,9 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     -1,
     (new AnnualSavingsPotential(0,0))->calculate(),//ex an cost, opt an cost
     -1,
-    (new OptimizationRating(0,0))->calculate()//ex an cost, opt an cost
+    (new OptimizationRating(0,0))->calculate(),//ex an cost, opt an cost
+
+    777//est fla; hp,class,v,speed
   });
   args.GetReturnValue().Set(r);
 }
