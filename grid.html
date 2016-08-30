@@ -261,14 +261,10 @@
   }
   function vChg(e) {
     const fv = nm('motor_field_voltage',col(e));
-
-
-    if(Math.abs(nm('motor_rated_voltage',col(e)).val()-nm('motor_field_voltage',col(e)).val())
-      >nm('motor_field_voltage',col(e)).val()*.1) {
-      
-      nm('motor_field_voltage',col(e)).css('background-color','yellow');
+    if(Math.abs(nm('motor_rated_voltage',col(e)).val()-fv.val()) > fv.val()*.1) {
+      fv.css('background-color','#FECB00');
     } else {
-      nm('motor_field_voltage',col(e)).css('background-color','');
+      fv.css('background-color','');
     }
   }
   function showHdResults(show) {
