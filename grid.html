@@ -263,29 +263,25 @@
     nm(n,col).css('background-color',
       Math.abs(nm(n,col).val()-v)>tol*v ? '#FECB00' : '');
   }
-  function estFLA(e) {
-      const cl=col(e),d=setData({},cl);
-      d['line'] = nm('line',cl);
-      cvtObj(d,'flow',CVT_FLOW,0,'m^3/s');
-      cvtObj(d,['motor_rated_power','motor_field_power'],CVT_POWER,1,'kW');      
-      cvtObj(d,'head',CVT_DIST,2,'m');
-      nm('motor_rated_flc',cl).val(Bridge.results(d).pop());
-      vdTol('motor_rated_flc',cl,1,999);
+  function estFLA(e) {      
+      nm('motor_rated_flc',col(e)).val(colResults(col(e)).pop());
+      vdTol('motor_rated_flc',col(e),1,999);
   }
   function showHdResults(show) {
     $('#results,#results~tr').toggle(show);
     $('p button').toggle(!show);
   }
-  function results() {
-    $('th:gt(1)').each((i,e)=>{
-      const col=$(`td:nth-child(${$(e).index()+1})`),
-        d=setData({},col);
-
-      d['line'] = nm('line',col).val();
+  function colResults(col) {
+      const d=setData({},col);
+      d['line'] = nm('line',col);
       cvtObj(d,'flow',CVT_FLOW,0,'m^3/s');
       cvtObj(d,['motor_rated_power','motor_field_power'],CVT_POWER,1,'kW');      
-      cvtObj(d,'head',CVT_DIST,2,'m');    
-      const r=Bridge.results(d);      
+      cvtObj(d,'head',CVT_DIST,2,'m');
+      return Bridge.results(d);
+  }
+  function results() {
+    $('th:gt(1)').each((i,e)=>{
+      const col = $(`td:nth-child(${$(e).index()+1})`), r = colResults(col);      
       col.filter('#results~tr:not(.th) td').each((i,e)=>{
         $(e).html(`<div><span>${r[2*i]>=0?r[2*i]:''}</span>
                         <span style='color:#5d9300'>${r[2*i+1]}</span></div>`);
