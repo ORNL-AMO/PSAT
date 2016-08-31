@@ -264,7 +264,7 @@
       Math.abs(nm(n,col).val()-v)>tol*v ? '#FECB00' : '');
   }
   function estFLA(e) {      
-      nm('motor_rated_flc',col(e)).val(colResults(col(e)).pop());
+      nm('motor_rated_flc',col(e)).val(colResults(col(e)).pop());//rnd?
       vdTol('motor_rated_flc',col(e));
   }
   function showHdResults(show) {
@@ -281,10 +281,10 @@
   }
   function results() {
     $('th:gt(1)').each((i,e)=>{
-      const col = $(`td:nth-child(${$(e).index()+1})`), r = colResults(col);      
+      const col = $(`td:nth-child(${$(e).index()+1})`), r = colResults(col);
       col.filter('#results~tr:not(.th) td').each((i,e)=>{
-        $(e).html(`<div><span>${r[2*i]>=0?r[2*i]:''}</span>
-                        <span style='color:#5d9300'>${r[2*i+1]}</span></div>`);
+        $(e).html(`<div><span>${r[2*i]>=0 ? rnd(r[2*i]) :''}</span>
+                        <span style='color:#5d9300'>${rnd(r[2*i+1])}</span></div>`);
       });
       vdTol('motor_rated_flc',col,r.pop(),.5);
       vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
