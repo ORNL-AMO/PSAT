@@ -266,6 +266,7 @@
   function estFLA(e) {      
       nm('motor_rated_flc',col(e)).val(colResults(col(e)).pop());//rnd?
       vdTol('motor_rated_flc',col(e));
+      ioBtn(this).addClass('prime');
   }
   function showHdResults(show) {
     $('#results,#results~tr').toggle(show);
