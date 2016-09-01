@@ -151,31 +151,15 @@
       CVT_POWER = {kW:1.341022218}
       CVT_DIST = {m:3.280839895};
 
-      function cvtObj2(d,nms,m,old,nu) {
+      function cvtObj(d,nms,m,old,nu) {
         $.makeArray(nms).forEach((nm)=>{
-          d[nm] = cvt2(d[nm],m,old,nu);
+          d[nm] = cvt(d[nm],m,old,nu);
         });
       }
-      function cvt2(v,m,old,nu) {
+      function cvt(v,m,old,nu) {
         if ($.isNumeric(v)) {
           if (m[old]) {
             v *= m[old];
-          }
-          if (m[nu]) {
-            v /= m[nu];
-          }
-        }
-        return v;
-      }
-      function cvtObj(d,nms,m,i,nu) {
-        $.makeArray(nms).forEach((nm)=>{
-          d[nm] = cvt(d[nm],m,i,nu);
-        });
-      }
-      function cvt(v,m,i,nu) {
-        if ($.isNumeric(v)) {
-          if (m[Units[i]]) {
-            v *= m[Units[i]];
           }
           if (m[nu]) {
             v /= m[nu];

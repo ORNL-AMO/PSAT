@@ -177,17 +177,17 @@
 	}
     
 	function chgUnits(nunits) {
-		function cvtObjArr(...args) {
-			cvtObj(...args,nunits[args.pop()]);
+		function chg(i,...args) {
+			cvtObj(...args,Units[i],nunits[i]);
     	}
 		$.each(Cond.concat([DefCond]),function(i,d) {
-			cvtObjArr(d,'flow',CVT_FLOW,0);
-			cvtObjArr(d,['motor_rated_power','motor_field_power'],CVT_POWER,1);
-			cvtObjArr(d,'head',CVT_DIST,2);
+			chg(0,d,'flow',CVT_FLOW);
+			chg(1,d,['motor_rated_power','motor_field_power'],CVT_POWER);
+			chg(2,d,'head',CVT_DIST);
 		});
 		saveProp('defCond',DefCond);
-		cvtObjArr(HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd'],CVT_DIST,2);		
-		cvtObjArr(HeadTool,['Ps','Pg_s','Pd'],{kPa:0.145037738007},3);		
+		chg(2,HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd'],CVT_DIST);		
+		chg(3,HeadTool,['Ps','Pg_s','Pd'],{kPa:0.145037738007});		
 		saveHd();
 		Units = nunits;
 		saveProp('units',Units);
