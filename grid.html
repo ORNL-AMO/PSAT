@@ -247,7 +247,7 @@
   <button onclick='this.parentElement.close()'>CANCEL</button>
 </dialog>
 
-<script>
+<script>//# sourceURL=grid
   function colCond(e) {
     return Cond[$(e).parent().data('idx')];
   }  
@@ -277,7 +277,9 @@
       cvtObj(d,'flow',CVT_FLOW,0,'m^3/s');
       cvtObj(d,['motor_rated_power','motor_field_power'],CVT_POWER,1,'kW');      
       cvtObj(d,'head',CVT_DIST,2,'m');
-      return Bridge.results(d);
+      const r=Bridge.results(d);
+      cvtObj2(r,[2,3,4,5,6,7,14],CVT_POWER,'kW',Units[1]);
+      return r;
   }
   function results() {
     $('th:gt(1)').each((i,e)=>{

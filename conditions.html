@@ -175,12 +175,6 @@
 		loadData(true);
 		main();
 	}
-
-	function cvtObj(d,nms,m,i,nu) {
-		$.makeArray(nms).forEach((nm)=>{
-			d[nm] = cvt(d[nm],m,i,nu);
-		});
-	}
     
 	function chgUnits(nunits) {
 		function cvtObjArr(...args) {
