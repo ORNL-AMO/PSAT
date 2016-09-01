@@ -157,9 +157,10 @@
         });
       }
       function cvt(v,m,old,nu) {
+        const o=$.isNumeric(old)?Units[old]:old;
         if ($.isNumeric(v)) {
-          if (m[old]) {
-            v *= m[old];
+          if (m[o]) {
+            v *= m[o];
           }
           if (m[nu]) {
             v /= m[nu];

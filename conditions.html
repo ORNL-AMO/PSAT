@@ -178,7 +178,7 @@
     
 	function chgUnits(nunits) {
 		function chg(i,...args) {
-			cvtObj(...args,Units[i],nunits[i]);
+			cvtObj(...args,i,nunits[i]);
     	}
 		$.each(Cond.concat([DefCond]),function(i,d) {
 			chg(0,d,'flow',CVT_FLOW);
