@@ -358,8 +358,9 @@
   }
 
   function fldUnit(nm) {
-    $(`td>div:contains(${nm})`).append(`<em>(${txt})</em>`);
-  }
+    $(`td>div:not(:has(em)):contains(${nm})`).append(`<em>(${txt})</em>`);
+  }  
+
   txt = Units[1];
   fldUnit('Power Rating');
   fldUnit('Motor Rated');
