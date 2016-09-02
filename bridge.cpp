@@ -60,7 +60,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
       get("pump_rated_speed"),get("viscosity"),get("stages"),get("flow"),get("head"),static_cast<Pump::Speed>(!get("speed"))))->calculate(),//
     mp,
     (new OptimalMotorRatedPower(0,get("margin")))->calculate(),//motorshaftpower
-    (new MotorShaftPower(0,mp))->calculate(),//motor eff 
+    (new MotorShaftPower(0,mp,get("motor_rated_speed"),effCls))->calculate(),//motor eff 
     (new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
     (new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
     (new OptimalPumpShaftPower(get("flow"),get("head"),get("specific_gravity"),0))->calculate(),//pumpeff
