@@ -3,6 +3,9 @@
 	canvas {
 		background-color: black;
 	}
+	th {
+		text-align: left;
+	}
 </style>
 <div>
 	<h1>System Head Curve</h1>
@@ -24,14 +27,13 @@
 
 <script>
 	$('th:gt(1)',Grid).each((i,e)=>{
-      const col = $(`td:nth-child(${$(e).index()+1})`,Grid);	  
-	  $('table').append(`<tr>
+      const col = $(`td:nth-child(${$(e).index()+1})`,Grid);
+	  $('table tr').first().after(`<tr>
 	  						<td><input type=checkbox></td>
 							<td>${nm('flow',col).val()}</td>
 							<td>${nm('head',col).val()}</td>
-							<td>${Cond[$(e).index()].name}</td>							
+							<td>${Cond[$(e).index()-2].name}</td>							
 						</tr>`);
-	//   debugger;
 	});
 
 	Cnv = $('canvas')[0];
