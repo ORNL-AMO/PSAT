@@ -23,6 +23,12 @@
 </div>
 
 <script>
+	$('th:gt(1)',Grid).each((i,e)=>{
+      const col = $(`td:nth-child(${$(e).index()+1})`,Grid);	  
+	  $('table').append(`<tr><td><input type=checkbox></td><td>${nm('head',col).val()}</td></tr>`);
+	//   debugger;
+	});
+
 	Cnv = $('canvas')[0];
 	Ctx = Cnv.getContext('2d');
 	Ctx.strokeStyle = "green";
