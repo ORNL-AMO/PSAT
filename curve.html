@@ -25,7 +25,12 @@
 <script>
 	$('th:gt(1)',Grid).each((i,e)=>{
       const col = $(`td:nth-child(${$(e).index()+1})`,Grid);	  
-	  $('table').append(`<tr><td><input type=checkbox></td><td>${nm('head',col).val()}</td></tr>`);
+	  $('table').append(`<tr>
+	  						<td><input type=checkbox></td>
+							<td>${nm('flow',col).val()}</td>
+							<td>${nm('head',col).val()}</td>
+							<td>${Cond[$(e).index()].name}</td>							
+						</tr>`);
 	//   debugger;
 	});
 
