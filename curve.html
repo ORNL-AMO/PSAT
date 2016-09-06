@@ -98,12 +98,13 @@
 	}
 
 	$('th:gt(1)',Grid).each((i,e)=>{
-      const col = $(`td:nth-child(${$(e).index()+1})`,Grid);
+		const 	idx = $(e).index(),
+      			col = $(`td:nth-child(${idx+1})`,Grid);
 	  pg('tr').last().before(`<tr>
 	  						<td><input type=checkbox></td>
 							<td>${nm('flow',col).val()}</td>
 							<td>${nm('head',col).val()}</td>
-							<td>${Cond[$(e).index()-2].name}</td>							
+							<td>${Cond[idx-2].name}</td>							
 						</tr>`);
 	});
 	Cnv = $('canvas');
