@@ -36,64 +36,66 @@
 </div>
 
 <script>//# sourceURL=*curve
+	function hideBtn() {
+		$('#container button').hide();
+	}
 	function plot() {
 		const 	r1 = $('#container :checked:first').parent().parent().index(),
 				r2 = $('#container :checked:last').parent().parent().index(),			
 				flow = $(`#container tr:eq(${r1}) td:eq(1)`).text(),
-				head = $(`#container tr:eq(${r2}) td:eq(2)`).text();		
-		if (r1!=r2) {
-			$('canvas').show();
-			$('#container button').hide();
-			const cnv = dom('canvas'), ctx = cnv.getContext('2d');					
+				head = $(`#container tr:eq(${r2}) td:eq(2)`).text();				
+		hideBtn();
+		$('canvas').show();
+		const cnv = dom('canvas'), ctx = cnv.getContext('2d');					
 
-			ctx.strokeStyle = "green";
-			ctx.fillStyle = "white";
-			ctx.textAlign = 'center';
-			ctx.textBaseline = 'middle';
-			ctx.font = '12px san serif';
-			PAD = 50;
-			function xPos(x) {
-				return x*(cnv.width-PAD*2)/3000+PAD;
-			}
-			function yPos(y) {
-				return (300-y)*(cnv.height-PAD*2)/300+PAD;
-			}
+		ctx.strokeStyle = "green";
+		ctx.fillStyle = "white";
+		ctx.textAlign = 'center';
+		ctx.textBaseline = 'middle';
+		ctx.font = '12px san serif';
+		PAD = 50;
+		function xPos(x) {
+			return x*(cnv.width-PAD*2)/3000+PAD;
+		}
+		function yPos(y) {
+			return (300-y)*(cnv.height-PAD*2)/300+PAD;
+		}
 
-			ctx.beginPath();
-			for (let x=0; x<=3000; x+=200) {
-				const xp = xPos(x);
-				ctx.moveTo(xp,PAD);
-				ctx.lineTo(xp,cnv.height-PAD);	
-				ctx.fillText(x,xp,cnv.height-.75*PAD);	
-			}
-			for (let y=0; y<=300; y+=20) {
-				const yp = yPos(y);
-				ctx.moveTo(PAD,yp);
-				ctx.lineTo(cnv.width-PAD,yp);	
-				ctx.fillText(y,.75*PAD,yp);	
-			}
-			ctx.stroke();
-			ctx.save();
+		ctx.beginPath();
+		for (let x=0; x<=3000; x+=200) {
+			const xp = xPos(x);
+			ctx.moveTo(xp,PAD);
+			ctx.lineTo(xp,cnv.height-PAD);	
+			ctx.fillText(x,xp,cnv.height-.75*PAD);	
+		}
+		for (let y=0; y<=300; y+=20) {
+			const yp = yPos(y);
+			ctx.moveTo(PAD,yp);
+			ctx.lineTo(cnv.width-PAD,yp);	
+			ctx.fillText(y,.75*PAD,yp);	
+		}
+		ctx.stroke();
+		ctx.save();
 
-			ctx.fillStyle = 'yellow';
-			ctx.font = '14px san serif';
-			ctx.fillText('FLOW RATE',cnv.width/2,cnv.height-.33*PAD);
-			
-			ctx.translate(.33*PAD,cnv.height/2);
-			ctx.rotate(-Math.PI/2);
-			ctx.fillText('HEAD',0,0);	
-			
-			ctx.restore();
+		ctx.fillStyle = 'yellow';
+		ctx.font = '14px san serif';
+		ctx.fillText('FLOW RATE',cnv.width/2,cnv.height-.33*PAD);
+		
+		ctx.translate(.33*PAD,cnv.height/2);
+		ctx.rotate(-Math.PI/2);
+		ctx.fillText('HEAD',0,0);	
+		
+		ctx.restore();
 
-			ctx.lineWidth = 2;
-			ctx.strokeStyle = "yellow";	
-			ctx.beginPath();
+		ctx.lineWidth = 2;
+		ctx.strokeStyle = "yellow";	
+		ctx.beginPath();
 
-			for (let val of [ [0,57.6], [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
-				ctx.lineTo(xPos(val[0]), yPos(val[1]));
-			}
-			ctx.stroke();
-		}		
+		for (let val of [ [0,57.6], [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
+			ctx.lineTo(xPos(val[0]), yPos(val[1]));
+		}
+		ctx.stroke();
+		
 	}
 
 	$('th:gt(1)',Grid).each((i,e)=>{
@@ -116,7 +118,7 @@
 				$('#container :checkbox').prop('checked',false);
 				this.checked=true;
 			default:
-				$('#container button').hide();
+				hideBtn();
 		}
 	});
 
