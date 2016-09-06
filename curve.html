@@ -37,13 +37,13 @@
 
 <script>//# sourceURL=*curve
 	function hideBtn() {
-		$('#container button').hide();
+		pg('button').hide();
 	}
 	function plot() {
-		const 	r1 = $('#container :checked:first').parent().parent().index(),
-				r2 = $('#container :checked:last').parent().parent().index(),			
-				flow = $(`#container tr:eq(${r1}) td:eq(1)`).text(),
-				head = $(`#container tr:eq(${r2}) td:eq(2)`).text();				
+		const 	r1 = pg(':checked:first').parent().parent().index(),
+				r2 = pg(':checked:last').parent().parent().index(),			
+				flow = pg(`tr:eq(${r1}) td:eq(1)`).text(),
+				head = pg(`tr:eq(${r2}) td:eq(2)`).text();				
 		hideBtn();
 		$('canvas').show();
 		const cnv = dom('canvas'), ctx = cnv.getContext('2d');					
@@ -100,22 +100,22 @@
 
 	$('th:gt(1)',Grid).each((i,e)=>{
       const col = $(`td:nth-child(${$(e).index()+1})`,Grid);
-	  $('table tr').last().before(`<tr>
+	  pg('tr').last().before(`<tr>
 	  						<td><input type=checkbox></td>
 							<td>${nm('flow',col).val()}</td>
 							<td>${nm('head',col).val()}</td>
 							<td>${Cond[$(e).index()-2].name}</td>							
 						</tr>`);
 	});
-	$('#container input').change(function (){
+	pg('input').change(function (){
 		$('canvas').hide();
 		dom('canvas').width+=0;
-		switch ($('#container :checked').length) {
+		switch (pg(':checked').length) {
 			case 2:
-				$('#container button').show();
+				pg('button').show();
 				break;
 			case 3:				
-				$('#container :checkbox').prop('checked',false);
+				pg(':checkbox').prop('checked',false);
 				this.checked=true;
 			default:
 				hideBtn();
