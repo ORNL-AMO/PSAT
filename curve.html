@@ -2,6 +2,7 @@
 <style scoped>
 	canvas {
 		background-color: black;
+		display: none;
 	}
 	th {
 		text-align: left;
@@ -29,11 +30,66 @@
 			<td><input></td>			
 		</tr>
 	</table>
-	<button class='prime'>PLOT</button><br>
+	<button class='prime' onclick='plot()'>PLOT</button><br>
 	<canvas width="700" height="500"></canvas>
 </div>
 
 <script>
+	function plot() {
+		$('canvas').show();
+		Cnv = $('canvas')[0];
+		Ctx = Cnv.getContext('2d');
+		Ctx.clearRect(0, 0, Cnv.width, Cnv.height);
+debugger;
+		Ctx.strokeStyle = "green";
+		Ctx.fillStyle = "white";
+		Ctx.textAlign = 'center';
+		Ctx.textBaseline = 'middle';
+		Ctx.font = '12px san serif';
+		PAD = 50;
+		function xPos(x) {
+			return x*(Cnv.width-PAD*2)/3000+PAD;
+		}
+		function yPos(y) {
+			return (300-y)*(Cnv.height-PAD*2)/300+PAD;
+		}
+
+		Ctx.beginPath();
+		for (let x=0; x<=3000; x+=200) {
+			const xp = xPos(x);
+			Ctx.moveTo(xp,PAD);
+			Ctx.lineTo(xp,Cnv.height-PAD);	
+			Ctx.fillText(x,xp,Cnv.height-.75*PAD);	
+		}
+		for (let y=0; y<=300; y+=20) {
+			const yp = yPos(y);
+			Ctx.moveTo(PAD,yp);
+			Ctx.lineTo(Cnv.width-PAD,yp);	
+			Ctx.fillText(y,.75*PAD,yp);	
+		}
+		Ctx.stroke();
+		Ctx.save();
+
+		Ctx.fillStyle = 'yellow';
+		Ctx.font = '14px san serif';
+		Ctx.fillText('FLOW RATE',Cnv.width/2,Cnv.height-.33*PAD);
+		
+		Ctx.translate(.33*PAD,Cnv.height/2);
+		Ctx.rotate(-Math.PI/2);
+		Ctx.fillText('HEAD',0,0);	
+		
+		Ctx.restore();
+
+		Ctx.lineWidth = 2;
+		Ctx.strokeStyle = "yellow";	
+		Ctx.beginPath();
+
+		for (let val of [ [0,57.6], [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
+			Ctx.lineTo(xPos(val[0]), yPos(val[1]));
+		}
+		Ctx.stroke();
+	}
+
 	$('th:gt(1)',Grid).each((i,e)=>{
       const col = $(`td:nth-child(${$(e).index()+1})`,Grid);
 	  $('table tr').last().before(`<tr>
@@ -43,56 +99,6 @@
 							<td>${Cond[$(e).index()-2].name}</td>							
 						</tr>`);
 	});
-
-	Cnv = $('canvas')[0];
-	Ctx = Cnv.getContext('2d');
-	Ctx.strokeStyle = "green";
-	Ctx.fillStyle = "white";
-	Ctx.textAlign = 'center';
-	Ctx.textBaseline = 'middle';
-	Ctx.font = '12px san serif';
-	PAD = 50;
-	function xPos(x) {
-		return x*(Cnv.width-PAD*2)/3000+PAD;
-	}
-	function yPos(y) {
-		return (300-y)*(Cnv.height-PAD*2)/300+PAD;
-	}
-
-	Ctx.beginPath();
-	for (let x=0; x<=3000; x+=200) {
-		const xp = xPos(x);
-		Ctx.moveTo(xp,PAD);
-		Ctx.lineTo(xp,Cnv.height-PAD);	
-		Ctx.fillText(x,xp,Cnv.height-.75*PAD);	
-	}
-	for (let y=0; y<=300; y+=20) {
-		const yp = yPos(y);
-		Ctx.moveTo(PAD,yp);
-		Ctx.lineTo(Cnv.width-PAD,yp);	
-		Ctx.fillText(y,.75*PAD,yp);	
-	}
-	Ctx.stroke();
-	Ctx.save();
-
-	Ctx.fillStyle = 'yellow';
-	Ctx.font = '14px san serif';
-	Ctx.fillText('FLOW RATE',Cnv.width/2,Cnv.height-.33*PAD);
-	
-	Ctx.translate(.33*PAD,Cnv.height/2);
-	Ctx.rotate(-Math.PI/2);
-	Ctx.fillText('HEAD',0,0);	
-	
-	Ctx.restore();
-
-	Ctx.lineWidth = 2;
-	Ctx.strokeStyle = "yellow";	
-	Ctx.beginPath();
-
-	for (let val of [ [0,57.6], [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
-		Ctx.lineTo(xPos(val[0]), yPos(val[1]));
-	}
-    Ctx.stroke();
 
 
 </script>
