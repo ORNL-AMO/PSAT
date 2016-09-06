@@ -145,8 +145,8 @@
       function dom(e) {
         return $(e)[0];
       }
-      function pg(s) {
-        return $('#container').find(s);
+      function pg(s='') {
+        return $('#container '+s);
       }
 
       CVT_FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
@@ -177,7 +177,7 @@
       }      
       function load(nm,bkHide) {
         back = main;
-        $('#container').load(nm+'.html',function () {
+        pg().load(nm+'.html',function () {
           if (bkHide) {
             $('#back').hide();
           } else {

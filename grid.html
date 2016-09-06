@@ -309,12 +309,12 @@
     backload('notes');
   }
   function backload(nm) {
-    Grid = $('#container').contents().detach();
+    Grid = pg().contents().detach();
     load(nm);
     back = backToGrid;
   }
   function backToGrid() {
-    $('#container').html(Grid);
+    pg().html(Grid);
     //$('#container').append($('#container script').remove());
 
     $('th:gt(1)>span').each(function(i,e) {
