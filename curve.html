@@ -105,11 +105,20 @@
 							<td>${Cond[$(e).index()-2].name}</td>							
 						</tr>`);
 	});
-	$('#container input').change(()=>{
+	$('#container input').change(function (){
 		$('canvas').hide();
 		dom('canvas').width+=0;
-		if ($('#container :checked').length>=2) {
+		if ($('#container :checked').length==2) {
 			$('#container button').show();
+		} else if ($('#container :checked').length>2) {
+			$('#container button').show();
+			if (dom('#container :checked:first')==this) {
+				dom('#container :checked:last').checked=false;
+			} else {
+				dom('#container :checked:first').checked=false;
+			}
+		} else if ($('#container :checked').length<2) {
+			$('#container button').hide();
 		}
 	});
 
