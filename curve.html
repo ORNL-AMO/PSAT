@@ -43,8 +43,7 @@
 		if (r1!=r2) {
 			$('canvas').show();
 			$('#container button').hide();
-			const cnv = $('canvas')[0], ctx = cnv.getContext('2d');
-			cnv.width+=0;		
+			const cnv = dom('canvas'), ctx = cnv.getContext('2d');					
 
 			ctx.strokeStyle = "green";
 			ctx.fillStyle = "white";
@@ -104,6 +103,11 @@
 							<td>${nm('head',col).val()}</td>
 							<td>${Cond[$(e).index()-2].name}</td>							
 						</tr>`);
+	});
+	$('#container input').change(()=>{
+		$('#container button').show();
+		$('canvas').hide();
+		dom('canvas').width+=0;
 	});
 
 
