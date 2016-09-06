@@ -45,8 +45,8 @@
 				flow = pg(`tr:eq(${r1}) td:eq(1)`).text(),
 				head = pg(`tr:eq(${r2}) td:eq(2)`).text();				
 		hideBtn();
-		$('canvas').show();
-		const cnv = dom('canvas'), ctx = cnv.getContext('2d');					
+		Cnv.show();
+		const cnv = dom(Cnv), ctx = cnv.getContext('2d');					
 
 		ctx.strokeStyle = "green";
 		ctx.fillStyle = "white";
@@ -95,7 +95,6 @@
 			ctx.lineTo(xPos(val[0]), yPos(val[1]));
 		}
 		ctx.stroke();
-		
 	}
 
 	$('th:gt(1)',Grid).each((i,e)=>{
@@ -107,8 +106,9 @@
 							<td>${Cond[$(e).index()-2].name}</td>							
 						</tr>`);
 	});
+	Cnv = $('canvas');
 	pg('input').change(function (){
-		$('canvas').hide();
+		Cnv.hide();
 		dom('canvas').width+=0;
 		switch (pg(':checked').length) {
 			case 2:
@@ -121,7 +121,5 @@
 				hideBtn();
 		}
 	});
-
-
 </script>
 
