@@ -32,7 +32,7 @@
 <script>
 	$('th:gt(1)',Grid).each((i,e)=>{
       const col = $(`td:nth-child(${$(e).index()+1})`,Grid);
-	  $('table tr').first().after(`<tr>
+	  $('table tr').last().before(`<tr>
 	  						<td><input type=checkbox></td>
 							<td>${nm('flow',col).val()}</td>
 							<td>${nm('head',col).val()}</td>
