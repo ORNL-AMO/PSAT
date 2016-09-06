@@ -96,15 +96,7 @@
       function rnd(v) {
         return $.isNumeric(v) ? Math.round(v*10000)/10000 : v;
       }
-      function nmGet(e) {
-        return $(e).attr('name');
-      }
-      function nmAll(e) {
-        return nm('',e);
-      }
-      function nm(nm,e=document) {
-        return $(e).find(`[name=${nm}]`.replace('=]',']'));              
-      }
+
       function setData(d,e) {
         let v;
         nmAll(e).each(function(i,el) {
@@ -138,6 +130,19 @@
           }
           ctl.trigger('change');
         });
+      }
+
+      function chk(e,v) {
+        $(e).prop('checked',v);
+      }
+      function nmGet(e) {
+        return $(e).attr('name');
+      }
+      function nmAll(e) {
+        return nm('',e);
+      }
+      function nm(nm,e=document) {
+        return $(e).find(`[name=${nm}]`.replace('=]',']'));              
       }
       function parIdx(e,a=0) {
         return $(e).parent().index()+a;

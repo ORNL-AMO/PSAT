@@ -115,8 +115,8 @@
 				pg('button').show();
 				break;
 			case 3:				
-				pg(':checkbox').prop('checked',false);
-				this.checked=true;
+				chk(pg(':checkbox'),false);
+				chk(this,true);
 			default:
 				hideBtn();
 		}

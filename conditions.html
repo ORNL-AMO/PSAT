@@ -124,7 +124,7 @@
 		return parIdx(e.parentElement,-2);
 	}
 	function chkAll(e) {
-		$(':checkbox').prop('checked',e.checked);
+		chk(':checkbox',e.checked);
 		$.each(Cond,function(i,d) {
 			d.grid = e.checked;
 		});
@@ -285,7 +285,7 @@
 		$.each(Cond,function(i,d) {		
 			const nu = $('#cond tr').first().clone();
 			nu.children().eq(1).text(d.name);
-			nu.find(':checkbox').prop('checked',d.grid);
+			chk(nu.find(':checkbox'),d.grid);
 			$('#cond').append(nu);		  
 
 		});		
