@@ -12,6 +12,7 @@
 	}
 	button {
 		margin: .5rem 0;
+		display: none;
 	}
 }
 </style>
@@ -105,9 +106,11 @@
 						</tr>`);
 	});
 	$('#container input').change(()=>{
-		$('#container button').show();
 		$('canvas').hide();
 		dom('canvas').width+=0;
+		if ($('#container :checked').length>=2) {
+			$('#container button').show();
+		}
 	});
 
 
