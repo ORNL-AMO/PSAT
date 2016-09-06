@@ -36,6 +36,12 @@
 
 <script>
 	function plot() {
+		const 	flow = $('#container tr:eq(1) td:eq(1)').text(),
+				head = $('#container tr:eq(1) td:eq(2)').text();		
+		console.log(flow);
+		console.log(head);
+		
+		
 		$('canvas').show();
 		const cnv = $('canvas')[0], ctx = cnv.getContext('2d');
 		cnv.width+=0;		
