@@ -36,15 +36,15 @@
 </div>
 
 <script>//# sourceURL=*curve
-	function hideBtn() {
-		pg('button').hide();
+	function showHdBtn(show) {
+		pg('button')[show]();
 	}
 	function plot() {
 		const 	r1 = checked().first().parent().parent().index(),
 				r2 = checked().last().parent().parent().index(),			
 				flow = pg(`tr:eq(${r1}) td:eq(1)`).text(),
 				head = pg(`tr:eq(${r2}) td:eq(2)`).text();				
-		hideBtn();
+		showHdBtn('hide');
 		Cnv.show();
 		const cnv = dom(Cnv), ctx = cnv.getContext('2d');					
 
@@ -123,8 +123,7 @@
 				chk(pg(':checkbox'),false);
 				chk(this,true);
 		}
-		pg('button')[show]();
-
+		showHdBtn(show);
 	});
 </script>
 
