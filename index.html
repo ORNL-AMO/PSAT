@@ -115,6 +115,9 @@
       function parIdx(e,a=0) {
         return $(e).parent().index()+a;
       }
+      function pparIdx(e) {
+        return parIdx($(e).parent());
+      }
       function dom(e) {
         return $(e)[0];
       }

@@ -40,8 +40,8 @@
 		pg('button')[show]();
 	}
 	function plot() {
-		const 	r1 = checked().first().parent().parent().index(),
-				r2 = checked().last().parent().parent().index(),			
+		const 	r1 = pparIdx(checked().first()),
+				r2 = pparIdx(checked().last())),			
 				flow = pg(`tr:eq(${r1}) td:eq(1)`).text(),
 				head = pg(`tr:eq(${r2}) td:eq(2)`).text();				
 		showHdBtn('hide');
