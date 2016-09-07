@@ -114,8 +114,9 @@
 		switch (checked().length) {
 			case 2:
 				if (checked().last().is('#cbFld')) {
-					if ($.isNumeric(checked().last().parent().parent().find('input').eq(1).val())
-						&& $.isNumeric(checked().last().parent().parent().find('input').eq(2).val())) {
+					const inp = checked().last().parent().parent().find('input');
+					if ($.isNumeric(inp.eq(1).val())
+						&& $.isNumeric(inp.eq(2).val())) {
 							pg('button').show();
 						} else {
 							pg('button').hide();
