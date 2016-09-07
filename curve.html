@@ -26,7 +26,7 @@
 			<th>Condition</th>
 		</tr>
 		<tr>
-			<td><input id=cbFld type=checkbox></td>			
+			<td><input type=checkbox></td>			
 			<td><input></td>
 			<td><input></td>			
 		</tr>
@@ -113,8 +113,8 @@
 		dom('canvas').width+=0;
 		switch (checked().length) {
 			case 2:
-				if (checked().last().is('#cbFld')) {
-					const inp = checked().last().parent().parent().find('input');
+				const inp = checked().last().parent().parent().find('input');					
+				if (inp.length>1) {
 					if ($.isNumeric(inp.eq(1).val())
 						&& $.isNumeric(inp.eq(2).val())) {
 							pg('button').show();
