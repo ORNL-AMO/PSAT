@@ -97,6 +97,31 @@
         return $.isNumeric(v) ? Math.round(v*10000)/10000 : v;
       }
 
+      function checked(e=pg()) {
+        return $(e).find(':checked');
+      }
+      function chk(e,v) {
+        $(e).prop('checked',v);
+      }
+      function nmGet(e) {
+        return $(e).attr('name');
+      }
+      function nmAll(e) {
+        return nm('',e);
+      }
+      function nm(nm,e=document) {
+        return $(e).find(`[name=${nm}]`.replace('=]',']'));              
+      }
+      function parIdx(e,a=0) {
+        return $(e).parent().index()+a;
+      }
+      function dom(e) {
+        return $(e)[0];
+      }
+      function pg(s='') {// , e
+        return $('#container '+s);
+      }
+
       function setData(d,e) {
         let v;
         nmAll(e).each(function(i,el) {
@@ -130,30 +155,6 @@
           }
           ctl.trigger('change');
         });
-      }
-      function checked(e=pg()) {
-        return $(e).find(':checked');
-      }
-      function chk(e,v) {
-        $(e).prop('checked',v);
-      }
-      function nmGet(e) {
-        return $(e).attr('name');
-      }
-      function nmAll(e) {
-        return nm('',e);
-      }
-      function nm(nm,e=document) {
-        return $(e).find(`[name=${nm}]`.replace('=]',']'));              
-      }
-      function parIdx(e,a=0) {
-        return $(e).parent().index()+a;
-      }
-      function dom(e) {
-        return $(e)[0];
-      }
-      function pg(s='') {// , e
-        return $('#container '+s);
       }
 
       CVT_FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
