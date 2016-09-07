@@ -111,13 +111,13 @@
 	pg('input').change(function (){
 		Cnv.hide();
 		dom('canvas').width+=0;
-		switch (checked().length) {
+		switch (checked().length) {			
 			case 2:
 				const inp = checked().last().parent().parent().find('input');
 				if (inp.length==1 || ($.isNumeric(inp.eq(1).val()) && $.isNumeric(inp.eq(2).val()))) {
 					pg('button').show();
 				} else {
-					pg('button').hide();
+					hideBtn();
 				}
 				break;
 			case 3:				
