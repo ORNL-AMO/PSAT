@@ -39,11 +39,20 @@
 	function showHdBtn(show) {
 		pg('button')[show]();
 	}
+	function tblTxt(r,c) {
+		const td = pg(`tr:eq(${r}) td:eq(${c})`);
+		if (r!=pg('tr').length-1) {
+			return td.text();
+		}
+		return td.find('input').val();
+	}
 	function plot() {
 		const 	r1 = pparIdx(checked().first()),
-				r2 = pparIdx(checked().last())),			
-				flow = pg(`tr:eq(${r1}) td:eq(1)`).text(),
-				head = pg(`tr:eq(${r2}) td:eq(2)`).text();				
+				flow1 = tblTxt(r1,1),
+				head1 = tblTxt(r1,2),				
+				r2 = pparIdx(checked().last()),			
+				flow2 = tblTxt(r2,1),
+				head2 = tblTxt(r2,2);				
 		showHdBtn('hide');
 		Cnv.show();
 		const cnv = dom(Cnv), ctx = cnv.getContext('2d');					
