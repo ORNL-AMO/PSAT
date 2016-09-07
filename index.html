@@ -131,7 +131,9 @@
           ctl.trigger('change');
         });
       }
-
+      function checked(e=pg()) {
+        return $(e).find(':checked');
+      }
       function chk(e,v) {
         $(e).prop('checked',v);
       }
@@ -150,7 +152,7 @@
       function dom(e) {
         return $(e)[0];
       }
-      function pg(s='') {
+      function pg(s='') {// , e
         return $('#container '+s);
       }
 

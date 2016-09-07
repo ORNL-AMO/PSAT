@@ -342,7 +342,7 @@
   }
   function io(dlg) {
     let e = dlg.data('src');
-    switch(parIdx(dlg.find(':checked'))) {
+    switch(parIdx(checked(dlg))) {
         case 1:
           setData(DefCond,col(e));
           saveProp('defCond',DefCond);

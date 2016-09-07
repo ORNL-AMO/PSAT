@@ -40,8 +40,8 @@
 		pg('button').hide();
 	}
 	function plot() {
-		const 	r1 = pg(':checked:first').parent().parent().index(),
-				r2 = pg(':checked:last').parent().parent().index(),			
+		const 	r1 = checked().first().parent().parent().index(),
+				r2 = checked().last().parent().parent().index(),			
 				flow = pg(`tr:eq(${r1}) td:eq(1)`).text(),
 				head = pg(`tr:eq(${r2}) td:eq(2)`).text();				
 		hideBtn();
@@ -111,7 +111,7 @@
 	pg('input').change(function (){
 		Cnv.hide();
 		dom('canvas').width+=0;
-		switch (pg(':checked').length) {
+		switch (checked().length) {
 			case 2:
 				pg('button').show();
 				break;
