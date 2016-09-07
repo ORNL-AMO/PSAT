@@ -52,7 +52,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     loadMeth = FieldData::LoadEstimationMethod::CURRENT;
     mp = (new MotorPower(0,mc,0,get("field_voltage")))->calculate();//motor power (makes no sense, it IS motor power), motor a, motorpf
   } else {
-    mc = (new MotorCurrent(0,mp,get("field_voltage")))->calculate();//motor a, motor power, recursive arg!!
+    mc = (new MotorCurrent(get("motor_rated_power"),mp,get("motor_rated_speed"),effCls)/*get("field_voltage")*/)->calculate();//motor a, motor power, recursive arg!!
   }
   set({
     (new PumpEfficiency(get("specific_gravity"),get("flow"),get("head"),0))->calculate(),//pumpShaftPower
