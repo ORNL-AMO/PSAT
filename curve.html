@@ -135,7 +135,7 @@
 		showHdBtn(show);
 	});
 	function showUnit(txt,n) {
-		pg(`th:contains(${txt})`).append(` <em>(${Units[n]})</em>`);
+		pg(`th:contains(${txt})`).append(em(Units[n]));
 	}
 	showUnit('Flow',0);
 	showUnit('Head',2);

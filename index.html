@@ -96,7 +96,9 @@
       function rnd(v) {
         return $.isNumeric(v) ? Math.round(v*10000)/10000 : v;
       }
-
+      function em(t) {
+        return ` <em>(${t})</em>`;
+      }
       function checked(e=pg()) {
         return $(e).find(':checked');
       }
