@@ -134,5 +134,7 @@
 		}
 		showHdBtn(show);
 	});
+	pg('th:contains(Flow)').append(` <em>(${Units[0]})</em>`);
+	pg('th:contains(Head)').append(` <em>(${Units[2]})</em>`);	
 </script>
 
