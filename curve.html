@@ -47,13 +47,14 @@
 		}
 		return td.find('input').val();
 	}
-	function plot() {alert(Bridge.curve());
+	function plot() {
 		const 	r1 = pparIdx(checked().first()),
 				flow1 = cvt(tblTxt(r1,1),CVT_FLOW,0,'m^3/s'),
 				head1 = cvt(tblTxt(r1,2),CVT_DIST,2,'m'),				
 				r2 = pparIdx(checked().last()),			
 				flow2 = cvt(tblTxt(r2,1),CVT_FLOW,0,'m^3/s'),
-				head2 = cvt(tblTxt(r2,2),CVT_DIST,2,'m');				
+				head2 = cvt(tblTxt(r2,2),CVT_DIST,2,'m');
+		alert(Bridge.curve(flow1,head1,flow2,head2));			
 		showHdBtn('hide');
 		Cnv.show();
 		const cnv = dom(Cnv), ctx = cnv.getContext('2d');					

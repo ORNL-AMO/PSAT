@@ -90,7 +90,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
 void Curve(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   r = Array::New(iso);
-  SetR({1,2,3});
+  SetR({args[0]->NumberValue(),args[1]->NumberValue(),args[2]->NumberValue(),args[3]->NumberValue()});
   args.GetReturnValue().Set(r);
 }
 void Init(Local<Object> exports) {
