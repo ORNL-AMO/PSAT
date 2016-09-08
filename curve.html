@@ -47,7 +47,7 @@
 		}
 		return td.find('input').val();
 	}
-	function plot() {
+	function plot() {alert(Bridge.curve());
 		const 	r1 = pparIdx(checked().first()),
 				flow1 = cvt(tblTxt(r1,1),CVT_FLOW,0,'m^3/s'),
 				head1 = cvt(tblTxt(r1,2),CVT_DIST,2,'m'),				

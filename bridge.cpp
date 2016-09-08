@@ -29,7 +29,7 @@ Local<Array> r;
 Isolate* iso;
 Local<Object> inp;
 
-void SetArgs(std::initializer_list <double> args) {
+void SetR(std::initializer_list <double> args) {
   for (auto d : args) {
     r->Set(r->Length(),Number::New(iso,d));
   }
@@ -54,7 +54,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   } else {
     mc = (new MotorCurrent(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls)/*Get("field_voltage")*/)->calculate();//motor a, motor power, recursive arg!!
   }
-  SetArgs({
+  SetR({
     (new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
     (new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
       Get("pump_rated_speed"),Get("viscosity"),Get("stages"),Get("flow"),Get("head"),static_cast<Pump::Speed>(!Get("speed"))))->calculate(),//
@@ -87,9 +87,15 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   });
   args.GetReturnValue().Set(r);
 }
-
+void Curve(const FunctionCallbackInfo<Value>& args) {
+  iso = args.GetIsolate();
+  r = Array::New(iso);
+  SetR({1,2,3});
+  args.GetReturnValue().Set(r);
+}
 void Init(Local<Object> exports) {
-  NODE_SET_METHOD(exports, "results", Results);    
+  NODE_SET_METHOD(exports, "results", Results);
+  NODE_SET_METHOD(exports, "curve", Curve);    
 }
 
 NODE_MODULE(bridge, Init)
