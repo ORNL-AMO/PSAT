@@ -65,7 +65,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
     (new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
     (new MotorEfficiency(Get("line"),Get("motor_rated_speed"),effCls,Get("motor_rated_power"),
-      loadMeth,0,mc,Get("field_voltage"),0,0))->calculate(),//motorKwh??
+      loadMeth,0,mc,Get("field_voltage"),Get("motor_rated_power"),Get("motor_field_power")))->calculate(),//motorKwh?? mp instead of field power? what about measured current case?
     (new OptimalMotorEfficiency(Get("motor_rated_power"),0))->calculate(),//motor shaft power
     (new MotorPowerFactor(Get("line"),Get("rpm"),effCls,Get("power_rating"),
       loadMeth,0,mc,Get("field_voltage")))->calculate(),//motor kwh
