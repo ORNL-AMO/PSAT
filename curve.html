@@ -48,11 +48,11 @@
 	}
 	function plot() {
 		const 	r1 = pparIdx(checked().first()),
-				flow1 = tblTxt(r1,1),
-				head1 = tblTxt(r1,2),				
+				flow1 = cvt(tblTxt(r1,1),CVT_FLOW,0,'m^3/s'),
+				head1 = cvt(tblTxt(r1,2),CVT_DIST,2,'m'),				
 				r2 = pparIdx(checked().last()),			
-				flow2 = tblTxt(r2,1),
-				head2 = tblTxt(r2,2);				
+				flow2 = cvt(tblTxt(r2,1),CVT_FLOW,0,'m^3/s'),
+				head2 = cvt(tblTxt(r2,2),CVT_DIST,2,'m');				
 		showHdBtn('hide');
 		Cnv.show();
 		const cnv = dom(Cnv), ctx = cnv.getContext('2d');					
