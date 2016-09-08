@@ -29,12 +29,12 @@ Local<Array> r;
 Isolate* iso;
 Local<Object> inp;
 
-void set(std::initializer_list <double> args) {
+void SetArgs(std::initializer_list <double> args) {
   for (auto d : args) {
     r->Set(r->Length(),Number::New(iso,d));
   }
 }
-double get(const char *nm) {
+double Get(const char *nm) {
   return inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
 }
 void Results(const FunctionCallbackInfo<Value>& args) {
@@ -42,42 +42,42 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   r = Array::New(iso);
   inp = args[0]->ToObject();
   
-  auto drive = static_cast<Pump::Drive>(get("drive"));
-  auto effCls = static_cast<Motor::EfficiencyClass>(get("efficiency_class"));
+  auto drive = static_cast<Pump::Drive>(Get("drive"));
+  auto effCls = static_cast<Motor::EfficiencyClass>(Get("efficiency_class"));
 
   auto loadMeth = FieldData::LoadEstimationMethod::POWER;
-  double mp = get("motor_field_power");
-  double mc = get("motor_field_current");
+  double mp = Get("motor_field_power");
+  double mc = Get("motor_field_current");
   if (mc>0) {
     loadMeth = FieldData::LoadEstimationMethod::CURRENT;
-    mp = (new MotorPower(0,mc,0,get("field_voltage")))->calculate();//motor power (makes no sense, it IS motor power), motor a, motorpf
+    mp = (new MotorPower(0,mc,0,Get("field_voltage")))->calculate();//motor power (makes no sense, it IS motor power), motor a, motorpf
   } else {
-    mc = (new MotorCurrent(get("motor_rated_power"),mp,get("motor_rated_speed"),effCls)/*get("field_voltage")*/)->calculate();//motor a, motor power, recursive arg!!
+    mc = (new MotorCurrent(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls)/*Get("field_voltage")*/)->calculate();//motor a, motor power, recursive arg!!
   }
-  set({
-    (new PumpEfficiency(get("specific_gravity"),get("flow"),get("head"),0))->calculate(),//pumpShaftPower
-    (new OptimalPumpEfficiency(static_cast<Pump::Style>(get("style")),
-      get("pump_rated_speed"),get("viscosity"),get("stages"),get("flow"),get("head"),static_cast<Pump::Speed>(!get("speed"))))->calculate(),//
+  SetArgs({
+    (new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
+    (new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
+      Get("pump_rated_speed"),Get("viscosity"),Get("stages"),Get("flow"),Get("head"),static_cast<Pump::Speed>(!Get("speed"))))->calculate(),//
     mp,
-    (new OptimalMotorRatedPower(0,get("margin")))->calculate(),//motorshaftpower
-    (new MotorShaftPower(0,mp,get("motor_rated_speed"),effCls))->calculate(),//motor eff 
+    (new OptimalMotorRatedPower(0,Get("margin")))->calculate(),//motorshaftpower
+    (new MotorShaftPower(0,mp,Get("motor_rated_speed"),effCls))->calculate(),//motor eff 
     (new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
     (new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
-    (new OptimalPumpShaftPower(get("flow"),get("head"),get("specific_gravity"),0))->calculate(),//pumpeff
-    (new MotorEfficiency(get("line"),get("motor_rated_speed"),effCls,get("motor_rated_power"),
-      loadMeth,0,mc,get("field_voltage")))->calculate(),//motorKwh??
-    (new OptimalMotorEfficiency(get("motor_rated_power"),0))->calculate(),//motor shaft power
-    (new MotorPowerFactor(get("line"),get("rpm"),effCls,get("power_rating"),
-      loadMeth,0,mc,get("field_voltage")))->calculate(),//motor kwh
-    (new OptimalMotorPowerFactor(get("motor_rated_power"),0))->calculate(),//opt motor power?
+    (new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
+    (new MotorEfficiency(Get("line"),Get("motor_rated_speed"),effCls,Get("motor_rated_power"),
+      loadMeth,0,mc,Get("field_voltage"),0,0))->calculate(),//motorKwh??
+    (new OptimalMotorEfficiency(Get("motor_rated_power"),0))->calculate(),//motor shaft power
+    (new MotorPowerFactor(Get("line"),Get("rpm"),effCls,Get("power_rating"),
+      loadMeth,0,mc,Get("field_voltage")))->calculate(),//motor kwh
+    (new OptimalMotorPowerFactor(Get("motor_rated_power"),0))->calculate(),//opt motor power?
     mc,
-    (new OptimalMotorCurrent(0,get("field_voltage")))->calculate(),//opt motor power
+    (new OptimalMotorCurrent(0,Get("field_voltage")))->calculate(),//opt motor power
     mp,
     (new OptimalMotorPower(0,0))->calculate(),//motorshaftpower, motor eff
-    (new AnnualEnergy(mp,get("fraction")))->calculate(),//motorpower
-    (new AnnualEnergy(0,get("fraction")))->calculate(),//opt motorpower
-    (new AnnualCost(0,get("cost")))->calculate(),//ex ann energy
-    (new AnnualCost(0,get("cost")))->calculate(),//opt ann energy
+    (new AnnualEnergy(mp,Get("fraction")))->calculate(),//motorpower
+    (new AnnualEnergy(0,Get("fraction")))->calculate(),//opt motorpower
+    (new AnnualCost(0,Get("cost")))->calculate(),//ex ann energy
+    (new AnnualCost(0,Get("cost")))->calculate(),//opt ann energy
     -1,
     (new AnnualSavingsPotential(0,0))->calculate(),//ex an cost, opt an cost
     -1,
@@ -88,9 +88,9 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   args.GetReturnValue().Set(r);
 }
 
-void init(Local<Object> exports) {
+void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);    
 }
 
-NODE_MODULE(bridge, init)
+NODE_MODULE(bridge, Init)
 
