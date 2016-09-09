@@ -81,11 +81,17 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     -1,
     (new AnnualSavingsPotential(0,0))->calculate(),//ex an cost, opt an cost
     -1,
-    (new OptimizationRating(0,0))->calculate(),//ex an cost, opt an cost
-
-    777//est fla; hp,class,v,speed
+    (new OptimizationRating(0,0))->calculate()//ex an cost, opt an cost
   });
   args.GetReturnValue().Set(r);
+}
+void EstFLA(const FunctionCallbackInfo<Value>& args) {
+  args[0]->NumberValue();//hp
+  args[1]->NumberValue();//speed
+  args[2]->NumberValue();//v
+  args[3]->NumberValue();//cls
+  args[4]->NumberValue();//cus cls
+  args.GetReturnValue().Set(args[4]);
 }
 void Curve(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
@@ -95,6 +101,7 @@ void Curve(const FunctionCallbackInfo<Value>& args) {
 }
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
+  NODE_SET_METHOD(exports, "estFLA", EstFLA);    
   NODE_SET_METHOD(exports, "curve", Curve);    
 }
 
