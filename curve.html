@@ -2,6 +2,8 @@
 <style scoped>
 	canvas {
 		background-color: black;
+	}
+	#plot {
 		display: none;
 	}
 	th {
@@ -18,7 +20,9 @@
 </style>
 <div>
 	<h1>System Head Curve</h1>
-	<div style='margin-bottom:1rem;xfont-style:italic'>Choose two points for <strong>head</strong> and <strong>flow</strong></div>
+	<div style='margin-bottom:1rem;xfont-style:italic'>
+		Choose two points for <strong>head</strong> and <strong>flow</strong>:
+	</div>
 	<table>
 		<tr>
 			<th></th>			
@@ -33,7 +37,12 @@
 		</tr>
 	</table>
 	<button class='prime' onclick='plot()'>PLOT</button><br>
-	<canvas width="700" height="500"></canvas>
+	<div id=plot>
+		<p>
+			Static Head: <span id=Hs></span>
+		</p>
+		<canvas width="700" height="500"></canvas>
+	</div>
 </div>
 
 <script>//# sourceURL=*curve
@@ -56,15 +65,11 @@
 				h2 = cvt(tblTxt(r2,2),CVT_DIST,2,'m');
 
 
-		//alert(Bridge.curve(flow1,head1,flow2,head2));	
-		alert(h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9))) );
-
-
-
+		$('#Hs').text(rnd(h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9)))));
 		showHdBtn('hide');
-		Cnv.show();
-		const cnv = dom(Cnv), ctx = cnv.getContext('2d');					
+		$('#plot').show();
 
+		const cnv = dom(Cnv), ctx = cnv.getContext('2d');					
 		ctx.strokeStyle = "green";
 		ctx.fillStyle = "white";
 		ctx.textAlign = 'center';
@@ -126,7 +131,7 @@
 	});
 	Cnv = $('canvas');
 	pg('input').change(function (){
-		Cnv.hide();
+		$('#plot').hide();
 		dom('canvas').width+=0;
 		let show='hide';
 		switch (checked().length) {			
