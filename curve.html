@@ -79,6 +79,7 @@
 				yCnt = Math.ceil (yMax / yStep);
 
 		$('#Hs').text(rnd(h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9)))));
+		const k = (h2-h1)/(Math.pow(f2,1.9)-Math.pow(f1,1.9));
 		showHdBtn('hide');
 		$('#plot').show();
 
@@ -128,8 +129,9 @@
 		ctx.strokeStyle = "yellow";	
 		ctx.beginPath();
 		
-		for (let x=0; x<=xMax; x+=xStep/5) {
-			ctx.lineTo(xPos(x), yPos(yMax-x));
+		for (let x=0; x<=xMax; x+=xStep) {
+			console.log(x+','+$('#Hs').text()*1+k*Math.pow(x,1.9));
+			ctx.lineTo(xPos(x), yPos($('#Hs').text()*1+k*Math.pow(x,1.9)));
 		
 		}
 		for (let val of [ [0,57.6], [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
