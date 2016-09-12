@@ -39,7 +39,8 @@
 	<button class='prime' onclick='plot()'>PLOT</button><br>
 	<div id=plot>
 		<p>
-			Static Head: <span id=Hs></span>
+			Static Head: <span id=Hs></span><br>
+			Loss coefficient K: <span id=K></span>
 		</p>
 		<canvas width="700" height="500"></canvas>
 	</div>
@@ -76,10 +77,11 @@
 				yMax = Math.max(h1,h2),
 				y10 = Math.pow(10,Math.floor(Math.log10(yMax/15))),
 				yStep = Math.round(yMax / 15 / y10) * y10,
-				yCnt = Math.ceil (yMax / yStep);
-
-		$('#Hs').text(rnd(h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9)))));
-		const k = (h2-h1)/(Math.pow(f2,1.9)-Math.pow(f1,1.9));
+				yCnt = Math.ceil (yMax / yStep),
+				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9))),
+				k = (h2-h1)/(Math.pow(f2,1.9)-Math.pow(f1,1.9));
+		$('#Hs').text(rnd(hS));
+		$('#K').text(k);
 		showHdBtn('hide');
 		$('#plot').show();
 
@@ -129,13 +131,8 @@
 		ctx.strokeStyle = "yellow";	
 		ctx.beginPath();
 		
-		for (let x=0; x<=xMax; x+=xStep) {
-			console.log(x+','+$('#Hs').text()*1+k*Math.pow(x,1.9));
-			ctx.lineTo(xPos(x), yPos($('#Hs').text()*1+k*Math.pow(x,1.9)));
-		
-		}
-		for (let val of [ [0,57.6], [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
-			//ctx.lineTo(xPos(val[0]), yPos(val[1]));
+		for (let x=0; x<=xMax; x+=xStep) {			
+			ctx.lineTo(xPos(x), yPos(hS+k*Math.pow(x,1.9)));		
 		}
 		ctx.stroke();
 	}
