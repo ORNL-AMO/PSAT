@@ -16,6 +16,12 @@
 		margin: .5rem 0;
 		display: none;
 	}
+	#plot td:first-child {
+		color: #5d9300;
+	}
+	#plot td:last-child {
+		text-align: right;
+	}
 }
 </style>
 <div>
@@ -23,7 +29,7 @@
 	<div style='margin-bottom:1rem;xfont-style:italic'>
 		Choose two points for <strong>head</strong> and <strong>flow</strong>:
 	</div>
-	<table>
+	<table id=points>
 		<tr>
 			<th></th>			
 			<th>Flow</th>
@@ -38,10 +44,14 @@
 	</table>
 	<button class='prime' onclick='plot()'>PLOT</button><br>
 	<div id=plot>
-		<p>
-			Static Head: <span id=Hs></span><br>
-			Loss coefficient K: <span id=K></span>
-		</p>
+		<table>
+			<tr>
+				<td>Static Head:</td><td id=Hs></td>		
+			</tr>
+			<tr>
+				<td>Loss coefficient K:</td><td id=K></td>
+			</tr>
+		</table>
 		<canvas width="700" height="500"></canvas>
 	</div>
 </div>
@@ -140,7 +150,7 @@
 	$('th:gt(1)',Grid).each((i,e)=>{
 		const 	idx = $(e).index(),
       			col = $(`td:nth-child(${idx+1})`,Grid);
-	  pg('tr').last().before(`<tr>
+	  pg('#points tr').last().before(`<tr>
 	  						<td><input type=checkbox></td>
 							<td>${nm('flow',col).val()}</td>
 							<td>${nm('head',col).val()}</td>
