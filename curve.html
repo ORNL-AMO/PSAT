@@ -81,7 +81,7 @@
 				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9))),
 				k = (h2-h1)/(Math.pow(f2,1.9)-Math.pow(f1,1.9));
 		$('#Hs').text(rnd(hS));
-		$('#K').text(k);
+		$('#K').text(rnd(k,6));
 		showHdBtn('hide');
 		$('#plot').show();
 

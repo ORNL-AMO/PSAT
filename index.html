@@ -93,8 +93,9 @@
     
     <div id=container></div>
     <script>
-      function rnd(v) {
-        return $.isNumeric(v) ? Math.round(v*10000)/10000 : v;
+      function rnd(v,p=4) {
+        const m=Math.pow(10,p);
+        return $.isNumeric(v) ? Math.round(v*m)/m : v;
       }
       function em(t) {
         return ` <em>(${t})</em>`;
