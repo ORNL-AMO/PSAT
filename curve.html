@@ -72,7 +72,11 @@
 				x10 = Math.pow(10,Math.floor(Math.log10(xMax/15))),
 				xStep = Math.round(xMax / 15 / x10) * x10,
 				xCnt = Math.ceil (xMax / xStep),
-				y = Math.max(h1,h2);
+				y = Math.max(h1,h2),
+				yMax = Math.max(h1,h2),
+				y10 = Math.pow(10,Math.floor(Math.log10(yMax/15))),
+				yStep = Math.round(yMax / 15 / y10) * y10,
+				yCnt = Math.ceil (yMax / yStep);
 
 		$('#Hs').text(rnd(h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9)))));
 		showHdBtn('hide');
@@ -89,7 +93,7 @@
 			return x*(cnv.width-PAD*2)/(xStep*xCnt)+PAD;
 		}
 		function yPos(y) {
-			return (300-y)*(cnv.height-PAD*2)/300+PAD;
+			return (yStep*yCnt-y)*(cnv.height-PAD*2)/(yStep*yCnt)+PAD;
 		}
 
 		ctx.beginPath();
@@ -100,7 +104,8 @@
 			ctx.lineTo(xp,cnv.height-PAD);	
 			ctx.fillText(x,xp,cnv.height-.75*PAD);	
 		}
-		for (let y=0; y<=300; y+=20) {
+		for (let j=0; j<=yCnt; j++) {
+			const y = j*yStep;
 			const yp = yPos(y);
 			ctx.moveTo(PAD,yp);
 			ctx.lineTo(cnv.width-PAD,yp);	
