@@ -68,10 +68,10 @@
 				// f2 = cvt(tblTxt(r2,1),CVT_FLOW,0,'m^3/s'),
 				h2 = tblTxt(r2,2),
 				// h2 = cvt(tblTxt(r2,2),CVT_DIST,2,'m'),
-				x = Math.max(f1,f2),
-				x10 = Math.pow(10,Math.floor(Math.log10(x/15))),
-				xStep = Math.round(x / 15 / x10) * x10,
-				xCnt = Math.ceil (x / xStep),
+				xMax = Math.max(f1,f2),
+				x10 = Math.pow(10,Math.floor(Math.log10(xMax/15))),
+				xStep = Math.round(xMax / 15 / x10) * x10,
+				xCnt = Math.ceil (xMax / xStep),
 				y = Math.max(h1,h2);
 debugger;
 		$('#Hs').text(rnd(h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9)))));
