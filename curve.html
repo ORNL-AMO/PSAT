@@ -86,14 +86,15 @@ debugger;
 		ctx.font = '12px san serif';
 		PAD = 50;
 		function xPos(x) {
-			return x*(cnv.width-PAD*2)/3000+PAD;
+			return x*(cnv.width-PAD*2)/xMax+PAD;
 		}
 		function yPos(y) {
 			return (300-y)*(cnv.height-PAD*2)/300+PAD;
 		}
 
 		ctx.beginPath();
-		for (let x=0; x<=3000; x+=200) {
+		for (let i=0; i<=xCnt; i++) {
+			const x = i*xStep;
 			const xp = xPos(x);
 			ctx.moveTo(xp,PAD);
 			ctx.lineTo(xp,cnv.height-PAD);	
@@ -123,7 +124,7 @@ debugger;
 		ctx.beginPath();
 
 		for (let val of [ [0,57.6], [600,67.3], [1800,144.8], [2400,212.7], [3000,300] ]) {
-			ctx.lineTo(xPos(val[0]), yPos(val[1]));
+			//ctx.lineTo(xPos(val[0]), yPos(val[1]));
 		}
 		ctx.stroke();
 	}
