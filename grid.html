@@ -384,6 +384,7 @@
           $('table tr').each(function (i,e) {
             const newEl = $(e).children().eq(1).clone();            
             $(e).append(newEl);
+            newEl.find('input,select').attr('tabindex',newEl.index());
             if (i==0) {
               newEl.find('span').text(d.name);     
               newEl.data('idx',idx);
