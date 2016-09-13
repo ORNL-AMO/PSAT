@@ -267,9 +267,8 @@
   function estFLA(e) {
     nm('motor_rated_flc',col(e)).val(fla(colArgs(col(e))));
     vdTol('motor_rated_flc',col(e));
-    ioBtn(this).addClass('prime');
   }
-  function showHdResults(show) {
+  function showHdResults(show=false) {
     $('#results,#results~tr').toggle(show);
     $('p button').toggle(!show);
   }
@@ -343,10 +342,16 @@
   function col(e) {
     return $(`td:nth-child(${parIdx(e,1)})`);
   }
+  function saveCol(e) {
+      setData(colCond(e),col(e));          
+      saveCond();
+  }
   function io(dlg) {    
     let e = dlg.data('src');
     if(parIdx(checked(dlg))==0) {
       setCtls(DefCond,col(e));
+      nm('efficiency_class',col(e)).change();
+      saveCol(e);
       showHdResults()
     } else {
       setData(DefCond,col(e));
@@ -382,13 +387,13 @@
             } else {              
               setCtls(d,newEl);              
             }
-          });   
+          });
+          nm('efficiency_class').change();   
     }
   });         
 
   nmAll('#grid').change(function() {
-    setData(colCond(this),col(this));          
-    saveCond();
+    saveCol(this);
     showHdResults(false);
   });
   nm('motor_field_power').change(function() {    
