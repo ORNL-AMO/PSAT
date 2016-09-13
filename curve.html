@@ -106,7 +106,7 @@
 			return (yStep*yCnt-y)*(cnv.height-PAD*2)/(yStep*yCnt)+PAD;
 		}
 		ctx.beginPath();
-		for (let x=0; x<=xCnt; i++) {
+		for (let i=0; i<=xCnt; i++) {
 			const x = i*xStep, xp = xPos(x);
 			ctx.moveTo(xp,PAD);
 			ctx.lineTo(xp,cnv.height-PAD);	
@@ -121,7 +121,7 @@
 		ctx.stroke();
 		ctx.save();
 
-		ctx.fillStyle = 'yellow';
+		ctx.fillStyle = '#FECB00';
 		ctx.font = '14px san serif';
 		ctx.fillText('FLOW RATE',cnv.width/2,cnv.height-.33*PAD);
 		
@@ -132,7 +132,7 @@
 		ctx.restore();
 
 		ctx.lineWidth = 2;
-		ctx.strokeStyle = "yellow";	
+		ctx.strokeStyle = "#FECB00";	
 		ctx.beginPath();
 		
 		for (let x=0; x<=xMax; x+=xStep/10) {			
