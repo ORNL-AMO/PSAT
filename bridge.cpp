@@ -52,7 +52,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     loadMeth = FieldData::LoadEstimationMethod::CURRENT;
     mp = (new MotorPower(Get("motor_rated_voltage"),mc,0))->calculate();//power factor
   } else {
-    mc = (new MotorCurrent(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls)/*Get("field_voltage")*/)->calculate();//motor a, motor power, recursive arg!!
+    mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0))->calculate();//loadf
   }
   SetR({
     (new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
@@ -65,7 +65,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
     (new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
     (new MotorEfficiency(Get("line"),Get("motor_rated_speed"),effCls,Get("motor_rated_power"),
-      loadMeth,0,mc,Get("field_voltage"),Get("motor_rated_power"),Get("motor_field_power")))->calculate(),//motorKwh?? mp instead of field power? what about measured current case?
+      loadMeth,0,mc,Get("field_voltage"),Get("motor_rated_power"),Get("motor_field_power"),0))->calculate(),//motorKwh?? mp instead of field power? what about measured current case? loadF
     (new OptimalMotorEfficiency(Get("motor_rated_power"),0))->calculate(),//motor shaft power
     (new MotorPowerFactor(Get("motor_rated_power"),0,mc,0,Get("motor_rated_voltage")))->calculate(),//loadFactor??, motor eff
     (new OptimalMotorPowerFactor(Get("motor_rated_power"),0))->calculate(),//opt motor power?
