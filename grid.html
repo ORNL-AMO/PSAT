@@ -352,9 +352,6 @@
       setData(DefCond,col(e));
       saveProp('defCond',DefCond);
     }
-    // setData(colCond(e),col(e));          
-    // saveCond();
-
     dom(dlg).close(); 
   }
 
@@ -379,9 +376,9 @@
             const newEl = $(e).children().eq(1).clone();            
             $(e).append(newEl);
             newEl.find('input,select').attr('tabindex',newEl.index());
+            newEl.data('idx',idx);
             if (i==0) {
               newEl.find('span').text(d.name);     
-              newEl.data('idx',idx);
             } else {              
               setCtls(d,newEl);              
             }
@@ -390,6 +387,8 @@
   });         
 
   nmAll('#grid').change(function() {
+    setData(colCond(this),col(this));          
+    saveCond();
     showHdResults(false);
   });
   nm('motor_field_power').change(function() {    
