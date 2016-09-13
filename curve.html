@@ -68,7 +68,7 @@
 		return td.find('input').val();
 	}
 	function steps(v1,v2) {
-		const 	max = Math.max(v2,v2),
+		const 	max = Math.max(v1,v2),
 				m10 = Math.pow(10, Math.floor(Math.log10(max / 15))),
 				step = Math.round(max / 15 / m10) * m10;
 		return [max, step, Math.ceil(max / step)];
@@ -80,20 +80,11 @@
 				r2 = pparIdx(checked().last()),			
 				f2 = tblTxt(r2,1),
 				h2 = tblTxt(r2,2),  
-				[xMax, xStep, xCnt] = steps(f1,f2),
-				//xMax = Math.max(f1,f2),
-				//x10 = Math.pow(10,Math.floor(Math.log10(xMax/15))),
-				// xSteps = steps(f1,f2),
-				// xStep = xSteps[0],
-				// xCnt = xSteps[1],
-				y = Math.max(h1,h2),
-				yMax = Math.max(h1,h2),
-				y10 = Math.pow(10,Math.floor(Math.log10(yMax/15))),
-				yStep = Math.round(yMax / 15 / y10) * y10,
-				yCnt = Math.ceil (yMax / yStep),
 				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9))),
-				k = (h2-h1)/(Math.pow(f2,1.9)-Math.pow(f1,1.9));
-		// const [xMax, xStep, xCnt] = steps(f1,f2);
+				k = (h2-h1)/(Math.pow(f2,1.9)-Math.pow(f1,1.9)),
+				PAD = 50,
+				[xMax, xStep, xCnt] = steps(f1,f2),
+				[yMax, yStep, yCnt] = steps(h1,h2);
 
 		$('#Hs').text(rnd(hS));
 		$('#K').text(rnd(k,6));
@@ -106,14 +97,13 @@
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'middle';
 		ctx.font = '12px san serif';
-		PAD = 50;
+		
 		function xPos(x) {
 			return x*(cnv.width-PAD*2)/(xStep*xCnt)+PAD;
 		}
 		function yPos(y) {
 			return (yStep*yCnt-y)*(cnv.height-PAD*2)/(yStep*yCnt)+PAD;
 		}
-
 		ctx.beginPath();
 		for (let i=0; i<=xCnt; i++) {
 			const x = i*xStep;
