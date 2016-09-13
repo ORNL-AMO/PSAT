@@ -235,13 +235,10 @@
 </p>
 <dialog id='io'>
   <label>
-    <input name=saveopt type="radio" checked> Save
+    <input name=saveopt type="radio"> Reset to default
   </label>  
   <label>
-    <input name=saveopt type="radio"> Save as Default
-  </label>
-  <label>
-    <input name=saveopt type="radio"> Load from Default
+    <input name=saveopt type="radio"> Set new default
   </label>
   <button class=prime onclick='io($(this.parentElement))'>ACCEPT</button> 
   <button onclick='this.parentElement.close()'>CANCEL</button>
@@ -335,8 +332,10 @@
   }
 
   function showIO(e) {
-    dom('#io').showModal();
-    $('#io').data('src',$(e));
+    const dlg = $('#io');
+    chk(dlg.find('input').first(),true);
+    dom(dlg).showModal();
+    dlg.data('src',$(e));
   }
   function ioBtn(e) {
     return $('.ioBtn').eq(parIdx(e,-1));
@@ -344,23 +343,18 @@
   function col(e) {
     return $(`td:nth-child(${parIdx(e,1)})`);
   }
-  function io(dlg) {
+  function io(dlg) {    
     let e = dlg.data('src');
-    switch(parIdx(checked(dlg))) {
-        case 1:
-          setData(DefCond,col(e));
-          saveProp('defCond',DefCond);
-          break;
-        case 2:
-          setCtls(DefCond,col(e));
-          ioBtn(e).addClass('prime');
-          showHdResults()
-          break;
-        default:
-          setData(colCond(e),col(e));          
-          saveCond();
-          ioBtn(e).removeClass('prime');
+    if(parIdx(checked(dlg))==0) {
+      setCtls(DefCond,col(e));
+      showHdResults()
+    } else {
+      setData(DefCond,col(e));
+      saveProp('defCond',DefCond);
     }
+    // setData(colCond(e),col(e));          
+    // saveCond();
+
     dom(dlg).close(); 
   }
 
