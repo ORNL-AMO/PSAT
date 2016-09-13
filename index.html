@@ -175,12 +175,14 @@
       }
       function cvt(v,m,old,nu) {
         const o=$.isNumeric(old)?Units[old]:old;
-        if ($.isNumeric(v)) {
-          if (m[o]) {
-            v *= m[o];
-          }
-          if (m[nu]) {
-            v /= m[nu];
+        if (m[o] != m[nu]) {
+          if ($.isNumeric(v)) {
+            if (m[o]) {
+              v *= m[o];
+            }
+            if (m[nu]) {
+              v /= m[nu];
+            }
           }
         }
         return v;
