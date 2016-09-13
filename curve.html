@@ -61,24 +61,19 @@
 		pg('button')[show]();
 	}
 	function tblTxt(r,c) {
-		const td = pg(`tr:eq(${r}) td:eq(${c})`);
-		if (r!=pg('tr').length-1) {
+		const td = pg(`#points tr:eq(${r}) td:eq(${c})`);
+		if (r!=pg('#points tr').length-1) {
 			return td.text();
 		}
 		return td.find('input').val();
 	}
 	function plot() {
 		const 	r1 = pparIdx(checked().first()),
-
 				f1 = tblTxt(r1,1),
-				// f1 = cvt(tblTxt(r1,1),CVT_FLOW,0,'m^3/s'),
 				h1 = tblTxt(r1,2),
-				// h1 = cvt(tblTxt(r1,2),CVT_DIST,2,'m'),				
 				r2 = pparIdx(checked().last()),			
 				f2 = tblTxt(r2,1),
-				// f2 = cvt(tblTxt(r2,1),CVT_FLOW,0,'m^3/s'),
-				h2 = tblTxt(r2,2),
-				// h2 = cvt(tblTxt(r2,2),CVT_DIST,2,'m'),
+				h2 = tblTxt(r2,2),  
 				xMax = Math.max(f1,f2),
 				x10 = Math.pow(10,Math.floor(Math.log10(xMax/15))),
 				xStep = Math.round(xMax / 15 / x10) * x10,
