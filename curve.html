@@ -82,17 +82,18 @@
 				h2 = tblTxt(r2,2),  
 				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9))),
 				k = (h2-h1)/(Math.pow(f2,1.9)-Math.pow(f1,1.9)),
-				PAD = 50,
 				[xMax, xStep, xCnt] = steps(f1,f2),
-				[yMax, yStep, yCnt] = steps(h1,h2);
+				[yMax, yStep, yCnt] = steps(h1,h2),
+				cnv = dom(Cnv),
+				ctx = cnv.getContext('2d'),
+				PAD = 50;
 
 		$('#Hs').text(rnd(hS));
 		$('#K').text(rnd(k,6));
 		showHdBtn('hide');
 		$('#plot').show();
 
-		const cnv = dom(Cnv), ctx = cnv.getContext('2d');					
-		ctx.strokeStyle = "green";
+		ctx.strokeStyle = "#5d9300";
 		ctx.fillStyle = "white";
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'middle';
@@ -105,16 +106,14 @@
 			return (yStep*yCnt-y)*(cnv.height-PAD*2)/(yStep*yCnt)+PAD;
 		}
 		ctx.beginPath();
-		for (let i=0; i<=xCnt; i++) {
-			const x = i*xStep;
-			const xp = xPos(x);
+		for (let x=0; x<=xCnt; i++) {
+			const x = i*xStep, xp = xPos(x);
 			ctx.moveTo(xp,PAD);
 			ctx.lineTo(xp,cnv.height-PAD);	
 			ctx.fillText(x,xp,cnv.height-.75*PAD);	
 		}
 		for (let j=0; j<=yCnt; j++) {
-			const y = j*yStep;
-			const yp = yPos(y);
+			const y = j*yStep, yp = yPos(y);
 			ctx.moveTo(PAD,yp);
 			ctx.lineTo(cnv.width-PAD,yp);	
 			ctx.fillText(y,.75*PAD,yp);	
