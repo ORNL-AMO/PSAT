@@ -348,18 +348,11 @@
     backload('notes');
   }
   function backload(nm) {
-    Grid = pg().contents().detach();
     load(nm);
     back = backToGrid;
   }
   function backToGrid() {
-    pg().html(Grid);
-    //$('#container').append($('#container script').remove());
-
-    $('th:gt(1)>span').each(function(i,e) {
-      $(e).text(colCond(e).name);
-    });
-    delete Grid;
+    load('grid');
     back = main;
   }
 
