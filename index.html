@@ -124,7 +124,7 @@
       function dom(e) {
         return $(e)[0];
       }
-      function pg(s='') {// , e
+      function pg(s='') {
         return $('#container '+s);
       }
 
@@ -132,14 +132,14 @@
         let v;
         nmAll(e).each(function(i,el) {
           switch (el.type) {
-            case 'text':case 'number':
-              v = $(el).val();
-              break;
             case 'checkbox':
               v = el.checked;
               break;
             case 'select-one':
               v = $(el).children(':selected').index();
+              break;
+            default:
+              v = $(el).val();
           }
           d[nmGet(el)] = v;
         });
