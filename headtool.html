@@ -169,6 +169,7 @@
 	}
 	function accept() {
 		Cond.head = Head;
+		saveConds();
 		backToGrid();
 	}
 	_txt = Units[2] == 'ft' ? 'inches' : 'mm';
