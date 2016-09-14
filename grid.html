@@ -181,7 +181,7 @@
     <td class='th'>
       <div style='justify-content:center'>        
         Results
-        <button style='margin-left:.5rem' onclick='backload("curve")'>
+        <button style='margin-left:.5rem' onclick='load("curve")'>
           <i class="fa fa-line-chart"/>
         </button>
       </div>
@@ -339,21 +339,13 @@
 
   function gotoHead(e) {
     Cond = colCond(e);
-    backload("headTool");
+    load("headTool");
   }
   function edit(e) {
     Cond = colCond(e);
-    backload('notes');
+    load('notes');
   }
-  function backload(nm) {
-    load(nm);
-    back = backToGrid;
-  }
-  function backToGrid() {
-    load('grid');
-    back = main;
-  }
-
+  
   function fldUnit(nm) {
     $(`td>div:not(:has(em)):contains(${nm})`).append(`<em>(${txt})</em>`);
   }  

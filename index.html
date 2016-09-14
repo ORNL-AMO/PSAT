@@ -191,17 +191,25 @@
       }
       
       function main() {
-        load('conditions',true);
-      }      
-      function load(nm,bkHide) {
-        back = main;
-        pg().load(nm+'.html',function () {
-          if (bkHide) {
-            $('#back').hide();
+        Nav = [];
+        load('conditions');
+      }
+      function back() {
+          Nav.pop();
+          loadPg();
+      }
+     function loadPg() {
+        pg().load(Nav[Nav.length-1]+'.html',function () {
+          if (Nav.length>1 ) {
+            $('#back').show();            
           } else {
-            $('#back').show();
+            $('#back').hide();
           }
-        });
+        });       
+     }
+      function load(nm) {
+        Nav.push(nm);
+        loadPg();
       }
 
       function saveHd(d=HeadTool) {
