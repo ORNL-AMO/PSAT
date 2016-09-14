@@ -168,7 +168,7 @@
 		load('notes');
 	}
 	function nu() {
-		Cond = {};
+		Cond = loadProp('defCond');
 		Conds.push(Cond);
 		Cond.name = 'Condition ' + Conds.length;
 		const dt = new Date();
