@@ -369,20 +369,18 @@
   txt = Units[0];
   fldUnit('Flow');
 
-  $.each(Conds,function(idx,d) {
-    if (d.grid) {
-          $('table tr').each(function (i,e) {
-            const newEl = $(e).children().eq(1).clone();            
-            $(e).append(newEl);
-            newEl.find('input,select').attr('tabindex',newEl.index());
-            newEl.data('cond',d);
-            if (i==0) {
-              newEl.find('span').text(d.name);     
-            } else {              
-              setCtls(d,newEl);              
-            }
-          });
-    }
+  Conds.filter(c => c.grid).forEach(c => {
+    $('table tr').each(function (i,e) {
+      const newEl = $(e).children().eq(1).clone();            
+      $(e).append(newEl);
+      newEl.find('input,select').attr('tabindex',newEl.index());
+      newEl.data('cond',c);
+      if (i==0) {
+        newEl.find('span').text(c.name);     
+      } else {              
+        setCtls(c,newEl);              
+      }
+    });    
   });         
 
   nmAll('#grid').change(function() {
