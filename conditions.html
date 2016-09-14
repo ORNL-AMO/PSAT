@@ -125,15 +125,15 @@
 	}
 	function chkAll(e) {
 		chk(':checkbox',e.checked);
-		$.each(Cond,function(i,d) {
+		$.each(Conds,function(i,d) {
 			d.grid = e.checked;
 		});
-		saveCond();
+		saveConds();
 		setGridBtn();
 	}
 	function setGrid(e) {
-		Cond[listIdx(e)].grid = e.checked;
-		saveCond();
+		Conds[listIdx(e)].grid = e.checked;
+		saveConds();
 		setGridBtn();		
 	}
 	function grid() {
@@ -147,20 +147,20 @@
 		}
 	}
 	function rm(e) {
-		Cond.splice(listIdx(e),1);
-		saveCond();
+		Conds.splice(listIdx(e),1);
+		saveConds();
 		main();
 	}
 	function removeAll() {
-		Cond = [];
-		saveCond();
+		Conds = [];
+		saveConds();
 		main();
 	}
 	function cp(e) {
-		let o=$.extend({},Cond[listIdx(e)]);
+		let o=$.extend({},Conds[listIdx(e)]);
 		o.name+=' (copy)';
-		Cond.push(o);
-		saveCond();
+		Conds.push(o);
+		saveConds();
 		main();
 	}
 	function edit(e) {
@@ -168,7 +168,7 @@
 		load('notes');
 	}
 	function nu() {
-		Idx = Cond.length;
+		Idx = Conds.length;
 		load('notes');
 	}
 	function reset() {
@@ -180,7 +180,7 @@
 		function chg(i,...args) {
 			cvtObj(...args,i,nunits[i]);
     	}
-		$.each(Cond.concat([DefCond]),function(i,d) {
+		$.each(Conds.concat([DefCond]),function(i,d) {
 			chg(0,d,'flow',CVT_FLOW);
 			chg(1,d,['motor_rated_power','motor_field_power'],CVT_POWER);
 			chg(2,d,'head',CVT_DIST);
@@ -191,7 +191,7 @@
 		saveHd();
 		Units = nunits;
 		saveProp('units',Units);
-		saveCond();
+		saveConds();
 	}
 	function shade(n) {
 		$('td').removeClass('shade');
@@ -209,9 +209,9 @@
 			function (fn) {
 				if (fn) {					
 					const 
-						hd=Object.keys(Cond[0]).sort(),
+						hd=Object.keys(Conds[0]).sort(),
 						lines=[JSON.stringify([0,Units,HeadTool]),hd.join('\t')];
-					Cond.forEach(function(d,i) {
+					Conds.forEach(function(d,i) {
 						lines.push(
 							hd.map((nm,i)=> {
 								return d[nm];
@@ -230,15 +230,15 @@
 						fs = require('fs'),
 						lines=fs.readFileSync(fn[0],'utf8').split('\n'),
 						hd=lines[1].split('\t');
-					Cond=[];
+					Conds=[];
 					[,Units,HeadTool]=JSON.parse(lines[0]);					
 					lines.slice(2).forEach((ln,row)=>{
-						Cond.push({});
+						Conds.push({});
 						ln.split('\t').forEach((v,i)=>{
-							Cond[row][hd[i]]=v;
+							Conds[row][hd[i]]=v;
 						});
 					});
-					saveCond();
+					saveConds();
 					main();	
 				}
 			}
@@ -282,14 +282,14 @@
 			nu[$('#units select').index(this)]=$(this).val();
 			chgUnits(nu);
 		});
-		$.each(Cond,function(i,d) {		
+		$.each(Conds,function(i,d) {		
 			const nu = $('#cond tr').first().clone();
 			nu.children().eq(1).text(d.name);
 			chk(nu.find(':checkbox'),d.grid);
 			$('#cond').append(nu);		  
 
 		});		
-		if (Cond.length==0) {
+		if (Conds.length==0) {
 			$('#cond').html('<em>None</em>');
 			$('.gt0').hide();
 		}		

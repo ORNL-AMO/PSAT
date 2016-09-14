@@ -270,7 +270,7 @@
   }
   function saveCol(e) {
       setData(colCond(e),col(e));          
-      saveCond();
+      saveConds();
   }
   function io(dlg) {    
     let e = dlg.data('src');
@@ -286,7 +286,7 @@
   }
 
   function colCond(e) {
-    return Cond[$(e).parent().data('idx')];
+    return Conds[$(e).parent().data('idx')];
   }  
   function rm(e) {
     colCond(e).grid = false;
@@ -338,7 +338,7 @@
   }
 
   function gotoHead(e) {
-    CondSel = colCond(e);
+    Cond = colCond(e);
 
     // Flow = nm('flow',col(e)).val();
     // SG = nm('specific_gravity',col(e)).val();
@@ -373,7 +373,7 @@
   txt = Units[0];
   fldUnit('Flow');
 
-  $.each(Cond,function(idx,d) {
+  $.each(Conds,function(idx,d) {
     if (d.grid) {
           $('table tr').each(function (i,e) {
             const newEl = $(e).children().eq(1).clone();            

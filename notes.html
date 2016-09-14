@@ -32,9 +32,9 @@
 	<textarea name='comment' rows=10 cols=100/><br>
 </form>
 <script>
-	if (Idx<Cond.length) {
+	if (Idx<Conds.length) {
 		nmAll().each(function(i,e) {
-			$(e).val(Cond[Idx][nmGet(e)]);
+			$(e).val(Conds[Idx][nmGet(e)]);
 		});				
 	} else {
 		nm('name').val('Condition ' + (Idx+1));
@@ -43,13 +43,13 @@
     	nm('date').val(dt.toJSON().slice(0,10));		
 	}
 	nmAll().change(function(){
-		if (Idx == Cond.length) {
-			Cond.push(loadProp('defCond'));
+		if (Idx == Conds.length) {
+			Conds.push(loadProp('defCond'));
 		};				
 		nmAll().each(function(i,e) {
-			Cond[Idx][nmGet(e)] = $(e).val();
+			Conds[Idx][nmGet(e)] = $(e).val();
 		});
-		saveCond();
+		saveConds();
 	});
 </script>
 
