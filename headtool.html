@@ -170,6 +170,7 @@
 	function accept() {
 		HeadEl.val(rnd(Head));
 		backToGrid();
+		HeadEl.change();
 	}
 	_txt = Units[2] == 'ft' ? 'inches' : 'mm';
 	hdFldUnit('D');
