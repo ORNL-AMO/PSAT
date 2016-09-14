@@ -207,8 +207,8 @@
       function saveHd(d=HeadTool) {
         saveProp('headTool',d);
       }
-      function saveCond() {
-        saveProp('conditions',Cond);
+      function saveConds() {
+        saveProp('conditions',Conds);
       }  
       function loadProp(nm) {
         return JSON.parse(LS.getItem(nm));
@@ -251,7 +251,7 @@
           saveProp('conditions',[]);
           saveHd({Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1});          
         }
-        Cond = loadProp('conditions');
+        Conds = loadProp('conditions');
         Units = loadProp('units');
         HeadTool = loadProp('headTool');
         return (DefCond= loadProp('defCond'));
