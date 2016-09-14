@@ -139,16 +139,13 @@
 		}
 		ctx.stroke();
 	}
-
-	$('th:gt(1)',Grid).each((i,e)=>{
-		const 	idx = $(e).index(),
-      			col = $(`td:nth-child(${idx+1})`,Grid);
+	Conds.filter(c => c.grid).forEach(c => {
 	  pg('#points tr').last().before(`<tr>
 	  						<td><input type=checkbox></td>
-							<td>${nm('flow',col).val()}</td>
-							<td>${nm('head',col).val()}</td>
-							<td>${Conds[idx-2].name}</td>							
-						</tr>`);
+							<td>${c.flow}</td>
+							<td>${c.head}</td>
+							<td>${c.name}</td>							
+						</tr>`);		
 	});
 	Cnv = dom('canvas');
 	pg('input').change(function (){
