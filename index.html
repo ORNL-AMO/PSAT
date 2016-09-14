@@ -150,14 +150,14 @@
           const ctl = $(e), v = d[nmGet(ctl)];
           if (v===undefined) return;
           switch (e.type) {
-            case 'text':case 'number':
-              ctl.val(rnd(v));
-              break;
             case 'checkbox':
               e.checked = v;
               break;
             case 'select-one':
               ctl.find('option')[v].selected = true;
+              break;
+            default:
+              ctl.val(rnd(v));
           }
           if (ctl.is('[data-init-chg]')) {
             ctl.trigger('change');

@@ -32,13 +32,15 @@
 	<textarea name='comment' rows=10 cols=100/><br>
 </form>
 <script>
-	nmAll().each(function(i,e) {
-		$(e).val(Cond[nmGet(e)]);
-	});				
+	setCtls(Cond);
+	// nmAll().each(function(i,e) {
+	// 	$(e).val(Cond[nmGet(e)]);
+	// });				
 	nmAll().change(function(){
-		nmAll().each(function(i,e) {
-			Cond[nmGet(e)] = $(e).val();
-		});
+		setData(Cond);
+		// nmAll().each(function(i,e) {
+		// 	Cond[nmGet(e)] = $(e).val();
+		// });
 		saveConds();
 	});
 </script>
