@@ -31,7 +31,6 @@
 	Comments<br>
 	<textarea name='comment' rows=10 cols=100/><br>
 </form>
-<button class=prime onclick='save()'>SAVE</button>
 <script>
 	if (Idx<Cond.length) {
 		nmAll().each(function(i,e) {
@@ -43,7 +42,7 @@
     	dt.setMinutes(dt.getMinutes()-dt.getTimezoneOffset());
     	nm('date').val(dt.toJSON().slice(0,10));		
 	}
-	function save() {
+	nmAll().change(function(){
 		if (Idx == Cond.length) {
 			Cond.push(loadProp('defCond'));
 		};				
@@ -51,7 +50,6 @@
 			Cond[Idx][nmGet(e)] = $(e).val();
 		});
 		saveCond();
-		back();
-	}
+	});
 </script>
 
