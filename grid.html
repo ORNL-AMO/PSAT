@@ -339,14 +339,10 @@
 
   function gotoHead(e) {
     Cond = colCond(e);
-
-    // Flow = nm('flow',col(e)).val();
-    // SG = nm('specific_gravity',col(e)).val();
-    // HeadEl = nm('head',col(e));
     backload("headTool");
   }
   function edit(e) {
-    Idx = $(e).parent().data('idx');
+    Cond = Conds[$(e).parent().data('idx')];
     backload('notes');
   }
   function backload(nm) {
