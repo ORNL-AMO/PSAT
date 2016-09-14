@@ -167,11 +167,11 @@
   </tr>-->
   <tr>
     <td><div>Motor Power</div></td>
-    <td><input name='motor_field_power'></td>
+    <td><input name='motor_field_power' onchange="clrFld('motor_field_current',this)"></td>
   </tr>
   <tr>
     <td><div>Motor Current<em>(A)</em></div></td>
-    <td><input name='motor_field_current'></td>
+    <td><input name='motor_field_current' onchange="clrFld('motor_field_power',this)"></td>
   </tr>
   <tr>
     <td><div>Motor Voltage<em>(V)</em></div></td>
@@ -248,7 +248,10 @@
   function colCond(e) {
     return Cond[$(e).parent().data('idx')];
   }  
-
+  
+  function clrFld(n,e) {
+    nm(n,col(e)).val('');
+  }  
   function effChg(e) {
     if ($(e).val()=='Custom') {
       $(e).next().show();      
@@ -350,7 +353,7 @@
     let e = dlg.data('src');
     if(parIdx(checked(dlg))==0) {
       setCtls(DefCond,col(e));
-      saveCol(e);//alt set cond from def
+      saveCol(e);
       showHdResults()
     } else {
       setData(DefCond,col(e));
@@ -391,14 +394,7 @@
   });         
 
   nmAll('#grid').change(function() {
-    saveCol(this);//alt just that field
+    saveCol(this);
     showHdResults(false);
   });
-  nm('motor_field_power').change(function() {    
-    nm('motor_field_current',col(this)).val('');
-  });
-  nm('motor_field_current').change(function() {    
-    nm('motor_field_power',col(this)).val('');
-  });
-  
 </script>
