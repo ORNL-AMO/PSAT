@@ -110,7 +110,7 @@
   <tr>
     <td>Efficiency Class</td>
     <td> 
-      <select name='efficiency_class' onchange='effChg(this)'>
+      <select name='efficiency_class' onchange='effChg(this)' data-init-chg>
         <option>Standard</option>
         <option>Energy</option>
         <option>Average</option>
@@ -350,8 +350,7 @@
     let e = dlg.data('src');
     if(parIdx(checked(dlg))==0) {
       setCtls(DefCond,col(e));
-      nm('efficiency_class',col(e)).change();
-      saveCol(e);
+      saveCol(e);//alt set cond from def
       showHdResults()
     } else {
       setData(DefCond,col(e));
@@ -388,12 +387,11 @@
               setCtls(d,newEl);              
             }
           });
-          nm('efficiency_class').change();   
     }
   });         
 
   nmAll('#grid').change(function() {
-    saveCol(this);
+    saveCol(this);//alt just that field
     showHdResults(false);
   });
   nm('motor_field_power').change(function() {    

@@ -159,7 +159,9 @@
             case 'select-one':
               ctl.find('option')[v].selected = true;
           }
-          //ctl.trigger('change');
+          if (ctl.is('[data-init-chg]')) {
+            ctl.trigger('change');
+          }
         });
       }
 
