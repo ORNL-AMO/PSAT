@@ -164,11 +164,17 @@
 		main();
 	}
 	function edit(e) {
-		Idx = parIdx(e,-2);
+		Cond = Conds[parIdx(e,-2)];
 		load('notes');
 	}
 	function nu() {
-		Idx = Conds.length;
+		Cond = {};
+		Conds.push(Cond);
+		Cond.name = 'Condition ' + Conds.length;
+		const dt = new Date();
+    	dt.setMinutes(dt.getMinutes()-dt.getTimezoneOffset());
+		Cond.date = dt.toJSON().slice(0,10);		
+		saveConds();
 		load('notes');
 	}
 	function reset() {

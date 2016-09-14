@@ -32,22 +32,12 @@
 	<textarea name='comment' rows=10 cols=100/><br>
 </form>
 <script>
-	if (Idx<Conds.length) {
-		nmAll().each(function(i,e) {
-			$(e).val(Conds[Idx][nmGet(e)]);
-		});				
-	} else {
-		nm('name').val('Condition ' + (Idx+1));
-		const dt = new Date();
-    	dt.setMinutes(dt.getMinutes()-dt.getTimezoneOffset());
-    	nm('date').val(dt.toJSON().slice(0,10));		
-	}
+	nmAll().each(function(i,e) {
+		$(e).val(Cond[nmGet(e)]);
+	});				
 	nmAll().change(function(){
-		if (Idx == Conds.length) {
-			Conds.push(loadProp('defCond'));
-		};				
 		nmAll().each(function(i,e) {
-			Conds[Idx][nmGet(e)] = $(e).val();
+			Cond[nmGet(e)] = $(e).val();
 		});
 		saveConds();
 	});
