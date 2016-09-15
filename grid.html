@@ -314,16 +314,17 @@
   function colArgs(col) {
     const d=setData({},col);
     d['line'] = nm('line',col);
-    cvtObj(d,'flow',FLOW,'m^3/s');
-    cvtObj(d,['motor_rated_power','motor_field_power'],POWER,'kW');      
-    cvtObj(d,'head',DIST,'m');
+    //cvtObj(d,'flow',FLOW,'m^3/s');
+    //cvtObj(d,['motor_rated_power','motor_field_power'],POWER,'kW');      
+    //cvtObj(d,'head',DIST,'m');
     return d;
   }
   function results() {
-    $('th:gt(1)').each((i,e)=>{debugger;
+    $('th:gt(1)').each((i,e)=>{
       const col = $(`td:nth-child(${$(e).index()+1})`),
         a = colArgs(col), r = Bridge.results(a);
-      cvtObj(r,[2,3,4,5,6,7,14],POWER,unit(POWER),'kW');            
+      console.log(a,'\n',r);
+      //cvtObj(r,[2,3,4,5,6,7,14],POWER,unit(POWER),'kW');            
       col.filter('#results~tr:not(.th) td').each((i,e)=>{        
         $(e).html(`<div>
                     <span ${i==2 && r[4]>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
