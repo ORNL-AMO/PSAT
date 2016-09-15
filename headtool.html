@@ -128,7 +128,7 @@
 	}
 	function calc() {
         let flowU, distF, g;
-        if (unit(CVT_DIST)=='ft') {
+        if (unit(DIST)=='ft') {
 			flowU='ft^3/s';
 			g=32.1740;
 			distF=12;
@@ -138,11 +138,11 @@
 			distF = 1000;
         }
 		let 
-			flow = cvt(Cond.flow,CVT_FLOW,flowU),
+			flow = cvt(Cond.flow,FLOW,flowU),
 			sucTnk = dom(nm('suc')).checked,
 			elevHd = nm('Zd').val()-(sucTnk ? nm('Ztnk_s') : nm('Zs')).val(),
 			presHd = cvt(nm('Pd').val()-(sucTnk ? nm('Pg_s') : nm('Ps')).val(),
-				CVT_PRESSURE,unit(CVT_DIST))/Cond.specific_gravity,
+				PRESSURE,unit(DIST))/Cond.specific_gravity,
 			vHdS = vHd(v(nm('Ds').val()/distF,flow),g),
 			vHdD = vHd(v(nm('Dd').val()/distF,flow),g),
 			vHdDif = vHdD - (sucTnk ? 0 : vHdS),
@@ -172,16 +172,16 @@
 		saveConds();
 		back();
 	}
-	_txt = unit(CVT_DIST) == 'ft' ? 'inches' : 'mm';
+	_txt = unit(DIST) == 'ft' ? 'inches' : 'mm';
 	hdFldUnit('D');
-	_txt = unit(CVT_DIST);
+	_txt = unit(DIST);
 	hdFldUnit('Z');
 	hdFldUnit('Ztnk_');
 	$('#results th').last().append(em(_txt));
-	_txt = unit(CVT_PRESSURE);
+	_txt = unit(PRESSURE);
 	hdFldUnit('P');
 	hdFldUnit('Pg_');
-	$('#flow').html(Cond.flow+em(unit(CVT_FLOW)));
+	$('#flow').html(Cond.flow+em(unit(FLOW)));
 	$('#sg').text(Cond.specific_gravity);
 	$('input').change(function () {
 		$('#results td:nth-child(2):gt(0)').text('');

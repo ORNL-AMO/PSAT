@@ -187,13 +187,13 @@
 			cvtObj(...args,m,nunits[m._num]);
     	}
 		$.each(Conds.concat([DefCond]),function(i,d) {
-			chg(CVT_FLOW,d,'flow');
-			chg(CVT_POWER,d,['motor_rated_power','motor_field_power']);
-			chg(CVT_DIST,d,'head');
+			chg(FLOW,d,'flow');
+			chg(POWER,d,['motor_rated_power','motor_field_power']);
+			chg(DIST,d,'head');
 		});
 		saveProp('defCond',DefCond);
-		chg(CVT_DIST,HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd']);		
-		chg(CVT_PRESSURE,HeadTool,['Ps','Pg_s','Pd']);		
+		chg(DIST,HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd']);		
+		chg(PRESSURE,HeadTool,['Ps','Pg_s','Pd']);		
 		saveHd();
 		Units = nunits;
 		saveProp('units',Units);
