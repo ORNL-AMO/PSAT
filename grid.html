@@ -32,7 +32,7 @@
 </style>
 <table id=grid>  
   <tr>      
-    <th style='vertical-align: bottom' onclick=backload('mock')>Pump</th>
+    <th style='vertical-align: bottom'>Pump</th>
       <th>
         <button onclick='rm(this)'><i class="fa fa-times"/></button>
         <button onclick='edit(this)'><i class="fa fa-pencil-square-o"></i></button>
@@ -181,7 +181,7 @@
     <td class='th'>
       <div style='justify-content:center'>        
         Results
-        <button style='margin-left:.5rem' onclick='load("curve")'>
+        <button style='margin-left:.5rem' onclick='go("curve")'>
           <i class="fa fa-line-chart"/>
         </button>
       </div>
@@ -339,11 +339,11 @@
 
   function gotoHead(e) {
     Cond = colCond(e);
-    load("headTool");
+    go("headTool");
   }
   function edit(e) {
     Cond = colCond(e);
-    load('notes');
+    go('notes');
   }
   
   function fldUnit(nm) {

@@ -192,7 +192,7 @@
       
       function main() {
         Nav = [];
-        load('conditions');
+        go('conditions');
       }
       function back() {
           Nav.pop();
@@ -207,7 +207,7 @@
           }
         });       
      }
-      function load(nm) {
+      function go(nm) {
         Nav.push(nm);
         loadPg();
       }

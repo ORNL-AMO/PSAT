@@ -137,7 +137,7 @@
 		setGridBtn();		
 	}
 	function grid() {
-		load('grid');		
+		go('grid');		
 	}
 	function setGridBtn() {
 		if ($('#cond :checkbox:gt(1):checked').length>0) {
@@ -165,7 +165,7 @@
 	}
 	function edit(e) {
 		Cond = Conds[parIdx(e,-2)];
-		load('notes');
+		go('notes');
 	}
 	function nu() {
 		Cond = loadProp('defCond');
@@ -175,7 +175,7 @@
     	dt.setMinutes(dt.getMinutes()-dt.getTimezoneOffset());
 		Cond.date = dt.toJSON().slice(0,10);		
 		saveConds();
-		load('notes');
+		go('notes');
 	}
 	function reset() {
 		loadData(true);
