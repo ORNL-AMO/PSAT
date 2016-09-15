@@ -54,13 +54,14 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   } else {
     mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0))->calculate();//loadf
   }
+  //auto x = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate();
   SetR({
     (new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
     (new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
-      Get("pump_rated_speed"),Get("viscosity"),Get("stages"),Get("flow"),Get("head"),static_cast<Pump::Speed>(!Get("speed"))))->calculate(),//
+      Get("pump_rated_speed"),Get("viscosity"),Get("stages"),Get("flow"),Get("head"),static_cast<Pump::Speed>(!Get("speed"))))->calculate(),
     mp,
     (new OptimalMotorRatedPower(0,Get("margin")))->calculate(),//motorshaftpower
-    (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate(),
+    0,// (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate(),
     (new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
     (new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
     (new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
@@ -80,6 +81,30 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new AnnualSavingsPotential(0,0))->calculate(),//ex an cost, opt an cost
     -1,
     (new OptimizationRating(0,0))->calculate()//ex an cost, opt an cost
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0,
+  // 0
   });
   args.GetReturnValue().Set(r);
 }

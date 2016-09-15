@@ -320,7 +320,7 @@
     return d;
   }
   function results() {
-    $('th:gt(1)').each((i,e)=>{
+    $('th:gt(1)').each((i,e)=>{debugger;
       const col = $(`td:nth-child(${$(e).index()+1})`),
         a = colArgs(col), r = Bridge.results(a);
       cvtObj(r,[2,3,4,5,6,7,14],POWER,unit(POWER),'kW');            
