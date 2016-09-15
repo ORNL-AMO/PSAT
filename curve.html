@@ -165,10 +165,10 @@
 		}
 		showHdBtn(show);
 	});
-	function showUnit(txt,n) {
-		pg(`th:contains(${txt})`).append(em(Units[n]));
+	function showUnit(txt,u) {
+		pg(`th:contains(${txt})`).append(em(unit(u)));
 	}
-	showUnit('Flow',0);
-	showUnit('Head',2);
+	showUnit('Flow',CVT_FLOW);
+	showUnit('Head',CVT_DIST);
 </script>
 

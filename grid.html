@@ -314,16 +314,16 @@
   function colArgs(col) {
     const d=setData({},col);
     d['line'] = nm('line',col);
-    cvtObj(d,'flow',CVT_FLOW,0,'m^3/s');
-    cvtObj(d,['motor_rated_power','motor_field_power'],CVT_POWER,1,'kW');      
-    cvtObj(d,'head',CVT_DIST,2,'m');
+    cvtObj(d,'flow',CVT_FLOW,'m^3/s');
+    cvtObj(d,['motor_rated_power','motor_field_power'],CVT_POWER,'kW');      
+    cvtObj(d,'head',CVT_DIST,'m');
     return d;
   }
   function results() {
     $('th:gt(1)').each((i,e)=>{
       const col = $(`td:nth-child(${$(e).index()+1})`),
         a = colArgs(col), r = Bridge.results(a);
-      cvtObj(r,[2,3,4,5,6,7,14],CVT_POWER,'kW',Units[1]);            
+      cvtObj(r,[2,3,4,5,6,7,14],CVT_POWER,unit(CVT_POWER),'kW');            
       col.filter('#results~tr:not(.th) td').each((i,e)=>{        
         $(e).html(`<div>
                     <span ${i==2 && r[4]>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
@@ -350,15 +350,15 @@
     $(`td>div:not(:has(em)):contains(${nm})`).append(`<em>(${txt})</em>`);
   }  
 
-  txt = Units[1];
+  txt = unit(CVT_POWER);
   fldUnit('Power Rating');
   fldUnit('Motor Rated');
   fldUnit('Motor Shaft');
   fldUnit('Pump Shaft');
   fldUnit('Motor Power');
-  txt = Units[2];
+  txt = unit(CVT_DIST);
   fldUnit('Head');
-  txt = Units[0];
+  txt = unit(CVT_FLOW);
   fldUnit('Flow');
 
   Conds.filter(c => c.grid).forEach(c => {
