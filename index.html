@@ -179,7 +179,7 @@
           d[nm] = cvt(d[nm],m,nu,old);
         });
       }
-      function cvt(v,m,nu,old=units(m)) {
+      function cvt(v,m,nu,old=unit(m)) {
         if (m[old] != m[nu]) {
           if ($.isNumeric(v)) {
             if (m[old]) {
