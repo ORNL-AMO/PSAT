@@ -60,12 +60,11 @@ void Results(const FunctionCallbackInfo<Value>& args) {
       Get("pump_rated_speed"),Get("viscosity"),Get("stages"),Get("flow"),Get("head"),static_cast<Pump::Speed>(!Get("speed"))))->calculate(),//
     mp,
     (new OptimalMotorRatedPower(0,Get("margin")))->calculate(),//motorshaftpower
-    (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls))->calculate(),//motor eff 
+    (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate(),
     (new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
     (new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
     (new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
-    (new MotorEfficiency(Get("line"),Get("motor_rated_speed"),effCls,Get("motor_rated_power"),
-      loadMeth,0,mc,Get("field_voltage"),Get("motor_rated_power"),Get("motor_field_power"),0))->calculate(),//motorKwh?? mp instead of field power? what about measured current case? loadF
+    (new MotorEfficiency(Get("motor_rated_speed"), effCls,Get("motor_rated_power"), mp, 0))->calculate(),//loadF
     (new OptimalMotorEfficiency(Get("motor_rated_power"),0))->calculate(),//motor shaft power
     (new MotorPowerFactor(Get("motor_rated_power"),0,mc,0,Get("motor_rated_voltage")))->calculate(),//loadFactor??, motor eff
     (new OptimalMotorPowerFactor(Get("motor_rated_power"),0))->calculate(),//opt motor power?
