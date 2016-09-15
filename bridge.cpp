@@ -56,55 +56,31 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   }
   //auto x = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate();
   SetR({
-    (new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
-    (new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
-      Get("pump_rated_speed"),Get("viscosity"),Get("stages"),Get("flow"),Get("head"),static_cast<Pump::Speed>(!Get("speed"))))->calculate(),
-    mp,
-    (new OptimalMotorRatedPower(0,Get("margin")))->calculate(),//motorshaftpower
+    0,//(new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
+    0,//(new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
+      //Get("pump_rated_speed"),Get("viscosity"),Get("stages"),Get("flow"),Get("head"),static_cast<Pump::Speed>(!Get("speed"))))->calculate(),
+    0,//mp,
+    0,//(new OptimalMotorRatedPower(0,Get("margin")))->calculate(),//motorshaftpower
     0,// (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate(),
-    (new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
-    (new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
-    (new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
-    (new MotorEfficiency(Get("motor_rated_speed"),effCls,Get("motor_rated_power"),mp,0))->calculate(),//loadF
-    (new OptimalMotorEfficiency(Get("motor_rated_power"),0))->calculate(),//motor shaft power
-    (new MotorPowerFactor(Get("motor_rated_power"),0,mc,0,Get("motor_rated_voltage")))->calculate(),//loadFactor??, motor eff
-    (new OptimalMotorPowerFactor(Get("motor_rated_power"),0))->calculate(),//opt motor power?
-    mc,
-    (new OptimalMotorCurrent(0,Get("field_voltage")))->calculate(),//opt motor power
-    mp,
-    (new OptimalMotorPower(0,0))->calculate(),//motorshaftpower, motor eff
-    (new AnnualEnergy(mp,Get("fraction")))->calculate(),//motorpower
-    (new AnnualEnergy(0,Get("fraction")))->calculate(),//opt motorpower
-    (new AnnualCost(0,Get("cost")))->calculate(),//ex ann energy
-    (new AnnualCost(0,Get("cost")))->calculate(),//opt ann energy
+    0,//(new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
+    0,//(new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
+    0,//(new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
+    0,//(new MotorEfficiency(Get("motor_rated_speed"),effCls,Get("motor_rated_power"),mp,0))->calculate(),//loadF
+    0,//(new OptimalMotorEfficiency(Get("motor_rated_power"),0))->calculate(),//motor shaft power
+    0,//(new MotorPowerFactor(Get("motor_rated_power"),0,mc,0,Get("motor_rated_voltage")))->calculate(),//loadFactor??, motor eff
+    0,//(new OptimalMotorPowerFactor(Get("motor_rated_power"),0))->calculate(),//opt motor power?
+    0,//mc,
+    0,//(new OptimalMotorCurrent(0,Get("field_voltage")))->calculate(),//opt motor power
+    0,//mp,
+    0,//(new OptimalMotorPower(0,0))->calculate(),//motorshaftpower, motor eff
+    0,//(new AnnualEnergy(mp,Get("fraction")))->calculate(),//motorpower
+    0,//(new AnnualEnergy(0,Get("fraction")))->calculate(),//opt motorpower
+    0,//(new AnnualCost(0,Get("cost")))->calculate(),//ex ann energy
+    0,//(new AnnualCost(0,Get("cost")))->calculate(),//opt ann energy
     -1,
-    (new AnnualSavingsPotential(0,0))->calculate(),//ex an cost, opt an cost
+    0,//(new AnnualSavingsPotential(0,0))->calculate(),//ex an cost, opt an cost
     -1,
-    (new OptimizationRating(0,0))->calculate()//ex an cost, opt an cost
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0,
-  // 0
+    0,//(new OptimizationRating(0,0))->calculate()//ex an cost, opt an cost
   });
   args.GetReturnValue().Set(r);
 }
