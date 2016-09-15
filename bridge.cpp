@@ -64,7 +64,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     (new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
     (new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
     (new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
-    (new MotorEfficiency(Get("motor_rated_speed"), effCls,Get("motor_rated_power"), mp, 0))->calculate(),//loadF
+    (new MotorEfficiency(Get("motor_rated_speed"),effCls,Get("motor_rated_power"),mp,0))->calculate(),//loadF
     (new OptimalMotorEfficiency(Get("motor_rated_power"),0))->calculate(),//motor shaft power
     (new MotorPowerFactor(Get("motor_rated_power"),0,mc,0,Get("motor_rated_voltage")))->calculate(),//loadFactor??, motor eff
     (new OptimalMotorPowerFactor(Get("motor_rated_power"),0))->calculate(),//opt motor power?
