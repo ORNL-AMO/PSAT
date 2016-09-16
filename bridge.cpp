@@ -1,5 +1,8 @@
 #include <node.h>
 #include <initializer_list>
+#include <map>
+#include <tuple> 
+#include <utility>
 
 #include "Pump.h"
 #include "calculator/PumpEfficiency.h"
@@ -34,12 +37,17 @@ void SetR(std::initializer_list <double> args) {
     r->Set(r->Length(),Number::New(iso,d));
   }
 }
+void SetR2(std::initializer_list <std::pair<const char *,double>> args) {
+  for (auto d : args) {
+    // r->Set(r->Length(),Number::New(iso,d));
+  }
+}
 double Get(const char *nm) {
   return inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
 }
 void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
-  r = Array::New(iso);
+  auto r = Object::New(iso);
   inp = args[0]->ToObject();
   
   auto drive = static_cast<Pump::Drive>(Get("drive"));
@@ -54,34 +62,59 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   } else {
     mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0))->calculate();//loadf
   }
+  //SetR2({"asdf",3});
+  //  std::map<const char *, std::tuple<double,double>> m = { // nested list-initialization
+  //          {"Pump Efficiency",{1,2}}
+  //         //  {"lkj",6 },
+  //         //  {"kjo",2}
+  //   };
+   std::map<const char *, std::pair<double,double>> m = { // nested list-initialization
+           {"Pump Efficiency",{1,2}},
+           {"Motor Shaft Power",{3,4}}
+          //  {"lkj",6 },
+          //  {"kjo",2}
+    };
+    
+    for(auto p: m) {
+      auto a = Array::New(iso);
+      a->Set(0,Number::New(iso,p.second.first));
+      a->Set(1,Number::New(iso,p.second.second));
+      
+      // r->Set(String::NewFromUtf8(iso,p.first),Number::New(iso,p.second.first));
+      r->Set(String::NewFromUtf8(iso,p.first),a);
+
+    }
+      //auto z=p.first;
+  //r->Set(String::NewFromUtf8(iso,"Hello"),Number::New(iso,123));
+  
   //auto x = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate();
-  SetR({
-    0,//(new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
-    0,//(new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
-      //Get("pump_rated_speed"),Get("viscosity"),Get("stages"),Get("flow"),Get("head"),static_cast<Pump::Speed>(!Get("speed"))))->calculate(),
-    0,//mp,
-    0,//(new OptimalMotorRatedPower(0,Get("margin")))->calculate(),//motorshaftpower
-    (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate(),
-    0,//(new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
-    0,//(new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
-    0,//(new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
-    0,//(new MotorEfficiency(Get("motor_rated_speed"),effCls,Get("motor_rated_power"),mp,0))->calculate(),//loadF
-    0,//(new OptimalMotorEfficiency(Get("motor_rated_power"),0))->calculate(),//motor shaft power
-    0,//(new MotorPowerFactor(Get("motor_rated_power"),0,mc,0,Get("motor_rated_voltage")))->calculate(),//loadFactor??, motor eff
-    0,//(new OptimalMotorPowerFactor(Get("motor_rated_power"),0))->calculate(),//opt motor power?
-    0,//mc,
-    0,//(new OptimalMotorCurrent(0,Get("field_voltage")))->calculate(),//opt motor power
-    0,//mp,
-    0,//(new OptimalMotorPower(0,0))->calculate(),//motorshaftpower, motor eff
-    0,//(new AnnualEnergy(mp,Get("fraction")))->calculate(),//motorpower
-    0,//(new AnnualEnergy(0,Get("fraction")))->calculate(),//opt motorpower
-    0,//(new AnnualCost(0,Get("cost")))->calculate(),//ex ann energy
-    0,//(new AnnualCost(0,Get("cost")))->calculate(),//opt ann energy
-    -1,
-    0,//(new AnnualSavingsPotential(0,0))->calculate(),//ex an cost, opt an cost
-    -1,
-    0,//(new OptimizationRating(0,0))->calculate()//ex an cost, opt an cost
-  });
+  // SetR({
+  //   0,//(new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
+  //   0,//(new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
+  //     //Get("pump_rated_speed"),Get("viscosity"),Get("stages"),Get("flow"),Get("head"),static_cast<Pump::Speed>(!Get("speed"))))->calculate(),
+  //   0,//mp,
+  //   0,//(new OptimalMotorRatedPower(0,Get("margin")))->calculate(),//motorshaftpower
+  //   (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate(),
+  //   0,//(new OptimalMotorShaftPower(0,drive))->calculate(),//pumpshaftpower
+  //   0,//(new PumpShaftPower(0,drive))->calculate(),//motorshaftpower
+  //   0,//(new OptimalPumpShaftPower(Get("flow"),Get("head"),Get("specific_gravity"),0))->calculate(),//pumpeff
+  //   0,//(new MotorEfficiency(Get("motor_rated_speed"),effCls,Get("motor_rated_power"),mp,0))->calculate(),//loadF
+  //   0,//(new OptimalMotorEfficiency(Get("motor_rated_power"),0))->calculate(),//motor shaft power
+  //   0,//(new MotorPowerFactor(Get("motor_rated_power"),0,mc,0,Get("motor_rated_voltage")))->calculate(),//loadFactor??, motor eff
+  //   0,//(new OptimalMotorPowerFactor(Get("motor_rated_power"),0))->calculate(),//opt motor power?
+  //   0,//mc,
+  //   0,//(new OptimalMotorCurrent(0,Get("field_voltage")))->calculate(),//opt motor power
+  //   0,//mp,
+  //   0,//(new OptimalMotorPower(0,0))->calculate(),//motorshaftpower, motor eff
+  //   0,//(new AnnualEnergy(mp,Get("fraction")))->calculate(),//motorpower
+  //   0,//(new AnnualEnergy(0,Get("fraction")))->calculate(),//opt motorpower
+  //   0,//(new AnnualCost(0,Get("cost")))->calculate(),//ex ann energy
+  //   0,//(new AnnualCost(0,Get("cost")))->calculate(),//opt ann energy
+  //   -1,
+  //   0,//(new AnnualSavingsPotential(0,0))->calculate(),//ex an cost, opt an cost
+  //   -1,
+  //   0,//(new OptimizationRating(0,0))->calculate()//ex an cost, opt an cost
+  // });
   args.GetReturnValue().Set(r);
 }
 void EstFLA(const FunctionCallbackInfo<Value>& args) {

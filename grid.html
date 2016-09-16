@@ -323,17 +323,31 @@
     $('th:gt(1)').each((i,e)=>{
       const col = $(`td:nth-child(${$(e).index()+1})`),
         a = colArgs(col), r = Bridge.results(a);
-      console.log(a,'\n',r);
-      //cvtObj(r,[2,3,4,5,6,7,14],POWER,unit(POWER),'kW');            
-      col.filter('#results~tr:not(.th) td').each((i,e)=>{        
+      console.log(a);
+      console.log(r);      
+      //cvtObj(r,[2,3,4,5,6,7,14],POWER,unit(POWER),'kW');      
+      for (var key in r) {debugger;
+        //alert(key+';'+r[key]);
+        const e=col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key);    
+        
+      //${/*i==2 && r[4]>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''*/}
+      
         $(e).html(`<div>
-                    <span ${i==2 && r[4]>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
-                      ${r[2*i]>=0 ? rnd(r[2*i]) :''}
+                    <span ${key=='Motor Shaft Power' && r[key][0]>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
+                      ${rnd(r[key][0])}
                     </span>
-                    <span style='color:#5d9300'>${rnd(r[2*i+1])}</span></div>`);
-      });
-      vdTol('motor_rated_flc',col,fla(a),.5);
-      vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
+                    <span style='color:#5d9300'>${rnd(r[key][1])}</span></div>`);
+        // $(e).html(`<div>
+        //             <span>
+        //               ${rnd(r[key][0])};${rnd(r[key][1])}
+        //             </span>
+        //             `);
+
+
+      }     
+     
+      // vdTol('motor_rated_flc',col,fla(a),.5);
+      // vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
     });
     showHdResults(true);
   }
@@ -371,7 +385,9 @@
       if (i==0) {
         newEl.find('span').text(c.name);     
       } else {              
-        setCtls(c,newEl);              
+        setCtls(c,newEl); 
+        newEl.data('rowNm',$(e).children().first().children().first().contents().first().text().trim());
+        console.log(newEl.data('rowNm'));//debugger;
       }
     });    
   });         
