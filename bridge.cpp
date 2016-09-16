@@ -3,6 +3,7 @@
 #include <map>
 #include <tuple> 
 #include <utility>
+#include <vector>
 
 #include "Pump.h"
 #include "calculator/PumpEfficiency.h"
@@ -57,7 +58,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   } else {
     mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0))->calculate();//loadf
   }
-   std::map<const char *, std::pair<double,double>> m = { // nested list-initialization
+   std::map<const char *, std::vector<double>> m = { // nested list-initialization
            {"Pump Efficiency",{1,2}},
            {"Motor Shaft Power",{3,4}}
           //  {"lkj",6 },
@@ -66,10 +67,10 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     
     for(auto p: m) {
       auto a = Array::New(iso);
-      a->Set(0,Number::New(iso,p.second.first));
-      a->Set(1,Number::New(iso,p.second.second));
+      a->Set(0,Number::New(iso,p.second[0]));
+      a->Set(1,Number::New(iso,p.second[1]));
       
-      // r->Set(String::NewFromUtf8(iso,p.first),Number::New(iso,p.second.first));
+      
       r->Set(String::NewFromUtf8(iso,p.first),a);
 
     }
