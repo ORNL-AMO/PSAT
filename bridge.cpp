@@ -37,11 +37,6 @@ void SetR(std::initializer_list <double> args) {
     r->Set(r->Length(),Number::New(iso,d));
   }
 }
-void SetR2(std::initializer_list <std::pair<const char *,double>> args) {
-  for (auto d : args) {
-    // r->Set(r->Length(),Number::New(iso,d));
-  }
-}
 double Get(const char *nm) {
   return inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
 }
@@ -62,12 +57,6 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   } else {
     mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0))->calculate();//loadf
   }
-  //SetR2({"asdf",3});
-  //  std::map<const char *, std::tuple<double,double>> m = { // nested list-initialization
-  //          {"Pump Efficiency",{1,2}}
-  //         //  {"lkj",6 },
-  //         //  {"kjo",2}
-  //   };
    std::map<const char *, std::pair<double,double>> m = { // nested list-initialization
            {"Pump Efficiency",{1,2}},
            {"Motor Shaft Power",{3,4}}
