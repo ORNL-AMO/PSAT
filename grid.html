@@ -315,7 +315,8 @@
     const d=setData({},col);
     d['line'] = nm('line',col);
     //cvtObj(d,'flow',FLOW,'m^3/s');
-    //cvtObj(d,['motor_rated_power','motor_field_power'],POWER,'kW');      
+    cvtObj(d,'motor_rated_power',POWER,'hp');
+    cvtObj(d,'motor_field_power',POWER,'kW');      
     //cvtObj(d,'head',DIST,'m');
     return d;
   }
@@ -324,30 +325,20 @@
       const col = $(`td:nth-child(${$(e).index()+1})`),
         a = colArgs(col), r = Bridge.results(a);
       console.log(a);
-      console.log(r);      
+      console.log(r);  
+      cvtObj(r,'Motor Shaft Power',POWER,unit(POWER),'hp');
       //cvtObj(r,[2,3,4,5,6,7,14],POWER,unit(POWER),'kW');      
-      for (var key in r) {debugger;
-        //alert(key+';'+r[key]);
-        const e=col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key);    
-        
-      //${/*i==2 && r[4]>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''*/}
-      
-        $(e).html(`<div>
-                    <span ${key=='Motor Shaft Power' && r[key][0]>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
-                      ${rnd(r[key][0])}
-                    </span>
-                    <span style='color:#5d9300'>${rnd(r[key][1])}</span></div>`);
-        // $(e).html(`<div>
-        //             <span>
-        //               ${rnd(r[key][0])};${rnd(r[key][1])}
-        //             </span>
-        //             `);
-
-
-      }     
-     
-      // vdTol('motor_rated_flc',col,fla(a),.5);
-      // vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
+      for (var key in r) {
+        col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).html(
+          `<div>
+            <span ${key=='Motor Shaft Power' && r[key][0]>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
+              ${rnd(r[key][0])}
+            </span>
+            <span style='color:#5d9300'>${rnd(r[key][1])}</span>
+          </div>`);
+      }          
+      vdTol('motor_rated_flc',col,fla(a),.5);
+      vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
     });
     showHdResults(true);
   }

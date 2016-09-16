@@ -67,8 +67,6 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     a->Set(1,Number::New(iso,p.second[1]));          
     r->Set(String::NewFromUtf8(iso,p.first),a);
   }
-  
-
   // SetR({
   //   0,//(new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
   //   0,//(new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
