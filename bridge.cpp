@@ -1,7 +1,8 @@
 #include <node.h>
 #include <initializer_list>
 #include <tuple>
-
+#include <iostream>
+#include <fstream>
 
 #include "Pump.h"
 #include "calculator/PumpEfficiency.h"
@@ -42,6 +43,11 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   const unsigned argc = 1;
   Local<Value> argv[argc] = { String::NewFromUtf8(iso, "hello world") };
   cb->Call(Null(iso), argc, argv);
+
+  std::ofstream myfile;
+  myfile.open ("example.txt");
+  myfile << "Writing this to a file.\n";
+  myfile.close();
 
   auto i4 = Get("efficiency_class");
   auto drive = static_cast<Pump::Drive>(Get("drive"));
