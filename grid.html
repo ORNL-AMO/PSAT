@@ -329,6 +329,9 @@
         console.log(key,r[key][0]);  
       }
       cvtObj(r,'Motor Shaft Power',POWER,unit(POWER),'hp');
+      r['Motor Efficiency'][0]*=100;
+      r['Motor Power Factor'][0]*=100;
+
       //cvtObj(r,[2,3,4,5,6,7,14],POWER,unit(POWER),'kW');      
       for (var key in r) {
         col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).html(
