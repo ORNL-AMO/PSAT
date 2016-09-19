@@ -323,7 +323,9 @@
   function results() {
     $('th:gt(1)').each((i,e)=>{
       const col = $(`td:nth-child(${$(e).index()+1})`),
-        a = colArgs(col), r = Bridge.results(a);
+        a = colArgs(col), r = Bridge.results((msg) => {
+  console.log(msg); // 'hello world'
+},a);
       console.log(a);
       for (var key in r) {
         console.log(key,r[key][0]);  

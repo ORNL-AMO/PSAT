@@ -35,8 +35,13 @@ double Get(const char *nm) {
 }
 void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
-  inp = args[0]->ToObject();
+  inp = args[1]->ToObject();
   auto r = Object::New(iso);
+
+  Local<Function> cb = Local<Function>::Cast(args[0]);
+  const unsigned argc = 1;
+  Local<Value> argv[argc] = { String::NewFromUtf8(iso, "hello world") };
+  cb->Call(Null(iso), argc, argv);
 
   auto i4 = Get("efficiency_class");
   auto drive = static_cast<Pump::Drive>(Get("drive"));
@@ -54,9 +59,13 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   auto i1 = Get("motor_rated_power"), i2 = mp, i3 = Get("motor_rated_speed"), i5 = Get("motor_rated_voltage");
   
   auto msp = (new MotorShaftPower(i1,i2,i3,effCls,i5));
+  auto mspr = msp->calculate();
+  
+  Local<Value> x[argc] = { Number::New(iso,mspr) };
+  cb->Call(Null(iso), argc, x);
   
   std::initializer_list <std::tuple<const char *,double,double>> out = { 
-    {"Motor Shaft Power",msp->calculate(),0},
+    {"Motor Shaft Power",mspr,0},
     {"Motor Current",msp->calculateCurrent(),0},
     {"Motor Efficiency",msp->calculateEfficiency(),0},
     {"Motor Power Factor",msp->calculateElectricPower(),0},
