@@ -325,7 +325,9 @@
       const col = $(`td:nth-child(${$(e).index()+1})`),
         a = colArgs(col), r = Bridge.results(a);
       console.log(a);
-      console.log(r);  
+      for (var key in r) {
+        console.log(key,r[key][0]);  
+      }
       cvtObj(r,'Motor Shaft Power',POWER,unit(POWER),'hp');
       //cvtObj(r,[2,3,4,5,6,7,14],POWER,unit(POWER),'kW');      
       for (var key in r) {
