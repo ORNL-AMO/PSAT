@@ -1,7 +1,5 @@
 #include <node.h>
 #include <initializer_list>
-#include <map>
-#include <vector>
 #include <tuple>
 
 
@@ -60,9 +58,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   }
   auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")));
   
-  std::tuple<int, int, int> tpl = {1,2,3};
-  std::initializer_list <std::tuple<int,int,int>> z = { {1,2,3},{2,5,3}};
-  std::initializer_list <std::tuple<const char *,double,double>> z2 = { 
+  std::initializer_list <std::tuple<const char *,double,double>> out = { 
     {"Motor Shaft Power",msp->calculate(),0},
     {"Motor Current",msp->calculateCurrent(),0},
     {"Motor Efficiency",msp->calculateEfficiency(),0},
@@ -70,22 +66,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     {"Motor Power", msp->calculateElectricPower(),0}
   };
   
-  std::map<const char *, std::vector<double>> m = { // nested list-initialization
-    {"Motor Shaft Power", {msp->calculate(),0}},
-    {"Motor Current", {msp->calculateCurrent(),0}},
-    {"Motor Efficiency", {msp->calculateEfficiency(),0}},
-    {"Motor Power Factor", {msp->calculatePowerFactor(),0}},
-    {"Motor Power", {msp->calculateElectricPower(),0}}
-  };    
-  
-  // for(auto p: m) {    
-  //   auto a = Array::New(iso);
-  //   a->Set(0,Number::New(iso,p.second[0]));
-  //   a->Set(1,Number::New(iso,p.second[1]));          
-  //   r->Set(String::NewFromUtf8(iso,p.first),a);
-  // }
-
-  for(auto p: z2) {    
+  for(auto p: out) {    
     auto a = Array::New(iso);
     a->Set(0,Number::New(iso,std::get<1>(p)));
     a->Set(1,Number::New(iso,std::get<2>(p)));          
