@@ -27,22 +27,16 @@
 
 using namespace v8;
 
-Local<Array> r;
 Isolate* iso;
 Local<Object> inp;
 
-void SetR(std::initializer_list <double> args) {
-  for (auto d : args) {
-    r->Set(r->Length(),Number::New(iso,d));
-  }
-}
 double Get(const char *nm) {
   return inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
 }
 void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
-  auto r = Object::New(iso);
   inp = args[0]->ToObject();
+  auto r = Object::New(iso);
   
   auto drive = static_cast<Pump::Drive>(Get("drive"));
   auto effCls = static_cast<Motor::EfficiencyClass>(Get("efficiency_class"));
@@ -109,16 +103,9 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
   args[4]->NumberValue();//cus cls
   args.GetReturnValue().Set(args[4]);
 }
-void Curve(const FunctionCallbackInfo<Value>& args) {
-  iso = args.GetIsolate();
-  r = Array::New(iso);
-  SetR({args[0]->NumberValue(),args[1]->NumberValue(),args[2]->NumberValue(),args[3]->NumberValue()});
-  args.GetReturnValue().Set(r);
-}
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA);    
-  NODE_SET_METHOD(exports, "curve", Curve);    
 }
 
 NODE_MODULE(bridge, Init)
