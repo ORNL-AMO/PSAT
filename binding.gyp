@@ -13,6 +13,10 @@
 		                'MACOSX_DEPLOYMENT_TARGET': '10.7' },
 					"sources" : ['<!@(ls -1 ../amo-library/*.cpp)','<!@(ls -1 ../amo-library/calculator/*.cpp)'] 
 		            }
+		        ], 
+		        [ 'OS=="win"', { 
+					"sources" : ['<!@(dir /b ../amo-library/*.cpp)','<!@(dir /b ../amo-library/calculator/*.cpp)'] 
+		            }
 		        ] 
 	       	] 
 	    }
