@@ -56,10 +56,13 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   } else {
     mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0))->calculate();//loadf
   }
+  auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")));
   std::map<const char *, std::vector<double>> m = { // nested list-initialization
-    {"Motor Shaft Power",
-      {(new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")))->calculate(),
-      0}}
+    {"Motor Shaft Power", {msp->calculate(),0}},
+    {"Motor Current", {msp->calculateCurrent(),0}},
+    {"Motor Efficiency", {msp->calculateEfficiency(),0}},
+    {"Motor Power Factor", {msp->calculatePowerFactor(),0}},
+    {"Motor Power", {msp->calculateElectricPower(),0}}
   };    
   for(auto p: m) {    
     auto a = Array::New(iso);
