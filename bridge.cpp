@@ -37,9 +37,10 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   inp = args[0]->ToObject();
   auto r = Object::New(iso);
-  
+
+  auto i4 = Get("efficiency_class");
   auto drive = static_cast<Pump::Drive>(Get("drive"));
-  auto effCls = static_cast<Motor::EfficiencyClass>(Get("efficiency_class"));
+  auto effCls = static_cast<Motor::EfficiencyClass>(i4);
 
   auto loadMeth = FieldData::LoadEstimationMethod::POWER;
   double mp = Get("motor_field_power");
@@ -50,16 +51,31 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   } else {
     mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0))->calculate();//loadf
   }
-  auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")));
+  auto i1 = Get("motor_rated_power"), i2 = mp, i3 = Get("motor_rated_speed"), i5 = Get("motor_rated_voltage");
+  
+  auto msp = (new MotorShaftPower(i1,i2,i3,effCls,i5));
   
   std::initializer_list <std::tuple<const char *,double,double>> out = { 
     {"Motor Shaft Power",msp->calculate(),0},
     {"Motor Current",msp->calculateCurrent(),0},
     {"Motor Efficiency",msp->calculateEfficiency(),0},
     {"Motor Power Factor",msp->calculateElectricPower(),0},
-    {"Motor Power", msp->calculateElectricPower(),0}
+    {"Motor Power", msp->calculateElectricPower(),0},
+    {"i1",i1,0},
+    {"i2",i2,0},
+    {"i3",i3,0},
+    {"i4",i4,0},
+    {"o1",msp->calculate(),0}
+    
+    
   };
-  
+  // std::initializer_list <std::tuple<const char *,double,double>> out = { 
+  //   {"Motor Shaft Power",3,0},
+  //   {"Motor Current",2,0},
+  //   {"Motor Efficiency",6,0},
+  //   {"Motor Power Factor",45,0},
+  //   {"Motor Power", 9,0}
+  // };
   for(auto p: out) {    
     auto a = Array::New(iso);
     a->Set(0,Number::New(iso,std::get<1>(p)));
