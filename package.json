@@ -18,7 +18,8 @@
     "psat"
   ],
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "electron test.js"
   },
   "devDependencies": {
     "electron-prebuilt": "1.2.8",

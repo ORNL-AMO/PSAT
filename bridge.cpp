@@ -27,6 +27,7 @@
 #include "OptimizationRating.h"
 
 using namespace v8;
+using namespace std;
 
 Isolate* iso;
 Local<Object> inp;
@@ -38,20 +39,9 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   inp = args[1]->ToObject();
   auto r = Object::New(iso);
-
-  Local<Function> cb = Local<Function>::Cast(args[0]);
-  const unsigned argc = 1;
-  Local<Value> argv[argc] = { String::NewFromUtf8(iso, "hello world") };
-  cb->Call(Null(iso), argc, argv);
-
-  std::ofstream myfile;
-  myfile.open ("example.txt");
-  myfile << "Writing this to a file.\n";
-  myfile.close();
-
-  auto i4 = Get("efficiency_class");
+ 
   auto drive = static_cast<Pump::Drive>(Get("drive"));
-  auto effCls = static_cast<Motor::EfficiencyClass>(i4);
+  auto effCls = static_cast<Motor::EfficiencyClass>(Get("efficiency_class"));
 
   auto loadMeth = FieldData::LoadEstimationMethod::POWER;
   double mp = Get("motor_field_power");
@@ -62,40 +52,21 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   } else {
     mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0))->calculate();//loadf
   }
-  auto i1 = Get("motor_rated_power"), i2 = mp, i3 = Get("motor_rated_speed"), i5 = Get("motor_rated_voltage");
   
-  auto msp = (new MotorShaftPower(i1,i2,i3,effCls,i5));
-  auto mspr = msp->calculate();
+  auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")));
   
-  Local<Value> x[argc] = { Number::New(iso,mspr) };
-  cb->Call(Null(iso), argc, x);
-  
-  std::initializer_list <std::tuple<const char *,double,double>> out = { 
-    {"Motor Shaft Power",mspr,0},
+  std::initializer_list <tuple<const char *,double,double>> out = { 
+    {"Motor Shaft Power",msp->calculate(),0},
     {"Motor Current",msp->calculateCurrent(),0},
     {"Motor Efficiency",msp->calculateEfficiency(),0},
     {"Motor Power Factor",msp->calculateElectricPower(),0},
-    {"Motor Power", msp->calculateElectricPower(),0},
-    {"i1",i1,0},
-    {"i2",i2,0},
-    {"i3",i3,0},
-    {"i4",i4,0},
-    {"o1",msp->calculate(),0}
-    
-    
+    {"Motor Power", msp->calculateElectricPower(),0}
   };
-  // std::initializer_list <std::tuple<const char *,double,double>> out = { 
-  //   {"Motor Shaft Power",3,0},
-  //   {"Motor Current",2,0},
-  //   {"Motor Efficiency",6,0},
-  //   {"Motor Power Factor",45,0},
-  //   {"Motor Power", 9,0}
-  // };
   for(auto p: out) {    
     auto a = Array::New(iso);
-    a->Set(0,Number::New(iso,std::get<1>(p)));
-    a->Set(1,Number::New(iso,std::get<2>(p)));          
-    r->Set(String::NewFromUtf8(iso,std::get<0>(p)),a);
+    a->Set(0,Number::New(iso,get<1>(p)));
+    a->Set(1,Number::New(iso,get<2>(p)));          
+    r->Set(String::NewFromUtf8(iso,get<0>(p)),a);
   }
   // SetR({
   //   0,//(new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
@@ -134,9 +105,38 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
   args[4]->NumberValue();//cus cls
   args.GetReturnValue().Set(args[4]);
 }
+ofstream Out;
+void Check(double exp, double act) {
+  Out << "Expected:" << exp << "; Actual: " << act << "; " <<
+    (roundf(act*100)/100 == roundf(exp*100)/100 ? "PASS" : "*** FAIL ***") << endl;
+}
+void TestBasic() {
+  Out.open ("clog.txt");
+  Out << "MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460)" << endl;
+  auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460));
+  Check(101.25,msp->calculate());  
+}
+void TestSame() {
+  Out << "MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460)" << endl;
+  auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460));
+  
+  for (int i=0; i<=100; i++) {
+    Check(msp->calculate(),msp->calculate());
+    Out << "calculateCurrent" << msp->calculateCurrent() << endl;
+    Out << "calculateEfficiency" << msp->calculateEfficiency() << endl;
+    Out << "calculateElectricPower" << msp->calculateElectricPower() << endl;
+    Out << "calculatePowerFactor" << msp->calculatePowerFactor() << endl << endl;
+  }
+}
+void Test(const FunctionCallbackInfo<Value>& args) {
+  Out.open ("clog.txt");
+  TestSame();
+  Out.close();
+}
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
-  NODE_SET_METHOD(exports, "estFLA", EstFLA);    
+  NODE_SET_METHOD(exports, "estFLA", EstFLA); 
+  NODE_SET_METHOD(exports, "test", Test);  
 }
 
 NODE_MODULE(bridge, Init)
