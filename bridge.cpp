@@ -120,12 +120,9 @@ void TestSame() {
   Out << "MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460)" << endl;
   auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460));
   
-  for (int i=0; i<=100; i++) {
+  for (int i=1; i<=25; i=i+2) {
+    Out << "**** " << i << " ******" << endl;
     Check(msp->calculate(),msp->calculate());
-    Out << "calculateCurrent" << msp->calculateCurrent() << endl;
-    Out << "calculateEfficiency" << msp->calculateEfficiency() << endl;
-    Out << "calculateElectricPower" << msp->calculateElectricPower() << endl;
-    Out << "calculatePowerFactor" << msp->calculatePowerFactor() << endl << endl;
   }
 }
 void Test(const FunctionCallbackInfo<Value>& args) {
