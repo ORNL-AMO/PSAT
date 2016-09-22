@@ -116,7 +116,7 @@ void TestSame() {
 }
 void Test(const FunctionCallbackInfo<Value>& args) {
   TestSame();
-  Check(101.25,new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460)->calculate());    
+  Check(101.25,(new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());    
 }
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
