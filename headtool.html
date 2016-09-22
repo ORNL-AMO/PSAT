@@ -165,8 +165,8 @@
 		return ` <em>(${t})</em>`;
 	}
 	function hdFldUnit(s) {
-		nm(`${s}s`).after(em(_txt));
-		nm(`${s}d`).after(em(_txt));
+		nm(`${s}s`).after(` <em>${_txt}</em>`);
+		nm(`${s}d`).after(` <em>${_txt}</em>`);
 	}
 	function accept() {
 		Cond.head = Head;
