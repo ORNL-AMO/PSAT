@@ -1,6 +1,9 @@
 #include <node.h>
 #include <initializer_list>
 #include <tuple>
+#include <vector>
+#include <map>
+
 #include <iostream>
 #include <fstream>
 
@@ -55,18 +58,18 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   
   auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage")));
   
-  std::initializer_list <tuple<const char *,double,double>> out = { 
-    {"Motor Shaft Power",msp->calculate(),0},
-    {"Motor Current",msp->calculateCurrent(),0},
-    {"Motor Efficiency",msp->calculateEfficiency(),0},
-    {"Motor Power Factor",msp->calculateElectricPower(),0},
-    {"Motor Power", msp->calculateElectricPower(),0}
+  map<const char *,vector<double>> out = { 
+    {"Motor Shaft Power",{msp->calculate(),0}},
+    {"Motor Current",{msp->calculateCurrent(),0}},
+    {"Motor Efficiency",{msp->calculateEfficiency(),0}},
+    {"Motor Power Factor",{msp->calculateElectricPower(),0}},
+    {"Motor Power", {msp->calculateElectricPower(),0}}
   };
   for(auto p: out) {    
     auto a = Array::New(iso);
-    a->Set(0,Number::New(iso,get<1>(p)));
-    a->Set(1,Number::New(iso,get<2>(p)));          
-    r->Set(String::NewFromUtf8(iso,get<0>(p)),a);
+    a->Set(0,Number::New(iso,p.second[0]));
+    a->Set(1,Number::New(iso,p.second[1]));          
+    r->Set(String::NewFromUtf8(iso,p.first),a);
   }
   // SetR({
   //   0,//(new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
