@@ -105,18 +105,22 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
   args[4]->NumberValue();//cus cls
   args.GetReturnValue().Set(args[4]);
 }
-void Check(double exp, double act) {
-  assert(roundf(exp*1000)/1000 == roundf(act*1000)/1000);
+void Check(double exp, double act, const char* nm="") {
+  if (roundf(exp*1000)/1000 != roundf(act*1000)/1000) {
+    printf("\"%s\" TEST FAILED: %f %f\n",nm,exp,act);
+    assert(!"equal");
+  }
 }
 void TestSame() {
   auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460));
-  for (int i=1; i<=1000; i=i+2) {
-    Check(msp->calculate(),msp->calculate());
+  for (int i=1; i<=10000; i=i+2) {
+    Check(msp->calculate(),msp->calculate(),"SAME");
   }
 }
 void Test(const FunctionCallbackInfo<Value>& args) {
   TestSame();
-  Check(101.255,(new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());   
+  Check(101.255,(new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());
+  Check(143.4,(new MotorShaftPower(200,111.855,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());     
 }
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
