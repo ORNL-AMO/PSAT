@@ -37,7 +37,7 @@ double Get(const char *nm) {
 }
 void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
-  inp = args[1]->ToObject();
+  inp = args[0]->ToObject();
   auto r = Object::New(iso);
  
   auto drive = (Pump::Drive)(int)Get("drive");

@@ -188,7 +188,7 @@
     	}
 		$.each(Conds.concat([DefCond]),function(i,d) {
 			chg(FLOW,d,'flow');
-			chg(POWER,d,['motor_rated_power','motor_field_power']);
+			chg(POWER,d,['motor_rated_power'/*,'motor_field_power'*/]);
 			chg(DIST,d,'head');
 		});
 		saveProp('defCond',DefCond);
