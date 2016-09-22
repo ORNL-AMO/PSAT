@@ -121,7 +121,7 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   //TestSame();
   auto msp = new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460);
   Check(101.3,msp->calculate());
-  Check(94.4,msp->calculateEfficiency());
+  Check(.944,msp->calculateEfficiency());
   Check(79.5,msp->calculateCurrent());
   Check(145.2,msp->calculatePowerFactor());
   Check(80,msp->calculateElectricPower());
