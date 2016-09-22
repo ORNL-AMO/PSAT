@@ -40,8 +40,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   inp = args[1]->ToObject();
   auto r = Object::New(iso);
  
-  auto drive = (Pump::Drive)((int)Get("drive"));
-  auto effCls = (Motor::EfficiencyClass)((int)Get("efficiency_class"));
+  auto drive = (Pump::Drive)(int)Get("drive");
+  auto effCls = (Motor::EfficiencyClass)(int)Get("efficiency_class");
 
   auto loadMeth = FieldData::LoadEstimationMethod::POWER;
   double mp = Get("motor_field_power");
