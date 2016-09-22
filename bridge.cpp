@@ -106,7 +106,7 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
   args.GetReturnValue().Set(args[4]);
 }
 void Check(double exp, double act) {
-  assert(roundf(act*100)/100 == roundf(exp*100)/100);
+  assert(roundf(exp*1000)/1000 == roundf(act*1000)/1000);
 }
 void TestSame() {
   auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460));
@@ -116,7 +116,7 @@ void TestSame() {
 }
 void Test(const FunctionCallbackInfo<Value>& args) {
   TestSame();
-  Check(101.25,(new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());    
+  Check(101.255,(new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());   
 }
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
