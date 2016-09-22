@@ -1,11 +1,8 @@
 #include <node.h>
-#include <initializer_list>
-#include <tuple>
 #include <vector>
 #include <map>
-
 #include <iostream>
-#include <fstream>
+
 
 #include "Pump.h"
 #include "calculator/PumpEfficiency.h"
@@ -108,30 +105,26 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
   args[4]->NumberValue();//cus cls
   args.GetReturnValue().Set(args[4]);
 }
-ofstream Out;
 void Check(double exp, double act) {
-  Out << "Expected:" << exp << "; Actual: " << act << "; " <<
+  cout << "Expected:" << exp << "; Actual: " << act << "; " <<
     (roundf(act*100)/100 == roundf(exp*100)/100 ? "PASS" : "*** FAIL ***") << endl;
 }
 void TestBasic() {
-  Out.open ("clog.txt");
-  Out << "MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460)" << endl;
+  cout << "MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460)" << endl;
   auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460));
   Check(101.25,msp->calculate());  
 }
 void TestSame() {
-  Out << "MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460)" << endl;
+  cout << "MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460)" << endl;
   auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460));
   
   for (int i=1; i<=25; i=i+2) {
-    Out << "**** " << i << " ******" << endl;
+    cout << "**** " << i << " ******" << endl;
     Check(msp->calculate(),msp->calculate());
   }
 }
 void Test(const FunctionCallbackInfo<Value>& args) {
-  Out.open ("clog.txt");
   TestSame();
-  Out.close();
 }
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
