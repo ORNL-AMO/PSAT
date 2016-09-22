@@ -57,9 +57,9 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   
   map<const char *,vector<double>> out = { 
     {"Motor Shaft Power",{msp->calculate(),0}},
-    {"Motor Current",{msp->calculateCurrent(),0}},
     {"Motor Efficiency",{msp->calculateEfficiency(),0}},
-    {"Motor Power Factor",{msp->calculateElectricPower(),0}},
+    {"Motor Current",{msp->calculateCurrent(),0}},
+    {"Motor Power Factor",{msp->calculatePowerFactor(),0}},
     {"Motor Power", {msp->calculateElectricPower(),0}}
   };
   for(auto p: out) {    
@@ -119,7 +119,13 @@ void TestSame() {
 }
 void Test(const FunctionCallbackInfo<Value>& args) {
   //TestSame();
-  Check(101.255,(new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());
+  auto msp = new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460);
+  Check(101.3,msp->calculate());
+  Check(94.4,msp->calculateEfficiency());
+  Check(79.5,msp->calculateCurrent());
+  Check(145.2,msp->calculatePowerFactor());
+  Check(80,msp->calculateElectricPower());
+
   Check(143.4,(new MotorShaftPower(200,111.855,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());     
 }
 void Init(Local<Object> exports) {
