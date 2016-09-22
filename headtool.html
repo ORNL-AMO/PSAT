@@ -3,6 +3,10 @@
 		font-size: smaller;
 		font-weight: lighter;
 	}
+	strong {
+		font-size: smaller;
+		font-weight: bold;
+	}
 	table {
 		border-collapse: collapse;
 	}
@@ -38,9 +42,9 @@
 				<input name=suc onchange='suction(this)' type=checkbox>
 			</label>
 			<div id="sucGauge">
-				Suction gauge pressure <em>(Ps)</em><br>
+				Suction gauge pressure <strong>(Ps)</strong><br>
 				<input name=Ps><br>
-				Suction gauge elevation <em>(Zs)</em><br>
+				Suction gauge elevation <strong>(Zs)</strong><br>
 				<input name=Zs><br>
 			</div>
 			<div id="sucTank" style="display: none">
@@ -49,15 +53,15 @@
 				Suction tank fluid surface elevation<br>
 				<input name=Ztnk_s><br>
 			</div>
-			Suction line loss coefficients <em>(Ks)</em><br>
+			Suction line loss coefficients <strong>(Ks)</strong><br>
 			<input name=Ks><br>
 			Discharge pipe inner diameter<br>
 			<input name=Dd><br>
-			Discharge gauge pressure <em>(Pd)</em><br>
+			Discharge gauge pressure <strong>(Pd)</strong><br>
 			<input name=Pd><br>
-			Discharge gauge elevation <em>(Zd)</em><br>
+			Discharge gauge elevation <strong>(Zd)</strong><br>
 			<input name=Zd><br>
-			Discharge line loss coefficients <em>(Kd)</em><br>
+			Discharge line loss coefficients <strong>(Kd)</strong><br>
 			<input name=Kd><br>
 		</td>
 		<td id=results>
