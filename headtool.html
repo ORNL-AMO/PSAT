@@ -17,7 +17,7 @@
 		text-align: left;
 	}
 	#results {
-		vertical-align: bottom;
+		/*vertical-align: bottom;*/
 	}
 	#results td:first-child {
 		padding-right: 1rem;
@@ -35,7 +35,7 @@
 <img src='headtool_a.png' width=600>
 <table style='width: 100%'>
 	<tr>
-		<td>
+		<td style='vertical-align:top'>
 			Suction pipe inner diameter<br>
 			<input name=Ds><br>
 			<label>Suction tank<br>
@@ -55,17 +55,7 @@
 			</div>
 			Suction line loss coefficients <strong>(Ks)</strong><br>
 			<input name=Ks><br>
-			Discharge pipe inner diameter<br>
-			<input name=Dd><br>
-			Discharge gauge pressure <strong>(Pd)</strong><br>
-			<input name=Pd><br>
-			Discharge gauge elevation <strong>(Zd)</strong><br>
-			<input name=Zd><br>
-			Discharge line loss coefficients <strong>(Kd)</strong><br>
-			<input name=Kd><br>
-		</td>
-		<td id=results>
-			<table>
+			<table id=results>
 				<tr>
 					<td>Flow: <span id="flow" style=""/></td>
 					<td>Specific Gravity: <span id="sg"></span></td>
@@ -100,14 +90,25 @@
 					<td id=result></td>
 				</tr>				
 			</table>
+			
+		</td>
+		<td style='vertical-align:top'>
+			Discharge pipe inner diameter<br>
+			<input name=Dd><br>
+			Discharge gauge pressure <strong>(Pd)</strong><br>
+			<input name=Pd><br>
+			Discharge gauge elevation <strong>(Zd)</strong><br>
+			<input name=Zd><br>
+			Discharge line loss coefficients <strong>(Kd)</strong><br>
+			<input name=Kd><br>
 		</td>
 	</tr>
 	<tr>
-		<td/>
 		<td>
 			<button class=prime onclick='calc()'>CALCULATE</button>
 			<button class=prime id=accept onclick='accept()' style="display: none">ACCEPT</button>
 		</td>
+		<td/>
 	</tr>
 </table>
 			
