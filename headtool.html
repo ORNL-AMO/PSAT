@@ -73,22 +73,25 @@
 	</tr>
 	<tr>
 		<td>Gauge pressure</td>
-		<td class=sucGauge>						
-			<input name=Ps><strong>Ps</strong>
+		<td>
+			<div class=sucGauge>
+				<input name=Ps <strong>Ps</strong>
+			</div>									
 		</td>
 		<td>						
 			<input name=Pd><strong>Pd</strong>
-
 		</td>
 	</tr>
 	<tr>
+	</tr>
+	<tr>
 		<td>Gauge elevation</td>
-		<td class=sucGauge>
-			
-			<input name=Zs><strong>Zs</strong>
-		</td>
 		<td>
-			
+			<div class=sucGauge>
+				<input name=Zs><strong>Zs</strong>
+			</div>
+		</td>
+		<td>			
 			<input name=Zd><strong>Zd</strong>
 		</td>
 	</tr>
@@ -163,11 +166,11 @@
 <script>
 	function suction(e) {
 		if (e.checked) {
-			$('#sucGauge').hide();
-			$('#sucTank').show();
+			pg('.sucGauge').hide();
+			pg('.sucTank').show();
 		} else {
-			$('#sucGauge').show();
-			$('#sucTank').hide();
+			$('.sucGauge').show();
+			$('.sucTank').hide();
 		}
 	}
 	function v(d,flow) {
