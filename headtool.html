@@ -251,7 +251,7 @@
 	setUnit('pressure');
 	//hdFldUnit('Pg_');
 	pg('td:contains("Flow")').append(em(unit(FLOW)));
-	$('#flow').html(Cond.flow);
+	$('#flow').html(rnd(Cond.flow));
 	$('#sg').text(Cond.specific_gravity);
 	$('input').change(function () {
 		pg('#results ~ tr:not(:last-child) td:last-child').text('');
