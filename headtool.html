@@ -42,8 +42,7 @@
 <label id=chg>	
 	<input name=suc onchange='suction()' type=checkbox style='margin-right: .5rem'><div>Suction tank</div>
 </label>
-<img src='headtool_a.png' width=600>
-
+<img width=600>
 <table>
 	<tr>
 		<td></td>
@@ -133,8 +132,8 @@
 	Suction tank fluid surface elevation<br>
 	<input name=Ztnk_s><br>
 </div>-->
-	<tr id=results><td>&nbsp;</td></tr>
-	<tr>					
+	<tr><td>&nbsp;</td></tr>
+	<tr id=results>					
 		<th>Head</th>
 		<th></th>
 		<th>Result</th>
@@ -188,7 +187,9 @@
 		if (dom(nm('suc')).checked) {
 			pg('.sucGauge').hide();
 			pg('.sucTank').show();
+			pg('img').attr('src','headtool_b.png')
 		} else {
+			pg('img').attr('src','headtool_a.png');
 			pg('.sucGauge').show();
 			pg('.sucTank').hide();
 		}
