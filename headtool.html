@@ -22,7 +22,7 @@
 	#results td:first-child {
 		padding-right: 1rem;
 	}
-	#results tr:nth-child(n+2) {
+	#results~ tr:nth-child(n+2) {
 		background-color: #C3C8C8;
 	}
 	#result {
@@ -97,7 +97,7 @@
 				<input name=Ztnk_s><br>
 			</div>-->
 			
-				<tr>
+				<tr id=results>
 					<td>Flow: <span id="flow" style=""/></td>
 					<td>Specific Gravity: <span id="sg"></span></td>
 				</tr>
@@ -161,7 +161,7 @@
 		return v*v/2/g;
 	}
 	function r(txt,v) {
-		$(`#results td:contains(${txt})`).next().text(rnd(v));
+		$(`#results~ tr>td:contains(${txt})`).next().text(rnd(v));
 	}
 	function calc() {
         let flowU, distF, g;
