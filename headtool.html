@@ -11,6 +11,9 @@
 		display: flex;
 		align-items: center;
 	}
+	td:not(:first-child),th:not(:first-child) {
+		padding-left: 1.5rem;
+	}
 	table {
 		border-collapse: collapse;
 	}
@@ -112,7 +115,7 @@
 			<input name=Zd><strong>Zd</strong>
 		</td>
 	</tr>
-	<tr id=results>
+	<tr >
 		<td>Line loss coefficients</td>
 		<td>
 			
@@ -130,7 +133,7 @@
 	Suction tank fluid surface elevation<br>
 	<input name=Ztnk_s><br>
 </div>-->
-
+	<tr id=results><td>&nbsp;</td></tr>
 	<tr>					
 		<th>Head</th>
 		<th></th>
