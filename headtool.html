@@ -42,7 +42,7 @@
 <label id=chg>	
 	<input name=suc onchange='suction()' type=checkbox style='margin-right: .5rem'><div>Suction tank</div>
 </label>
-<img width=600>
+<img width=600 onload="pg().show()">
 <table>
 	<tr>
 		<td></td>
@@ -167,14 +167,6 @@
 		<td><button class=prime id=accept onclick='accept()' style="display: none">ACCEPT</button></td>
 	</tr>				
 </table>		
-
-
-		
-		
-	
-
-			
-
 <script>
 	function suction() {
 		if (dom(nm('suc')).checked) {
@@ -241,6 +233,7 @@
 		saveConds();
 		back();
 	}
+	pg().hide();
 	_txt = unit(DIST) == 'ft' ? 'inches' : 'mm';
 	setUnit('diameter');
 	_txt = unit(DIST);
