@@ -97,11 +97,13 @@
 				<input name=Ztnk_s><br>
 			</div>-->
 			
-				<tr id=results>
-					
-					<td>Flow: <span id="flow" style=""/></td>
-					<td>Specific Gravity: <span id="sg"></span></td>
+				<tr>					
+					<td>Flow</td>
+					<td id="flow"/></td>					
 				</tr>
+				<tr id=results>					
+					<td>Specific Gravity</td>
+					<td id="sg"/></td>
 				</tr>
 				<tr>					
 					<th>Head</th>
@@ -225,7 +227,8 @@
 	_txt = unit(PRESSURE);
 	setUnit('pressure');
 	//hdFldUnit('Pg_');
-	$('#flow').html(Cond.flow+em(unit(FLOW)));
+	pg('td:contains("Flow")').append(em(unit(FLOW)));
+	$('#flow').html(Cond.flow);
 	$('#sg').text(Cond.specific_gravity);
 	$('input').change(function () {
 		$('#results td:nth-child(2):gt(0)').text('');
