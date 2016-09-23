@@ -234,7 +234,7 @@
 		return ` <em>(${t})</em>`;
 	}
 	function setUnit(nm,s) {
-		pg(`td:contains(${nm})`).append(em(_txt));
+		pg(`tr:not(#results ~) td:contains(${nm})`).append(em(_txt));
 	}
 	function accept() {
 		Cond.head = Head;
