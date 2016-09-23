@@ -37,7 +37,7 @@
 </style>
 <h1>Head Tool</h1>
 <label id=chg>	
-	<input name=suc onchange='suction(this)' type=checkbox style='margin-right: .5rem'><div>Suction tank</div>
+	<input name=suc onchange='suction()' type=checkbox style='margin-right: .5rem'><div>Suction tank</div>
 </label>
 <img src='headtool_a.png' width=600>
 
@@ -95,6 +95,22 @@
 			<input name=Zd><strong>Zd</strong>
 		</td>
 	</tr>
+	<tr id="sucTank">
+		<td>
+			Tank gas overpressure
+		</td>
+		<td>
+			<input name=Pg_s>
+		</td>
+	</tr>
+	<tr id="sucTank">
+		<td>
+			Tank fluid surface elevation
+		</td>
+		<td>
+			<input name=Ztnk_s>
+		</td>
+	</tr>	
 	<tr id=results>
 		<td>Line loss coefficients</td>
 		<td>
@@ -164,13 +180,13 @@
 			
 
 <script>
-	function suction(e) {
-		if (e.checked) {
+	function suction() {
+		if (dom(nm('suc')).checked) {
 			pg('.sucGauge').hide();
 			pg('.sucTank').show();
 		} else {
-			$('.sucGauge').show();
-			$('.sucTank').hide();
+			pg('.sucGauge').show();
+			pg('.sucTank').hide();
 		}
 	}
 	function v(d,flow) {
@@ -244,4 +260,5 @@
 		$('#accept').hide();
 	});
 	setCtls(HeadTool);
+	suction();
 </script>
