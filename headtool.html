@@ -35,20 +35,21 @@
 <img src='headtool_a.png' width=600>
 			<table>
 				<tr>
+					<th></th>
 					<th>Suction</th>
 					<th>Discharge</th>
 				</tr>
 				<tr>
-					<td>
-						Pipe inner diameter<br>
-						<input name=Ds><br>
+					<td>Pipe inner diameter</td>
+					<td>						
+						<input name=Ds>
 					</td>
 					<td>
-						Pipe inner diameter<br>
-						<input name=Dd><br>
+						<input name=Dd>
 					</td>
 				</tr>
 				<tr>
+					<td></td>
 					<td>
 						<label>Suction tank<br>
 							<input name=suc onchange='suction(this)' type=checkbox>
@@ -57,36 +58,37 @@
 					<td></td>
 				</tr>
 				<tr>
+					<td>Gauge pressure</td>
 					<td class=sucGauge>
-						Gauge pressure <strong>(Ps)</strong><br>
-						<input name=Ps><br>
+						<strong>(Ps)</strong><br>
+						<input name=Ps>
 					</td>
 					<td>
-						Gauge pressure <strong>(Pd)</strong><br>
-						<input name=Pd><br>
+						<strong>(Pd)</strong><br>
+						<input name=Pd>
 
 					</td>
 				</tr>
 				<tr>
+					<td>Gauge elevation</td>
 					<td class=sucGauge>
-						Gauge elevation <strong>(Zs)</strong><br>
-						<input name=Zs><br>
+						<strong>(Zs)</strong><br>
+						<input name=Zs>
 					</td>
 					<td>
-						Gauge elevation <strong>(Zd)</strong><br>
-						<input name=Zd><br>
-
+						<strong>(Zd)</strong><br>
+						<input name=Zd><
 					</td>
 				</tr>
 				<tr>
+					<td>Line loss coefficients</td>
 					<td>
-						Line loss coefficients <strong>(Ks)</strong><br>
+						<strong>(Ks)</strong><br>
 						<input name=Ks><br>
 					</td>
 					<td>
-						Line loss coefficients <strong>(Kd)</strong><br>
+						<strong>(Kd)</strong><br>
 						<input name=Kd><br>
-
 					</td>
 				</tr>
 			
@@ -98,11 +100,13 @@
 			</div>-->
 			
 				<tr id=results>
+					
 					<td>Flow: <span id="flow" style=""/></td>
 					<td>Specific Gravity: <span id="sg"></span></td>
 				</tr>
 				</tr>
 				<tr>
+					
 					<th>Head</th>
 					<th>Result</th>
 				</tr>
