@@ -7,6 +7,10 @@
 		font-size: smaller;
 		font-weight: bold;
 	}
+	#chg {
+		display: flex;
+		align-items: center;
+	}
 	table {
 		border-collapse: collapse;
 	}
@@ -32,122 +36,119 @@
 }
 </style>
 <h1>Head Tool</h1>
+<label id=chg>	
+	<input name=suc onchange='suction(this)' type=checkbox style='margin-right: .5rem'><div>Suction tank</div>
+</label>
 <img src='headtool_a.png' width=600>
-			<table>
-				<tr>
-					<td>Suction tank</td>
-					<td>
-						<label>
-							<input name=suc onchange='suction(this)' type=checkbox>
-						</label>
-					</td>
-					<td></td>
-				</tr>
-				<tr>					
-					<td>Flow</td>
-					<td id="flow"/></td>					
-				</tr>
-				<tr>					
-					<td>Specific Gravity</td>
-					<td id="sg"/></td>
-				</tr>
-				<tr>
-					<th></th>
-					<th>Suction</th>
-					<th>Discharge</th>
-				</tr>
-				<tr>
-					<td>Pipe inner diameter</td>
-					<td>						
-						<input name=Ds>
-					</td>
-					<td>
-						<input name=Dd>
-					</td>
-				</tr>
-				<tr>
-					<td>Gauge pressure</td>
-					<td class=sucGauge>						
-						<input name=Ps><strong>Ps</strong>
-					</td>
-					<td>						
-						<input name=Pd><strong>Pd</strong>
 
-					</td>
-				</tr>
-				<tr>
-					<td>Gauge elevation</td>
-					<td class=sucGauge>
-						
-						<input name=Zs><strong>Zs</strong>
-					</td>
-					<td>
-						
-						<input name=Zd><strong>Zd</strong>
-					</td>
-				</tr>
-				<tr id=results>
-					<td>Line loss coefficients</td>
-					<td>
-						
-						<input name=Ks><strong>Ks</strong>
-					</td>
-					<td>
-						
-						<input name=Kd><strong>Kd</strong>
-					</td>
-				</tr>
+<table>
+	<tr>
+		<td></td>
+		<td>
 			
-			<!--<div id="sucTank" style="display: none">
-				Suction tank gas overpressure<br>
-				<input name=Pg_s><br>
-				Suction tank fluid surface elevation<br>
-				<input name=Ztnk_s><br>
-			</div>-->
-			
-				<tr>					
-					<th>Head</th>
-					<th></th>
-					<th>Result</th>
-				</tr>
-				<tr>
-					<td>Differential elevation head</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Differential pressure head</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Differential velocity head</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Estimated suction friction head</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Estimated discharge friction head</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Pump head</td>
-					<td></td>
-					<td id=result></td>
-				</tr>				
-			</table>
-			
-		
+		</td>
+		<td></td>
 	</tr>
-	
-		
-			<button class=prime onclick='calc()'>CALCULATE</button>
-			<button class=prime id=accept onclick='accept()' style="display: none">ACCEPT</button>
+	<tr>					
+		<td>Specific Gravity</td>
+		<td id="sg"/></td>
+	</tr>
+	<tr>					
+		<td>Flow</td>
+		<td id="flow"/></td>					
+	</tr>
+	<tr>
+		<th></th>
+		<th>Suction</th>
+		<th>Discharge</th>
+	</tr>
+	<tr>
+		<td>Pipe inner diameter</td>
+		<td>						
+			<input name=Ds>
+		</td>
+		<td>
+			<input name=Dd>
+		</td>
+	</tr>
+	<tr>
+		<td>Gauge pressure</td>
+		<td class=sucGauge>						
+			<input name=Ps><strong>Ps</strong>
+		</td>
+		<td>						
+			<input name=Pd><strong>Pd</strong>
+
+		</td>
+	</tr>
+	<tr>
+		<td>Gauge elevation</td>
+		<td class=sucGauge>
+			
+			<input name=Zs><strong>Zs</strong>
+		</td>
+		<td>
+			
+			<input name=Zd><strong>Zd</strong>
+		</td>
+	</tr>
+	<tr id=results>
+		<td>Line loss coefficients</td>
+		<td>
+			
+			<input name=Ks><strong>Ks</strong>
+		</td>
+		<td>
+			
+			<input name=Kd><strong>Kd</strong>
+		</td>
+	</tr>
+
+<!--<div id="sucTank" style="display: none">
+	Suction tank gas overpressure<br>
+	<input name=Pg_s><br>
+	Suction tank fluid surface elevation<br>
+	<input name=Ztnk_s><br>
+</div>-->
+
+	<tr>					
+		<th>Head</th>
+		<th></th>
+		<th>Result</th>
+	</tr>
+	<tr>
+		<td>Differential elevation head</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Differential pressure head</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Differential velocity head</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Estimated suction friction head</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Estimated discharge friction head</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Pump head</td>
+		<td></td>
+		<td id=result></td>
+	</tr>				
+</table>		
+<button class=prime onclick='calc()'>CALCULATE</button>
+<button class=prime id=accept onclick='accept()' style="display: none">ACCEPT</button>
 		
 		
 	
