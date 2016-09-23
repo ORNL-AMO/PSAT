@@ -77,18 +77,18 @@
 					</td>
 					<td>
 						<strong>(Zd)</strong><br>
-						<input name=Zd><
+						<input name=Zd>
 					</td>
 				</tr>
 				<tr>
 					<td>Line loss coefficients</td>
 					<td>
 						<strong>(Ks)</strong><br>
-						<input name=Ks><br>
+						<input name=Ks>
 					</td>
 					<td>
 						<strong>(Kd)</strong><br>
-						<input name=Kd><br>
+						<input name=Kd>
 					</td>
 				</tr>
 			
@@ -105,33 +105,39 @@
 					<td>Specific Gravity: <span id="sg"></span></td>
 				</tr>
 				</tr>
-				<tr>
-					
+				<tr>					
 					<th>Head</th>
+					<th></th>
 					<th>Result</th>
 				</tr>
 				<tr>
 					<td>Differential elevation head</td>
 					<td></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Differential pressure head</td>
+					<td></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>Differential velocity head</td>
 					<td></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Estimated suction friction head</td>
+					<td></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>Estimated discharge friction head</td>
 					<td></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>Pump head</td>
+					<td></td>
 					<td id=result></td>
 				</tr>				
 			</table>
@@ -204,9 +210,8 @@
 	function em(t) {
 		return ` <em>(${t})</em>`;
 	}
-	function hdFldUnit(s) {
-		nm(`${s}s`).after(` <em>${_txt}</em>`);
-		nm(`${s}d`).after(` <em>${_txt}</em>`);
+	function setUnit(nm,s) {
+		pg(`td:contains(${nm})`).append(em(_txt));
 	}
 	function accept() {
 		Cond.head = Head;
@@ -214,14 +219,14 @@
 		back();
 	}
 	_txt = unit(DIST) == 'ft' ? 'inches' : 'mm';
-	hdFldUnit('D');
+	setUnit('diameter');
 	_txt = unit(DIST);
-	hdFldUnit('Z');
-	hdFldUnit('Ztnk_');
+	setUnit('elevation');
+	//hdFldUnit('Ztnk_');
 	$('#results th').last().append(em(_txt));
 	_txt = unit(PRESSURE);
-	hdFldUnit('P');
-	hdFldUnit('Pg_');
+	setUnit('pressure');
+	//hdFldUnit('Pg_');
 	$('#flow').html(Cond.flow+em(unit(FLOW)));
 	$('#sg').text(Cond.specific_gravity);
 	$('input').change(function () {
