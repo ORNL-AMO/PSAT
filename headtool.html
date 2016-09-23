@@ -33,28 +33,69 @@
 </style>
 <h1>Head Tool</h1>
 <img src='headtool_a.png' width=600>
-<table style='width: 100%'>
-	<tr>
-		<td style='vertical-align:top'>
-			Suction pipe inner diameter<br>
-			<input name=Ds><br>
-			<label>Suction tank<br>
-				<input name=suc onchange='suction(this)' type=checkbox>
-			</label>
-			<div id="sucGauge">
-				Suction gauge pressure <strong>(Ps)</strong><br>
-				<input name=Ps><br>
-				Suction gauge elevation <strong>(Zs)</strong><br>
-				<input name=Zs><br>
-			</div>
-			<div id="sucTank" style="display: none">
+			<table>
+				<tr>
+					<th>Suction</th>
+					<th>Discharge</th>
+				</tr>
+				<tr>
+					<td>
+						Suction pipe inner diameter<br>
+						<input name=Ds><br>
+					</td>
+					<td>
+						Discharge pipe inner diameter<br>
+						<input name=Dd><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Suction tank<br>
+							<input name=suc onchange='suction(this)' type=checkbox>
+						</label>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class=sucGauge>
+						Suction gauge pressure <strong>(Ps)</strong><br>
+						<input name=Ps><br>
+					</td>
+					<td>
+						Discharge gauge pressure <strong>(Pd)</strong><br>
+						<input name=Pd><br>
+
+					</td>
+				</tr>
+				<tr>
+					<td class=sucGauge>
+						Suction gauge elevation <strong>(Zs)</strong><br>
+						<input name=Zs><br>
+					</td>
+					<td>
+						Discharge gauge elevation <strong>(Zd)</strong><br>
+						<input name=Zd><br>
+
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Suction line loss coefficients <strong>(Ks)</strong><br>
+						<input name=Ks><br>
+					</td>
+					<td>
+						Discharge line loss coefficients <strong>(Kd)</strong><br>
+						<input name=Kd><br>
+
+					</td>
+				</tr>
+			</table>
+			<!--<div id="sucTank" style="display: none">
 				Suction tank gas overpressure<br>
 				<input name=Pg_s><br>
 				Suction tank fluid surface elevation<br>
 				<input name=Ztnk_s><br>
-			</div>
-			Suction line loss coefficients <strong>(Ks)</strong><br>
-			<input name=Ks><br>
+			</div>-->
 			<table id=results>
 				<tr>
 					<td>Flow: <span id="flow" style=""/></td>
@@ -91,26 +132,16 @@
 				</tr>				
 			</table>
 			
-		</td>
-		<td style='vertical-align:top'>
-			Discharge pipe inner diameter<br>
-			<input name=Dd><br>
-			Discharge gauge pressure <strong>(Pd)</strong><br>
-			<input name=Pd><br>
-			Discharge gauge elevation <strong>(Zd)</strong><br>
-			<input name=Zd><br>
-			Discharge line loss coefficients <strong>(Kd)</strong><br>
-			<input name=Kd><br>
-		</td>
+		
 	</tr>
-	<tr>
-		<td>
+	
+		
 			<button class=prime onclick='calc()'>CALCULATE</button>
 			<button class=prime id=accept onclick='accept()' style="display: none">ACCEPT</button>
-		</td>
-		<td/>
-	</tr>
-</table>
+		
+		
+	
+
 			
 
 <script>
