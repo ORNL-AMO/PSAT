@@ -42,7 +42,7 @@
 <label id=chg>	
 	<input name=suc onchange='suction()' type=checkbox style='margin-right: .5rem'><div>Suction tank</div>
 </label>
-<img width=600 onload="pg().show()">
+<img onload="pg().show();$(this).width(pg('table').width());">
 <table>
 	<tr>
 		<td></td>
