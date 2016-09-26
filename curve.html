@@ -9,6 +9,9 @@
 	th {
 		text-align: left;
 	}
+	th:first-child, td:first-child {
+		padding-right: 1rem;
+	}
 	td>* {
     	display: block;
 	}
@@ -31,13 +34,17 @@
 	</div>
 	<table id=points>
 		<tr>
-			<th></th>			
+			<th>Condition</th>			
 			<th>Flow</th>
-			<th>Head</th>
-			<th>Condition</th>
+			<th>Head</th>			
 		</tr>
 		<tr>
-			<td><input type=checkbox></td>			
+			<td><select onchange='selCon(this)'><option selected disabled>Choose</option></select></td>			
+			<td><input></td>
+			<td><input></td>			
+		</tr>
+		<tr>
+			<td><select onchange='selCon(this)'><option selected disabled>Choose</option></select></td>			
 			<td><input></td>
 			<td><input></td>			
 		</tr>
@@ -140,12 +147,7 @@
 		ctx.stroke();
 	}
 	Conds.filter(c => c.grid).forEach(c => {
-	  pg('#points tr').last().before(`<tr>
-	  						<td><input type=checkbox></td>
-							<td>${rnd(c.flow)}</td>
-							<td>${rnd(c.head)}</td>
-							<td>${c.name}</td>							
-						</tr>`);		
+	  pg('select').append(`<option>${c.name}</option>`);		
 	});
 	Cnv = dom('canvas');
 	pg('input').change(function (){
