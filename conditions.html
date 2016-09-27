@@ -216,7 +216,7 @@
 				if (fn) {					
 					const 
 						hd=Object.keys(Conds[0]).sort(),
-						lines=[JSON.stringify([0,Units,HeadTool]),hd.join('\t')];
+						lines=[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')];
 					Conds.forEach(function(d,i) {
 						lines.push(
 							hd.map((nm,i)=> {
@@ -237,7 +237,7 @@
 						lines=fs.readFileSync(fn[0],'utf8').split('\n'),
 						hd=lines[1].split('\t');
 					Conds=[];
-					[,Units,HeadTool]=JSON.parse(lines[0]);					
+					[,Units,HeadTool,Curve]=JSON.parse(lines[0]);					
 					lines.slice(2).forEach((ln,row)=>{
 						Conds.push({});
 						ln.split('\t').forEach((v,i)=>{
