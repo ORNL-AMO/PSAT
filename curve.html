@@ -65,7 +65,10 @@
 
 <script>//# sourceURL=*curve
 	function selCond(e) {
-		alert($(e).find(':selected').data('cond').flow)
+		const 	c = $(e).find(':selected').data('cond'),
+				inp = $(e).parent().parent().find('input');
+		inp.first().val(rnd(c.flow));
+		inp.last().val(rnd(c.head));
 	}
 	function showHdBtn(show) {
 		pg('button')[show]();
