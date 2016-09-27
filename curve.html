@@ -69,6 +69,7 @@
 				inp = $(e).parent().parent().find('input');
 		inp.first().val(rnd(c.flow));
 		inp.last().val(rnd(c.head));
+		inp.first().change();
 	}
 	function showHdBtn(show) {
 		pg('button')[show]();
@@ -159,19 +160,10 @@
 	pg('input').change(function (){
 		$('#plot').hide();
 		Cnv.width+=0;
-		let show='hide';
-		switch (checked().length) {			
-			case 2:
-				const inp = checked().last().parent().parent().find('input');
-				if (inp.length==1 || ($.isNumeric(inp.eq(1).val()) && $.isNumeric(inp.eq(2).val()))) {
-					show = 'show';
-				}
-				break;
-			case 3:				
-				chk(pg(':checkbox'),false);
-				chk(this,true);
+		showHdBtn('hide');
+		if (pg('input').filter((i,e)=>$.isNumeric($(e).val())).length==4) {
+			showHdBtn('show');
 		}
-		showHdBtn(show);
 	});
 	function showUnit(txt,u) {
 		pg(`th:contains(${txt})`).append(em(unit(u)));
