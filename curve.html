@@ -161,6 +161,7 @@
 		if (pg('input').filter((i,e)=>$.isNumeric($(e).val())).length==4) {
 			showHdBtn('show');
 		}
+		saveProp('curve',$.makeArray(pg('input').map((i,v)=>$(v).val())));
 	}
 	pg('input').change(inpChg);
 	function showUnit(txt,u) {
@@ -168,5 +169,7 @@
 	}
 	showUnit('Flow',FLOW);
 	showUnit('Head',DIST);
+	loadProp('curve').forEach((v,i)=>pg('input').eq(i).val(v));
+	inpChg();
 </script>
 
