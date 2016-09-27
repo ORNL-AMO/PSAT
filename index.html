@@ -227,11 +227,17 @@
       function saveProp(nm,v) {
         LS.setItem(nm,JSON.stringify(v));
       }
-
+      function save() {
+        saveProp('units',Units);
+        saveProp('headTool',HeadTool);
+        saveProp('conditions',Conds);
+        saveProp('defCond',DefCond);
+        saveProp('curve',Curve);
+      }
       IMP = ['gpm','hp','ft','psig'];      
       function loadData(reset) {
         if (reset) {
-          saveProp('defCond', {
+          DefCond = {
             pump_style: 5,
             pump_rated_speed: 1780,
             drive: 0,
@@ -257,11 +263,12 @@
             motor_field_voltage: 460,
 
             grid: false       
-          });        
-          saveProp('units',IMP);
-          saveProp('conditions',[]);
-          saveHd({Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1});  
-          saveProp('curve',["","","",""]);        
+          };        
+          Units = IMP;
+          Conds = [];
+          HeadTool = {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1};  
+          Curve = ["","","",""];
+          save();        
         }
         Conds = loadProp('conditions');
         Units = loadProp('units');

@@ -191,16 +191,12 @@
 			chg(POWER,d,['motor_rated_power'/*,'motor_field_power'*/]);
 			chg(DIST,d,'head');
 		});
-		saveProp('defCond',DefCond);
-		saveConds();
 		chg(DIST,HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd']);		
 		chg(PRESSURE,HeadTool,['Ps','Pg_s','Pd']);		
-		saveHd();
 		chg(FLOW, Curve, [0,2]);
 		chg(DIST, Curve, [1,3]);
-		saveProp('curve',Curve);
 		Units = nunits;
-		saveProp('units',Units);
+		save();
 	}
 	function shade(n) {
 		$('td').removeClass('shade');
@@ -247,10 +243,7 @@
 							Conds[row][hd[i]]=v;
 						});
 					});
-					saveConds();
-					saveProp('units',Units);          
-          			saveHd(HeadTool);  
-          			saveProp('curve',Curve);        
+					save();
 					main();	
 				}
 			}
