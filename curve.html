@@ -39,12 +39,12 @@
 			<th>Head</th>			
 		</tr>
 		<tr>
-			<td><select onchange='selCon(this)'><option selected disabled>Choose</option></select></td>			
+			<td><select onchange='selCond(this)'><option selected disabled>Choose</option></select></td>			
 			<td><input></td>
 			<td><input></td>			
 		</tr>
 		<tr>
-			<td><select onchange='selCon(this)'><option selected disabled>Choose</option></select></td>			
+			<td><select onchange='selCond(this)'><option selected disabled>Choose</option></select></td>			
 			<td><input></td>
 			<td><input></td>			
 		</tr>
@@ -64,6 +64,9 @@
 </div>
 
 <script>//# sourceURL=*curve
+	function selCond(e) {
+		alert($(e).find(':selected').data('cond').flow)
+	}
 	function showHdBtn(show) {
 		pg('button')[show]();
 	}
@@ -147,7 +150,7 @@
 		ctx.stroke();
 	}
 	Conds.filter(c => c.grid).forEach(c => {
-	  pg('select').append(`<option>${c.name}</option>`);		
+	  pg('select').append($(`<option>${c.name}</option>`).data('cond',c));		
 	});
 	Cnv = dom('canvas');
 	pg('input').change(function (){
