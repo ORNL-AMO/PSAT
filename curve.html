@@ -74,12 +74,8 @@
 	function showHdBtn(show) {
 		pg('button')[show]();
 	}
-	function tblTxt(r,c) {
-		const td = pg(`#points tr:eq(${r}) td:eq(${c})`);
-		if (r!=pg('#points tr').length-1) {
-			return td.text();
-		}
-		return td.find('input').val();
+	function fh(n) {
+		return pg('#points input').eq(n).val();
 	}
 	function steps(v1,v2) {
 		const 	max = Math.max(v1,v2),
@@ -88,12 +84,10 @@
 		return [max, step, Math.ceil(max / step)];
 	}
 	function plot() {
-		const 	r1 = pparIdx(checked().first()),
-				f1 = tblTxt(r1,1),
-				h1 = tblTxt(r1,2),
-				r2 = pparIdx(checked().last()),			
-				f2 = tblTxt(r2,1),
-				h2 = tblTxt(r2,2),  
+		const 	f1 = fh(0),
+				h1 = fh(1),				
+				f2 = fh(2),
+				h2 = fh(3),  
 				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9))),
 				k = (h2-h1)/(Math.pow(f2,1.9)-Math.pow(f1,1.9)),
 				[xMax, xStep, xCnt] = steps(f1,f2),
