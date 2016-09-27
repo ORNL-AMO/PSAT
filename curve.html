@@ -34,7 +34,7 @@
 	</div>
 	<table id=points>
 		<tr>
-			<th>Condition</th>			
+			<th></th>			
 			<th>Flow</th>
 			<th>Head</th>			
 		</tr>
@@ -69,7 +69,7 @@
 				inp = $(e).parent().parent().find('input');
 		inp.first().val(rnd(c.flow));
 		inp.last().val(rnd(c.head));
-		inp.first().change();
+		inpChg();
 	}
 	function showHdBtn(show) {
 		pg('button')[show]();
@@ -157,14 +157,18 @@
 	  pg('select').append($(`<option>${c.name}</option>`).data('cond',c));		
 	});
 	Cnv = dom('canvas');
-	pg('input').change(function (){
+	function inpChg(ev) {
+		if (ev) {
+			pg('select :disabled')[pparIdx(this,-1)].selected=true;
+		}
 		$('#plot').hide();
 		Cnv.width+=0;
 		showHdBtn('hide');
 		if (pg('input').filter((i,e)=>$.isNumeric($(e).val())).length==4) {
 			showHdBtn('show');
 		}
-	});
+	}
+	pg('input').change(inpChg);
 	function showUnit(txt,u) {
 		pg(`th:contains(${txt})`).append(em(unit(u)));
 	}
