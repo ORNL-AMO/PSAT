@@ -19,7 +19,8 @@
   ],
   "scripts": {
     "start": "electron .",
-    "test": "electron test.js"
+    "test": "electron test.js",
+    "vs": "electron vs.js"
   },
   "devDependencies": {
     "electron-prebuilt": "1.2.8",
