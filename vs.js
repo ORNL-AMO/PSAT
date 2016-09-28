@@ -1,5 +1,13 @@
-console.log("node",process.versions.node);
-console.log("electron",process.versions.electron);
-console.log("chrome",process.versions.chrome);
-console.log("v8",process.versions.v8);
-process.exit(0);
+Electron = require('electron')
+App = Electron.app
+
+
+App.on('ready', function() {
+  Win = new Electron.BrowserWindow();
+  Win.loadURL(`file://${__dirname}/vs.html`);
+})
+
+App.on('window-all-closed', function () {
+    App.quit();
+})
+
