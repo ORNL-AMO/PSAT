@@ -379,7 +379,7 @@
       if (i==0) {
         newEl.find('span').text(c.name);     
       } else {              
-        setCtls(c,newEl); //debugger;
+        setCtls(c,newEl);
         //newEl.data('rowNm',$(e).children().first().children().first().contents().first().text().trim());
         newEl.data('rowNm',$(e).children(':first').text().replace(/\(.*\)/,'').trim());
       }
