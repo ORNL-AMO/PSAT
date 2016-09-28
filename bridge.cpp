@@ -60,7 +60,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     {"Motor Efficiency",{msp->calculateEfficiency(),0}},
     {"Motor Current",{msp->calculateCurrent(),0}},
     {"Motor Power Factor",{msp->calculatePowerFactor(),0}},
-    {"Motor Power", {msp->calculateElectricPower(),0}}
+    {"Motor Power", {mp,0}}
   };
   for(auto p: out) {    
     auto a = Array::New(iso);
@@ -119,11 +119,11 @@ void TestSame() {
 }
 void Test(const FunctionCallbackInfo<Value>& args) {
   //TestSame();
-  // auto msp = new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460);
-  // Check(101.3,msp->calculate());
-  // Check(.944,msp->calculateEfficiency());
-  // Check(79.5,msp->calculateCurrent());
-  // Check(145.2,msp->calculatePowerFactor());
+  auto msp = new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
+  Check(101.3,msp->calculate());
+  Check(.944,msp->calculateEfficiency());
+  Check(123.6,msp->calculateCurrent());
+  Check(81.2,msp->calculatePowerFactor());
   // Check(80,msp->calculateElectricPower());
 
   // Check(143.4,(new MotorShaftPower(200,111.855,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());     
