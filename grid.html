@@ -382,7 +382,6 @@
         setCtls(c,newEl); //debugger;
         //newEl.data('rowNm',$(e).children().first().children().first().contents().first().text().trim());
         newEl.data('rowNm',$(e).children(':first').text().replace(/\(.*\)/,'').trim());
-        //console.log($(e).children(':first').text().replace(/\(.*\)/,'').trim());
       }
     });    
   });         
