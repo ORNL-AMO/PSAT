@@ -23,7 +23,7 @@
     "vs": "electron vs.js"
   },
   "devDependencies": {
-    # "electron-prebuilt": "1.2.8",
+    "electron-prebuilt": "",
     "electron-reload": "^1.0.0"
   },
   "dependencies": {
