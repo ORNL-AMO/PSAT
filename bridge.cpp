@@ -112,13 +112,13 @@ void Check(double exp, double act, const char* nm="") {
   }
 }
 void TestSame() {
-  // auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460));
-  // for (int i=1; i<=10000; i=i+2) {
-  //   Check(msp->calculate(),msp->calculate(),"SAME");
-  // }
+  auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460));
+  for (int i=1; i<=10000; i=i+2) {
+    Check(msp->calculate(),msp->calculate(),"SAME");
+  }
 }
 void Test(const FunctionCallbackInfo<Value>& args) {
-  //TestSame();
+  TestSame();
   auto msp = new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
   Check(101.3,msp->calculate());
   Check(.944,msp->calculateEfficiency());
