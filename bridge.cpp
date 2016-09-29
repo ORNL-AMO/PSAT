@@ -59,7 +59,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     {"Motor Shaft Power",{msp->calculate(),0}},
     {"Motor Efficiency",{msp->calculateEfficiency(),0}},
     {"Motor Current",{msp->calculateCurrent(),0}},
-    //{"Motor Power Factor",{msp->calculatePowerFactor(),0}},
+    {"Motor Power Factor",{msp->calculatePowerFactor(),0}},
     {"Motor Power", {mp,0}}
   };
   for(auto p: out) {    
