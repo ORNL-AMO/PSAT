@@ -134,7 +134,30 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   Check100(95.6,msp->calculateEfficiency());
   Check100(84.3,msp->calculatePowerFactor());
   Check(166.5,msp->calculateCurrent());
+
+  msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,260);
+  Check(101.9,msp->calculate());
+  Check100(95,msp->calculateEfficiency());
+  Check100(138.8,msp->calculatePowerFactor());
+  Check(128,msp->calculateCurrent());
+
+  msp = new MotorShaftPower(100,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
+  Check(101.8,msp->calculate());
+  Check100(94.9,msp->calculateEfficiency());
+  Check100(86.7,msp->calculatePowerFactor());
+  Check(115.8,msp->calculateCurrent());
+
+  msp = new MotorShaftPower(200,80,1200,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
+  Check(101.4,msp->calculate());
+  Check100(94.5,msp->calculateEfficiency());
+  Check100(74.3,msp->calculatePowerFactor());
+  Check(135.1,msp->calculateCurrent());
   
+  msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,200,460);
+  Check(101.9,msp->calculate());
+  Check100(95,msp->calculateEfficiency());
+  Check100(35.2,msp->calculatePowerFactor());
+  Check(285,msp->calculateCurrent());
 }
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
