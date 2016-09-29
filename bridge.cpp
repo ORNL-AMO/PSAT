@@ -111,6 +111,9 @@ void Check(double exp, double act, const char* nm="") {
     assert(!"equal");
   }
 }
+void Check100(double exp, double act, const char* nm="") {
+  Check(exp,act*100,nm);
+}
 void TestSame() {
   auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460));
   for (int i=1; i<=10000; i=i+2) {
@@ -119,14 +122,19 @@ void TestSame() {
 }
 void Test(const FunctionCallbackInfo<Value>& args) {
   TestSame();
+  //assume power load meth, est fla, line=60
   auto msp = new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
-  Check(101.3,msp->calculate());
-  Check(.944,msp->calculateEfficiency());
-  Check(123.6,msp->calculateCurrent());
-  Check(81.2,msp->calculatePowerFactor());
-  // Check(80,msp->calculateElectricPower());
+  Check(101.9,msp->calculate());
+  Check100(95,msp->calculateEfficiency());
+  Check100(79.1,msp->calculatePowerFactor());
+  Check(127,msp->calculateCurrent());
 
-  // Check(143.4,(new MotorShaftPower(200,111.855,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460))->calculate());     
+  msp = new MotorShaftPower(200,111.855,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
+  Check(143.4,msp->calculate());
+  Check100(95.6,msp->calculateEfficiency());
+  Check100(84.3,msp->calculatePowerFactor());
+  Check(166.5,msp->calculateCurrent());
+  
 }
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
