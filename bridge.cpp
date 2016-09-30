@@ -60,7 +60,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     {"Motor Efficiency",{msp->calculateEfficiency(),0}},
     {"Motor Current",{msp->calculateCurrent(),0}},
     {"Motor Power Factor",{msp->calculatePowerFactor(),0}},
-    {"Motor Power", {mp,0}}
+    {"Motor Power", {mp,0}},
+    {"Annual Energy", {(new AnnualEnergy(mp,Get("fraction")))->calculate(),0}}
   };
   for(auto p: out) {    
     auto a = Array::New(iso);
