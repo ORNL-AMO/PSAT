@@ -34,15 +34,8 @@
 <label id=chg>	
 	<input name=suc onchange='suction()' type=checkbox style='margin-right: .5rem'><div>Suction tank</div>
 </label>
-<img onload="pg().show();$(this).width(pg('table').width());">
+<img onload="size()">
 <table>
-	<tr>
-		<td></td>
-		<td>
-			
-		</td>
-		<td></td>
-	</tr>
 	<tr>					
 		<td>Specific Gravity</td>
 		<td id="sg"/></td>
@@ -94,8 +87,6 @@
 		</td>
 	</tr>
 	<tr>
-	</tr>
-	<tr>
 		<td>Gauge elevation</td>
 		<td>
 			<div class=sucGauge>
@@ -112,8 +103,7 @@
 			
 			<input name=Ks><strong>Ks</strong>
 		</td>
-		<td>
-			
+		<td>			
 			<input name=Kd><strong>Kd</strong>
 		</td>
 	</tr>
@@ -160,6 +150,9 @@
 	</tr>				
 </table>		
 <script>
+	function size() {
+		pg().show();$('img').width(pg('table').width());
+	}
 	function suction() {
 		if (dom(nm('suc')).checked) {
 			pg('.sucGauge').hide();
