@@ -223,11 +223,9 @@
 	setUnit('diameter');
 	_txt = unit(DIST);
 	setUnit('elevation');
-	//hdFldUnit('Ztnk_');
 	$('#results th').last().append(em(_txt));
 	_txt = unit(PRESSURE);
-	setUnit('pressure');
-	//hdFldUnit('Pg_');
+	setUnit('pressure');	
 	pg('td:contains("Flow")').append(em(unit(FLOW)));
 	$('#flow').html(rnd(Cond.flow));
 	$('#sg').text(Cond.specific_gravity);
