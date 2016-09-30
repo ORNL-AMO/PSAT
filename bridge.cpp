@@ -54,14 +54,16 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   }
   
   auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage"),Get("motor_field_voltage")));
-  
+  auto energy = (new AnnualEnergy(mp,Get("fraction")))->calculate();
+
   map<const char *,vector<double>> out = { 
     {"Motor Shaft Power",{msp->calculate(),0}},
     {"Motor Efficiency",{msp->calculateEfficiency(),0}},
     {"Motor Current",{msp->calculateCurrent(),0}},
     {"Motor Power Factor",{msp->calculatePowerFactor(),0}},
     {"Motor Power", {mp,0}},
-    {"Annual Energy", {(new AnnualEnergy(mp,Get("fraction")))->calculate(),0}}
+    {"Annual Energy", {energy,0}},
+    {"Annual Cost", {(new AnnualCost(energy,Get("cost")))->calculate()*1000,0}},
   };
   for(auto p: out) {    
     auto a = Array::New(iso);
@@ -154,11 +156,21 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   Check100(74.3,msp->calculatePowerFactor());
   Check(135.1,msp->calculateCurrent());
   
-  msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,200,460);
-  Check(101.9,msp->calculate());
-  Check100(95,msp->calculateEfficiency());
-  Check100(35.2,msp->calculatePowerFactor());
-  Check(285,msp->calculateCurrent());
+  // msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,200,460);
+  // Check(101.9,msp->calculate());
+  // Check100(95,msp->calculateEfficiency());
+  // Check100(35.2,msp->calculatePowerFactor());
+  // Check(285,msp->calculateCurrent());
+
+  auto ae = (new AnnualEnergy(80,1))->calculate();
+  Check(700.8,ae);
+
+  ae = (new AnnualEnergy(150,.25))->calculate();
+  Check(328.5,ae);
+  
+  auto ac = (new AnnualCost(328.5,.05))->calculate();
+  Check(16.4,ac);
+
 }
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
