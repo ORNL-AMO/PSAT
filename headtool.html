@@ -97,10 +97,9 @@
 			<input name=Zd><strong>Zd</strong>
 		</td>
 	</tr>
-	<tr >
+	<tr>
 		<td>Line loss coefficients</td>
 		<td>
-			
 			<input name=Ks><strong>Ks</strong>
 		</td>
 		<td>			
@@ -230,7 +229,7 @@
 	$('#flow').html(rnd(Cond.flow));
 	$('#sg').text(Cond.specific_gravity);
 	$('input').change(function () {
-		pg('#results ~ tr:not(:last-child) td:last-child').text('');
+		pg('#results ~ :not(:last-child) :last-child').text('');
 		pg('#accept').hide();
 	});
 	setCtls(HeadTool);
