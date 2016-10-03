@@ -48,9 +48,9 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   double mc = Get("motor_field_current");
   if (mc>0) {
     loadMeth = FieldData::LoadEstimationMethod::CURRENT;
-    mp = (new MotorPower(Get("motor_rated_voltage"),mc,0))->calculate();//power factor
+    //mp = (new MotorPower(Get("motor_rated_voltage"),mc,0))->calculate();//power factor
   } else {
-    mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0))->calculate();//loadf
+    //mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0,Get("motor_rated_voltage")))->calculate();//loadf
   }
   
   auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage"),Get("motor_field_voltage")));
