@@ -4,27 +4,28 @@
 #include <iostream>
 
 
-#include "Pump.h"
-#include "calculator/PumpEfficiency.h"
-#include "calculator/OptimalPumpEfficiency.h"
-#include "calculator/MotorRatedPower.h"
-#include "calculator/OptimalMotorRatedPower.h"
-#include "calculator/MotorShaftPower.h"
-#include "calculator/OptimalMotorShaftPower.h"
-#include "calculator/PumpShaftPower.h"
-#include "calculator/OptimalPumpShaftPower.h"
-#include "calculator/MotorEfficiency.h"
-#include "calculator/OptimalMotorEfficiency.h"
-#include "calculator/MotorPowerFactor.h"
-#include "calculator/OptimalMotorPowerFactor.h"
-#include "calculator/MotorCurrent.h"
-#include "calculator/OptimalMotorCurrent.h"
-#include "calculator/MotorPower.h"
-#include "calculator/OptimalMotorPower.h"
-#include "AnnualEnergy.h"
-#include "AnnualCost.h"
-#include "AnnualSavingsPotential.h"
-#include "OptimizationRating.h"
+#include "PSATResult.h"
+// #include "Pump.h"
+// #include "calculator/PumpEfficiency.h"
+// #include "calculator/OptimalPumpEfficiency.h"
+// #include "calculator/MotorRatedPower.h"
+// #include "calculator/OptimalMotorRatedPower.h"
+// #include "calculator/MotorShaftPower.h"
+// #include "calculator/OptimalMotorShaftPower.h"
+// #include "calculator/PumpShaftPower.h"
+// #include "calculator/OptimalPumpShaftPower.h"
+// #include "calculator/MotorEfficiency.h"
+// #include "calculator/OptimalMotorEfficiency.h"
+// #include "calculator/MotorPowerFactor.h"
+// #include "calculator/OptimalMotorPowerFactor.h"
+// #include "calculator/MotorCurrent.h"
+// #include "calculator/OptimalMotorCurrent.h"
+// #include "calculator/MotorPower.h"
+// #include "calculator/OptimalMotorPower.h"
+// // #include "AnnualEnergy.h"
+// // #include "AnnualCost.h"
+// #include "AnnualSavingsPotential.h"
+// #include "OptimizationRating.h"
 
 using namespace v8;
 using namespace std;
@@ -40,37 +41,41 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   inp = args[0]->ToObject();
   auto r = Object::New(iso);
  
-  auto drive = (Pump::Drive)(int)Get("drive");
-  auto effCls = (Motor::EfficiencyClass)(int)Get("efficiency_class");
+  // new Pump((Pump::Drive)(int)Get("pump_style"),(Pump::Drive)(int)Get("drive"),
+  //   Get("viscosity"),Get("specific_Gravity"),Get("stages"),Get("fixed_speed"));
+  auto psat = new PSATResult();
 
-  auto loadMeth = FieldData::LoadEstimationMethod::POWER;
-  double mp = Get("motor_field_power");
-  double mc = Get("motor_field_current");
-  if (mc>0) {
-    loadMeth = FieldData::LoadEstimationMethod::CURRENT;
-    //mp = (new MotorPower(Get("motor_rated_voltage"),mc,0))->calculate();//power factor
-  } else {
-    //mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0,Get("motor_rated_voltage")))->calculate();//loadf
-  }
+  // auto drive = (Pump::Drive)(int)Get("drive");
+  // auto effCls = (Motor::EfficiencyClass)(int)Get("efficiency_class");
+
+  // auto loadMeth = FieldData::LoadEstimationMethod::POWER;
+  // double mp = Get("motor_field_power");
+  // double mc = Get("motor_field_current");
+  // if (mc>0) {
+  //   loadMeth = FieldData::LoadEstimationMethod::CURRENT;
+  //   //mp = (new MotorPower(Get("motor_rated_voltage"),mc,0))->calculate();//power factor
+  // } else {
+  //   //mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0,Get("motor_rated_voltage")))->calculate();//loadf
+  // }
   
-  auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage"),Get("motor_field_voltage")));
-  auto energy = (new AnnualEnergy(mp,Get("fraction")))->calculate();
+  // auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage"),Get("motor_field_voltage")));
+  // auto energy = (new AnnualEnergy(mp,Get("fraction")))->calculate();
 
-  map<const char *,vector<double>> out = { 
-    {"Motor Shaft Power",{msp->calculate(),0}},
-    {"Motor Efficiency",{msp->calculateEfficiency(),0}},
-    {"Motor Current",{msp->calculateCurrent(),0}},
-    {"Motor Power Factor",{msp->calculatePowerFactor(),0}},
-    {"Motor Power", {mp,0}},
-    {"Annual Energy", {energy,0}},
-    {"Annual Cost", {(new AnnualCost(energy,Get("cost")))->calculate()*1000,0}},
-  };
-  for(auto p: out) {    
-    auto a = Array::New(iso);
-    a->Set(0,Number::New(iso,p.second[0]));
-    a->Set(1,Number::New(iso,p.second[1]));          
-    r->Set(String::NewFromUtf8(iso,p.first),a);
-  }
+  // map<const char *,vector<double>> out = { 
+  //   {"Motor Shaft Power",{msp->calculate(),0}},
+  //   {"Motor Efficiency",{msp->calculateEfficiency(),0}},
+  //   {"Motor Current",{msp->calculateCurrent(),0}},
+  //   {"Motor Power Factor",{msp->calculatePowerFactor(),0}},
+  //   {"Motor Power", {mp,0}},
+  //   {"Annual Energy", {energy,0}},
+  //   {"Annual Cost", {(new AnnualCost(energy,Get("cost")))->calculate()*1000,0}},
+  // };
+  // for(auto p: out) {    
+  //   auto a = Array::New(iso);
+  //   a->Set(0,Number::New(iso,p.second[0]));
+  //   a->Set(1,Number::New(iso,p.second[1]));          
+  //   r->Set(String::NewFromUtf8(iso,p.first),a);
+  // }
   // SetR({
   //   0,//(new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
   //   0,//(new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
@@ -118,64 +123,64 @@ void Check100(double exp, double act, const char* nm="") {
   Check(exp,act*100,nm);
 }
 void TestSame() {
-  auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460));
+  // auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460));
   for (int i=1; i<=10000; i=i+2) {
-    Check(msp->calculate(),msp->calculate(),"SAME");
+    // Check(msp->calculate(),msp->calculate(),"SAME");
   }
 }
-void Test(const FunctionCallbackInfo<Value>& args) {
-  TestSame();
-  //assume power load meth, est fla, line=60
-  auto msp = new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
-  Check(101.9,msp->calculate());
-  Check100(95,msp->calculateEfficiency());
-  Check100(79.1,msp->calculatePowerFactor());
-  Check(127,msp->calculateCurrent());
+// void Test(const FunctionCallbackInfo<Value>& args) {
+//   TestSame();
+//   //assume power load meth, est fla, line=60
+//   auto msp = new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
+//   Check(101.9,msp->calculate());
+//   Check100(95,msp->calculateEfficiency());
+//   Check100(79.1,msp->calculatePowerFactor());
+//   Check(127,msp->calculateCurrent());
 
-  msp = new MotorShaftPower(200,111.855,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
-  Check(143.4,msp->calculate());
-  Check100(95.6,msp->calculateEfficiency());
-  Check100(84.3,msp->calculatePowerFactor());
-  Check(166.5,msp->calculateCurrent());
+//   msp = new MotorShaftPower(200,111.855,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
+//   Check(143.4,msp->calculate());
+//   Check100(95.6,msp->calculateEfficiency());
+//   Check100(84.3,msp->calculatePowerFactor());
+//   Check(166.5,msp->calculateCurrent());
 
-  msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,260);
-  Check(101.9,msp->calculate());
-  Check100(95,msp->calculateEfficiency());
-  Check100(138.8,msp->calculatePowerFactor());
-  Check(128,msp->calculateCurrent());
+//   msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,260);
+//   Check(101.9,msp->calculate());
+//   Check100(95,msp->calculateEfficiency());
+//   Check100(138.8,msp->calculatePowerFactor());
+//   Check(128,msp->calculateCurrent());
 
-  msp = new MotorShaftPower(100,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
-  Check(101.8,msp->calculate());
-  Check100(94.9,msp->calculateEfficiency());
-  Check100(86.7,msp->calculatePowerFactor());
-  Check(115.8,msp->calculateCurrent());
+//   msp = new MotorShaftPower(100,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
+//   Check(101.8,msp->calculate());
+//   Check100(94.9,msp->calculateEfficiency());
+//   Check100(86.7,msp->calculatePowerFactor());
+//   Check(115.8,msp->calculateCurrent());
 
-  msp = new MotorShaftPower(200,80,1200,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
-  Check(101.4,msp->calculate());
-  Check100(94.5,msp->calculateEfficiency());
-  Check100(74.3,msp->calculatePowerFactor());
-  Check(135.1,msp->calculateCurrent());
+//   msp = new MotorShaftPower(200,80,1200,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
+//   Check(101.4,msp->calculate());
+//   Check100(94.5,msp->calculateEfficiency());
+//   Check100(74.3,msp->calculatePowerFactor());
+//   Check(135.1,msp->calculateCurrent());
   
-  // msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,200,460);
-  // Check(101.9,msp->calculate());
-  // Check100(95,msp->calculateEfficiency());
-  // Check100(35.2,msp->calculatePowerFactor());
-  // Check(285,msp->calculateCurrent());
+//   // msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,200,460);
+//   // Check(101.9,msp->calculate());
+//   // Check100(95,msp->calculateEfficiency());
+//   // Check100(35.2,msp->calculatePowerFactor());
+//   // Check(285,msp->calculateCurrent());
 
-  auto ae = (new AnnualEnergy(80,1))->calculate();
-  Check(700.8,ae);
+//   auto ae = (new AnnualEnergy(80,1))->calculate();
+//   Check(700.8,ae);
 
-  ae = (new AnnualEnergy(150,.25))->calculate();
-  Check(328.5,ae);
+//   ae = (new AnnualEnergy(150,.25))->calculate();
+//   Check(328.5,ae);
   
-  auto ac = (new AnnualCost(328.5,.05))->calculate();
-  Check(16.4,ac);
+//   auto ac = (new AnnualCost(328.5,.05))->calculate();
+//   Check(16.4,ac);
 
-}
+// }
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA); 
-  NODE_SET_METHOD(exports, "test", Test);  
+  // NODE_SET_METHOD(exports, "test", Test);  
 }
 
 NODE_MODULE(bridge, Init)
