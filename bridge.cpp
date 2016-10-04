@@ -41,8 +41,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   inp = args[0]->ToObject();
   auto r = Object::New(iso);
  
-  // new Pump((Pump::Drive)(int)Get("pump_style"),(Pump::Drive)(int)Get("drive"),
-  //   Get("viscosity"),Get("specific_Gravity"),Get("stages"),Get("fixed_speed"));
+  new Pump((Pump::Style)(int)Get("pump_style"),Get("pump_rpm"),(Pump::Drive)(int)Get("drive"),
+    Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
   auto psat = new PSATResult();
 
   // auto drive = (Pump::Drive)(int)Get("drive");
