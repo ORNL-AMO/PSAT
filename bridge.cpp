@@ -40,13 +40,16 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   inp = args[0]->ToObject();
   auto r = Object::New(iso);
+
+  auto drive = (Pump::Drive)(int)Get("drive");
+  auto effCls = (Motor::EfficiencyClass)(int)Get("efficiency_class");
  
-  new Pump((Pump::Style)(int)Get("pump_style"),Get("pump_rpm"),(Pump::Drive)(int)Get("drive"),
+  new Pump((Pump::Style)(int)Get("pump_style"),Get("pump_rpm"),drive,
     Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
+  new Motor((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_power"),Get("motor_rpm"),
+    effCls,0,Get("motor_rated_voltage"),0,Get("motor_rated_flc"),Get("margin"));
   auto psat = new PSATResult();
 
-  // auto drive = (Pump::Drive)(int)Get("drive");
-  // auto effCls = (Motor::EfficiencyClass)(int)Get("efficiency_class");
 
   // auto loadMeth = FieldData::LoadEstimationMethod::POWER;
   // double mp = Get("motor_field_power");
