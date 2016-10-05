@@ -219,7 +219,7 @@
 					Conds.forEach(function(d,i) {
 						lines.push(
 							hd.map((nm,i)=> {
-								return d[nm];
+								return JSON.stringify(d[nm]);
 							}).join('\t')
 						);
 					});		
@@ -240,7 +240,7 @@
 					lines.slice(2).forEach((ln,row)=>{
 						Conds.push({});
 						ln.split('\t').forEach((v,i)=>{
-							Conds[row][hd[i]]=v;
+							Conds[row][hd[i]]=JSON.parse(v);
 						});
 					});
 					save();
