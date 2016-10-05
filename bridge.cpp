@@ -54,9 +54,10 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   FieldData fd(Get("flow"),Get("head"),(FieldData::LoadEstimationMethod)0,Get("motor_field_power"),
       Get("motor_field_current"),Get("motor_field_current"));
   PSATResult psat(pump,motor,fin,fd);
+  psat.calculate();
   auto ex = psat.getExisting();
   
-  ;
+  
 
   // auto loadMeth = FieldData::LoadEstimationMethod::POWER;
   // double mp = Get("motor_field_power");
@@ -72,14 +73,14 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   // auto energy = (new AnnualEnergy(mp,Get("fraction")))->calculate();
 
   map<const char *,vector<double>> out = { 
-      {"Pump Efficiency",{ex.pumpEfficiency_,0}},    
-  //   {"Motor Shaft Power",{msp->calculate(),0}},
-  //   {"Motor Efficiency",{msp->calculateEfficiency(),0}},
-  //   {"Motor Current",{msp->calculateCurrent(),0}},
-  //   {"Motor Power Factor",{msp->calculatePowerFactor(),0}},
-  //   {"Motor Power", {mp,0}},
-  //   {"Annual Energy", {energy,0}},
-  //   {"Annual Cost", {(new AnnualCost(energy,Get("cost")))->calculate()*1000,0}},
+    {"Pump Efficiency",{ex.pumpEfficiency_,0}},    
+    {"Motor Shaft Power",{ex.motorShaftPower_,0}},
+    {"Motor Efficiency",{ex.motorEfficiency_,0}},
+    {"Motor Power Factor",{ex.motorPowerFactor_,0}},
+    {"Motor Current",{ex.motorCurrent_,0}},    
+    {"Motor Power", {ex.motorPower_,0}},
+    {"Annual Energy", {ex.annualEnergy_,0}},
+    {"Annual Cost", {ex.annualCost_*1000,0}},
   };
   for(auto p: out) {    
     auto a = Array::New(iso);
