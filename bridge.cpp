@@ -32,7 +32,7 @@ using namespace std;
 
 Isolate* iso;
 Local<Object> inp;
-
+//todo assert exist
 double Get(const char *nm) {
   return inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
 }
@@ -46,13 +46,13 @@ void Results(const FunctionCallbackInfo<Value>& args) {
  
   
   
-  Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_rpm"),drive,
+  Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_rated_speed"),drive,
       Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
-  Motor motor((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_power"),Get("motor_rpm"),
+  Motor motor((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_power"),Get("motor_rated_speed"),
       effCls,0,Get("motor_rated_voltage"),Get("motor_rated_flc"),Get("margin"));
   Financial fin(Get("fraction"),Get("cost"));
   FieldData fd(Get("flow"),Get("head"),(FieldData::LoadEstimationMethod)0,Get("motor_field_power"),
-      Get("motor_field_current"),Get("motor_field_current"));
+      Get("motor_field_current"),Get("motor_field_voltage"));
   PSATResult psat(pump,motor,fin,fd);
   psat.calculate();
   auto ex = psat.getExisting();
@@ -189,10 +189,24 @@ void TestSame() {
 //   Check(16.4,ac);
 
 // }
+
+void Test2(const FunctionCallbackInfo<Value>& args) {
+  Pump pump((Pump::Style)0,1780,(Pump::Drive)0,
+      1,1,1,(Pump::Speed)1);
+  Motor motor((Motor::LineFrequency)1,200,1780,
+      (Motor::EfficiencyClass)1,0,460,225,0);
+  Financial fin(1,.05);
+  FieldData fd(2000,277,(FieldData::LoadEstimationMethod)0,150,
+      0,460);
+  PSATResult psat(pump,motor,fin,fd);
+  psat.calculate();
+  auto ex = psat.getExisting();
+  cout << ex.motorCurrent_;
+}
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA); 
-  // NODE_SET_METHOD(exports, "test", Test);  
+  NODE_SET_METHOD(exports, "test", Test2);  
 }
 
 NODE_MODULE(bridge, Init)
