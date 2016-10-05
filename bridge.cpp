@@ -44,12 +44,19 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   auto drive = (Pump::Drive)(int)Get("drive");
   auto effCls = (Motor::EfficiencyClass)(int)Get("efficiency_class");
  
-  new Pump((Pump::Style)(int)Get("pump_style"),Get("pump_rpm"),drive,
-    Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
-  new Motor((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_power"),Get("motor_rpm"),
-    effCls,0,Get("motor_rated_voltage"),0,Get("motor_rated_flc"),Get("margin"));
-  auto psat = new PSATResult();
-
+  
+  
+  Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_rpm"),drive,
+      Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
+  Motor motor((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_power"),Get("motor_rpm"),
+      effCls,0,Get("motor_rated_voltage"),0,Get("motor_rated_flc"),Get("margin"));
+  Financial fin(Get("fraction"),Get("cost"));
+  FieldData fd(Get("flow"),Get("head"),(FieldData::LoadEstimationMethod)0,Get("motor_field_power"),
+      Get("motor_field_current"),Get("motor_field_current"));
+  PSATResult psat(pump,motor,fin,fd);
+  auto ex = psat.getExisting();
+  
+  ;
 
   // auto loadMeth = FieldData::LoadEstimationMethod::POWER;
   // double mp = Get("motor_field_power");
@@ -64,7 +71,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   // auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage"),Get("motor_field_voltage")));
   // auto energy = (new AnnualEnergy(mp,Get("fraction")))->calculate();
 
-  // map<const char *,vector<double>> out = { 
+  map<const char *,vector<double>> out = { 
+      {"Pump Efficiency",{ex.pumpEfficiency_,0}},    
   //   {"Motor Shaft Power",{msp->calculate(),0}},
   //   {"Motor Efficiency",{msp->calculateEfficiency(),0}},
   //   {"Motor Current",{msp->calculateCurrent(),0}},
@@ -72,13 +80,13 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   //   {"Motor Power", {mp,0}},
   //   {"Annual Energy", {energy,0}},
   //   {"Annual Cost", {(new AnnualCost(energy,Get("cost")))->calculate()*1000,0}},
-  // };
-  // for(auto p: out) {    
-  //   auto a = Array::New(iso);
-  //   a->Set(0,Number::New(iso,p.second[0]));
-  //   a->Set(1,Number::New(iso,p.second[1]));          
-  //   r->Set(String::NewFromUtf8(iso,p.first),a);
-  // }
+  };
+  for(auto p: out) {    
+    auto a = Array::New(iso);
+    a->Set(0,Number::New(iso,p.second[0]));
+    a->Set(1,Number::New(iso,p.second[1]));          
+    r->Set(String::NewFromUtf8(iso,p.first),a);
+  }
   // SetR({
   //   0,//(new PumpEfficiency(Get("specific_gravity"),Get("flow"),Get("head"),0))->calculate(),//pumpShaftPower
   //   0,//(new OptimalPumpEfficiency(static_cast<Pump::Style>(Get("style")),
