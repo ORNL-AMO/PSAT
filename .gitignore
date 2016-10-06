@@ -2,3 +2,4 @@ build
 node_modules
 CMakeLists.txt
 .vscode
+psat-client-darwin-x64
