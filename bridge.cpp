@@ -49,7 +49,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_rated_speed"),drive,
       Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
   Motor motor((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_power"),Get("motor_rated_speed"),
-      effCls,0,Get("motor_rated_voltage"),Get("motor_rated_flc"),Get("margin"));
+      effCls,Get("efficiency"),Get("motor_rated_voltage"),Get("motor_rated_flc"),Get("margin"));
   Financial fin(Get("fraction"),Get("cost"));
   FieldData fd(Get("flow"),Get("head"),(FieldData::LoadEstimationMethod)0,Get("motor_field_power"),
       Get("motor_field_current"),Get("motor_field_voltage"));
@@ -81,6 +81,8 @@ void Results(const FunctionCallbackInfo<Value>& args) {
     {"Motor Power", {ex.motorPower_,0}},
     {"Annual Energy", {ex.annualEnergy_,0}},
     {"Annual Cost", {ex.annualCost_*1000,0}},
+    {"Savings Potential", {psat.getAnnualSavingsPotential(),0}},
+    {"Optimization Rating", {psat.getOptimizationRating(),0}}
   };
   for(auto p: out) {    
     auto a = Array::New(iso);
