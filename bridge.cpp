@@ -51,27 +51,12 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   Motor motor((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_power"),Get("motor_rated_speed"),
       effCls,Get("efficiency"),Get("motor_rated_voltage"),Get("motor_rated_flc"),Get("margin"));
   Financial fin(Get("fraction"),Get("cost"));
-  FieldData fd(Get("flow"),Get("head"),(FieldData::LoadEstimationMethod)0,Get("motor_field_power"),
-      Get("motor_field_current"),Get("motor_field_voltage"));
+  FieldData fd(Get("flow"),Get("head"),(FieldData::LoadEstimationMethod)(Get("motor_field_power")>0?0:1),
+      Get("motor_field_power"),Get("motor_field_current"),Get("motor_field_voltage"));
   PSATResult psat(pump,motor,fin,fd);
   psat.calculate();
   auto ex = psat.getExisting();
   
-  
-
-  // auto loadMeth = FieldData::LoadEstimationMethod::POWER;
-  // double mp = Get("motor_field_power");
-  // double mc = Get("motor_field_current");
-  // if (mc>0) {
-  //   loadMeth = FieldData::LoadEstimationMethod::CURRENT;
-  //   //mp = (new MotorPower(Get("motor_rated_voltage"),mc,0))->calculate();//power factor
-  // } else {
-  //   //mc = (new MotorCurrent(Get("motor_rated_power"),Get("motor_rated_speed"),effCls,0,Get("motor_rated_voltage")))->calculate();//loadf
-  // }
-  
-  // auto msp = (new MotorShaftPower(Get("motor_rated_power"),mp,Get("motor_rated_speed"),effCls,Get("motor_rated_voltage"),Get("motor_field_voltage")));
-  // auto energy = (new AnnualEnergy(mp,Get("fraction")))->calculate();
-
   map<const char *,vector<double>> out = { 
     {"Pump Efficiency",{ex.pumpEfficiency_,0}},    
     {"Motor Shaft Power",{ex.motorShaftPower_,0}},
