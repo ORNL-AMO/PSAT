@@ -5,10 +5,6 @@
   "homepage": "https://github.com/ORNL-AMO/PSAT#psat",
   "license": "MIT",
   "repository": "ORNL-AMO/PSAT",
-  "contributors": [
-    "Gina Accawi <accawigk@ornl.gov> (hyperion.ornl.gov/psat)",
-    "Noah Rosser <noah@codesimple.consulting>"
-  ],
   "bugs": {
     "url": "https://github.com/ORNL-AMO/PSAT/issues"
   },
