@@ -58,8 +58,10 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   auto ex = psat.getExisting();
   
   map<const char *,vector<double>> out = { 
-    {"Pump Efficiency",{ex.pumpEfficiency_,0}},    
+    {"Pump Efficiency",{ex.pumpEfficiency_*100,0}},
+    {"Motor Rated Power",{ex.motorRatedPower_,0}},        
     {"Motor Shaft Power",{ex.motorShaftPower_,0}},
+    {"Pump Shaft Power",{ex.pumpShaftPower_,0}},    
     {"Motor Efficiency",{ex.motorEfficiency_,0}},
     {"Motor Power Factor",{ex.motorPowerFactor_,0}},
     {"Motor Current",{ex.motorCurrent_,0}},    
