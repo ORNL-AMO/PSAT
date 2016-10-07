@@ -150,12 +150,23 @@ void Test3(const FunctionCallbackInfo<Value>& args) {
         Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);\
     Financial fin(1,.05);\
     FieldData fd(2000,277,FieldData::LoadEstimationMethod::POWER,\
-        150,218,460); 
+        150,0,460); 
 
   #define CALC \
     PSATResult psat(pump,motor,fin,fd);\
-    psat.calculateExisting();\  
-    auto ex = psat.getExisting();  
+    psat.calculateExisting();\
+    auto ex = psat.getExisting();
+
+  {
+    BASE
+    motor.setMotorRpm(1786);
+    fd.setMotorPower(80);
+    CALC
+    Check(101.9,ex.motorShaftPower_);
+    Check100(95,ex.motorEfficiency_);
+    Check100(79.1,ex.motorPowerFactor_);
+    Check(127,ex.motorCurrent_);
+  }
   {
     BASE
     CALC
@@ -164,16 +175,33 @@ void Test3(const FunctionCallbackInfo<Value>& args) {
   {
     BASE    
     fd.setLoadEstimationMethod(FieldData::LoadEstimationMethod::CURRENT);
+    fd.setMotorAmps(218);
+    fd.setMotorPower(0);
     CALC
-    Check(150.7,psat.getExisting().motorPower_);
+    Check(150.7,ex.motorPower_);
+    Check100(72.5,ex.pumpEfficiency_);
   }
 }
+void Wtf(const FunctionCallbackInfo<Value>& args) {
+  Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,
+      1,1,1,Pump::Speed::NOT_FIXED_SPEED);
+  Motor motor(Motor::LineFrequency::FREQ60,200,1786,
+      Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);
+  Financial fin(1,.05);
+  FieldData fd(2000,277,FieldData::LoadEstimationMethod::POWER,
+      80,0,460);   
 
+  PSATResult psat(pump,motor,fin,fd);
+  psat.calculateExisting();
+  auto ex = psat.getExisting();
+
+  cout << "msp " << ex.motorShaftPower_ << endl;
+}
 
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA); 
-  NODE_SET_METHOD(exports, "test", Test3);  
+  NODE_SET_METHOD(exports, "test", Wtf);  
 }
 
 NODE_MODULE(bridge, Init)
