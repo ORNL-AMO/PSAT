@@ -33,7 +33,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   FieldData fd(Get("flow"),Get("head"),(FieldData::LoadEstimationMethod)(Get("motor_field_power")>0?0:1),
       Get("motor_field_power"),Get("motor_field_current"),Get("motor_field_voltage"));
   PSATResult psat(pump,motor,fin,fd);
-  psat.calculate();
+  psat.calculateExisting();
   auto ex = psat.getExisting();
   
   map<const char *,vector<double>> out = { 
@@ -137,62 +137,36 @@ void TestSame() {
 
 // }
 
-void Test2(const FunctionCallbackInfo<Value>& args) {
-  Pump pump((Pump::Style)0,1780,(Pump::Drive)0,
-      1,1,1,(Pump::Speed)1);
-  Motor motor((Motor::LineFrequency)1,200,1780,
-      (Motor::EfficiencyClass)1,0,460,225,0);
-  Financial fin(1,.05);
-  FieldData fd(2000,277,(FieldData::LoadEstimationMethod)0,150,
-      0,460);
-  PSATResult psat(pump,motor,fin,fd);
-  psat.calculate();
-  auto ex = psat.getExisting();
-  cout << ex.motorCurrent_;
-}
 void TestFLA(const FunctionCallbackInfo<Value>& args) {
   EstimateFLA fla(200,1780,(Motor::EfficiencyClass)(1),0,460);
   fla.calculate();
   Check(225.8,fla.getEstimatedFLA());
 }
 void Test3(const FunctionCallbackInfo<Value>& args) {
-  // Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,
-  //     1,1,1,Pump::Speed::NOT_FIXED_SPEED);
-  // Motor motor(Motor::LineFrequency::FREQ60,200,1780,
-  //     Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.4,0);
-  // Financial fin(1,.05);
-  // FieldData fd(2000,277,FieldData::LoadEstimationMethod::POWER,
-  //     150,0,460);
-  // PSATResult psat(pump,motor,fin,fd);
-  // psat.calculate();
-  // auto ex = psat.getExisting();  
-  {
-    Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,
-        1,1,1,Pump::Speed::NOT_FIXED_SPEED);
-    Motor motor(Motor::LineFrequency::FREQ60,200,1780,
-        Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);
-    Financial fin(1,.05);
-    FieldData fd(2000,277,FieldData::LoadEstimationMethod::POWER,
-        150,0,460);
-    PSATResult psat(pump,motor,fin,fd);
-    psat.calculate();
+  #define BASE \
+    Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,\
+      1,1,1,Pump::Speed::NOT_FIXED_SPEED);\
+    Motor motor(Motor::LineFrequency::FREQ60,200,1780,\
+        Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);\
+    Financial fin(1,.05);\
+    FieldData fd(2000,277,FieldData::LoadEstimationMethod::POWER,\
+        150,218,460); 
+
+  #define CALC \
+    PSATResult psat(pump,motor,fin,fd);\
+    psat.calculateExisting();\  
     auto ex = psat.getExisting();  
+  {
+    BASE
+    CALC
     Check(217.1,ex.motorCurrent_);
   }
   {
-    Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,
-        1,1,1,Pump::Speed::NOT_FIXED_SPEED);
-    Motor motor(Motor::LineFrequency::FREQ60,200,1780,
-        Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);
-    Financial fin(1,.05);
-    FieldData fd(2000,277,FieldData::LoadEstimationMethod::CURRENT,
-        0,218,460);
-    PSATResult psat(pump,motor,fin,fd);
-    psat.calculate();
-    auto ex = psat.getExisting();  
-    Check(150.7,ex.motorPower_);
+    BASE    
+    fd.setLoadEstimationMethod(FieldData::LoadEstimationMethod::CURRENT);
+    CALC
+    Check(150.7,psat.getExisting().motorPower_);
   }
-
 }
 
 
