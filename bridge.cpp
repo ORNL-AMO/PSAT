@@ -70,7 +70,8 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
 }
 
 void Check(double exp, double act, const char* nm="") {
-  if (abs(exp-act)>.01*exp) {
+  cout << "e " << exp << "; a " << act << endl;
+  if (abs(exp-act)>.1*exp) {
     printf("\"%s\" TEST FAILED: %f %f\n",nm,exp,act);
     assert(!"equal");
   }
@@ -154,10 +155,49 @@ void TestFLA(const FunctionCallbackInfo<Value>& args) {
   fla.calculate();
   Check(225.8,fla.getEstimatedFLA());
 }
+void Test3(const FunctionCallbackInfo<Value>& args) {
+  // Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,
+  //     1,1,1,Pump::Speed::NOT_FIXED_SPEED);
+  // Motor motor(Motor::LineFrequency::FREQ60,200,1780,
+  //     Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.4,0);
+  // Financial fin(1,.05);
+  // FieldData fd(2000,277,FieldData::LoadEstimationMethod::POWER,
+  //     150,0,460);
+  // PSATResult psat(pump,motor,fin,fd);
+  // psat.calculate();
+  // auto ex = psat.getExisting();  
+
+  Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,
+      1,1,1,Pump::Speed::NOT_FIXED_SPEED);
+  Motor motor(Motor::LineFrequency::FREQ60,200,1780,
+      Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);
+  Financial fin(1,.05);
+  FieldData fd(2000,277,FieldData::LoadEstimationMethod::POWER,
+      150,0,460);
+  PSATResult psat(pump,motor,fin,fd);
+  psat.calculate();
+  auto ex = psat.getExisting();  
+  Check(217.1,ex.motorCurrent_);
+
+  Pump pump2(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,
+      1,1,1,Pump::Speed::NOT_FIXED_SPEED);
+  Motor motor2(Motor::LineFrequency::FREQ60,200,1780,
+      Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);
+  Financial fin2(1,.05);
+  FieldData fd2(2000,277,FieldData::LoadEstimationMethod::CURRENT,
+      0,218,460);
+  PSATResult psat2(pump2,motor2,fin2,fd2);
+  psat2.calculate();
+  auto ex2 = psat2.getExisting();  
+  Check(150.7,ex2.motorPower_);
+
+}
+
+
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA); 
-  NODE_SET_METHOD(exports, "test", TestFLA);  
+  NODE_SET_METHOD(exports, "test", Test3);  
 }
 
 NODE_MODULE(bridge, Init)
