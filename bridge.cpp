@@ -70,8 +70,8 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
 }
 
 void Check(double exp, double act, const char* nm="") {
-  cout << "e " << exp << "; a " << act << endl;
-  if (abs(exp-act)>.1*exp) {
+  //cout << "e " << exp << "; a " << act << endl;
+  if (isnan(act) || (abs(exp-act)>.1*exp)) {
     printf("\"%s\" TEST FAILED: %f %f\n",nm,exp,act);
     assert(!"equal");
   }
@@ -89,18 +89,7 @@ void TestSame() {
 }
 // void Test(const FunctionCallbackInfo<Value>& args) {
 //   TestSame();
-//   //assume power load meth, est fla, line=60
-//   auto msp = new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
-//   Check(101.9,msp->calculate());
-//   Check100(95,msp->calculateEfficiency());
-//   Check100(79.1,msp->calculatePowerFactor());
-//   Check(127,msp->calculateCurrent());
 
-//   msp = new MotorShaftPower(200,111.855,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
-//   Check(143.4,msp->calculate());
-//   Check100(95.6,msp->calculateEfficiency());
-//   Check100(84.3,msp->calculatePowerFactor());
-//   Check(166.5,msp->calculateCurrent());
 
 //   msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,260);
 //   Check(101.9,msp->calculate());
@@ -169,6 +158,15 @@ void Test3(const FunctionCallbackInfo<Value>& args) {
   }
   {
     BASE
+    fd.setMotorPower(111.855);
+    CALC
+    Check(143.4,ex.motorShaftPower_);
+    Check100(95.6,ex.motorEfficiency_);
+    Check100(84.3,ex.motorPowerFactor_);
+    Check(166.5,ex.motorCurrent_);
+  }
+  {
+    BASE
     CALC
     Check(217.1,ex.motorCurrent_);
   }
@@ -201,7 +199,7 @@ void Wtf(const FunctionCallbackInfo<Value>& args) {
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA); 
-  NODE_SET_METHOD(exports, "test", Wtf);  
+  NODE_SET_METHOD(exports, "test", Test3);  
 }
 
 NODE_MODULE(bridge, Init)
