@@ -43,7 +43,7 @@
   <tr>
     <td><span>Style</span></td>
     <td>
-      <select name='pump_style'>
+      <select name='pump_style' onchange='pumpChg(this)' data-init-chg>
         <option>End suction slurry</option>
         <option>End suction sewage</option>
         <option>End suction stock</option>
@@ -56,6 +56,7 @@
         <option>Large end suction</option>
         <option>Specified optimal eff</option>
       </select>
+      <input name='pump_specified'></input>
     </td>
   </tr>  
   <tr>
@@ -240,6 +241,13 @@
   }  
   function effChg(e) {
     if ($(e).val()=='Custom') {
+      $(e).next().show();      
+    } else {
+      $(e).next().hide();
+    }
+  }
+  function pumpChg(e) {debugger;
+    if ($(e).val().startsWith('Specified')) {
       $(e).next().show();      
     } else {
       $(e).next().hide();
