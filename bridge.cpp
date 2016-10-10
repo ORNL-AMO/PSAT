@@ -94,20 +94,7 @@ void TestSame() {
 
 
   
-//   // msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,200,460);
-//   // Check(101.9,msp->calculate());
-//   // Check100(95,msp->calculateEfficiency());
-//   // Check100(35.2,msp->calculatePowerFactor());
-//   // Check(285,msp->calculateCurrent());
 
-//   auto ae = (new AnnualEnergy(80,1))->calculate();
-//   Check(700.8,ae);
-
-//   ae = (new AnnualEnergy(150,.25))->calculate();
-//   Check(328.5,ae);
-  
-//   auto ac = (new AnnualCost(328.5,.05))->calculate();
-//   Check(16.4,ac);
 
 // }
 
@@ -181,7 +168,17 @@ void Test3(const FunctionCallbackInfo<Value>& args) {
     Check100(84.3,ex.motorPowerFactor_);
     Check(166.5,ex.motorCurrent_);
   }
-  
+  {
+    BASE
+    fd.setMotorPower(80);
+    motor.setMotorRatedVoltage(200);
+    motor.setFullLoadAmps(519.3);
+    CALC
+    Check(101.9,ex.motorShaftPower_);
+    Check100(95,ex.motorEfficiency_);
+    Check100(35.2,ex.motorPowerFactor_);
+    Check(285,ex.motorCurrent_);
+  }  
   {
     BASE
     CALC
@@ -195,6 +192,19 @@ void Test3(const FunctionCallbackInfo<Value>& args) {
     CALC
     Check(150.7,ex.motorPower_);
     Check100(72.5,ex.pumpEfficiency_);
+  }
+  {
+    BASE
+    fd.setMotorPower(80);
+    CALC
+    Check(700.8,ex.annualEnergy_);
+  }
+  {
+    BASE
+    fin.setOperatingFraction(.25);
+    CALC
+    Check(328.5,ex.annualEnergy_);
+    Check(16.4,ex.annualCost_);
   }
 }
 void Wtf(const FunctionCallbackInfo<Value>& args) {
