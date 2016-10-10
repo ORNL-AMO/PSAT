@@ -93,11 +93,6 @@ void TestSame() {
 
 
 
-//   msp = new MotorShaftPower(200,80,1200,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460);
-//   Check(101.4,msp->calculate());
-//   Check100(94.5,msp->calculateEfficiency());
-//   Check100(74.3,msp->calculatePowerFactor());
-//   Check(135.1,msp->calculateCurrent());
   
 //   // msp = new MotorShaftPower(200,80,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,200,460);
 //   // Check(101.9,msp->calculate());
@@ -167,6 +162,16 @@ void Test3(const FunctionCallbackInfo<Value>& args) {
     Check100(138.8,ex.motorPowerFactor_);
     Check(128,ex.motorCurrent_);    
   }
+  {
+    BASE
+    motor.setMotorRpm(1200);
+    fd.setMotorPower(80);
+    CALC
+    Check(101.4,ex.motorShaftPower_);
+    Check100(94.5,ex.motorEfficiency_);
+    Check100(74.3,ex.motorPowerFactor_);
+    Check(135.1,ex.motorCurrent_);
+  }  
   {
     BASE
     fd.setMotorPower(111.855);
