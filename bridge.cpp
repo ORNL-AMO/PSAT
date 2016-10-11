@@ -81,29 +81,11 @@ void Check100(double exp, double act, const char* nm="") {
   Check(exp,act*100,nm);
 }
 
-void TestSame() {
-  // auto msp = (new MotorShaftPower(200,80,1786,Motor::EfficiencyClass::ENERGY_EFFICIENT,460,460));
-  for (int i=1; i<=10000; i=i+2) {
-    // Check(msp->calculate(),msp->calculate(),"SAME");
-  }
-}
-// void Test(const FunctionCallbackInfo<Value>& args) {
-//   TestSame();
-
-
-
-
-  
-
-
-// }
-
-void TestFLA(const FunctionCallbackInfo<Value>& args) {
+void Test(const FunctionCallbackInfo<Value>& args) {
   EstimateFLA fla(200,1780,(Motor::LineFrequency)1,(Motor::EfficiencyClass)(1),0,460);
   fla.calculate();
   Check(225.8,fla.getEstimatedFLA());
-}
-void Test3(const FunctionCallbackInfo<Value>& args) {
+
   #define BASE \
     Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,\
       1,1,1,Pump::Speed::NOT_FIXED_SPEED);\
@@ -117,6 +99,12 @@ void Test3(const FunctionCallbackInfo<Value>& args) {
     PSATResult psat(pump,motor,fin,fd);\
     psat.calculateExisting();\
     auto ex = psat.getExisting();
+
+  for (int i=1; i<=10000; i=i+2) {
+    BASE
+    CALC
+    Check(ex.motorShaftPower_,ex.motorShaftPower_,"SAME");
+  }
 
   {
     BASE
@@ -226,7 +214,7 @@ void Wtf(const FunctionCallbackInfo<Value>& args) {
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA); 
-  NODE_SET_METHOD(exports, "test", Test3);  
+  NODE_SET_METHOD(exports, "test", Test);  
 }
 
 NODE_MODULE(bridge, Init)
