@@ -1,5 +1,5 @@
 {
-  "name": "psat-client",
+  "name": "psat",
   "version": "0.0.0",
   "description": "Pumping System Assessment Tool",
   "homepage": "https://github.com/ORNL-AMO/PSAT#psat",
@@ -17,7 +17,7 @@
     "start": "electron .",
     "test": "electron test.js",
     "vs": "electron vs.js",
-    "pkg": "electron-packager . --version 1.4.1"
+    "pkg": "electron-packager . --version 1.4.1 --overwrite"
   },
   "devDependencies": {
     "electron-packager": "^8.1.0",
