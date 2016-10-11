@@ -63,7 +63,7 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   inp = args[0]->ToObject();
 
-  EstimateFLA fla(Get("motor_rated_power"),Get("motor_rated_speed"),(Motor::EfficiencyClass)(int)Get("efficiency_class"),
+  EstimateFLA fla(Get("motor_rated_power"),Get("motor_rated_speed"),(Motor::LineFrequency)(int)(!Get("line")),(Motor::EfficiencyClass)(int)Get("efficiency_class"),
     Get("efficiency"),Get("motor_rated_voltage"));
   fla.calculate();
   args.GetReturnValue().Set(fla.getEstimatedFLA());
@@ -99,7 +99,7 @@ void TestSame() {
 // }
 
 void TestFLA(const FunctionCallbackInfo<Value>& args) {
-  EstimateFLA fla(200,1780,(Motor::EfficiencyClass)(1),0,460);
+  EstimateFLA fla(200,1780,(Motor::LineFrequency)1,(Motor::EfficiencyClass)(1),0,460);
   fla.calculate();
   Check(225.8,fla.getEstimatedFLA());
 }
