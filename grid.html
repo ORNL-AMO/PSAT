@@ -246,7 +246,7 @@
       $(e).next().hide();
     }
   }
-  function pumpChg(e) {debugger;
+  function pumpChg(e) {
     if ($(e).val().startsWith('Specified')) {
       $(e).next().show();      
     } else {
@@ -325,7 +325,9 @@
       for (var key in r) {
         console.log(key,r[key][0]);  
       }
-      cvtObj(r,'Motor Shaft Power',POWER,unit(POWER),'hp');
+      ['Motor Rated Power','Motor Shaft Power','Pump Shaft Power'].forEach(function(e) {
+        cvtObj(r[e],[0,1],POWER,unit(POWER),'hp');
+      });
       r['Motor Efficiency'][0]*=100;
       r['Motor Power Factor'][0]*=100;
       for (var key in r) {
