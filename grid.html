@@ -311,10 +311,10 @@
   function colArgs(col) {
     const d=setData({},col);
     d['line'] = nm('line',col);
-    //cvtObj(d,'flow',FLOW,'m^3/s');
+    cvtObj(d,'flow',FLOW,'gpm');
     cvtObj(d,'motor_rated_power',POWER,'hp');
     //cvtObj(d,'motor_field_power',POWER,'kW');      
-    //cvtObj(d,'head',DIST,'m');
+    cvtObj(d,'head',DIST,'ft');
     return d;
   }
   function results() {
