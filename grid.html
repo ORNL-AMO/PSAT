@@ -309,8 +309,7 @@
     $('p button').toggle(!show);
   }
   function colArgs(col) {
-    const d=setData({},col);
-    d['line'] = nm('line',col);
+    const d=setData({},col);    
     cvtObj(d,'flow',FLOW,'gpm');
     cvtObj(d,'motor_rated_power',POWER,'hp');
     //cvtObj(d,'motor_field_power',POWER,'kW');      
