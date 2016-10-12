@@ -217,7 +217,7 @@
 						hd=Object.keys(Conds[0]).sort().concat(['a_MyR','o_MyR']),
 						lines=[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')];
 					Conds.forEach(function(c,i) {
-						
+						crunch(c);
 						lines.push(
 							hd.map((nm,i)=> {
 								return JSON.stringify(c[nm]);

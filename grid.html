@@ -308,7 +308,8 @@
     $('#results,#results~tr').toggle(show);
     $('p button').toggle(!show);
   }
-  function cvtArg(d) {
+  function cvtArg(c) {
+    const d=$.extend({},c);
     cvtObj(d,'flow',FLOW,'gpm');
     cvtObj(d,'motor_rated_power',POWER,'hp');
     //cvtObj(d,'motor_field_power',POWER,'kW');      
@@ -316,7 +317,7 @@
     return d;    
   }
   function colArgs(col) {
-    return cvtArg(setData({},col));    
+    return cvtArg(col.data('cond'));    
   }
   function results() {
     $('th:gt(1)').each((i,e)=>{
