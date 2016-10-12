@@ -208,29 +208,26 @@
 		});
 		lastCol.show();		
 	}
-
-	//todo no cond case
+	
 	function xprt() {		
 		Dlg.showSaveDialog(DlgFilter,
 			function (fn) {
 				if (fn) {					
-					let 
-						hd,
-						lines = [];
-						// lines=[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')];
+					let hd, lines;
 					Conds.forEach(function(c,i) {
 						const r = crunch(cvtArg(c));						
 						if (i==0) {
 							hd = Object.keys(Conds[0]).sort().concat(Object.keys(r).sort());
+							lines=[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')];
 						}
-						//$.extend(crunch(cvtArg(c)),c);
+						let o = $.extend(crunch(cvtArg(c)),c);
 						lines.push(
 							hd.map((nm,i)=> {
-								return JSON.stringify( c[nm] || r[nm]);
+								return JSON.stringify(o[nm]);
 							}).join('\t')
 						);
 					});		
-					require('fs').writeFile(fn,[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')].concat(lines).join('\n'));				
+					require('fs').writeFile(fn,lines.join('\n'));				
 				}
 		}); 
 	}
@@ -241,12 +238,12 @@
 					const 
 						fs = require('fs'),
 						lines=fs.readFileSync(fn[0],'utf8').split('\n'),
-						hd=lines[1].split('\t');
+						hd=lines[1].split('\t').filter(e => e > 'Z' );
 					Conds=[];
 					[,Units,HeadTool,Curve]=JSON.parse(lines[0]);					
 					lines.slice(2).forEach((ln,row)=>{
 						Conds.push({});
-						ln.split('\t').forEach((v,i)=>{
+						ln.split('\t').slice(0,hd.length).forEach((v,i)=>{
 							Conds[row][hd[i]]=JSON.parse(v);
 						});
 					});
