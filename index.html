@@ -128,6 +128,20 @@
         return $('#container '+s);
       }
 
+      function crunch(a) {        
+        const r = Bridge.results(a);
+        console.log(a);
+        for (var key in r) {
+          console.log(key,r[key][0]);  
+        }
+        ['Motor Rated Power','Motor Shaft Power','Pump Shaft Power'].forEach(function(e) {
+          cvtObj(r[e],[0,1],POWER,unit(POWER),'hp');
+        });
+        r['Motor Efficiency'][0]*=100;
+        r['Motor Power Factor'][0]*=100;
+        return r;
+      }
+
       function setData(d,e) {
         let v;
         nmAll(e).each(function(i,el) {

@@ -214,12 +214,13 @@
 			function (fn) {
 				if (fn) {					
 					const 
-						hd=Object.keys(Conds[0]).sort(),
+						hd=Object.keys(Conds[0]).sort().concat(['a_MyR','o_MyR']),
 						lines=[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')];
-					Conds.forEach(function(d,i) {
+					Conds.forEach(function(c,i) {
+						
 						lines.push(
 							hd.map((nm,i)=> {
-								return JSON.stringify(d[nm]);
+								return JSON.stringify(c[nm]);
 							}).join('\t')
 						);
 					});		

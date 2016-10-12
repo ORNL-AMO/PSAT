@@ -308,27 +308,20 @@
     $('#results,#results~tr').toggle(show);
     $('p button').toggle(!show);
   }
-  function colArgs(col) {
-    const d=setData({},col);    
+  function cvtArg(d) {
     cvtObj(d,'flow',FLOW,'gpm');
     cvtObj(d,'motor_rated_power',POWER,'hp');
     //cvtObj(d,'motor_field_power',POWER,'kW');      
     cvtObj(d,'head',DIST,'ft');
-    return d;
+    return d;    
+  }
+  function colArgs(col) {
+    return cvtArg(setData({},col));    
   }
   function results() {
     $('th:gt(1)').each((i,e)=>{
       const col = $(`td:nth-child(${$(e).index()+1})`),
-        a = colArgs(col), r = Bridge.results(a);
-      console.log(a);
-      for (var key in r) {
-        console.log(key,r[key][0]);  
-      }
-      ['Motor Rated Power','Motor Shaft Power','Pump Shaft Power'].forEach(function(e) {
-        cvtObj(r[e],[0,1],POWER,unit(POWER),'hp');
-      });
-      r['Motor Efficiency'][0]*=100;
-      r['Motor Power Factor'][0]*=100;
+        a = colArgs(col), r = crunch(a);
       for (var key in r) {
         col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).html(
           `<div>
