@@ -3,3 +3,4 @@ node_modules
 CMakeLists.txt
 .vscode
 psat-client-darwin-x64
+psat-darwin-x64
