@@ -128,6 +128,14 @@
         return $('#container '+s);
       }
 
+      function cvtArg(c) {
+        const d=$.extend({},c);
+        cvtObj(d,'flow',FLOW,'gpm');
+        cvtObj(d,'motor_rated_power',POWER,'hp');
+        //cvtObj(d,'motor_field_power',POWER,'kW');      
+        cvtObj(d,'head',DIST,'ft');
+        return d;    
+      }
       function crunch(a) {        
         const r = Bridge.results(a);
         console.log(a);

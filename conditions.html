@@ -209,22 +209,29 @@
 		lastCol.show();		
 	}
 
+	//todo no cond case
 	function xprt() {		
 		Dlg.showSaveDialog(DlgFilter,
 			function (fn) {
 				if (fn) {					
-					const 
-						hd=Object.keys(Conds[0]).sort().concat(['a_MyR','o_MyR']),
-						lines=[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')];
+					let 
+						hd = Object.keys(Conds[0]).sort(),
+						lines = [];
+						// lines=[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')];
 					Conds.forEach(function(c,i) {
-						crunch(c);
+						const r = crunch(cvtArg(c));
+						
+						if (i==0) {
+							hd = hd.concat(Object.keys(r).sort());
+						}
+						//$.extend(crunch(cvtArg(c)),c);
 						lines.push(
 							hd.map((nm,i)=> {
-								return JSON.stringify(c[nm]);
+								return JSON.stringify( c[nm] || r[nm]);
 							}).join('\t')
 						);
 					});		
-					require('fs').writeFile(fn,lines.join('\n'));				
+					require('fs').writeFile(fn,[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')].concat(lines).join('\n'));				
 				}
 		}); 
 	}
