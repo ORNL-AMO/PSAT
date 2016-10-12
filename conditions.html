@@ -215,14 +215,13 @@
 			function (fn) {
 				if (fn) {					
 					let 
-						hd = Object.keys(Conds[0]).sort(),
+						hd,
 						lines = [];
 						// lines=[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')];
 					Conds.forEach(function(c,i) {
-						const r = crunch(cvtArg(c));
-						
+						const r = crunch(cvtArg(c));						
 						if (i==0) {
-							hd.push(...Object.keys(r).sort());
+							hd = Object.keys(Conds[0]).sort().concat(Object.keys(r).sort());
 						}
 						//$.extend(crunch(cvtArg(c)),c);
 						lines.push(
