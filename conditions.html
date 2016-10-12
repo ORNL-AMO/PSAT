@@ -222,7 +222,7 @@
 						const r = crunch(cvtArg(c));
 						
 						if (i==0) {
-							hd = hd.concat(Object.keys(r).sort());
+							hd.push(...Object.keys(r).sort());
 						}
 						//$.extend(crunch(cvtArg(c)),c);
 						lines.push(
