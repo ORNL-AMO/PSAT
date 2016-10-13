@@ -12,9 +12,13 @@ using namespace std;
 Isolate* iso;
 Local<Object> inp;
 
-//todo assert exist
 double Get(const char *nm) {
-  return inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
+  auto r = inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
+  if (isnan(r)) {
+    cout << nm;
+    assert(!"number");
+  }  
+  return r;
 }
 
 void Results(const FunctionCallbackInfo<Value>& args) {
@@ -24,7 +28,6 @@ void Results(const FunctionCallbackInfo<Value>& args) {
 
   auto drive = (Pump::Drive)(int)Get("drive");
   auto effCls = (Motor::EfficiencyClass)(int)Get("efficiency_class");
- 
   Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_rated_speed"),drive,
       Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
   Motor motor((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_power"),Get("motor_rated_speed"),
@@ -35,7 +38,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
   PSATResult psat(pump,motor,fin,fd);
   psat.calculateExisting();
   auto ex = psat.getExisting();
-  
+
   map<const char *,vector<double>> out = { 
     {"Pump Efficiency",{ex.pumpEfficiency_*100,0}},
     {"Motor Rated Power",{ex.motorRatedPower_,0}},        
@@ -196,25 +199,13 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   }
 }
 void Wtf(const FunctionCallbackInfo<Value>& args) {
-  Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,
-      1,1,1,Pump::Speed::NOT_FIXED_SPEED);
-  Motor motor(Motor::LineFrequency::FREQ60,200,1786,
-      Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);
-  Financial fin(1,.05);
-  FieldData fd(2000,277,FieldData::LoadEstimationMethod::POWER,
-      80,0,460);   
-
-  PSATResult psat(pump,motor,fin,fd);
-  psat.calculateExisting();
-  auto ex = psat.getExisting();
-
-  cout << "msp " << ex.motorShaftPower_ << endl;
 }
 
 void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA); 
   NODE_SET_METHOD(exports, "test", Test);  
+  NODE_SET_METHOD(exports, "wtf", Wtf);    
 }
 
 NODE_MODULE(bridge, Init)
