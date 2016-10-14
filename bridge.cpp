@@ -204,6 +204,7 @@ void Test(const FunctionCallbackInfo<Value>& args) {
     Check(288.9,ex.motorCurrent_);
   }  
 }
+
 void Wtf(const FunctionCallbackInfo<Value>& args) {
 }
 
