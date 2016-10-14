@@ -1,5 +1,8 @@
 
-<style scoped=scoped>       
+<style scoped=scoped>
+  [title] {    
+    cursor: help;
+  }   
   #results,#results~tr {
     display:none;
   }
@@ -157,11 +160,11 @@
     </td>
   </tr>         
   <tr>
-    <td><div>Motor Power<em>(kW)</em></div></td>
+    <td><div title='Enter either power or current, for the desired estimation method'>Motor Power<em>(kW)</em></div></td>
     <td><input name='motor_field_power' onchange="clrFld('motor_field_current',this)"></td>
   </tr>
   <tr>
-    <td><div>Motor Current<em>(A)</em></div></td>
+    <td><div title='Enter either power or current, for the desired estimation method'>Motor Current<em>(A)</em></div></td>
     <td><input name='motor_field_current' onchange="clrFld('motor_field_power',this)"></td>
   </tr>
   <tr>
