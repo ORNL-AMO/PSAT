@@ -72,7 +72,7 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
   fla.calculate();
   args.GetReturnValue().Set(fla.getEstimatedFLA());
 }
-
+//TODO round vs js round; loosen up to make next test case
 void Check(double exp, double act, const char* nm="") {
   //cout << "e " << exp << "; a " << act << endl;
   // if (isnan(act) || (abs(exp-act)>.01*exp)) {
@@ -215,11 +215,11 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   }  
   {
     BASE
-    motor.setEfficiencyClass(Motor::EfficiencyClass(1));
+    motor.setEfficiencyClass(Motor::EfficiencyClass(2));
     motor.setSpecifiedEfficiency(75);
     CALC
     Check(173.7,ex.motorCurrent_);
-  }
+  }  
   cout << "done";
 }
 
