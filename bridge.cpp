@@ -76,8 +76,8 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
 void Check(double exp, double act, const char* nm="") {
   //cout << "e " << exp << "; a " << act << endl;
   // if (isnan(act) || (abs(exp-act)>.01*exp)) {
-  if (isnan(act) || ( (round(exp*10)/10)!=round(act*10)/10)) {
-    
+  auto p = 10;
+  if (isnan(act) || ( (round(exp*p)/p)!=round(act*p)/p)) {    
     printf("\"%s\" TEST FAILED: %f %f\n",nm,exp,act);
     assert(!"equal");
   }  
