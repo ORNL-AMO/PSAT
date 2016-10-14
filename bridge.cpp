@@ -28,7 +28,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
 
   auto drive = (Pump::Drive)(int)Get("drive");
   auto effCls = (Motor::EfficiencyClass)(int)Get("efficiency_class");
-  Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_rated_speed"),drive,
+  Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_specified"),Get("pump_rated_speed"),drive,
       Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
   Motor motor((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_power"),Get("motor_rated_speed"),
       effCls,Get("efficiency"),Get("motor_rated_voltage"),Get("motor_rated_flc"),Get("margin"));
@@ -92,7 +92,7 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   Check(225.8,fla.getEstimatedFLA());
 
   #define BASE \
-    Pump pump(Pump::Style::END_SUCTION_ANSI_API,1780,Pump::Drive::DIRECT_DRIVE,\
+    Pump pump(Pump::Style::END_SUCTION_ANSI_API,Get("pump_specified"),1780,Pump::Drive::DIRECT_DRIVE,\
       1,1,1,Pump::Speed::NOT_FIXED_SPEED);\
     Motor motor(Motor::LineFrequency::FREQ60,200,1780,\
         Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);\
