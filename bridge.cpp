@@ -74,7 +74,9 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
 
 void Check(double exp, double act, const char* nm="") {
   //cout << "e " << exp << "; a " << act << endl;
-  if (isnan(act) || (abs(exp-act)>.01*exp)) {
+  // if (isnan(act) || (abs(exp-act)>.01*exp)) {
+  if (isnan(act) || ( (round(exp*10)/10)!=round(act*10)/10)) {
+    
     printf("\"%s\" TEST FAILED: %f %f\n",nm,exp,act);
     assert(!"equal");
   }
@@ -210,6 +212,13 @@ void Test(const FunctionCallbackInfo<Value>& args) {
     CALC
     Check(213.7,ex.motorCurrent_);
   }  
+  {
+    BASE
+    motor.setEfficiencyClass(Motor::EfficiencyClass(2));
+    motor.setSpecifiedEfficiency(75);
+    CALC
+    Check(173.7,ex.motorCurrent_);
+  }
 }
 
 void Wtf(const FunctionCallbackInfo<Value>& args) {
