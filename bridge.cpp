@@ -37,6 +37,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
       Get("motor_field_power"),Get("motor_field_current"),Get("motor_field_voltage"));
   PSATResult psat(pump,motor,fin,fd);
   psat.calculateExisting();
+  psat.calculateOptimal(); 
   auto ex = psat.getExisting(), opt = psat.getOptimal();
 
   map<const char *,vector<double>> out = { 
