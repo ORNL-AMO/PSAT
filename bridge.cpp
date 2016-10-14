@@ -80,7 +80,7 @@ void Check(double exp, double act, const char* nm="") {
     
     printf("\"%s\" TEST FAILED: %f %f\n",nm,exp,act);
     assert(!"equal");
-  }
+  }  
 }
 
 void Check100(double exp, double act, const char* nm="") {
@@ -93,7 +93,7 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   Check(225.8,fla.getEstimatedFLA());
 
   #define BASE \
-    Pump pump(Pump::Style::END_SUCTION_ANSI_API,Get("pump_specified"),1780,Pump::Drive::DIRECT_DRIVE,\
+    Pump pump(Pump::Style::END_SUCTION_ANSI_API,0,1780,Pump::Drive::DIRECT_DRIVE,\
       1,1,1,Pump::Speed::NOT_FIXED_SPEED);\
     Motor motor(Motor::LineFrequency::FREQ60,200,1780,\
         Motor::EfficiencyClass::ENERGY_EFFICIENT,0,460,225.8,0);\
@@ -215,11 +215,12 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   }  
   {
     BASE
-    motor.setEfficiencyClass(Motor::EfficiencyClass(2));
+    motor.setEfficiencyClass(Motor::EfficiencyClass(1));
     motor.setSpecifiedEfficiency(75);
     CALC
     Check(173.7,ex.motorCurrent_);
   }
+  cout << "done";
 }
 
 void Wtf(const FunctionCallbackInfo<Value>& args) {
