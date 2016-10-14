@@ -197,6 +197,12 @@ void Test(const FunctionCallbackInfo<Value>& args) {
     Check(328.5,ex.annualEnergy_);
     Check(16.4,ex.annualCost_);
   }
+  {
+    BASE
+    motor.setFullLoadAmps(300);
+    CALC
+    Check(288.9,ex.motorCurrent_);
+  }  
 }
 void Wtf(const FunctionCallbackInfo<Value>& args) {
 }
