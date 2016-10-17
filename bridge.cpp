@@ -172,12 +172,12 @@ void Test(const FunctionCallbackInfo<Value>& args) {
     Check(101.9,ex.motorShaftPower_);
     Check100(95,ex.motorEfficiency_);
     Check100(35.2,ex.motorPowerFactor_);
-    Check(285,ex.motorCurrent_);
+    Check(284.9,ex.motorCurrent_);
   }  
   {
     BASE
     CALC
-    Check(217.1,ex.motorCurrent_);
+    Check(217.5,ex.motorCurrent_);
   }
   {
     BASE    
@@ -185,7 +185,7 @@ void Test(const FunctionCallbackInfo<Value>& args) {
     fd.setMotorAmps(218);
     fd.setMotorPower(0);
     CALC
-    Check(150.7,ex.motorPower_);
+    Check(150.4,ex.motorPower_);
     Check100(72.5,ex.pumpEfficiency_);
   }
   {
