@@ -1,0 +1,88 @@
+
+<style scoped>
+	canvas {
+		background-color: black;
+	}
+}
+</style>
+<div>
+	<h1>Motor Performance</h1>
+	<canvas width="700" height="500"></canvas>
+	
+</div>
+
+<script>//# sourceURL=*pump_eff
+	function plot() {
+		const 	f1 = Curve.plot[0],
+				h1 = Curve.plot[1],				
+				f2 = Curve.plot[2],
+				h2 = Curve.plot[3],  
+				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,Curve.C) - Math.pow(f1,Curve.C))),
+				k = (h2-h1)/(Math.pow(f2,Curve.C)-Math.pow(f1,Curve.C)),
+				[xMax, xStep, xCnt] = steps(f1,f2),
+				[yMax, yStep, yCnt] = steps(h1,h2),				
+				ctx = Cnv.getContext('2d'),
+				PAD = 50;
+
+		$('#Hs').text(rnd(hS));
+		$('#K').text(rnd(k,6));
+		showHdBtn('hide');
+		$('#plot').show();
+
+		ctx.strokeStyle = "#5d9300";
+		ctx.fillStyle = "white";
+		ctx.textAlign = 'center';
+		ctx.textBaseline = 'middle';
+		ctx.font = '12px san serif';
+		
+		function xPos(x) {
+			return x*(Cnv.width-PAD*2)/(xStep*xCnt)+PAD;
+		}
+		function yPos(y) {
+			return (yStep*yCnt-y)*(Cnv.height-PAD*2)/(yStep*yCnt)+PAD;
+		}
+		ctx.beginPath();
+		for (let i=0; i<=xCnt; i++) {
+			const x = i*xStep, xp = xPos(x);
+			ctx.moveTo(xp,PAD);
+			ctx.lineTo(xp,Cnv.height-PAD);	
+			ctx.fillText(x,xp,Cnv.height-.75*PAD);	
+		}
+		for (let j=0; j<=yCnt; j++) {
+			const y = j*yStep, yp = yPos(y);
+			ctx.moveTo(PAD,yp);
+			ctx.lineTo(Cnv.width-PAD,yp);	
+			ctx.fillText(y,.75*PAD,yp);	
+		}
+		ctx.stroke();
+		ctx.save();
+
+		ctx.fillStyle = '#FECB00';
+		ctx.font = '14px san serif';
+		ctx.fillText('FLOW RATE',Cnv.width/2,Cnv.height-.33*PAD);
+		
+		ctx.translate(.33*PAD,Cnv.height/2);
+		ctx.rotate(-Math.PI/2);
+		ctx.fillText('HEAD',0,0);	
+		
+		ctx.restore();
+
+		ctx.lineWidth = 2;
+		ctx.strokeStyle = "#FECB00";	
+		ctx.beginPath();
+		
+		for (let x=0; x<=xMax; x+=xStep/10) {			
+			ctx.lineTo(xPos(x), yPos(hS+k*Math.pow(x,1.9)));		
+		}
+		ctx.stroke();
+	}
+
+	Conds.filter(c => c.grid).forEach(c => {
+	  pg('select').append($(`<option>${c.name}</option>`).data('cond',c));		
+	});
+	
+	Cnv = dom('canvas');
+	
+	
+</script>
+
