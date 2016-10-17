@@ -29,12 +29,10 @@
 </style>
 <div>
 	<h1>System Head Curve</h1>
-	System loss exponent<br>
-	<input id=C size=10>	
-	<div style='margin:1rem 0rem'>
+	<div >
 		Choose two points for <strong>head</strong> and <strong>flow</strong>:
 	</div>
-	<table id=points>
+	<table id=points style='margin:1rem 0rem'>
 		<tr>
 			<th></th>			
 			<th>Flow</th>
@@ -51,6 +49,8 @@
 			<td><input></td>			
 		</tr>
 	</table>
+	System loss exponent<br>
+	<input id=C size=10><br>	
 	<button class='prime' onclick='plot()'>PLOT</button><br>
 	<div id=plot>
 		<table>
