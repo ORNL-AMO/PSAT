@@ -30,7 +30,7 @@
 <div>
 	<h1>System Head Curve</h1>
 	System loss exponent<br>
-	<input>	
+	<input size=10>	
 	<div style='margin:1rem 0rem'>
 		Choose two points for <strong>head</strong> and <strong>flow</strong>:
 	</div>
@@ -146,10 +146,16 @@
 		}
 		ctx.stroke();
 	}
+
 	Conds.filter(c => c.grid).forEach(c => {
 	  pg('select').append($(`<option>${c.name}</option>`).data('cond',c));		
 	});
+	
 	Cnv = dom('canvas');
+	
+	function ptsInp() {
+		return pg('#points input');
+	}
 	function inpChg(ev) {
 		if (ev) {
 			pg('select :disabled')[pparIdx(this,-1)].selected=true;
@@ -157,18 +163,21 @@
 		$('#plot').hide();
 		Cnv.width+=0;
 		showHdBtn('hide');
-		if (pg('#points input').filter((i,e)=>$.isNumeric($(e).val())).length==4) {
+		if (ptsInp().filter((i,e)=>$.isNumeric($(e).val())).length==4) {
 			showHdBtn('show');
 		}
-		saveProp('curve',Curve = $.makeArray(pg('#points input').map((i,v)=>$(v).val())));
+		saveProp('curve',Curve = $.makeArray(ptsInp().map((i,v)=>$(v).val())));
 	}
-	pg('#points input').change(inpChg);
+
+	ptsInp().change(inpChg);
+	
 	function showUnit(txt,u) {
 		pg(`th:contains(${txt})`).append(em(unit(u)));
 	}
+	
 	showUnit('Flow',FLOW);
 	showUnit('Head',DIST);
-	Curve.forEach((v,i)=>pg('#points input').eq(i).val(rnd(v)));
+	Curve.forEach((v,i)=>ptsInp().eq(i).val(rnd(v)));
 	inpChg();
 </script>
 
