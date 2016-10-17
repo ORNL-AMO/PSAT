@@ -83,12 +83,12 @@
 		return [max, step, Math.ceil(max / step)];
 	}
 	function plot() {
-		const 	f1 = Curve[0],
-				h1 = Curve[1],				
-				f2 = Curve[2],
-				h2 = Curve[3],  
-				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,1.9) - Math.pow(f1,1.9))),
-				k = (h2-h1)/(Math.pow(f2,1.9)-Math.pow(f1,1.9)),
+		const 	f1 = Curve.plot[0],
+				h1 = Curve.plot[1],				
+				f2 = Curve.plot[2],
+				h2 = Curve.plot[3],  
+				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,Curve.C) - Math.pow(f1,Curve.C))),
+				k = (h2-h1)/(Math.pow(f2,Curve.C)-Math.pow(f1,Curve.C)),
 				[xMax, xStep, xCnt] = steps(f1,f2),
 				[yMax, yStep, yCnt] = steps(h1,h2),				
 				ctx = Cnv.getContext('2d'),
