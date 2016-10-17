@@ -29,7 +29,9 @@
 </style>
 <div>
 	<h1>System Head Curve</h1>
-	<div style='margin-bottom:1rem;xfont-style:italic'>
+	System loss exponent<br>
+	<input>	
+	<div style='margin:1rem 0rem'>
 		Choose two points for <strong>head</strong> and <strong>flow</strong>:
 	</div>
 	<table id=points>
@@ -155,18 +157,18 @@
 		$('#plot').hide();
 		Cnv.width+=0;
 		showHdBtn('hide');
-		if (pg('input').filter((i,e)=>$.isNumeric($(e).val())).length==4) {
+		if (pg('#points input').filter((i,e)=>$.isNumeric($(e).val())).length==4) {
 			showHdBtn('show');
 		}
-		saveProp('curve',Curve = $.makeArray(pg('input').map((i,v)=>$(v).val())));
+		saveProp('curve',Curve = $.makeArray(pg('#points input').map((i,v)=>$(v).val())));
 	}
-	pg('input').change(inpChg);
+	pg('#points input').change(inpChg);
 	function showUnit(txt,u) {
 		pg(`th:contains(${txt})`).append(em(unit(u)));
 	}
 	showUnit('Flow',FLOW);
 	showUnit('Head',DIST);
-	Curve.forEach((v,i)=>pg('input').eq(i).val(rnd(v)));
+	Curve.forEach((v,i)=>pg('#points input').eq(i).val(rnd(v)));
 	inpChg();
 </script>
 
