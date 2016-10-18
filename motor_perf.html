@@ -11,7 +11,25 @@
 	Line Frequency
 	<label><input type=radio> 60</label>
 	<label><input type=radio> 50</label>
-	
+	Motor Power Units
+	<label><input type=radio> hp</label>
+	<label><input type=radio> kW</label>
+	Speed <em>(rpm)</em><br>
+	<input><br>
+	Efficiency Class<br>
+	<select name='efficiency_class' onchange='effChg(this)' data-init-chg>
+		<option>Standard</option>
+		<option>Energy</option>
+		<option>Custom</option>
+	</select><br>
+    <input name='efficiency'></input><br>
+
+	Voltage<br>
+	<input><br>
+	Full-load Current <em>(A)</em><br>
+    <input name='motor_rated_flc'> <button onclick='estFLA(this)'>EST</button><br>
+
+
 	<canvas width="700" height="500"></canvas>
 	
 </div>
