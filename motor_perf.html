@@ -27,8 +27,8 @@
 		Efficiency Class<br>
 		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Standard</label>
 		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Energy</label>
-		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Custom<input class=xvsp name='efficiency'></input></label>
-		
+		<label class=vsp><input name='efficiency_class' onchange='effChg(this)' type=radio> Custom </label>
+		<input class=vsp name='efficiency'></input>
 		<!--<select class=vsp name='efficiency_class' onchange='effChg(this)'>
 			<option>Standard</option>
 			<option>Energy</option>
@@ -112,10 +112,10 @@
 	Cnv = dom('canvas');
 /////
 	function effChg(e) {
-		if ($(e).val()=='Custom') {
-			//nm('efficiency').show();      
+		if ($(e).parent().text().trim()=='Custom') {
+			nm('efficiency').show();      
 		} else {
-			//nm('efficiency').hide();
+			nm('efficiency').hide();
 		}
 	}
 	nm('efficiency_class').change();	
