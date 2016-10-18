@@ -7,14 +7,15 @@
 The Pumping System Assessment Tool was developed by the Department of Energy's BestPractices Program to assist in preliminary assessments of how efficiently pumping systems are operating.
 </p> 
 <ul>    
+    <li><a onclick='lnk(event,"help")' href=''>Help</a></li>
 	<li><a onclick='lnk(event,"about")' href=''>About</a></li>
 	<li><a onclick='lnk(event,"goal")' href=''>Ultimate Goal</a></li>
     <li><a onclick='lnk(event,"mvr")' href=''>Measured vs Required Conditions</a></li>
 	<li><a onclick='lnk(event,"losses")' href=''>System Losses</a></li>	
-    <li><a onclick='lnk(event,"help")' href=''>Help</a></li>
-    <!--<li><a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency Curves</a></li>
-	<li><a onclick='lnk(event,"motor_perf")' href=''>Motor Performance Curves</a></li>    -->
-
+	<a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency Curves</a><br>
+	<a onclick='lnk(event,"motor_perf")' href=''>Motor Performance Curves</a><br>
+	<a onclick='lnk(event,"units")' href=''>Units</a><br>
+	<a onclick='lnk(event,"conditions")' href=''>Pump Conditions</a>
 </ul>
 <table>
 	<tr>
@@ -27,16 +28,6 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		<td><button onclick='go("conditions")'>EXPORT</button></td><td>Save current session to file</td>
 	</tr>
 </table>
- <!--<br> 
-<button onclick="imprt()">IMPORT</button> Replace current session with one loaded from file<br>
-<button class=gt0 onclick="xprt()">EXPORT</button> Save current session to file<br>-->
-<a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency Curves</a><br>
-<a onclick='lnk(event,"motor_perf")' href=''>Motor Performance Curves</a><br>
-<a onclick='lnk(event,"pump_eff")' href=''>Units</a><br>
-<a onclick='lnk(event,"motor_perf")' href=''>Pump Conditions</a>
-
-<!--<button onclick='go("conditions")'>UNITS</button>
-<button onclick='go("conditions")'>CONDITIONS</button>-->
 <script>
 	function lnk(e,nm) {
 		e.preventDefault();
