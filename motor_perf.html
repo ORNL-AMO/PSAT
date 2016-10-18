@@ -2,36 +2,38 @@
 <style scoped>
 	canvas {
 		background-color: black;
-		margin-top: 1rem;
+		display:none;		
+	}
+	button {
+		margin-top: .5rem;
 	}
 }
 </style>
-<div>
-	<h1>Motor Performance</h1>
-	Line Frequency
-	<label><input type=radio> 60</label>
-	<label><input type=radio> 50</label>
-	Motor Power Units
-	<label><input type=radio> hp</label>
-	<label><input type=radio> kW</label>
-	Speed <em>(rpm)</em><br>
-	<input><br>
-	Efficiency Class<br>
-	<select name='efficiency_class' onchange='effChg(this)' data-init-chg>
-		<option>Standard</option>
-		<option>Energy</option>
-		<option>Custom</option>
-	</select><br>
-    <input name='efficiency'></input><br>
-
-	Voltage<br>
-	<input><br>
-	Full-load Current <em>(A)</em><br>
-    <input name='motor_rated_flc'> <button onclick='estFLA(this)'>EST</button><br>
-
-
+<h1>Motor Performance</h1>
+<div style='display:flex; justify-content: space-between;'>
+	<div>
+		Line Frequency
+		<label><input type=radio> 60</label>
+		<label><input type=radio> 50</label>
+		Motor Power Units
+		<label><input type=radio> hp</label>
+		<label><input type=radio> kW</label>
+		Speed <em>(rpm)</em><br>
+		<input><br>
+		Efficiency Class<br>
+		<select name='efficiency_class' onchange='effChg(this)'>
+			<option>Standard</option>
+			<option>Energy</option>
+			<option>Custom</option>
+		</select>
+		<input name='efficiency'></input><br>
+		Voltage<br>
+		<input><br>
+		Full-load Current <em>(A)</em><br>
+		<input name='motor_rated_flc'> <button onclick='estFLA(this)'>EST</button><br>
+		<button>PLOT</button>
+	</div>
 	<canvas width="700" height="500"></canvas>
-	
 </div>
 
 <script>//# sourceURL=*pump_eff
@@ -99,13 +101,16 @@
 		}
 		ctx.stroke();
 	}
-
-	Conds.filter(c => c.grid).forEach(c => {
-	  pg('select').append($(`<option>${c.name}</option>`).data('cond',c));		
-	});
-	
 	Cnv = dom('canvas');
-	
+/////
+	function effChg(e) {
+		if ($(e).val()=='Custom') {
+			nm('efficiency').show();      
+		} else {
+			nm('efficiency').hide();
+		}
+	}
+	nm('efficiency_class').change();	
 	
 </script>
 
