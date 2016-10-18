@@ -1,17 +1,31 @@
 <style scoped>
 	ul {
 		list-style-type: none;
+		padding-left: 4rem;
+	}
+	table {
+		border-collapse:collapse;
+	}
+	td {
+		padding:0;
+	}
+	td:first-child {
+		min-width: 4rem;
 	}
 </style>
 <p>
 The Pumping System Assessment Tool was developed by the Department of Energy's BestPractices Program to assist in preliminary assessments of how efficiently pumping systems are operating.
 </p> 
+<strong>Information</strong>
 <ul>    
-    <li><a onclick='lnk(event,"help")' href=''>Help</a></li>
 	<li><a onclick='lnk(event,"about")' href=''>About</a></li>
+    <li><a onclick='lnk(event,"help")' href=''>Help</a></li>
 	<li><a onclick='lnk(event,"goal")' href=''>Ultimate Goal</a></li>
     <li><a onclick='lnk(event,"mvr")' href=''>Measured vs Required</a></li>
 	<li style='margin-bottom:1rem'><a onclick='lnk(event,"losses")' href=''>System Losses</a></li>	
+</ul>
+<strong>Analysis</strong>
+<ul>    
 	<a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency</a><br>
 	<a onclick='lnk(event,"motor_perf")' href=''>Motor Performance</a><br>
 	<a onclick='lnk(event,"units")' href=''>Units</a><br>
