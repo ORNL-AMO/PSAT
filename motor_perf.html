@@ -16,7 +16,7 @@
 <h1>Motor Performance</h1>
 <div style='display:flex; justify-content: space-between;'>
 	<div>
-		Line Frequency
+		Line Frequency <em>(Hz)</em>
 		<label><input type=radio> 60</label>
 		<label class=vsp><input type=radio> 50</label>
 		Motor Power Units
@@ -25,13 +25,17 @@
 		Speed <em>(rpm)</em><br>
 		<input class=vsp>
 		Efficiency Class<br>
-		<select class=vsp name='efficiency_class' onchange='effChg(this)'>
+		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Standard</label>
+		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Energy</label>
+		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Custom<input class=xvsp name='efficiency'></input></label>
+		
+		<!--<select class=vsp name='efficiency_class' onchange='effChg(this)'>
 			<option>Standard</option>
 			<option>Energy</option>
 			<option>Custom</option>
-		</select>
-		<input class=vsp name='efficiency'></input>
-		Voltage<br>
+		</select>-->
+		
+		Voltage <em>(V)</em><br>
 		<input class=vsp>
 		Full-load Current <em>(A)</em><br>
 		<div class=vsp><input name='motor_rated_flc'> <button onclick='estFLA(this)'>EST</button></div>
@@ -109,9 +113,9 @@
 /////
 	function effChg(e) {
 		if ($(e).val()=='Custom') {
-			nm('efficiency').show();      
+			//nm('efficiency').show();      
 		} else {
-			nm('efficiency').hide();
+			//nm('efficiency').hide();
 		}
 	}
 	nm('efficiency_class').change();	
