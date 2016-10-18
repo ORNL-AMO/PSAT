@@ -152,7 +152,6 @@
       }
 
       function setData(d,e) {
-        
         nmAll(e).each(function(i,el) {
           let v;
           switch (el.type) {
@@ -186,6 +185,9 @@
               break;
             case 'select-one':
               ctl.find('option')[v].selected = true;
+              break;
+            case 'radio':
+              chk(el,$(el).parent().text().trim()==v);
               break;
             default:
               ctl.val(rnd(v));
