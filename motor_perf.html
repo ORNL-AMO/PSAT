@@ -21,13 +21,13 @@
 <div style='display:flex; justify-content: space-between;'>
 	<div>
 		Line Frequency <em>(Hz)</em>
-		<label><input type=radio> 60</label>
-		<label class=vsp><input type=radio> 50</label>
+		<label><input name=line type=radio> 50</label>
+		<label class=vsp><input name=line type=radio> 60</label>
 		Motor Power Units
 		<label><input type=radio> hp</label>
 		<label class=vsp><input type=radio> kW</label>
 		Speed <em>(rpm)</em><br>
-		<input class=vsp>
+		<input name=speed class=vsp>
 		Efficiency Class<br>
 		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Standard</label>
 		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Energy</label>

@@ -152,8 +152,9 @@
       }
 
       function setData(d,e) {
-        let v;
+        
         nmAll(e).each(function(i,el) {
+          let v;
           switch (el.type) {
             case 'checkbox':
               v = el.checked;
@@ -161,10 +162,17 @@
             case 'select-one':
               v = $(el).children(':selected').index();
               break;
+            case 'radio':
+              if ($(el).is(':checked')) {
+                v = $(el).parent().text().trim();
+              } 
+              break;
             default:
               v = $(el).val();
           }
-          d[nmGet(el)] = v;
+          if (v!==undefined) {
+            d[nmGet(el)] = v;
+          }
         });
         return d; 
       }     
@@ -273,7 +281,7 @@
             motor_rated_power: 200,
             motor_rated_speed: 1780,
             efficiency_class: 0,
-            efficiency:0,
+            efficiency:75,
             motor_rated_voltage: 460,
             motor_rated_flc: 225.4,
             margin: 0,
