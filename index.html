@@ -186,8 +186,8 @@
             case 'select-one':
               ctl.find('option')[v].selected = true;
               break;
-            case 'radio':
-              chk(el,$(el).parent().text().trim()==v);
+            case 'radio'://debugger;
+              chk(ctl,ctl.parent().text().trim()==v);
               break;
             default:
               ctl.val(rnd(v));
@@ -305,7 +305,7 @@
           Curve = {C:1.9,plot:["","","",""]};
           MotorPerf = {
             line: 60,
-            units: 'hp',
+            unit: 'hp',
             speed: 1780,
             efficiency_class: 'Standard',
             efficiency: 75,

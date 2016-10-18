@@ -24,8 +24,8 @@
 		<label><input name=line type=radio> 50</label>
 		<label class=vsp><input name=line type=radio> 60</label>
 		Motor Power Units
-		<label><input type=radio> hp</label>
-		<label class=vsp><input type=radio> kW</label>
+		<label><input name=unit type=radio> hp</label>
+		<label class=vsp><input name=unit type=radio> kW</label>
 		Speed <em>(rpm)</em><br>
 		<input name=speed class=vsp>
 		Efficiency Class<br>
@@ -34,9 +34,9 @@
 		<label class=vsp><input name='efficiency_class' onchange='effChg(this)' type=radio> Custom </label>
 		<input class=vsp name='efficiency'></input>
 		Voltage <em>(V)</em><br>
-		<input class=vsp>
+		<input name=voltage class=vsp>
 		Full-load Current <em>(A)</em><br>
-		<div class=vsp><input name='motor_rated_flc'> <button onclick='estFLA(this)'>EST</button></div>
+		<div class=vsp><input name='flc'> <button onclick='estFLA(this)'>EST</button></div>
 		<button>PLOT</button>
 	</div>
 	<canvas width="700" height="500"></canvas>
