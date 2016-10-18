@@ -1,5 +1,9 @@
 
 <style scoped>
+	label {
+		font-size: .75rem;
+		font-style: italic;
+    }
 	canvas {
 		background-color: black;
 		display:none;		
@@ -29,12 +33,6 @@
 		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Energy</label>
 		<label class=vsp><input name='efficiency_class' onchange='effChg(this)' type=radio> Custom </label>
 		<input class=vsp name='efficiency'></input>
-		<!--<select class=vsp name='efficiency_class' onchange='effChg(this)'>
-			<option>Standard</option>
-			<option>Energy</option>
-			<option>Custom</option>
-		</select>-->
-		
 		Voltage <em>(V)</em><br>
 		<input class=vsp>
 		Full-load Current <em>(A)</em><br>
