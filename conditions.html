@@ -149,19 +149,19 @@
 	function rm(e) {
 		Conds.splice(listIdx(e),1);
 		saveConds();
-		main();
+		loadPg();
 	}
 	function removeAll() {
 		Conds = [];
 		saveConds();
-		main();
+		loadPg();
 	}
 	function cp(e) {
 		let o=$.extend({},Conds[listIdx(e)]);
 		o.name+=' (copy)';
 		Conds.push(o);
 		saveConds();
-		main();
+		loadPg();
 	}
 	function edit(e) {
 		Cond = Conds[parIdx(e,-2)];
@@ -179,7 +179,7 @@
 	}
 	function reset() {
 		loadData(true);
-		main();
+		loadPg();
 	}
     
 	function chgUnits(nunits) {
@@ -248,7 +248,7 @@
 						});
 					});
 					save();
-					main();	
+					loadPg();	
 				}
 			}
 		); 

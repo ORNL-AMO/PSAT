@@ -266,6 +266,7 @@
         saveProp('conditions',Conds);
         saveProp('defCond',DefCond);
         saveProp('curve',Curve);
+        saveProp('motorPerf',MotorPerf);        
       }
       IMP = ['gpm','hp','ft','psig'];      
       function loadData(reset) {
@@ -317,6 +318,7 @@
         Units = loadProp('units');
         HeadTool = loadProp('headTool');
         Curve = loadProp('curve'); 
+        MotorPerf = loadProp('motorPerf');
         return (DefCond = loadProp('defCond'));
       }
       Dlg=require('electron').remote.dialog;
