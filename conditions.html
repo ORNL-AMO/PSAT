@@ -37,7 +37,7 @@
 	}
 </style>
 <div style='display: inline-block'>
-	<h1>Conditions</h1>
+	<h1>Pump Conditions</h1>
 	<table id=cond>
 		<tr>
 			<td><input type="checkbox" onclick="setGrid(this)"></td>
@@ -112,121 +112,8 @@
 		Cond.date = dt.toJSON().slice(0,10);		
 		saveConds();
 		go('notes');
-	}
-	function reset() {
-		loadData(true);
-		loadPg();
-	}
-    
-	function chgUnits(nunits) {
-		function chg(m,...args) {
-			cvtObj(...args,m,nunits[m._num]);
-    	}
-		$.each(Conds.concat([DefCond]),function(i,d) {
-			chg(FLOW,d,'flow');
-			chg(POWER,d,['motor_rated_power'/*,'motor_field_power'*/]);
-			chg(DIST,d,'head');
-		});
-		chg(DIST,HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd']);		
-		chg(PRESSURE,HeadTool,['Ps','Pg_s','Pd']);		
-		chg(FLOW, Curve, [0,2]);
-		chg(DIST, Curve, [1,3]);
-		Units = nunits;
-		save();
-	}
-	function shade(n) {
-		$('td').removeClass('shade');
-		$(`#units td:nth-child(${n})`).addClass('shade');		
-	}
-	function showCus(lastCol) {
-		lastCol.find('select').each(function(i,e) {
-			$(e).val(Units[i]);
-		});
-		lastCol.show();		
-	}
-	
-	function xprt() {		
-		Dlg.showSaveDialog(DlgFilter,
-			function (fn) {
-				if (fn) {					
-					let hd, lines;
-					Conds.forEach(function(c,i) {
-						const r = crunch(cvtArg(c));						
-						if (i==0) {
-							hd = Object.keys(Conds[0]).sort().concat(Object.keys(r).sort());
-							lines=[JSON.stringify([0,Units,HeadTool,Curve]),hd.join('\t')];
-						}
-						let o = $.extend(crunch(cvtArg(c)),c);
-						lines.push(
-							hd.map((nm,i)=> {
-								return JSON.stringify(o[nm]);
-							}).join('\t')
-						);
-					});		
-					require('fs').writeFile(fn,lines.join('\n'));				
-				}
-		}); 
-	}
-	function imprt() {
-		Dlg.showOpenDialog(DlgFilter,
-			function (fn) {
-				if (fn ) {
-					const 
-						fs = require('fs'),
-						lines=fs.readFileSync(fn[0],'utf8').split('\n'),
-						hd=lines[1].split('\t').filter(e => e > 'Z' );
-					Conds=[];
-					[,Units,HeadTool,Curve]=JSON.parse(lines[0]);					
-					lines.slice(2).forEach((ln,row)=>{
-						Conds.push({});
-						ln.split('\t').slice(0,hd.length).forEach((v,i)=>{
-							Conds[row][hd[i]]=JSON.parse(v);
-						});
-					});
-					save();
-					loadPg();	
-				}
-			}
-		); 
-	}		
+	}	
 	function start() {
-		const lastCol = $('#units th:last-child,#units td:last-child');
-		const met = ['m^3/hr','kW','m','kPa'];
-		let i;
-		switch (Units.toString()) {
-			case IMP.toString():
-				i=0;
-				break;
-			case met.toString():
-				i=1;
-				break;
-			default:
-				i=2;
-				showCus(lastCol);
-		}
-		$('#units :radio')[i].checked = true;
-		shade(i+2);
-				
-		$('#units :radio').change(function() {			
-			switch (parIdx(this)) {
-				case 0:
-					lastCol.hide();
-					chgUnits(IMP);
-					break;
-				case 1:
-					lastCol.hide();
-					chgUnits(met);
-					break;
-				case 2:
-					showCus(lastCol);
-			}
-			shade(parIdx(this,2));
-		}); 
-		$('#units select').change(function() {
-			const nu=Units.slice();
-			nu[$('#units select').index(this)]=$(this).val();
-			chgUnits(nu);
-		});
 		$.each(Conds,function(i,d) {		
 			const nu = $('#cond tr').first().clone();
 			nu.children().eq(1).text(d.name);
@@ -240,7 +127,5 @@
 		}		
 		setGridBtn();
 	}
-	
-	DlgFilter={filters: [{ name: 'Tab Separated Values', extensions: ['tsv'] }]};
 	start();
 </script>
