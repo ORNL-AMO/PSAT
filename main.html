@@ -33,7 +33,7 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 </ul>
 <table>
 	<tr>
-		<td><button onclick='go("conditions")'>RESET</button></td><td>Reset session to defaults, removing all pump conditions</td>
+		<td><button onclick='reset()'>RESET</button></td><td>Reset session to defaults, removing all pump conditions</td>
 	</tr>
 	<tr>
 		<td><button onclick='go("conditions")'>IMPORT</button></td><td>Replace current session with one loaded from file</td>
@@ -47,4 +47,9 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		e.preventDefault();
 		go(nm);
 	}
+	function reset() {
+		loadData(true);
+		loadPg();
+		alert("Reset complete.");
+	}	
 </script>
