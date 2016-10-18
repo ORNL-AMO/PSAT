@@ -7,6 +7,10 @@
 	button {
 		margin-top: .5rem;
 	}
+	.vsp {
+		margin-bottom: .5rem;
+		display:block;
+	}
 }
 </style>
 <h1>Motor Performance</h1>
@@ -14,23 +18,23 @@
 	<div>
 		Line Frequency
 		<label><input type=radio> 60</label>
-		<label><input type=radio> 50</label>
+		<label class=vsp><input type=radio> 50</label>
 		Motor Power Units
 		<label><input type=radio> hp</label>
-		<label><input type=radio> kW</label>
+		<label class=vsp><input type=radio> kW</label>
 		Speed <em>(rpm)</em><br>
-		<input><br>
+		<input class=vsp>
 		Efficiency Class<br>
-		<select name='efficiency_class' onchange='effChg(this)'>
+		<select class=vsp name='efficiency_class' onchange='effChg(this)'>
 			<option>Standard</option>
 			<option>Energy</option>
 			<option>Custom</option>
 		</select>
-		<input name='efficiency'></input><br>
+		<input class=vsp name='efficiency'></input>
 		Voltage<br>
-		<input><br>
+		<input class=vsp>
 		Full-load Current <em>(A)</em><br>
-		<input name='motor_rated_flc'> <button onclick='estFLA(this)'>EST</button><br>
+		<div class=vsp><input name='motor_rated_flc'> <button onclick='estFLA(this)'>EST</button></div>
 		<button>PLOT</button>
 	</div>
 	<canvas width="700" height="500"></canvas>
