@@ -1,34 +1,42 @@
 <style scoped>
+	ul {
+		list-style-type: none;
+	}
 </style>
 <p>
 The Pumping System Assessment Tool was developed by the Department of Energy's BestPractices Program to assist in preliminary assessments of how efficiently pumping systems are operating.
 </p> 
-<p>
-For many industrial facilities, the energy consumed in pumping fluids comprises a large fraction of the overall facility electricity usage.  Operators of pumping systems often are not aware of how effectively the energy required to pump the fluids is being used.
-</p>
-
-<p>
-This tool seeks to provide a relatively simple indication of the pumping system effectiveness.
-</p>
-
-<p>
-In essence, the tool simply estimates the work done by the pumping system and compares that to the estimated energy input into the system.  Using generic typical performance characteristics for pumps and motors, indications of potential savings (in energy and dollars) are developed.
-</p>
-<p>
-This tool DOES NOT tell the user how to improve the system.  But it does provide a means of prioritizing energy improvement opportunities.
-</p>
-<p>
-Accompanying this tool is additional information on factors affecting the various components and overall pumping system effectiveness.  The user is encouraged to browse through the information to develop a better understanding of these factors.  As these factors are better understood, changes that can be made to improve system efficiency and effectiveness will often become obvious.
-</p>
 <ul>    
+	<li><a onclick='lnk(event,"about")' href=''>About</a></li>
 	<li><a onclick='lnk(event,"goal")' href=''>Ultimate Goal</a></li>
     <li><a onclick='lnk(event,"mvr")' href=''>Measured vs Required Conditions</a></li>
 	<li><a onclick='lnk(event,"losses")' href=''>System Losses</a></li>	
-    <li style='margin-bottom:1rem;'><a onclick='lnk(event,"help")' href=''>Help</a></li>
-    <li><a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency Curves</a></li>
-	<li><a onclick='lnk(event,"motor_perf")' href=''>Motor Performance Curves</a></li>    
+    <li><a onclick='lnk(event,"help")' href=''>Help</a></li>
+    <!--<li><a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency Curves</a></li>
+	<li><a onclick='lnk(event,"motor_perf")' href=''>Motor Performance Curves</a></li>    -->
+
 </ul>
-<button onclick='go("conditions")'>BEGIN ANALYSIS</button>
+<table>
+	<tr>
+		<td><button onclick='go("conditions")'>RESET</button></td><td>Reset session to defaults, removing all pump conditions</td>
+	</tr>
+	<tr>
+		<td><button onclick='go("conditions")'>IMPORT</button></td><td>Replace current session with one loaded from file</td>
+	</tr>
+	<tr>
+		<td><button onclick='go("conditions")'>EXPORT</button></td><td>Save current session to file</td>
+	</tr>
+</table>
+ <!--<br> 
+<button onclick="imprt()">IMPORT</button> Replace current session with one loaded from file<br>
+<button class=gt0 onclick="xprt()">EXPORT</button> Save current session to file<br>-->
+<a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency Curves</a><br>
+<a onclick='lnk(event,"motor_perf")' href=''>Motor Performance Curves</a><br>
+<a onclick='lnk(event,"pump_eff")' href=''>Units</a><br>
+<a onclick='lnk(event,"motor_perf")' href=''>Pump Conditions</a>
+
+<!--<button onclick='go("conditions")'>UNITS</button>
+<button onclick='go("conditions")'>CONDITIONS</button>-->
 <script>
 	function lnk(e,nm) {
 		e.preventDefault();
