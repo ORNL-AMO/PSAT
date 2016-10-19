@@ -124,6 +124,7 @@
 	setCtls(MotorPerf);
 	nmAll().change(()=>{
 		setData(MotorPerf);
+		saveProp('motorPerf',MotorPerf);
 	});
 	effChg();
 	nm('efficiency_class').change(effChg);	
