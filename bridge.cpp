@@ -13,12 +13,12 @@ Isolate* iso;
 Local<Object> inp;
 
 double Get(const char *nm) {
-  auto r = inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
-  if (isnan(r)) {
+  auto rObj = inp->ToObject()->Get(String::NewFromUtf8(iso,nm));
+  if (rObj->IsUndefined()) {
     cout << nm << endl;;
-    assert(!"number");
-  }  
-  return r;
+    assert(!"defined");
+  }
+  return rObj->NumberValue();
 }
 
 void Results(const FunctionCallbackInfo<Value>& args) {
@@ -66,12 +66,12 @@ void Results(const FunctionCallbackInfo<Value>& args) {
 void EstFLA(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   inp = args[0]->ToObject();
-
   EstimateFLA fla(Get("motor_rated_power"),Get("motor_rated_speed"),(Motor::LineFrequency)(int)(!Get("line")),(Motor::EfficiencyClass)(int)Get("efficiency_class"),
     Get("efficiency"),Get("motor_rated_voltage"));
-  fla.calculate();
+  fla.calculate();  
   args.GetReturnValue().Set(fla.getEstimatedFLA());
 }
+
 //TODO round vs js round; loosen up to make next test case
 void Check(double exp, double act, const char* nm="") {
   //cout << "e " << exp << "; a " << act << endl;
