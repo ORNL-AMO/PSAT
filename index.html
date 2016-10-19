@@ -237,17 +237,15 @@
       }
      function loadPg() {
         pg().load(Nav[Nav.length-1]+'.html',function () {
+          let back=false,home=false;
           if (Nav.length>1) {
-            $('#back').show();
+            back = true;
             if (Nav.length>2) {
-              $('#home').show();
-            } else {
-              $('#home').hide();
-            }          
-          } else {
-            $('#back').hide();
-            $('#home').hide();            
+              home = true;
+            }            
           }
+          $('#back').toggle(back);
+          $('#home').toggle(home);
         });       
      }
       function go(nm) {
