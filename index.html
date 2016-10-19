@@ -130,6 +130,9 @@
         return $('#container '+s);
       }
 
+      function flc(a) {    
+        return rnd(Bridge.estFLA(a));
+      }
       function cvtArg(c) {
         const d=$.extend({},c);
         cvtObj(d,'flow',FLOW,'gpm');
@@ -310,8 +313,8 @@
           Curve = {C:1.9,plot:["","","",""]};
           MotorPerf = {
             line: 60,
-            unit: 'hp',
-            speed: 1780,
+            motor_rated_power: 200,
+            motor_rated_speed: 1780,
             efficiency_class: 'Standard',
             efficiency: 75,
             voltage: 460,

@@ -128,7 +128,7 @@
   </tr>
   <tr>
     <td><div>Full-load Current<em>(A)</em></div></td>
-    <td><input name='motor_rated_flc'> <button onclick='estFLA(this)'>EST</button></td>
+    <td><input name='motor_rated_flc'> <button onclick='estFLC(this)'>EST</button></td>
   </tr>
   <tr>
     <td><div>Size Margin <em>(%)</em></div></td>
@@ -299,11 +299,8 @@
     nm(n,col).css('background-color',
       Math.abs(nm(n,col).val()-v)>tol*v ? '#FECB00' : '');
   }
-  function fla(a) {    
-    return rnd(Bridge.estFLA(a));
-  }
-  function estFLA(e) {
-    nm('motor_rated_flc',col(e)).val(fla(colArgs(col(e))));
+  function estFLC(e) {
+    nm('motor_rated_flc',col(e)).val(flc(colArgs(col(e))));
     vdTol('motor_rated_flc',col(e));
     nm('motor_rated_flc',col(e)).change();
   }
@@ -327,7 +324,7 @@
             <span style='color:#5d9300'>${rnd(r[key][1])}</span>
           </div>`);
       }          
-      vdTol('motor_rated_flc',col,fla(a),.5);
+      vdTol('motor_rated_flc',col,flc(a),.5);
       vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
     });
     showHdResults(true);

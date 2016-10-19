@@ -1,5 +1,8 @@
 
 <style scoped>
+	em {
+		color: #5d9300;
+	}
 	label {
 		font-size: .75rem;
 		font-style: italic;
@@ -23,11 +26,13 @@
 		Line Frequency <em>(Hz)</em>
 		<label><input name=line type=radio> 50</label>
 		<label class=vsp><input name=line type=radio> 60</label>
-		Motor Power Units
+		Motor Power <em id=unit_pow></em><br>
+		<input name=motor_rated_power class=vsp>
+		<!--Motor Power Units
 		<label><input name=unit type=radio> hp</label>
-		<label class=vsp><input name=unit type=radio> kW</label>
+		<label class=vsp><input name=unit type=radio> kW</label>-->
 		Speed <em>(rpm)</em><br>
-		<input name=speed class=vsp>
+		<input name=motor_rated_speed class=vsp>
 		Efficiency Class<br>
 		<label><input name='efficiency_class' type=radio> Standard</label>
 		<label><input name='efficiency_class' type=radio> Energy</label>
@@ -36,7 +41,7 @@
 		Voltage <em>(V)</em><br>
 		<input name=voltage class=vsp>
 		Full-load Current <em>(A)</em><br>
-		<div class=vsp><input name='flc'> <button onclick='estFLA(this)'>EST</button></div>
+		<div class=vsp><input name='flc'> <button onclick='estFLC(this)'>EST</button></div>
 		<button>PLOT</button>
 	</div>
 	<canvas width="700" height="500"></canvas>
@@ -109,8 +114,8 @@
 	}
 	Cnv = dom('canvas');
 /////
-	function estFLA(e) {
-		//nm('motor_rated_flc',col(e)).val(fla(colArgs(col(e))));
+	function estFLC(e) {
+		nm('flc').val(flc(cvtArg(MotorPerf)));
 		//vdTol('motor_rated_flc',col(e));
 		//nm('motor_rated_flc',col(e)).change();
 	}
@@ -121,13 +126,15 @@
 			nm('efficiency').hide();
 		}
 	}
+	pg('#unit_pow').text(`(${unit(POWER)})`)
 	setCtls(MotorPerf);
+	nm('efficiency_class').change(effChg);	
 	nmAll().change(()=>{
 		setData(MotorPerf);
 		saveProp('motorPerf',MotorPerf);
 	});
 	effChg();
-	nm('efficiency_class').change(effChg);	
+	
 	
 </script>
 
