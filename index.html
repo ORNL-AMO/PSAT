@@ -266,10 +266,10 @@
         LS.setItem(nm,JSON.stringify(v));
       }
       function save() {
+        saveProp('defCond',DefCond);
         saveProp('units',Units);
         saveProp('headTool',HeadTool);
         saveProp('conditions',Conds);
-        saveProp('defCond',DefCond);
         saveProp('curve',Curve);
         saveProp('motorPerf',MotorPerf);        
       }
