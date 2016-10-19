@@ -1,0 +1,169 @@
+<style scoped>
+	.shade {
+		background-color: #C3C8C8;
+	}
+	#units select {
+		vertical-align: middle;
+	}
+	#units label {
+		padding-right: 1rem;
+	}
+	#units td:first-child {
+		color: #5d9300;
+		padding-right: 1rem;
+	}
+	#units td:last-child, #units th:last-child {
+		display: none;
+	}
+	#units th:nth-child(n+2),#units td:nth-child(n+2) {
+		padding-right: 1rem;
+		padding-left: 1rem;
+	}
+	#units table {
+		border-collapse: collapse;
+	}
+	#cond td>* {
+		display: block;
+	}
+	#cond tr:first-child {
+		display: none;
+	}
+	#cond td:nth-child(2):hover {
+		background-color: #C3C8C8;
+		cursor: pointer;
+	}
+	p button {
+		float:left;
+	}
+</style>
+<div style='display: inline-block'>
+	<h1>Units</h1>
+	<div id="units">
+		<label><input type=radio name=unit_sys></input> Imperial</label>
+		<label><input type=radio name=unit_sys></input> Metric</label>
+		<label><input type=radio name=unit_sys></input> Custom</label>
+		<p>
+		<table>
+			<tr>
+				<th></th>
+				<th>Imperial</th>
+				<th>Metric</th>
+				<th>Custom</th>
+			</tr>
+			<tr>
+				<td>Flow</td>
+				<td>gpm</td>
+				<td>m^3/hr</td>
+				<td>
+					<select>
+						<option>gpm</option>
+						<option>MGD</option>
+						<option>m^3/hr</option>
+						<option>L/s</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Power</td>
+				<td>hp</td>
+				<td>kW</td>
+				<td>
+					<select>
+						<option>hp</option>
+						<option>kW</option>				
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Distance</td>
+				<td>ft</td>
+				<td>m</td>
+				<td>
+					<select>
+						<option>ft</option>
+						<option>m</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Pressure</td>
+				<td>psig</td>
+				<td>kPa</td>
+				<td>
+					<select>
+						<option>psig</option>
+						<option>kPa</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<script>
+	function chgUnits(nunits) {
+		function chg(m,...args) {
+			cvtObj(...args,m,nunits[m._num]);
+    	}
+		$.each(Conds.concat([DefCond]),function(i,d) {
+			chg(FLOW,d,'flow');
+			chg(POWER,d,['motor_rated_power'/*,'motor_field_power'*/]);
+			chg(DIST,d,'head');
+		});
+		chg(DIST,HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd']);		
+		chg(PRESSURE,HeadTool,['Ps','Pg_s','Pd']);		
+		chg(FLOW, Curve, [0,2]);
+		chg(DIST, Curve, [1,3]);
+		Units = nunits;
+		save();
+	}
+	function shade(n) {
+		$('td').removeClass('shade');
+		$(`#units td:nth-child(${n})`).addClass('shade');		
+	}
+	function showCus(lastCol) {
+		lastCol.find('select').each(function(i,e) {
+			$(e).val(Units[i]);
+		});
+		lastCol.show();		
+	}	
+	function start() {
+		const lastCol = $('#units th:last-child,#units td:last-child');
+		const met = ['m^3/hr','kW','m','kPa'];
+		let i;
+		switch (Units.toString()) {
+			case IMP.toString():
+				i=0;
+				break;
+			case met.toString():
+				i=1;
+				break;
+			default:
+				i=2;
+				showCus(lastCol);
+		}
+		$('#units :radio')[i].checked = true;
+		shade(i+2);
+				
+		$('#units :radio').change(function() {			
+			switch (parIdx(this)) {
+				case 0:
+					lastCol.hide();
+					chgUnits(IMP);
+					break;
+				case 1:
+					lastCol.hide();
+					chgUnits(met);
+					break;
+				case 2:
+					showCus(lastCol);
+			}
+			shade(parIdx(this,2));
+		}); 
+		$('#units select').change(function() {
+			const nu=Units.slice();
+			nu[$('#units select').index(this)]=$(this).val();
+			chgUnits(nu);
+		});		
+	}
+	start();
+</script>
