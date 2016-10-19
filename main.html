@@ -4,10 +4,10 @@
 		padding-left: 4rem;
 	}
 	table {
-		border-collapse:collapse;
+		border-collapse:collapse;		
 	}
 	td {
-		padding:0;
+		padding:.25rem 0;
 	}
 	td:first-child {
 		min-width: 4rem;
@@ -26,20 +26,20 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 </ul>
 <strong>Analysis</strong>
 <ul>    
+	<a onclick='lnk(event,"units")' href=''>Units</a><br>
+	<a onclick='lnk(event,"conditions")' href=''>Pump Conditions</a><br>
 	<a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency</a><br>
 	<a onclick='lnk(event,"motor_perf")' href=''>Motor Performance</a><br>
-	<a onclick='lnk(event,"units")' href=''>Units</a><br>
-	<a onclick='lnk(event,"conditions")' href=''>Pump Conditions</a>
 </ul>
 <table>
 	<tr>
-		<td><button onclick='reset()'>RESET</button></td><td>Reset session to defaults, removing all pump conditions</td>
+		<td><button onclick='reset()'>RESET</button></td><td>Reset all analysis data to defaults</td>
 	</tr>
 	<tr>
-		<td><button onclick='go("conditions")'>IMPORT</button></td><td>Replace current session with one loaded from file</td>
+		<td><button onclick='go("conditions")'>IMPORT</button></td><td>Load analysis data from file</td>
 	</tr>
 	<tr>
-		<td><button onclick='go("conditions")'>EXPORT</button></td><td>Save current session to file</td>
+		<td><button onclick='go("conditions")'>EXPORT</button></td><td>Save analysis data to file</td>
 	</tr>
 </table>
 <script>
