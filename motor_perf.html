@@ -42,13 +42,13 @@
 		<input name=motor_rated_voltage class=vsp>
 		Full-load Current <em>(A)</em><br>
 		<div class=vsp><input name='flc'> <button onclick='estFLC(this)'>EST</button></div>
-		<button>PLOT</button>
+		<button onclick='plot()'>PLOT</button>
 	</div>
 	<canvas width="700" height="500"></canvas>
 </div>
 
 <script>//# sourceURL=*pump_eff
-	function plot() {
+	function _plot() {
 		const 	f1 = Curve.plot[0],
 				h1 = Curve.plot[1],				
 				f2 = Curve.plot[2],
@@ -112,12 +112,15 @@
 		}
 		ctx.stroke();
 	}
-	Cnv = dom('canvas');
+	
 /////
+	Cnv = dom('canvas');
+	
+	function plot() {
+		$(Cnv).show();
+	}
 	function estFLC(e) {
 		nm('flc').val(flc(cvtArg(MotorPerf)));
-		//vdTol('motor_rated_flc',col(e));
-		//nm('motor_rated_flc',col(e)).change();
 	}
 	function effChg() {
 		if (nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom') {
@@ -126,10 +129,12 @@
 			nm('efficiency').hide();
 		}
 	}
+
 	pg('#unit_pow').text(`(${unit(POWER)})`)
 	setCtls(MotorPerf);
 	nm('efficiency_class').change(effChg);	
 	nmAll().change(()=>{
+		$(Cnv).hide();
 		setData(MotorPerf);
 		saveProp('motorPerf',MotorPerf);
 	});
