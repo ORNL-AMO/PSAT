@@ -36,7 +36,7 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		<td><button onclick='reset()'>RESET</button></td><td>Reset all analysis data to defaults</td>
 	</tr>
 	<tr>
-		<td><button onclick='go("conditions")'>IMPORT</button></td><td>Load analysis data from file</td>
+		<td><button onclick='imprt()'>IMPORT</button></td><td>Load analysis data from file</td>
 	</tr>
 	<tr>
 		<td><button onclick='go("conditions")'>EXPORT</button></td><td>Save analysis data to file</td>
@@ -52,4 +52,28 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		loadPg();
 		alert("Reset complete.");
 	}	
+	function imprt() {
+		Dlg.showOpenDialog(DlgFilter,
+			function (fn) {
+				if (fn ) {
+					const 
+						fs = require('fs'),
+						lines=fs.readFileSync(fn[0],'utf8').split('\n'),
+						hd=lines[1].split('\t').filter(e => e > 'Z' );
+					Conds=[];
+					[,Units,HeadTool,Curve]=JSON.parse(lines[0]);					
+					lines.slice(2).forEach((ln,row)=>{
+						Conds.push({});
+						ln.split('\t').slice(0,hd.length).forEach((v,i)=>{
+							Conds[row][hd[i]]=JSON.parse(v);
+						});
+					});
+					save();
+					loadPg();	
+				}
+			}
+		); 
+	}		
+	DlgFilter={filters: [{ name: 'Tab Separated Values', extensions: ['tsv'] }]};
+	
 </script>
