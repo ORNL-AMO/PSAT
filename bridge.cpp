@@ -15,7 +15,7 @@ Local<Object> inp;
 double Get(const char *nm) {
   auto r = inp->ToObject()->Get(String::NewFromUtf8(iso,nm))->NumberValue();
   if (isnan(r)) {
-    cout << nm;
+    cout << nm << endl;;
     assert(!"number");
   }  
   return r;
