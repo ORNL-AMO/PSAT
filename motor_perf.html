@@ -29,9 +29,9 @@
 		Speed <em>(rpm)</em><br>
 		<input name=speed class=vsp>
 		Efficiency Class<br>
-		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Standard</label>
-		<label><input name='efficiency_class' onchange='effChg(this)' type=radio> Energy</label>
-		<label class=vsp><input name='efficiency_class' onchange='effChg(this)' type=radio> Custom </label>
+		<label><input name='efficiency_class' type=radio> Standard</label>
+		<label><input name='efficiency_class' type=radio> Energy</label>
+		<label class=vsp><input name='efficiency_class' type=radio> Custom </label>
 		<input class=vsp name='efficiency'></input>
 		Voltage <em>(V)</em><br>
 		<input name=voltage class=vsp>
@@ -109,15 +109,24 @@
 	}
 	Cnv = dom('canvas');
 /////
-	function effChg(e) {
-		if ($(e).parent().text().trim()=='Custom') {
+	function estFLA(e) {
+		//nm('motor_rated_flc',col(e)).val(fla(colArgs(col(e))));
+		//vdTol('motor_rated_flc',col(e));
+		//nm('motor_rated_flc',col(e)).change();
+	}
+	function effChg() {
+		if (nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom') {
 			nm('efficiency').show();      
 		} else {
 			nm('efficiency').hide();
 		}
 	}
 	setCtls(MotorPerf);
-	//nm('efficiency_class').change();	
+	nmAll().change(()=>{
+		setData(MotorPerf);
+	});
+	effChg();
+	nm('efficiency_class').change(effChg);	
 	
 </script>
 
