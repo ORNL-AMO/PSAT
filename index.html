@@ -167,7 +167,7 @@
               break;
             case 'radio':
               if ($(el).is(':checked')) {
-                v = $(el).parent().text().trim();
+                v = $(el).val();
               } 
               break;
             default:
@@ -191,7 +191,7 @@
               ctl.find('option')[v].selected = true;
               break;
             case 'radio':
-              chk(ctl,ctl.parent().text().trim()==v);
+              chk(ctl,ctl.val()==v);
               break;
             default:
               ctl.val(rnd(v));
@@ -312,12 +312,12 @@
           HeadTool = {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1};  
           Curve = {C:1.9,plot:["","","",""]};
           MotorPerf = {
-            line: 60,
+            line: 1,
             motor_rated_power: 200,
             motor_rated_speed: 1780,
-            efficiency_class: 'Standard',
+            efficiency_class: 0,
             efficiency: 75,
-            voltage: 460,
+            motor_rated_voltage: 460,
             flc: 225.4
           };
           save();        

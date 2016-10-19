@@ -24,8 +24,8 @@
 <div style='display:flex; justify-content: space-between;'>
 	<div>
 		Line Frequency <em>(Hz)</em>
-		<label><input name=line type=radio> 50</label>
-		<label class=vsp><input name=line type=radio> 60</label>
+		<label><input name=line type=radio value=0> 50</label>
+		<label class=vsp><input name=line type=radio value=1> 60</label>
 		Motor Power <em id=unit_pow></em><br>
 		<input name=motor_rated_power class=vsp>
 		<!--Motor Power Units
@@ -34,12 +34,12 @@
 		Speed <em>(rpm)</em><br>
 		<input name=motor_rated_speed class=vsp>
 		Efficiency Class<br>
-		<label><input name='efficiency_class' type=radio> Standard</label>
-		<label><input name='efficiency_class' type=radio> Energy</label>
-		<label class=vsp><input name='efficiency_class' type=radio> Custom </label>
+		<label><input name='efficiency_class' type=radio value=0> Standard</label>
+		<label><input name='efficiency_class' type=radio value=1> Energy</label>
+		<label class=vsp><input name='efficiency_class' type=radio value=2> Custom </label>
 		<input class=vsp name='efficiency'></input>
 		Voltage <em>(V)</em><br>
-		<input name=voltage class=vsp>
+		<input name=motor_rated_voltage class=vsp>
 		Full-load Current <em>(A)</em><br>
 		<div class=vsp><input name='flc'> <button onclick='estFLC(this)'>EST</button></div>
 		<button>PLOT</button>
