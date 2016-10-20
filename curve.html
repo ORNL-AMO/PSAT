@@ -15,9 +15,8 @@
 	td>* {
     	display: block;
 	}
-	button {
+	#container button {
 		margin: .5rem 0;
-		display: none;
 	}
 	#plot td:first-child {
 		color: #5d9300;
@@ -182,5 +181,6 @@
 	pg('#C').val(Curve.C);
 	Curve.plot.forEach((v,i)=>ptsInp().eq(i).val(rnd(v)));
 	inpChg();
+	
 </script>
 
