@@ -112,8 +112,11 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 
 //nema
   {
-   // MotorEfficiency mef()
+    MotorEfficiency mef(Motor::LineFrequency::FREQ60,1200, Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,1);
+    cout << mef.calculate();
   }
+  return;
+
   #define BASE \
     Pump pump(Pump::Style::END_SUCTION_ANSI_API,0,1780,Pump::Drive::DIRECT_DRIVE,\
       1,1,1,Pump::Speed::NOT_FIXED_SPEED);\
