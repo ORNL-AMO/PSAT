@@ -140,7 +140,7 @@
 		ctx.strokeStyle = "#FECB00";	
 		ctx.beginPath();
 		
-		for (let x=0; x<=xMax; x+=xStep/10) {			
+		for (let x=0; rnd(x)<=xMax; x+=xStep/10) {			
 			ctx.lineTo(xPos(x), yPos(hS+k*Math.pow(x,1.9)));		
 		}
 		ctx.stroke();

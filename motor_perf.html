@@ -50,8 +50,8 @@
 <script>//# sourceURL=*pump_eff
 	function plot() {
 		const 	
-				[xMax, xStep, xCnt] = [120,10,13],
-				[yMax, yStep, yCnt] = [130,10,14],				
+				[xMax, xStep, xCnt] = [120,10,12],
+				[yMax, yStep, yCnt] = [130,10,13],				
 				ctx = Cnv.getContext('2d'),
 				PAD = 50;
 
@@ -100,8 +100,9 @@
 		ctx.strokeStyle = "#FECB00";	
 		ctx.beginPath();
 		
-		for (let x=0; x<=120; x+=13/10) {			
-			ctx.lineTo(xPos(x), yPos(x));		
+		for (let x=0; rnd(x)<=120; x+=12/10) {			
+			ctx.lineTo(xPos(x), yPos(x));	
+			console.log(x);	
 		}
 		ctx.stroke();
 	}
