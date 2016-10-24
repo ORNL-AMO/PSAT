@@ -88,7 +88,7 @@ void Check100(double exp, double act, const char* nm="") {
 }
 
 void Test(const FunctionCallbackInfo<Value>& args) {
-  MotorEfficiency mef(1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,.75);
+  MotorEfficiency mef(Motor::LineFrequency::FREQ60,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,.75);
   Check100(95.69,mef.calculate());
   
   EstimateFLA fla(200,1780,(Motor::LineFrequency)1,(Motor::EfficiencyClass)(1),0,460);
