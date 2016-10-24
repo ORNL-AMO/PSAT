@@ -7,6 +7,8 @@
 #include "calculator/EstimateFLA.h"
 #include "calculator/MotorCurrent.h"
 #include "calculator/MotorPowerFactor.h"
+#include "calculator/OptimalPrePumpEff.h"
+#include "calculator/OptimalSpecificSpeedCorrection.h"
 
 using namespace v8;
 using namespace std;
@@ -113,7 +115,20 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 //nema
   {
     MotorEfficiency mef(Motor::LineFrequency::FREQ60,1200, Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,1);
-    cout << mef.calculate();
+    //cout << mef.calculate();
+  }
+
+//pump eff
+  {
+    OptimalPrePumpEff pef(Pump::Style::END_SUCTION_ANSI_API, 0, 2000); 
+    cout << pef.calculate();
+  }
+
+//spec speed
+
+  {
+    OptimalSpecificSpeedCorrection cor(Pump::Style::END_SUCTION_ANSI_API, 1170);
+    //cout << cor.calculate();
   }
   return;
 
