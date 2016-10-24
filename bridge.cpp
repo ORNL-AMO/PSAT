@@ -116,21 +116,21 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 //nema
   {
     MotorEfficiency mef(Motor::LineFrequency::FREQ60,1200, Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,1);
-    //cout << mef.calculate();
+    //Check100(95,mef.calculate());    
   }
 
 //pump eff
   {
     OptimalPrePumpEff pef(Pump::Style::END_SUCTION_ANSI_API, 0, 2000); 
     OptimalDeviationFactor df(2000);
-//    Check(87.1,pef.calculate()*df.calculate());
+//  Check(87.1,pef.calculate()*df.calculate());
   }
 
 //spec speed
 
   {
     OptimalSpecificSpeedCorrection cor(Pump::Style::END_SUCTION_ANSI_API, 1170);
-    //cout << cor.calculate();
+    //Check100(2.3,cor.calculate());
   }
   return;
 
