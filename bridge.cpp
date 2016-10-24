@@ -122,10 +122,8 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 //pump eff
   {
     OptimalPrePumpEff pef(Pump::Style::END_SUCTION_ANSI_API, 0, 2000); 
-    cout << pef.calculate() << endl;
-
     OptimalDeviationFactor df(2000);
-    cout << df.calculate() << endl;;
+//    Check(87.1,pef.calculate()*df.calculate());
   }
 
 //spec speed
