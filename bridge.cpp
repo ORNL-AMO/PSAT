@@ -9,6 +9,7 @@
 #include "calculator/MotorPowerFactor.h"
 #include "calculator/OptimalPrePumpEff.h"
 #include "calculator/OptimalSpecificSpeedCorrection.h"
+#include "calculator/OptimalDeviationFactor.h"
 
 using namespace v8;
 using namespace std;
@@ -121,7 +122,10 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 //pump eff
   {
     OptimalPrePumpEff pef(Pump::Style::END_SUCTION_ANSI_API, 0, 2000); 
-    cout << pef.calculate();
+    cout << pef.calculate() << endl;
+
+    OptimalDeviationFactor df(2000);
+    cout << df.calculate() << endl;;
   }
 
 //spec speed
