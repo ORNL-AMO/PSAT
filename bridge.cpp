@@ -90,21 +90,30 @@ void Check100(double exp, double act, const char* nm="") {
 }
 
 void Test(const FunctionCallbackInfo<Value>& args) {
-  MotorEfficiency mef(Motor::LineFrequency::FREQ60,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,.75);
-  auto mefVal = mef.calculate();
-  Check100(95.69,mefVal);
-  
-  MotorCurrent mc(200,1780,Motor::LineFrequency::FREQ60,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,.75,460,225.8);
-  auto mcVal = mc.calculate();
-  Check100(76.63,mcVal/225.8);
+    EstimateFLA fla(200,1780,(Motor::LineFrequency)1,(Motor::EfficiencyClass)(1),0,460);
+    fla.calculate();
+    Check(225.8,fla.getEstimatedFLA());
 
-  MotorPowerFactor pf(200,.75,mcVal,mefVal,460);
-  Check100(84.97,pf.calculate());
+// motor perf
 
-  EstimateFLA fla(200,1780,(Motor::LineFrequency)1,(Motor::EfficiencyClass)(1),0,460);
-  fla.calculate();
-  Check(225.8,fla.getEstimatedFLA());
+  {
+    MotorEfficiency mef(Motor::LineFrequency::FREQ60,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,.75);
+    auto mefVal = mef.calculate();
+    Check100(95.69,mefVal);
+    
+    MotorCurrent mc(200,1780,Motor::LineFrequency::FREQ60,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,.75,460,225.8);
+    auto mcVal = mc.calculate();
+    Check100(76.63,mcVal/225.8);
 
+    MotorPowerFactor pf(200,.75,mcVal,mefVal,460);
+    Check100(84.82,pf.calculate());
+
+  }
+
+//nema
+  {
+   // MotorEfficiency mef()
+  }
   #define BASE \
     Pump pump(Pump::Style::END_SUCTION_ANSI_API,0,1780,Pump::Drive::DIRECT_DRIVE,\
       1,1,1,Pump::Speed::NOT_FIXED_SPEED);\
