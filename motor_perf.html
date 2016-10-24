@@ -42,28 +42,21 @@
 		<input name=motor_rated_voltage class=vsp>
 		Full-load Current <em>(A)</em><br>
 		<div class=vsp><input name='flc'> <button onclick='estFLC(this)'>EST</button></div>
-		<button onclick='plot()'>PLOT</button>
+		<button id=plot-btn onclick='plot()'>PLOT</button>
 	</div>
 	<canvas width="700" height="500"></canvas>
 </div>
 
 <script>//# sourceURL=*pump_eff
-	function _plot() {
-		const 	f1 = Curve.plot[0],
-				h1 = Curve.plot[1],				
-				f2 = Curve.plot[2],
-				h2 = Curve.plot[3],  
-				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,Curve.C) - Math.pow(f1,Curve.C))),
-				k = (h2-h1)/(Math.pow(f2,Curve.C)-Math.pow(f1,Curve.C)),
-				[xMax, xStep, xCnt] = steps(f1,f2),
-				[yMax, yStep, yCnt] = steps(h1,h2),				
+	function plot() {
+		const 	
+				[xMax, xStep, xCnt] = [120,10,13],
+				[yMax, yStep, yCnt] = [130,10,14],				
 				ctx = Cnv.getContext('2d'),
 				PAD = 50;
 
-		$('#Hs').text(rnd(hS));
-		$('#K').text(rnd(k,6));
-		showHdBtn('hide');
-		$('#plot').show();
+		$('#plot-btn').hide();
+		$(Cnv).show();
 
 		ctx.strokeStyle = "#5d9300";
 		ctx.fillStyle = "white";
@@ -107,8 +100,8 @@
 		ctx.strokeStyle = "#FECB00";	
 		ctx.beginPath();
 		
-		for (let x=0; x<=xMax; x+=xStep/10) {			
-			ctx.lineTo(xPos(x), yPos(hS+k*Math.pow(x,1.9)));		
+		for (let x=0; x<=120; x+=13/10) {			
+			ctx.lineTo(xPos(x), yPos(x));		
 		}
 		ctx.stroke();
 	}
@@ -116,9 +109,6 @@
 /////
 	Cnv = dom('canvas');
 	
-	function plot() {
-		$(Cnv).show();
-	}
 	function estFLC(e) {
 		nm('flc').val(flc(cvtArg(MotorPerf)));
 	}
