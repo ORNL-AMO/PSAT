@@ -5,6 +5,8 @@
 
 #include "PSATResult.h"
 #include "calculator/EstimateFLA.h"
+#include "calculator/MotorCurrent.h"
+
 
 using namespace v8;
 using namespace std;
@@ -74,7 +76,7 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
 
 //TODO round vs js round; loosen up to make next test case
 void Check(double exp, double act, const char* nm="") {
-  //cout << "e " << exp << "; a " << act << endl;
+  cout << "e " << exp << "; a " << act << endl;
   // if (isnan(act) || (abs(exp-act)>.01*exp)) {
   auto p = 10;
   if (isnan(act) || ( (round(exp*p)/p)!=round(act*p)/p)) {    
@@ -91,6 +93,9 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   MotorEfficiency mef(Motor::LineFrequency::FREQ60,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,.75);
   Check100(95.69,mef.calculate());
   
+  MotorCurrent mc(200,1780,Motor::LineFrequency::FREQ60,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,.75,460,225.8);
+  Check100(76.63,mc.calculate()/225.8);
+return;
   EstimateFLA fla(200,1780,(Motor::LineFrequency)1,(Motor::EfficiencyClass)(1),0,460);
   fla.calculate();
   Check(225.8,fla.getEstimatedFLA());
