@@ -80,8 +80,12 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
 void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   inp = args[0]->ToObject();
+  auto r = Object::New(iso);
+
   MotorEfficiency mef((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_speed"),(Motor::EfficiencyClass)(int)Get("efficiency_class"),Get("efficiency"),Get("motor_rated_power"),Get("load_factor"));
-  args.GetReturnValue().Set(mef.calculate()*100);
+  r->Set(String::NewFromUtf8(iso,"motor_efficiency"),Number::New(iso,mef.calculate()*100));
+  
+  args.GetReturnValue().Set(r);
 }
 
 //TODO round vs js round; loosen up to make next test case

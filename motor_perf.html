@@ -103,7 +103,7 @@
 		for (let x=0; rnd(x)<=120; x+=12/10) {			
 			ctx.lineTo(xPos(x), yPos(Bridge.motorPerformance(setData({
 				load_factor: x/100
-			}))));	
+			})).motor_efficiency));	
 		}
 		ctx.stroke();
 	}
