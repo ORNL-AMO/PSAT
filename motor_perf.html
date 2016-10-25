@@ -71,18 +71,20 @@
 			return (yStep*yCnt-y)*(Cnv.height-PADy*2)/(yStep*yCnt)+PADy;
 		}
 		ctx.beginPath();
+		ctx.textBaseline = 'top';
 		for (let i=0; i<=xCnt; i++) {
 			const x = i*xStep, xp = xPos(x);
 			ctx.moveTo(xp,PADy);
 			ctx.lineTo(xp,Cnv.height-PADy);	
-			ctx.fillText(x,xp,Cnv.height-.75*PADy);	
+			ctx.fillText(x,xp,Cnv.height-PADy+5);	
 		}
 		ctx.textAlign = 'right';
+		ctx.textBaseline = 'middle';
 		for (let j=0; j<=yCnt; j++) {
 			const y = j*yStep, yp = yPos(y);
 			ctx.moveTo(PADx,yp);
 			ctx.lineTo(Cnv.width-PADx,yp);	
-			ctx.fillText(y,.75*PADx,yp);	
+			ctx.fillText(y,PADx-5,yp);	
 		}
 		ctx.stroke();
 		ctx.save();
