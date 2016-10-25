@@ -101,14 +101,9 @@
 		ctx.beginPath();
 		
 		for (let x=0; rnd(x)<=120; x+=12/10) {			
-			ctx.lineTo(xPos(x), yPos(Bridge.motorPerformance({
-				line: 1,
-				motor_rated_speed: 1780,
-				motor_rated_power: 200,
-				efficiency_class: 0,
-				efficiency: 0,
+			ctx.lineTo(xPos(x), yPos(Bridge.motorPerformance(setData({
 				load_factor: x/100
-			})));	
+			}))));	
 		}
 		ctx.stroke();
 	}
@@ -132,6 +127,8 @@
 	nm('efficiency_class').change(effChg);	
 	nmAll().change(()=>{
 		$(Cnv).hide();
+		Cnv.width+=0;
+		$('#plot-btn').show();
 		setData(MotorPerf);
 		saveProp('motorPerf',MotorPerf);
 	});
