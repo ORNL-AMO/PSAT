@@ -91,7 +91,6 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
   r->Set(String::NewFromUtf8(iso,"current"),Number::New(iso,mcVal/225.8*100));  
   
   MotorPowerFactor pf(Get("motor_rated_power"),Get("load_factor"),mcVal,mefVal,Get("motor_rated_voltage"));
-  cout << pf.calculate() << endl;
   r->Set(String::NewFromUtf8(iso,"pf"),Number::New(iso,pf.calculate()*100));  
   
   args.GetReturnValue().Set(r);

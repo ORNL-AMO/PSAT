@@ -119,34 +119,33 @@
 		*/
 
 		ctx.restore();
+		ctx.lineWidth = 2;		
 
-		ctx.lineWidth = 2;
+		let m = new Map();		
+		for (let x=0; rnd(x)<=120; x+=12/10) {		
+			m.set(x,Bridge.motorPerformance(setData({
+				load_factor: x/100
+			})));	
+		}
 		ctx.strokeStyle = "#FECB00";	
 		ctx.beginPath();
-		
-		for (let x=0; rnd(x)<=120; x+=12/10) {			
-			ctx.lineTo(xPos(x), yPos(Bridge.motorPerformance(setData({
-				load_factor: x/100
-			})).efficiency));	
+		for (let [x,y] of m.entries()) {
+			ctx.lineTo(xPos(x), yPos(y.efficiency));
 		}
 		ctx.stroke();
 
-		ctx.strokeStyle = "white";
+		ctx.strokeStyle = "white";	
 		ctx.beginPath();
-		for (let x=0; rnd(x)<=120; x+=12/10) {			
-			ctx.lineTo(xPos(x), yPos(Bridge.motorPerformance(setData({
-				load_factor: x/100
-			})).current));	
-		}		
+		for (let [x,y] of m.entries()) {
+			ctx.lineTo(xPos(x), yPos(y.current));
+		}
 		ctx.stroke();
-		
-		ctx.strokeStyle = "#1F82BB";
+
+		ctx.strokeStyle = "#1F82BB";	
 		ctx.beginPath();
-		for (let x=0; rnd(x)<=120; x+=12/10) {			
-			ctx.lineTo(xPos(x), yPos(Bridge.motorPerformance(setData({
-				load_factor: x/100
-			})).pf));	
-		}		
+		for (let [x,y] of m.entries()) {
+			ctx.lineTo(xPos(x), yPos(y.pf));
+		}
 		ctx.stroke();
 
 	}
