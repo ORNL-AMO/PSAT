@@ -83,8 +83,8 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
   auto r = Object::New(iso);
 
   MotorEfficiency mef((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_speed"),(Motor::EfficiencyClass)(int)Get("efficiency_class"),Get("efficiency"),Get("motor_rated_power"),Get("load_factor"));
-  r->Set(String::NewFromUtf8(iso,"motor_efficiency"),Number::New(iso,mef.calculate()*100));
-  
+  r->Set(String::NewFromUtf8(iso,"efficiency"),Number::New(iso,mef.calculate()*100));
+  r->Set(String::NewFromUtf8(iso,"current"),Number::New(iso,1*100));  
   args.GetReturnValue().Set(r);
 }
 
