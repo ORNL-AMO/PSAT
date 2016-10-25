@@ -83,10 +83,17 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
   auto r = Object::New(iso);
 
   MotorEfficiency mef((Motor::LineFrequency)(int)(!Get("line")),Get("motor_rated_speed"),(Motor::EfficiencyClass)(int)Get("efficiency_class"),Get("efficiency"),Get("motor_rated_power"),Get("load_factor"));
-  r->Set(String::NewFromUtf8(iso,"efficiency"),Number::New(iso,mef.calculate()*100));
+  auto mefVal = mef.calculate();
+  r->Set(String::NewFromUtf8(iso,"efficiency"),Number::New(iso,mefVal*100));
   
   MotorCurrent mc(Get("motor_rated_power"),Get("motor_rated_speed"),(Motor::LineFrequency)(int)(!Get("line")),(Motor::EfficiencyClass)(int)Get("efficiency_class"),Get("efficiency"),Get("load_factor"),Get("motor_rated_voltage"),Get("flc"));
-  r->Set(String::NewFromUtf8(iso,"current"),Number::New(iso,mc.calculate()/225.8*100));  
+  auto mcVal = mc.calculate();
+  r->Set(String::NewFromUtf8(iso,"current"),Number::New(iso,mcVal/225.8*100));  
+  
+  MotorPowerFactor pf(Get("motor_rated_power"),Get("load_factor"),mcVal,mefVal,Get("motor_rated_voltage"));
+  cout << pf.calculate() << endl;
+  r->Set(String::NewFromUtf8(iso,"pf"),Number::New(iso,pf.calculate()*100));  
+  
   args.GetReturnValue().Set(r);
 }
 

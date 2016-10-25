@@ -106,18 +106,25 @@
 			})).efficiency));	
 		}
 		ctx.stroke();
-		//ctx.strokeStyle = "#1F82BB";
-		ctx.strokeStyle = "white";
 
-		//ctx.endPath();
+		ctx.strokeStyle = "white";
 		ctx.beginPath();
 		for (let x=0; rnd(x)<=120; x+=12/10) {			
 			ctx.lineTo(xPos(x), yPos(Bridge.motorPerformance(setData({
 				load_factor: x/100
 			})).current));	
-		}
-		
+		}		
 		ctx.stroke();
+		
+		ctx.strokeStyle = "#1F82BB";
+		ctx.beginPath();
+		for (let x=0; rnd(x)<=120; x+=12/10) {			
+			ctx.lineTo(xPos(x), yPos(Bridge.motorPerformance(setData({
+				load_factor: x/100
+			})).pf));	
+		}		
+		ctx.stroke();
+
 	}
 	
 /////
