@@ -103,20 +103,6 @@
 		ctx.fillText("Efficiency (%)",Cnv.width-PADx,16);
 		ctx.fillStyle = '#1F82BB';
 		ctx.fillText("Power Factor (%)",Cnv.width-PADx,32);
-		
-		/*
-		ctx.translate(.33*PAD,Cnv.height/2);
-		ctx.rotate(-Math.PI/2);
-		ctx.fillStyle = 'white';
-		let tw = ctx.measureText('Current; ').width;
-		ctx.fillText('Current',0,0);
-		ctx.fillStyle = '#FECB00';
-		let tw2 = ctx.measureText('Efficiency; ').width;
-		ctx.fillText('Efficiency; ',tw,0);
-		ctx.fillStyle = '#1F82BB'
-		ctx.fillText('PF',tw+tw2,0);
-		//ctx.fillText('Current; Efficiency; PF (%)',0,0);	
-		*/
 
 		ctx.restore();
 		ctx.lineWidth = 2;		
@@ -127,29 +113,19 @@
 				load_factor: x/100
 			})));	
 		}
-		ctx.strokeStyle = "#FECB00";	
-		ctx.beginPath();
-		for (let [x,y] of m.entries()) {
-			ctx.lineTo(xPos(x), yPos(y.efficiency));
+		function strokeIt(col,prop) {
+			ctx.strokeStyle = col;	
+			ctx.beginPath();
+			for (let [x,y] of m.entries()) {
+				ctx.lineTo(xPos(x), yPos(y[prop]));
+			}
+			ctx.stroke();
 		}
-		ctx.stroke();
-
-		ctx.strokeStyle = "white";	
-		ctx.beginPath();
-		for (let [x,y] of m.entries()) {
-			ctx.lineTo(xPos(x), yPos(y.current));
-		}
-		ctx.stroke();
-
-		ctx.strokeStyle = "#1F82BB";	
-		ctx.beginPath();
-		for (let [x,y] of m.entries()) {
-			ctx.lineTo(xPos(x), yPos(y.pf));
-		}
-		ctx.stroke();
-
+		strokeIt('#FECB00','efficiency');
+		strokeIt('white','current');
+		strokeIt('#1F82BB','pf');		
 	}
-	
+	 
 /////
 	Cnv = dom('canvas');
 	
