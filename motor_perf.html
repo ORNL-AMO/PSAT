@@ -53,7 +53,7 @@
 				[xMax, xStep, xCnt] = [120,10,12],
 				[yMax, yStep, yCnt] = [130,10,13],				
 				ctx = Cnv.getContext('2d'),
-				PAD = 50;
+				PADx = 25, PADy = 50;
 
 		$('#plot-btn').hide();
 		$(Cnv).show();
@@ -65,31 +65,44 @@
 		ctx.font = '12px san serif';
 		
 		function xPos(x) {
-			return x*(Cnv.width-PAD*2)/(xStep*xCnt)+PAD;
+			return x*(Cnv.width-PADx*2)/(xStep*xCnt)+PADx;
 		}
 		function yPos(y) {
-			return (yStep*yCnt-y)*(Cnv.height-PAD*2)/(yStep*yCnt)+PAD;
+			return (yStep*yCnt-y)*(Cnv.height-PADy*2)/(yStep*yCnt)+PADy;
 		}
 		ctx.beginPath();
 		for (let i=0; i<=xCnt; i++) {
 			const x = i*xStep, xp = xPos(x);
-			ctx.moveTo(xp,PAD);
-			ctx.lineTo(xp,Cnv.height-PAD);	
-			ctx.fillText(x,xp,Cnv.height-.75*PAD);	
+			ctx.moveTo(xp,PADy);
+			ctx.lineTo(xp,Cnv.height-PADy);	
+			ctx.fillText(x,xp,Cnv.height-.75*PADy);	
 		}
+		ctx.textAlign = 'right';
 		for (let j=0; j<=yCnt; j++) {
 			const y = j*yStep, yp = yPos(y);
-			ctx.moveTo(PAD,yp);
-			ctx.lineTo(Cnv.width-PAD,yp);	
-			ctx.fillText(y,.75*PAD,yp);	
+			ctx.moveTo(PADx,yp);
+			ctx.lineTo(Cnv.width-PADx,yp);	
+			ctx.fillText(y,.75*PADx,yp);	
 		}
 		ctx.stroke();
 		ctx.save();
 
 		ctx.fillStyle = '#FECB00';
 		ctx.font = '14px san serif';
-		ctx.fillText('Motor Shaft Load (%)',Cnv.width/2,Cnv.height-.33*PAD);
+		ctx.textAlign = 'center';
+		ctx.fillText('Motor Shaft Load (%)',Cnv.width/2,Cnv.height-.33*PADy);
 		
+		ctx.textAlign='right';
+		ctx.textBaseline='top';
+		
+		ctx.fillStyle = 'white';
+		ctx.fillText("Current (% FLC)",Cnv.width-PADx,0);
+		ctx.fillStyle = '#FECB00';
+		ctx.fillText("Efficiency (%)",Cnv.width-PADx,16);
+		ctx.fillStyle = '#1F82BB';
+		ctx.fillText("Power Factor (%)",Cnv.width-PADx,32);
+		
+		/*
 		ctx.translate(.33*PAD,Cnv.height/2);
 		ctx.rotate(-Math.PI/2);
 		ctx.fillStyle = 'white';
@@ -100,9 +113,9 @@
 		ctx.fillText('Efficiency; ',tw,0);
 		ctx.fillStyle = '#1F82BB'
 		ctx.fillText('PF',tw+tw2,0);
-		
 		//ctx.fillText('Current; Efficiency; PF (%)',0,0);	
-		
+		*/
+
 		ctx.restore();
 
 		ctx.lineWidth = 2;
