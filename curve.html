@@ -50,7 +50,7 @@
 	</table>
 	Loss exponent<br>
 	<input id=C size=10><br>	
-	<button class='prime' onclick='plot()'>PLOT</button><br>
+	<button id=plot_btn class='prime' onclick='plot()'>PLOT</button><br>
 	<div id=plot>
 		<table>
 			<tr>
@@ -99,8 +99,6 @@
 
 		$('#Hs').text(rnd(hS));
 		$('#K').text(rnd(k,6));
-		showHdBtn('hide');
-		$('#plot').show();
 
 		const ctx = setupPlot('FLOW RATE','HEAD');
 				

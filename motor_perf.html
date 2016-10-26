@@ -42,9 +42,9 @@
 		<input name=motor_rated_voltage class=vsp>
 		Full-load Current <em>(A)</em><br>
 		<div class=vsp><input name='flc'> <button onclick='estFLC(this)'>EST</button></div>
-		<button id=plot-btn onclick='plot()'>PLOT</button>
+		<button id=plot_btn onclick='plot()'>PLOT</button>
 	</div>
-	<canvas width="700" height="500"></canvas>
+	<canvas id=plot width="700" height="500"></canvas>
 </div>
 
 <script>//# sourceURL=*pump_eff
@@ -58,10 +58,6 @@
 			stepY: 10,
 			cntY: 12
 		}
-
-		$('#plot-btn').hide();
-		$(Cnv).show();
-
 		const ctx = setupPlot('Motor Shaft Load (%)','Efficiency (%)');
 				
 		ctx.fillStyle = '#1F82BB';
