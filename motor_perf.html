@@ -75,8 +75,6 @@
 		ctx.fillStyle = 'white';
 		ctx.fillText("Current (% FLC)",Cnv.width-PADx,P.padY-5-30);
 
-		ctx.lineWidth = 2;		
-
 		let m = new Map();		
 		for (let x=0; rnd(x)<=120; x+=12/10) {		
 			m.set(x,Bridge.motorPerformance(setData({

@@ -107,11 +107,7 @@
 		$('#plot').show();
 
 		setupPlot('FLOW RATE','HEAD');
-		
-		ctx.lineWidth = 2;
-		ctx.strokeStyle = "#FECB00";	
-		ctx.beginPath();
-		
+				
 		for (let x=0; rnd(x)<=xMax; x+=xStep/10) {			
 			ctx.lineTo(xPos(x), yPos(hS+k*Math.pow(x,1.9)));		
 		}
