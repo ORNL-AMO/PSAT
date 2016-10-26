@@ -67,13 +67,8 @@
 
 		$('#plot-btn').hide();
 		$(Cnv).show();
-		
-		setupPlot();
 
-		ctx.fillStyle = '#FECB00';
-		ctx.font = '14px san serif';
-		ctx.textAlign = 'center';
-		ctx.fillText('Motor Shaft Load (%)',Cnv.width/2,Cnv.height-.33*PADy);
+		setupPlot('Motor Shaft Load (%)');
 		
 		ctx.textAlign='right';
 		ctx.textBaseline='top';

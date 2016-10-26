@@ -103,7 +103,7 @@
         return (P.stepY*P.cntY-y)*(P.cnv.height-P.padY*2)/(P.stepY*P.cntY)+P.padY;
       }
 
-      function setupPlot() {
+      function setupPlot(lblX) {
         const ctx = P.cnv.getContext('2d');
 
         ctx.strokeStyle = "#5d9300";
@@ -130,6 +130,12 @@
         }
         ctx.stroke();
         ctx.save();
+
+        ctx.fillStyle = '#FECB00';
+        ctx.font = '14px san serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(lblX,Cnv.width/2,Cnv.height-.33*P.padY);
+        
       }
 
     //

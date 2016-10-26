@@ -106,11 +106,7 @@
 		showHdBtn('hide');
 		$('#plot').show();
 
-		setupPlot();
-
-		ctx.fillStyle = '#FECB00';
-		ctx.font = '14px san serif';
-		ctx.fillText('FLOW RATE',Cnv.width/2,Cnv.height-.33*PAD);
+		setupPlot('FLOW RATE');
 		
 		ctx.translate(.33*PAD,Cnv.height/2);
 		ctx.rotate(-Math.PI/2);
