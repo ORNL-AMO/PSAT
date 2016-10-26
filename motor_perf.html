@@ -68,19 +68,13 @@
 		$('#plot-btn').hide();
 		$(Cnv).show();
 
-		setupPlot('Motor Shaft Load (%)');
-		
-		ctx.textAlign='right';
-		ctx.textBaseline='top';
-		
-		ctx.fillStyle = 'white';
-		ctx.fillText("Current (% FLC)",Cnv.width-PADx,0);
-		ctx.fillStyle = '#FECB00';
-		ctx.fillText("Efficiency (%)",Cnv.width-PADx,16);
+		setupPlot('Motor Shaft Load (%)','Efficiency (%)');
+				
 		ctx.fillStyle = '#1F82BB';
-		ctx.fillText("Power Factor (%)",Cnv.width-PADx,32);
+		ctx.fillText("Power Factor (%)",Cnv.width-PADx,P.padY-5-15);
+		ctx.fillStyle = 'white';
+		ctx.fillText("Current (% FLC)",Cnv.width-PADx,P.padY-5-30);
 
-		ctx.restore();
 		ctx.lineWidth = 2;		
 
 		let m = new Map();		

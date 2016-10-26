@@ -106,13 +106,8 @@
 		showHdBtn('hide');
 		$('#plot').show();
 
-		setupPlot('FLOW RATE');
+		setupPlot('FLOW RATE','HEAD');
 		
-		ctx.textAlign='right';
-		ctx.textBaseline='bottom';
-		ctx.fillStyle = '#FECB00';
-		ctx.fillText("HEAD",Cnv.width-P.padX,P.padY-5);
-
 		ctx.lineWidth = 2;
 		ctx.strokeStyle = "#FECB00";	
 		ctx.beginPath();
