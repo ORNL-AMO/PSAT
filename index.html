@@ -102,9 +102,16 @@
       function yPos(y) {
         return (P.stepY*P.cntY-y)*(P.cnv.height-P.padY*2)/(P.stepY*P.cntY)+P.padY;
       }
-
+      function curve(fn,col='#FECB00') {
+        P.ctx.strokeStyle = col;	
+  			P.ctx.beginPath();
+        for (let x=0; rnd(x)<=P.stepX*P.cntX; x+=P.stepX/10) {			
+    			P.ctx.lineTo(xPos(x), yPos(fn(x)));		
+	    	}
+		    P.ctx.stroke();
+      }
       function setupPlot(lblX,lblY) {
-        const ctx = P.cnv.getContext('2d');
+        const ctx = P.ctx = P.cnv.getContext('2d');
         $('#plot_btn').hide();
         $('#plot').show();
 
@@ -144,12 +151,8 @@
         ctx.fillText(lblY,P.cnv.width-P.padX,P.padY-5);
 
         ctx.lineWidth = 2;
-        ctx.strokeStyle = "#FECB00";	
-        ctx.beginPath();
-
         return ctx;
       }
-
     //
       function rnd(v,p=2) {
         const m=Math.pow(10,p);

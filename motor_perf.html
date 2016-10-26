@@ -65,12 +65,29 @@
 		ctx.fillStyle = 'white';
 		ctx.fillText("Current (% FLC)",Cnv.width-P.padX,P.padY-5-30);
 
-		let m = new Map();		
+		let m = new Map();
+		function get(x) {
+			let r = m.get(x);
+			if (!r) {
+				r = Bridge.motorPerformance(setData({
+					load_factor: x/100
+				}));
+				m.set(x,r);
+				//console.log(r.efficiency);
+			}
+			return r;
+		}
+		/*		
 		for (let x=0; rnd(x)<=120; x+=12/10) {		
 			m.set(x,Bridge.motorPerformance(setData({
 				load_factor: x/100
 			})));	
 		}
+		*/
+		curve(x => get(x).efficiency);
+		curve(x => get(x).current,'white');
+		curve(x => get(x).pf,'#1F82BB');		
+/*
 		function strokeIt(col,prop) {
 			ctx.strokeStyle = col;	
 			ctx.beginPath();
@@ -81,7 +98,8 @@
 		}
 		strokeIt('#FECB00','efficiency');
 		strokeIt('white','current');
-		strokeIt('#1F82BB','pf');		
+		strokeIt('#1F82BB','pf');	
+*/	
 	}
 	 
 /////
