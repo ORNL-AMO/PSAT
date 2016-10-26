@@ -104,7 +104,7 @@
       }
 
       function setupPlot(lblX,lblY) {
-        const ctx = P.ctx = P.cnv.getContext('2d');
+        const ctx = P.cnv.getContext('2d');
 
         ctx.strokeStyle = "#5d9300";
         ctx.fillStyle = "white";
@@ -145,6 +145,7 @@
         ctx.strokeStyle = "#FECB00";	
         ctx.beginPath();
 
+        return ctx;
       }
 
     //

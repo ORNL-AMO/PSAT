@@ -79,7 +79,7 @@
 		const 	max = Math.max(v1,v2),
 				m10 = Math.pow(10, Math.floor(Math.log10(max / 15))),
 				step = Math.round(max / 15 / m10) * m10;
-		return [max, step, Math.ceil(max / step)];
+		return [step, Math.ceil(max / step)];
 	}
 	function plot() {		
 		const 	f1 = Curve.plot[0],
@@ -94,20 +94,20 @@
 			padX: 25,
 			padY: 50
 		};
-		[P.maxX,P.stepX,P.cntX] = steps(f1,f2);
-		[,P.stepY,P.cntY] = steps(h1,h2);
+		[P.stepX,P.cntX] = steps(f1,f2);
+		[P.stepY,P.cntY] = steps(h1,h2);
 
 		$('#Hs').text(rnd(hS));
 		$('#K').text(rnd(k,6));
 		showHdBtn('hide');
 		$('#plot').show();
 
-		setupPlot('FLOW RATE','HEAD');
+		const ctx = setupPlot('FLOW RATE','HEAD');
 				
-		for (let x=0; rnd(x)<=P.maxX; x+=P.stepX/10) {			
-			P.ctx.lineTo(xPos(x), yPos(hS+k*Math.pow(x,1.9)));		
+		for (let x=0; rnd(x)<=P.stepX*P.cntX; x+=P.stepX/10) {			
+			ctx.lineTo(xPos(x), yPos(hS+k*Math.pow(x,1.9)));		
 		}
-		P.ctx.stroke();
+		ctx.stroke();
 	}
 
 	Conds.filter(c => c.grid).forEach(c => {
