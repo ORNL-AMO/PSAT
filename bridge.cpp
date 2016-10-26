@@ -27,31 +27,32 @@ double Get(const char *nm) {
   return rObj->NumberValue();
 }
 
-Motor::LineFrequency line;
-Motor::EfficiencyClass effCls;
-Pump::Drive drive;
-double motorRatedPower;
+
+Motor::LineFrequency line() {
+  return (Motor::LineFrequency)(int)(!Get("line"));
+}
+Motor::EfficiencyClass effCls() {
+  return (Motor::EfficiencyClass)(int)Get("efficiency_class");
+}
+Pump::Drive drive() {
+  return (Pump::Drive)(int)Get("drive");
+}
 
 void Setup(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
   inp = args[0]->ToObject();
   r = Object::New(iso);
   args.GetReturnValue().Set(r);
-
-  line = (Motor::LineFrequency)(int)(!Get("line"));
-  effCls = (Motor::EfficiencyClass)(int)Get("efficiency_class");
-  drive = (Pump::Drive)(int)Get("drive");
-  motorRatedPower = Get("motor_rated_power");
 }
 
 
 void Results(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
   
-  Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_specified"),Get("pump_rated_speed"),drive,
+  Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_specified"),Get("pump_rated_speed"),drive(),
       Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
-  Motor motor(line,motorRatedPower,Get("motor_rated_speed"),
-      effCls,Get("efficiency"),Get("motor_rated_voltage"),Get("motor_rated_flc"),Get("margin"));
+  Motor motor(line(),Get("motor_rated_power"),Get("motor_rated_speed"),effCls(),
+      Get("efficiency"),Get("motor_rated_voltage"),Get("motor_rated_flc"),Get("margin"));
   Financial fin(Get("fraction"),Get("cost"));
   FieldData fd(Get("flow"),Get("head"),(FieldData::LoadEstimationMethod)(Get("motor_field_power")>0?0:1),
       Get("motor_field_power"),Get("motor_field_current"),Get("motor_field_voltage"));
@@ -84,7 +85,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
 
 void EstFLA(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
-  EstimateFLA fla(motorRatedPower,Get("motor_rated_speed"),line,effCls,
+  EstimateFLA fla(Get("motor_rated_power"),Get("motor_rated_speed"),line(),effCls(),
     Get("efficiency"),Get("motor_rated_voltage"));
   fla.calculate();  
   args.GetReturnValue().Set(fla.getEstimatedFLA());
@@ -93,15 +94,15 @@ void EstFLA(const FunctionCallbackInfo<Value>& args) {
 void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
 
-  MotorEfficiency mef(line,Get("motor_rated_speed"),effCls,Get("efficiency"),motorRatedPower,Get("load_factor"));
+  MotorEfficiency mef(line(),Get("motor_rated_speed"),effCls(),Get("efficiency"),Get("motor_rated_power"),Get("load_factor"));
   auto mefVal = mef.calculate();
   r->Set(String::NewFromUtf8(iso,"efficiency"),Number::New(iso,mefVal*100));
   
-  MotorCurrent mc(motorRatedPower,Get("motor_rated_speed"),line,effCls,Get("efficiency"),Get("load_factor"),Get("motor_rated_voltage"),Get("flc"));
+  MotorCurrent mc(Get("motor_rated_power"),Get("motor_rated_speed"),line(),effCls(),Get("efficiency"),Get("load_factor"),Get("motor_rated_voltage"),Get("flc"));
   auto mcVal = mc.calculate();
   r->Set(String::NewFromUtf8(iso,"current"),Number::New(iso,mcVal/225.8*100));  
   
-  MotorPowerFactor pf(motorRatedPower,Get("load_factor"),mcVal,mefVal,Get("motor_rated_voltage"));
+  MotorPowerFactor pf(Get("motor_rated_power"),Get("load_factor"),mcVal,mefVal,Get("motor_rated_voltage"));
   r->Set(String::NewFromUtf8(iso,"pf"),Number::New(iso,pf.calculate()*100));  
 }
 
