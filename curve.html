@@ -87,11 +87,7 @@
 				f2 = Curve.plot[2],
 				h2 = Curve.plot[3],  
 				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,Curve.C) - Math.pow(f1,Curve.C))),
-				k = (h2-h1)/(Math.pow(f2,Curve.C)-Math.pow(f1,Curve.C)),
-				[xMax, xStep, xCnt] = steps(f1,f2),
-				[yMax, yStep, yCnt] = steps(h1,h2),				
-				ctx = Cnv.getContext('2d'),
-				PAD = 50;
+				k = (h2-h1)/(Math.pow(f2,Curve.C)-Math.pow(f1,Curve.C));							
 
 		P = {
 			cnv: Cnv,
@@ -99,7 +95,7 @@
 			padY: 50
 		};
 		[P.maxX,P.stepX,P.cntX] = steps(f1,f2);
-		[P.maxY,P.stepY,P.cntY] = steps(h1,h2);
+		[,P.stepY,P.cntY] = steps(h1,h2);
 
 		$('#Hs').text(rnd(hS));
 		$('#K').text(rnd(k,6));
@@ -108,10 +104,10 @@
 
 		setupPlot('FLOW RATE','HEAD');
 				
-		for (let x=0; rnd(x)<=xMax; x+=xStep/10) {			
-			ctx.lineTo(xPos(x), yPos(hS+k*Math.pow(x,1.9)));		
+		for (let x=0; rnd(x)<=P.maxX; x+=P.stepX/10) {			
+			P.ctx.lineTo(xPos(x), yPos(hS+k*Math.pow(x,1.9)));		
 		}
-		ctx.stroke();
+		P.ctx.stroke();
 	}
 
 	Conds.filter(c => c.grid).forEach(c => {

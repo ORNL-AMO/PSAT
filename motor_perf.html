@@ -58,22 +58,16 @@
 			stepY: 10,
 			cntY: 12
 		}
-		
-		const 	
-				[xMax, xStep, xCnt] = [120,10,12],
-				[yMax, yStep, yCnt] = [130,10,13],				
-				ctx = Cnv.getContext('2d'),
-				PADx = 25, PADy = 50;
 
 		$('#plot-btn').hide();
 		$(Cnv).show();
 
 		setupPlot('Motor Shaft Load (%)','Efficiency (%)');
 				
-		ctx.fillStyle = '#1F82BB';
-		ctx.fillText("Power Factor (%)",Cnv.width-PADx,P.padY-5-15);
-		ctx.fillStyle = 'white';
-		ctx.fillText("Current (% FLC)",Cnv.width-PADx,P.padY-5-30);
+		P.ctx.fillStyle = '#1F82BB';
+		P.ctx.fillText("Power Factor (%)",Cnv.width-P.padX,P.padY-5-15);
+		P.ctx.fillStyle = 'white';
+		P.ctx.fillText("Current (% FLC)",Cnv.width-P.padX,P.padY-5-30);
 
 		let m = new Map();		
 		for (let x=0; rnd(x)<=120; x+=12/10) {		
@@ -82,12 +76,12 @@
 			})));	
 		}
 		function strokeIt(col,prop) {
-			ctx.strokeStyle = col;	
-			ctx.beginPath();
+			P.ctx.strokeStyle = col;	
+			P.ctx.beginPath();
 			for (let [x,y] of m.entries()) {
-				ctx.lineTo(xPos(x), yPos(y[prop]));
+				P.ctx.lineTo(xPos(x), yPos(y[prop]));
 			}
-			ctx.stroke();
+			P.ctx.stroke();
 		}
 		strokeIt('#FECB00','efficiency');
 		strokeIt('white','current');
