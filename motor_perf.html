@@ -49,6 +49,16 @@
 
 <script>//# sourceURL=*pump_eff
 	function plot() {
+		P = {
+			cnv: Cnv,
+			padX: 25,
+			stepX: 10,
+			cntX: 12,
+			padY: 50,
+			stepY: 10,
+			cntY: 12
+		}
+		
 		const 	
 				[xMax, xStep, xCnt] = [120,10,12],
 				[yMax, yStep, yCnt] = [130,10,13],				
@@ -57,37 +67,8 @@
 
 		$('#plot-btn').hide();
 		$(Cnv).show();
-
-		ctx.strokeStyle = "#5d9300";
-		ctx.fillStyle = "white";
-		ctx.textAlign = 'center';
-		ctx.textBaseline = 'middle';
-		ctx.font = '12px san serif';
 		
-		function xPos(x) {
-			return x*(Cnv.width-PADx*2)/(xStep*xCnt)+PADx;
-		}
-		function yPos(y) {
-			return (yStep*yCnt-y)*(Cnv.height-PADy*2)/(yStep*yCnt)+PADy;
-		}
-		ctx.beginPath();
-		ctx.textBaseline = 'top';
-		for (let i=0; i<=xCnt; i++) {
-			const x = i*xStep, xp = xPos(x);
-			ctx.moveTo(xp,PADy);
-			ctx.lineTo(xp,Cnv.height-PADy);	
-			ctx.fillText(x,xp,Cnv.height-PADy+5);	
-		}
-		ctx.textAlign = 'right';
-		ctx.textBaseline = 'middle';
-		for (let j=0; j<=yCnt; j++) {
-			const y = j*yStep, yp = yPos(y);
-			ctx.moveTo(PADx,yp);
-			ctx.lineTo(Cnv.width-PADx,yp);	
-			ctx.fillText(y,PADx-5,yp);	
-		}
-		ctx.stroke();
-		ctx.save();
+		setupPlot();
 
 		ctx.fillStyle = '#FECB00';
 		ctx.font = '14px san serif';
