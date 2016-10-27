@@ -19,9 +19,8 @@
 			stepX: 250,
 			cntX: 20,
 			padY: 50,
-			stepY: 2,
-			cntY: 19,
-			minY: 52
+			stepY: 5,
+			cntY: 20			
 		}
 		const ctx = setupPlot('Flow Rate (gpm)','Achievable Efficiency (average)');
 				
@@ -37,8 +36,8 @@
 						pump_style: 0,
 						pump_specified: 0
 				})));
-				m.set(x,r);		
-				console.log(r);		
+				m.set(x,r);						
+				console.log(x,r);		
 			}
 			return r;
 		}

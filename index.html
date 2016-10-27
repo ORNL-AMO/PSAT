@@ -106,7 +106,7 @@
         P.ctx.strokeStyle = col;	
   			P.ctx.beginPath();
         for (let x=0; rnd(x)<=P.stepX*P.cntX; x+=P.stepX/10) {			
-    			P.ctx.lineTo(xPos(x), yPos(fn(x) - (P.minY ? P.minY : 0)));		
+    			P.ctx.lineTo(xPos(x), yPos(fn(x)));		
 	    	}
 		    P.ctx.stroke();
       }
@@ -135,7 +135,7 @@
           const y = j*P.stepY, yp = yPos(y);
           ctx.moveTo(P.padX,yp);
           ctx.lineTo(P.cnv.width-P.padX,yp);	
-          ctx.fillText(y + (P.minY ? P.minY : 0),P.padX-5,yp);	
+          ctx.fillText(y,P.padX-5,yp);	
         }
         ctx.stroke();
         ctx.save();
