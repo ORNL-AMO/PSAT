@@ -20,7 +20,8 @@
 			cntX: 20,
 			padY: 50,
 			stepY: 2,
-			cntY: 19
+			cntY: 19,
+			minY: 52
 		}
 		const ctx = setupPlot('Flow Rate (gpm)','Achievable Efficiency (average)');
 				
@@ -46,7 +47,7 @@
 	 
 	Cnv = dom('canvas');
 	plot();
-	
+
 	function estFLC(e) {
 		nm('flc').val(flc(cvtArg(MotorPerf)));
 	}
