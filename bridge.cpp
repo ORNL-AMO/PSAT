@@ -37,6 +37,9 @@ Motor::EfficiencyClass effCls() {
 Pump::Drive drive() {
   return (Pump::Drive)(int)Get("drive");
 }
+Pump::Style style() {
+  return (Pump::Style)(int)Get("pump_style");
+}
 
 void Setup(const FunctionCallbackInfo<Value>& args) {
   iso = args.GetIsolate();
@@ -49,7 +52,7 @@ void Setup(const FunctionCallbackInfo<Value>& args) {
 void Results(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
   
-  Pump pump((Pump::Style)(int)Get("pump_style"),Get("pump_specified"),Get("pump_rated_speed"),drive(),
+  Pump pump(style(),Get("pump_specified"),Get("pump_rated_speed"),drive(),
       Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
   Motor motor(line(),Get("motor_rated_power"),Get("motor_rated_speed"),effCls(),
       Get("efficiency"),Get("motor_rated_voltage"),Get("motor_rated_flc"),Get("margin"));
@@ -104,6 +107,13 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
   
   MotorPowerFactor pf(Get("motor_rated_power"),Get("load_factor"),mcVal,mefVal,Get("motor_rated_voltage"));
   r->Set(String::NewFromUtf8(iso,"pf"),Number::New(iso,pf.calculate()*100));  
+}
+
+void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
+  Setup(args);
+
+  OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
+  r->Set(String::NewFromUtf8(iso,"average"),Number::New(iso,pef.calculate()*100));
 }
 
 //TODO round vs js round; loosen up to make next test case
@@ -310,6 +320,7 @@ void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA);
   NODE_SET_METHOD(exports, "motorPerformance", MotorPerformance);   
+  NODE_SET_METHOD(exports, "pumpEfficiency", PumpEfficiency);   
   NODE_SET_METHOD(exports, "test", Test);  
   NODE_SET_METHOD(exports, "wtf", Wtf);    
 }
