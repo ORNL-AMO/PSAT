@@ -128,6 +128,16 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 
 // motor perf
 
+  { 
+    MotorPowerFactor pf(200,0,.28*225.8,0,460);
+    cout << pf.calculate();
+    //Check100(0,pf.calculate());
+
+
+    MotorCurrent mc(200,1780,Motor::LineFrequency::FREQ60,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,.25,460,225.8);
+    auto mcVal = mc.calculate();
+    Check100(36.11,mcVal/225.8);
+  }
   {
     MotorEfficiency mef(Motor::LineFrequency::FREQ60,1780,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,.75);
     auto mefVal = mef.calculate();
@@ -139,7 +149,6 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 
     MotorPowerFactor pf(200,.75,mcVal,mefVal,460);
     Check100(84.82,pf.calculate());
-
   }
 
 //nema
