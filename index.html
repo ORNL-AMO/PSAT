@@ -106,7 +106,7 @@
         P.ctx.strokeStyle = col;	
   			P.ctx.beginPath();
         for (let x=0; rnd(x)<=P.stepX*P.cntX; x+=P.stepX/10) {			
-    			P.ctx.lineTo(xPos(x), yPos(fn(x)));		
+    			P.ctx.lineTo(xPos(x), yPos(fn(x) - (P.minY ? P.minY : 0)));		
 	    	}
 		    P.ctx.stroke();
       }

@@ -113,7 +113,7 @@ void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
 
   OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
-  r->Set(String::NewFromUtf8(iso,"average"),Number::New(iso,pef.calculate()*100));
+  r->Set(String::NewFromUtf8(iso,"average"),Number::New(iso,pef.calculate()));
 }
 
 //TODO round vs js round; loosen up to make next test case
