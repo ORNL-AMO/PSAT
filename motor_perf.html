@@ -69,9 +69,9 @@
 		function get(x) {
 			let r = m.get(x);
 			if (!r) {
-				r = Bridge.motorPerformance(setData({
+				r = Bridge.motorPerformance(cvtArg(setData({
 					load_factor: x/100
-				}));
+				})));
 				m.set(x,r);
 			}
 			return r;
