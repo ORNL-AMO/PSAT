@@ -2,13 +2,28 @@
 <style>
 	canvas {
 		background-color: black;
+		display: none;
 	}
 }
 </style>
 <div>
 	<h1>Pump Efficiency</h1>
-	<canvas width="700" height="500"></canvas>
-	
+	Pump Style
+	<select name='pump_style' >
+        <option>Choose</option>
+		<option>End suction slurry</option>
+        <option>End suction sewage</option>
+        <option>End suction stock</option>
+        <option>API double suction</option>
+        <option>Multistage boiler feed</option>
+        <option>End suction ANSI/API</option>
+        <option>Axial flow</option>
+        <option>Double suction</option>
+        <option>Vertical turbine</option>
+        <option>Large end suction</option>
+    </select>
+	<br>
+	<canvas id=plot width="700" height="500"></canvas>
 </div>
 
 <script>//# sourceURL=*pump_eff
@@ -33,7 +48,6 @@
 			if (!r) {
 				r = Bridge.pumpEfficiency(cvtArg(setData({
 						flow: x,
-						pump_style: 0,
 						pump_specified: 0
 				})));
 				m.set(x,r);						
@@ -46,22 +60,7 @@
 	}
 	 
 	Cnv = dom('canvas');
-	plot();
-
-	function estFLC(e) {
-		nm('flc').val(flc(cvtArg(MotorPerf)));
-	}
-	function effChg() {
-		if (nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom') {
-			nm('efficiency').show();      
-		} else {
-			nm('efficiency').hide();
-		}
-	}
-
-	pg('#unit_pow').text(`(${unit(POWER)})`)
-	setCtls(MotorPerf);
-	nm('efficiency_class').change(effChg);	
+	
 	nmAll().change(()=>{
 		$(Cnv).hide();
 		Cnv.width+=0;

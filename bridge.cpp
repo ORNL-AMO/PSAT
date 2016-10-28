@@ -111,7 +111,7 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
 
 void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
-
+cout << Get("pump_style");
   OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
   r->Set(String::NewFromUtf8(iso,"average"),Number::New(iso,pef.calculate()));
 }
