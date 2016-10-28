@@ -30,12 +30,16 @@
 		P = {
 			cnv: Cnv,
 			padX: 25,
-			stepX: 250,
-			cntX: 20,
 			padY: 50,
 			stepY: 5,
 			cntY: 20			
-		}
+		};
+		[P.stepX,P.cntX] = {
+			gpm: [250,20],
+			MGD: [.5,15],
+			'm^3/hr': [100,12],
+			'L/s': [20,16]
+		}[unit(FLOW)];
 		const ctx = setupPlot(`Flow Rate (${unit(FLOW)})`,'Achievable Efficiency (average)');
 				
 		ctx.fillStyle = 'white';
