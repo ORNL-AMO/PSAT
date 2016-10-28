@@ -116,8 +116,8 @@ void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
   OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
   auto v = pef.calculate();
   SetR("average",v);
-  OptimalDeviationFactor df(Get("flow"));
-  SetR("max",v*df.calculate());  
+  //OptimalDeviationFactor df(Get("flow"));
+  SetR("max",v*OptimalDeviationFactor(Get("flow")).calculate());  
 }
 
 //TODO round vs js round; loosen up to make next test case
