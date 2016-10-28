@@ -114,7 +114,10 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
 void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
   OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
-  SetR("average",pef.calculate());
+  auto v = pef.calculate();
+  SetR("average",v);
+  OptimalDeviationFactor df(Get("flow"));
+  SetR("max",v*df.calculate());  
 }
 
 //TODO round vs js round; loosen up to make next test case
