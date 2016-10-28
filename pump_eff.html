@@ -22,8 +22,7 @@
         <option>Vertical turbine</option>
         <option>Large end suction</option>
     </select>
-	<br>
-	<canvas id=plot width="700" height="500"></canvas>
+	<canvas id=plot width="700" height="500" style='margin-top: 1rem'></canvas>
 </div>
 
 <script>//# sourceURL=*pump_eff
@@ -61,10 +60,9 @@
 	 
 	Cnv = dom('canvas');
 	
-	nmAll().change(()=>{
-		$(Cnv).hide();
+	nm('pump_style').change(()=>{
 		Cnv.width+=0;
-		$('#plot_btn').show();
+		plot();
 		setData(MotorPerf);
 		saveProp('motorPerf',MotorPerf);
 	});
