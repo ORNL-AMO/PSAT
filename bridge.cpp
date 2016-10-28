@@ -113,7 +113,6 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
 
 void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
-
   OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
   SetR("average",pef.calculate());
 }
@@ -142,7 +141,7 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 
   { 
     MotorPowerFactor pf(200,0,.28*225.8,0,460);
-    cout << pf.calculate();
+    //cout << pf.calculate();
     //Check100(0,pf.calculate());
 
 
