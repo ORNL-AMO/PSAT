@@ -36,7 +36,7 @@
 			stepY: 5,
 			cntY: 20			
 		}
-		const ctx = setupPlot('Flow Rate (gpm)','Achievable Efficiency (average)');
+		const ctx = setupPlot(`Flow Rate (${unit(FLOW)})`,'Achievable Efficiency (average)');
 				
 		ctx.fillStyle = 'white';
 		ctx.fillText('Achievable Efficiency (max)',Cnv.width-P.padX,P.padY-5-15);
