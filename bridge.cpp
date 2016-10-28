@@ -26,7 +26,9 @@ double Get(const char *nm) {
   }
   return rObj->NumberValue();
 }
-
+double SetR(const char *nm, double n) {
+  r->Set(String::NewFromUtf8(iso,nm),Number::New(iso,n));
+}
 
 Motor::LineFrequency line() {
   return (Motor::LineFrequency)(int)(!Get("line"));
@@ -99,21 +101,21 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
 
   MotorEfficiency mef(line(),Get("motor_rated_speed"),effCls(),Get("efficiency"),Get("motor_rated_power"),Get("load_factor"));
   auto mefVal = mef.calculate();
-  r->Set(String::NewFromUtf8(iso,"efficiency"),Number::New(iso,mefVal*100));
+  SetR("efficiency",mefVal*100);
   
   MotorCurrent mc(Get("motor_rated_power"),Get("motor_rated_speed"),line(),effCls(),Get("efficiency"),Get("load_factor"),Get("motor_rated_voltage"),Get("flc"));
   auto mcVal = mc.calculate();
-  r->Set(String::NewFromUtf8(iso,"current"),Number::New(iso,mcVal/225.8*100));  
+  SetR("current",mcVal/225.8*100);  
   
   MotorPowerFactor pf(Get("motor_rated_power"),Get("load_factor"),mcVal,mefVal,Get("motor_rated_voltage"));
-  r->Set(String::NewFromUtf8(iso,"pf"),Number::New(iso,pf.calculate()*100));  
+  SetR("pf",pf.calculate()*100);  
 }
 
 void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
-cout << Get("pump_style");
+
   OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
-  r->Set(String::NewFromUtf8(iso,"average"),Number::New(iso,pef.calculate()));
+  SetR("average",pef.calculate());
 }
 
 //TODO round vs js round; loosen up to make next test case
