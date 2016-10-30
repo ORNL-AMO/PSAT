@@ -31,9 +31,9 @@ TEFC: <span id=result></span>
         }
     }
     function calc() {
-        $('#result').text(rnd(Bridge.nema()));
+        $('#result').text(rnd(Bridge.nema(cvtArg(setData({})))));
+
     }
     nm('efficiency_class').change(effChg);
-    nmAll().change(calc);
-    //calc();
+    nmAll().change(calc);    
 </script>
