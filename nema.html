@@ -1,16 +1,25 @@
-<h1>NEMA</h1>
-Rated Power<br>
-<input name='motor_rated_power'><br>
-Rated Speed<br>
-<input name='motor_rated_speed'><br>
-Efficiency Class<br>
+<style>
+    label {
+		font-size: .75rem;
+		font-style: italic;
+    }
+    .vsp {
+        margin-bottom: .5rem;
+        display:block;
+    }
+</style>
 
-<select name='efficiency_class' onchange='effChg(this)' data-init-chg>
-    <option>Standard</option>
-    <option>Energy</option>
-    <option>Custom</option>
-</select><br>
-<input name='efficiency'></input><br>
+<h1>NEMA</h1>
+Rated Power
+<input class=vsp name='motor_rated_power'>
+Rated Speed
+<input class=vsp name='motor_rated_speed'>
+Efficiency Class<br>
+<label><input name='efficiency_class' type=radio value=0 checked> Standard</label>
+<label><input name='efficiency_class' type=radio value=1> Energy</label>
+<label class=vsp><input name='efficiency_class' type=radio value=2> Custom </label>
+<input class=vsp name='efficiency' style='display:none'></input>
+<hr>
 TEFC: 
 
 <script>
@@ -21,5 +30,5 @@ TEFC:
             nm('efficiency').hide();
         }
     }
-    effChg();
+    nm('efficiency_class').change(effChg);
 </script>
