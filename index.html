@@ -223,6 +223,9 @@
               break;
             case 'select-one':
               v = $(el).children(':selected').index();
+              if ($(el).children().first().is(':disabled')) {
+                v--;
+              }
               break;
             case 'radio':
               if ($(el).is(':checked')) {
