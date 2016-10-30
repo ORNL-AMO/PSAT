@@ -34,7 +34,12 @@ TEFC: <span id=result></span>
         }
     }
     function calc() {
-        $('#result').text(rnd(Bridge.nema(cvtArg(setData({})))));
+        let txt = '';
+        if (nm('motor_rated_power').val().trim()!='' 
+            && nm('motor_rated_speed').val().trim()!='') {
+                txt = rnd(Bridge.nema(cvtArg(setData({}))));
+            }
+        $('#result').text(txt);
 
     }
     nm('efficiency_class').change(effChg);

@@ -135,7 +135,7 @@ void Nema(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
   
   args.GetReturnValue().Set(
-    MotorEfficiency(line(),Get("motor_rated_speed"),effCls(),Get("efficiency"),200,1).calculate()
+    MotorEfficiency(line(),Get("motor_rated_speed"),effCls(),Get("efficiency"),Get("motor_rated_power"),1).calculate()
   );
 }
 
