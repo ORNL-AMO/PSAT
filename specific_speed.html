@@ -2,15 +2,35 @@
 <style>
 	canvas {
 		background-color: black;
-		display: none;
+		margin-top: .25rem;		
+	}
+	#plot {
+		display:none;
+		margin-top:1rem
 	}
 }
 </style>
 <div>
 	<h1>Specific Speed</h1>
-	<xstrong style='margin-right:1rem'>Specific Speed: </xstrong><span></span>
-	<xstrong>Efficiency Correction: </xstrong><span></span>
-	<canvas id=plot width="700" height="500" style='margin-top:1rem'></canvas>
+	Pump Style
+	<select name='pump_style' style='vertical-align: middle'>
+        <option selected disabled>Choose</option>
+		<option>End suction slurry</option>
+        <option>End suction sewage</option>
+        <option>End suction stock</option>
+        <option>API double suction</option>
+        <option>Multistage boiler feed</option>
+        <option>End suction ANSI/API</option>
+        <option>Axial flow</option>
+        <option>Double suction</option>
+        <option>Vertical turbine</option>
+        <option>Large end suction</option>
+    </select><br>
+	<div id=plot>
+		<span style='margin-right:1rem'>Specific Speed: </span><span></span>
+		<span>Efficiency Correction: </span><span></span>
+		<canvas width="700" height="500"></canvas>
+	</div>
 </div>
 
 <script>//# sourceURL=*pump_eff
@@ -34,7 +54,11 @@
 	 
 	Cnv = dom('canvas');
 	
-	plot();
+	nm('pump_style').change(()=>{
+		Cnv.width+=0;
+		plot();		
+	});
+
 
 	
 </script>

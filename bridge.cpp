@@ -126,7 +126,7 @@ void AchievableEfficiency(const FunctionCallbackInfo<Value>& args) {
   //auto v = pef.calculate();
   //cout << OptimalSpecificSpeedCorrection(Pump::Style::END_SUCTION_ANSI_API, Get("specific_speed")).calculate() << endl;
   args.GetReturnValue().Set(
-    OptimalSpecificSpeedCorrection(Pump::Style::END_SUCTION_ANSI_API, Get("specific_speed")).calculate()*100);
+    OptimalSpecificSpeedCorrection(style(), Get("specific_speed")).calculate()*100);
   //OptimalDeviationFactor df(Get("flow"));
   //SetR("max",v*OptimalDeviationFactor(Get("flow")).calculate());  
 }
