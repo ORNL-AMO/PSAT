@@ -133,9 +133,9 @@ void AchievableEfficiency(const FunctionCallbackInfo<Value>& args) {
 
 void Nema(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
+  
   args.GetReturnValue().Set(
-    //MotorEfficiency(Motor::LineFrequency::FREQ60,1200, Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,1).calculate()
-    MotorEfficiency(Motor::LineFrequency::FREQ60,Get("motor_rated_speed"),Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,1).calculate()
+    MotorEfficiency(line(),Get("motor_rated_speed"),Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,1).calculate()
   );
 }
 
