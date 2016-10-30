@@ -8,8 +8,8 @@
 </style>
 <div>
 	<h1>Specific Speed</h1>
-	<strong style='margin-right:1rem'>Specific Speed: </strong><span></span>
-	<strong>Efficiency Correction: </strong><span></span>
+	<xstrong style='margin-right:1rem'>Specific Speed: </xstrong><span></span>
+	<xstrong>Efficiency Correction: </xstrong><span></span>
 	<canvas id=plot width="700" height="500" style='margin-top:1rem'></canvas>
 </div>
 
@@ -18,17 +18,13 @@
 		P = {
 			cnv: Cnv,
 			padX: 25,
+			stepX: 500,
+			cntX: 20,
 			padY: 50,
-			stepY: 5,
-			cntY: 20			
+			stepY: 2,
+			cntY: 15
 		};
-		[P.stepX,P.cntX] = {
-			gpm: [250,20],
-			MGD: [.5,15],
-			'm^3/hr': [100,12],
-			'L/s': [20,16]
-		}[unit(FLOW)];
-		const ctx = setupPlot(`Flow Rate (${unit(FLOW)})`,'Achievable Efficiency (average)');
+		const ctx = setupPlot(`Specific Speed`,'Efficiency Correction (%)');
 						
 		curve(x => 
 			Bridge.achievableEfficiency(cvtArg(setData({
