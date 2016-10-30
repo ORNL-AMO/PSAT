@@ -8,7 +8,8 @@
 </style>
 <div>
 	<h1>Specific Speed</h1>
-
+	<strong style='margin-right:1rem'>Specific Speed: </strong><span></span>
+	<strong>Efficiency Correction: </strong><span></span>
 	<canvas id=plot width="700" height="500" style='margin-top:1rem'></canvas>
 </div>
 
@@ -28,27 +29,16 @@
 			'L/s': [20,16]
 		}[unit(FLOW)];
 		const ctx = setupPlot(`Flow Rate (${unit(FLOW)})`,'Achievable Efficiency (average)');
-				
-		ctx.fillStyle = 'white';
-		ctx.fillText('Achievable Efficiency (max)',Cnv.width-P.padX,P.padY-5-15);
-		
-		P.getYobj = x => 
-			Bridge.pumpEfficiency(cvtArg(setData({
-				flow: x,
-				pump_specified: 0
-			})));
-		curveMulti('average');
-		curveMulti('max','white');
+						
+		curve(x => 
+			Bridge.achievableEfficiency(cvtArg(setData({
+				specific_speed: x,
+			}))));
 	}
 	 
 	Cnv = dom('canvas');
 	
-	nm('pump_style').change(()=>{
-		Cnv.width+=0;
-		plot();
-		setData(MotorPerf);
-		saveProp('motorPerf',MotorPerf);
-	});
+	plot();
 
 	
 </script>

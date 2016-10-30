@@ -120,6 +120,15 @@ void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
   SetR("max",v*OptimalDeviationFactor(Get("flow")).calculate());  
 }
 
+void AchievableEfficiency(const FunctionCallbackInfo<Value>& args) {
+  Setup(args);
+  //OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
+  //auto v = pef.calculate();
+  args.GetReturnValue().Set(Get("specific_speed"));
+  //OptimalDeviationFactor df(Get("flow"));
+  //SetR("max",v*OptimalDeviationFactor(Get("flow")).calculate());  
+}
+
 //TODO round vs js round; loosen up to make next test case
 void Check(double exp, double act, const char* nm="") {
   //cout << "e " << exp << "; a " << act << endl;
@@ -324,7 +333,8 @@ void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "results", Results);
   NODE_SET_METHOD(exports, "estFLA", EstFLA);
   NODE_SET_METHOD(exports, "motorPerformance", MotorPerformance);   
-  NODE_SET_METHOD(exports, "pumpEfficiency", PumpEfficiency);   
+  NODE_SET_METHOD(exports, "pumpEfficiency", PumpEfficiency);  
+  NODE_SET_METHOD(exports, "achievableEfficiency", AchievableEfficiency);   
   NODE_SET_METHOD(exports, "test", Test);  
   NODE_SET_METHOD(exports, "wtf", Wtf);    
 }
