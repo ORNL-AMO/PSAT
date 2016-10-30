@@ -116,19 +116,13 @@ void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
   OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
   auto v = pef.calculate();
   SetR("average",v);
-  //OptimalDeviationFactor df(Get("flow"));
   SetR("max",v*OptimalDeviationFactor(Get("flow")).calculate());  
 }
 
 void AchievableEfficiency(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
-  //OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
-  //auto v = pef.calculate();
-  //cout << OptimalSpecificSpeedCorrection(Pump::Style::END_SUCTION_ANSI_API, Get("specific_speed")).calculate() << endl;
   args.GetReturnValue().Set(
     OptimalSpecificSpeedCorrection(style(), Get("specific_speed")).calculate()*100);
-  //OptimalDeviationFactor df(Get("flow"));
-  //SetR("max",v*OptimalDeviationFactor(Get("flow")).calculate());  
 }
 
 void Nema(const FunctionCallbackInfo<Value>& args) {
