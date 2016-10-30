@@ -131,6 +131,12 @@ void AchievableEfficiency(const FunctionCallbackInfo<Value>& args) {
   //SetR("max",v*OptimalDeviationFactor(Get("flow")).calculate());  
 }
 
+void Nema(const FunctionCallbackInfo<Value>& args) {
+  args.GetReturnValue().Set(
+    MotorEfficiency(Motor::LineFrequency::FREQ60,1200, Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,1).calculate()
+  );
+}
+
 //TODO round vs js round; loosen up to make next test case
 void Check(double exp, double act, const char* nm="") {
   //cout << "e " << exp << "; a " << act << endl;
@@ -336,7 +342,8 @@ void Init(Local<Object> exports) {
   NODE_SET_METHOD(exports, "estFLA", EstFLA);
   NODE_SET_METHOD(exports, "motorPerformance", MotorPerformance);   
   NODE_SET_METHOD(exports, "pumpEfficiency", PumpEfficiency);  
-  NODE_SET_METHOD(exports, "achievableEfficiency", AchievableEfficiency);   
+  NODE_SET_METHOD(exports, "achievableEfficiency", AchievableEfficiency);
+  NODE_SET_METHOD(exports, "nema", Nema);  
   NODE_SET_METHOD(exports, "test", Test);  
   NODE_SET_METHOD(exports, "wtf", Wtf);    
 }

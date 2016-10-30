@@ -20,7 +20,7 @@ Efficiency Class<br>
 <label class=vsp><input name='efficiency_class' type=radio value=2> Custom </label>
 <input class=vsp name='efficiency' style='display:none'></input>
 <hr>
-TEFC: 
+TEFC: <span id=result></span>
 
 <script>
     function effChg() {
@@ -30,5 +30,10 @@ TEFC:
             nm('efficiency').hide();
         }
     }
+    function calc() {
+        $('#result').text(rnd(Bridge.nema()));
+    }
     nm('efficiency_class').change(effChg);
+    nmAll().change(calc);
+    //calc();
 </script>
