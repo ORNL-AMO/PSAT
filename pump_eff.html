@@ -45,20 +45,15 @@
 		ctx.fillStyle = 'white';
 		ctx.fillText('Achievable Efficiency (max)',Cnv.width-P.padX,P.padY-5-15);
 		
-		let m = new Map();
-		function get(x) {
-			let r = m.get(x);
-			if (!r) {
-				r = Bridge.pumpEfficiency(cvtArg(setData({
-						flow: x,
-						pump_specified: 0
-				})));
-				m.set(x,r);						
-			}
-			return r;
-		}
-		curve(x => get(x).average);
-		curve(x => get(x).max,'white');
+		P.getYobj = x => 
+			Bridge.pumpEfficiency(cvtArg(setData({
+				flow: x,
+				pump_specified: 0
+		})));
+		curveMulti('average');
+		curveMulti('max','white');
+			
+
 	}
 	 
 	Cnv = dom('canvas');
