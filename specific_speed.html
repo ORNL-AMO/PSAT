@@ -1,0 +1,55 @@
+
+<style>
+	canvas {
+		background-color: black;
+		display: none;
+	}
+}
+</style>
+<div>
+	<h1>Specific Speed</h1>
+
+	<canvas id=plot width="700" height="500" style='margin-top:1rem'></canvas>
+</div>
+
+<script>//# sourceURL=*pump_eff
+	function plot() {
+		P = {
+			cnv: Cnv,
+			padX: 25,
+			padY: 50,
+			stepY: 5,
+			cntY: 20			
+		};
+		[P.stepX,P.cntX] = {
+			gpm: [250,20],
+			MGD: [.5,15],
+			'm^3/hr': [100,12],
+			'L/s': [20,16]
+		}[unit(FLOW)];
+		const ctx = setupPlot(`Flow Rate (${unit(FLOW)})`,'Achievable Efficiency (average)');
+				
+		ctx.fillStyle = 'white';
+		ctx.fillText('Achievable Efficiency (max)',Cnv.width-P.padX,P.padY-5-15);
+		
+		P.getYobj = x => 
+			Bridge.pumpEfficiency(cvtArg(setData({
+				flow: x,
+				pump_specified: 0
+			})));
+		curveMulti('average');
+		curveMulti('max','white');
+	}
+	 
+	Cnv = dom('canvas');
+	
+	nm('pump_style').change(()=>{
+		Cnv.width+=0;
+		plot();
+		setData(MotorPerf);
+		saveProp('motorPerf',MotorPerf);
+	});
+
+	
+</script>
+
