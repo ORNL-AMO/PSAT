@@ -9,7 +9,7 @@
 		display:none;
 		vertical-align:top
 	}
-	#calc_btn {
+	#xcalc_btn {
 		
 		margin-top:1rem
 	}
@@ -38,19 +38,19 @@
 				<option>Vertical turbine</option>
 				<option>Large end suction</option>
 			</select><br>
+			Pump Speed<br>
+			<input name='pump_rated_speed'><br>
 			Flow<br>
 			<input name='flow'><br>
 			Head<br>
 			<input name='head'><br>
-			Pump Speed<br>
-			<input name='pump_rated_speed'><br>
-			<button id=calc_btn class=prime onclick='calc()'>CALCULATE</button>
+			<button id=plot_btn class=prime onclick='calc()'>CALCULATE</button>
 		</div>
 		<div id=plot>
 			<canvas width="700" height="500"></canvas>
 			<div style='display:flex; justify-content: space-between;'>
 				<div>Specific Speed: <span id=ss></span></div>
-				<div>Efficiency Correction: <span id=ef></span></div>				
+				<div>Efficiency Correction: <span id=ec></span></div>				
 			</div>
 				
 		</div>
@@ -71,15 +71,18 @@
 		const ctx = setupPlot(`Specific Speed`,'Efficiency Correction (%)');
 						
 		curve(x => 
-			Bridge.achievableEfficiency(cvtArg(setData({
+			Bridge.achievableEfficiency(setData({
 				specific_speed: x,
-			}))));
+			})));
 	}
 	function calc() {
 		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) / Math.pow(nm('head').val(),.75);
 		$('#ss').text(rnd(ss));
+		$('#ec').text(rnd(Bridge.achievableEfficiency(setData({
+			specific_speed: ss,
+		}))));
 		Cnv.width+=0;
-		plot();		
+		plot();				
 	}	 
 	Cnv = dom('canvas');
 	
@@ -87,9 +90,9 @@
 		$('#plot').hide();
 		let d = setData({});
 		if (d.pump_style>=0 && d.flow!='' && d.head!='' && d.pump_rated_speed!='') {
-			$('#calc_btn').show();
+			$('#plot_btn').show();
 		} else {
-			$('#calc_btn').hide();
+			$('#plot_btn').hide();
 		}
 	});
 	//nmAll().first().change();
