@@ -26,7 +26,7 @@ double Get(const char *nm) {
   }
   return rObj->NumberValue();
 }
-double SetR(const char *nm, double n) {
+void SetR(const char *nm, double n) {
   r->Set(String::NewFromUtf8(iso,nm),Number::New(iso,n));
 }
 
