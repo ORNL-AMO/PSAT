@@ -75,7 +75,7 @@
 						
 		curve(x => 
 			Bridge.achievableEfficiency(setData({
-				specific_speed: x,
+				specific_speed: unit(DIST) == 'ft' ? x : 3472 / 4033 * x,
 			})));
 	}
 	function calc() {
