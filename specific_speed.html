@@ -1,5 +1,8 @@
 
 <style>
+	em {
+		color: #5d9300;
+	}
 	canvas {
 		background-color: black;
 		margin-top: .25rem;	
@@ -38,11 +41,11 @@
 				<option>Vertical turbine</option>
 				<option>Large end suction</option>
 			</select><br>
-			Pump Speed<br>
+			Pump Speed <em>(rpm)</em><br>
 			<input name='pump_rated_speed'><br>
-			Flow<br>
+			<label id=lbl_flow>Flow</label>
 			<input name='flow'><br>
-			Head<br>
+			<label id=lbl_hd>Head</label>
 			<input name='head'><br>
 			<button id=plot_btn class=prime onclick='calc()'>CALCULATE</button>
 		</div>
@@ -95,7 +98,11 @@
 			$('#plot_btn').hide();
 		}
 	});
-	//nmAll().first().change();
+	if (unit(DIST)=='ft') {
+
+	} else {
+
+	}	
 	
 	
 </script>
