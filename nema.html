@@ -1,4 +1,7 @@
 <style>
+    em {
+		color: #5d9300;
+	}
     label {
 		font-size: .75rem;
 		font-style: italic;
@@ -13,9 +16,9 @@
 Line Frequency <em>(Hz)</em>
 <label><input name=line type=radio value=0> 50</label>
 <label class=vsp><input name=line type=radio value=1 checked> 60</label>
-Rated Power
+<span id='lblMRP'>Motor Rated Power</span>
 <input class=vsp name='motor_rated_power'>
-Rated Speed
+Motor Rated Speed <em>(rpm)</em>
 <input class=vsp name='motor_rated_speed'>
 Efficiency Class<br>
 <label><input name='efficiency_class' type=radio value=0 checked> Standard</label>
@@ -43,5 +46,6 @@ TEFC: <span id=result></span>
 
     }
     nm('efficiency_class').change(effChg);
-    nmAll().change(calc);    
+    nmAll().change(calc);
+    $('#lblMRP').append(em(unit(POWER)));    
 </script>
