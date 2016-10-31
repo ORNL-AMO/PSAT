@@ -71,11 +71,16 @@
 			stepY: 2,
 			cntY: 14
 		};
-		const ctx = setupPlot(`Specific Speed`,'Efficiency Correction (%)');
+		let lblTxt = 'U.S.', m = 1;
+		if (unit(DIST) == 'm') {
+			lblTxt = 'metric';
+			m = 3472 / 4033;
+		}
+		const ctx = setupPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
 						
 		curve(x => 
 			Bridge.achievableEfficiency(setData({
-				specific_speed: unit(DIST) == 'ft' ? x : 3472 / 4033 * x,
+				specific_speed: x * m,
 			})));
 	}
 	function calc() {

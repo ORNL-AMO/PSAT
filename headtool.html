@@ -206,9 +206,6 @@
 		setData(HeadTool);
 		saveHd();
 	}
-	function em(t) {
-		return ` <em>(${t})</em>`;
-	}
 	function setUnit(nm,s) {
 		pg(`tr:not(#results ~) td:contains(${nm})`).append(em(_txt));
 	}
