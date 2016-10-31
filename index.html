@@ -167,6 +167,11 @@
         return ctx;
       }
     //
+    	function lnk(e,nm) {
+    		e.preventDefault();
+		    go(nm);
+	    }
+      
       function rnd(v,p=2) {
         const m=Math.pow(10,p);
         return $.isNumeric(v) ? Math.round(v*m)/m : v;
