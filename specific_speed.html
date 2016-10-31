@@ -5,17 +5,20 @@
 		margin-top: .25rem;	
 		display:block;	
 	}
-	#plot {
+	#plot,#calc_btn {
 		display:none;
 		margin-top:1rem
+	}
+	select,input {
+		margin-bottom: .5rem;
 	}
 }
 </style>
 <div>
 	<h1>Specific Speed</h1>
 	<a style='display:block' onclick='lnk(event,"what_is_ss")' href=''>What Is Specific Speed?</a><br>
-	<span>Pump Style</span>
-	<select name='pump_style' style='vertical-align: middle'>
+	<span>Pump Style</span><br>
+	<select name='pump_style'>
         <option selected disabled>Choose</option>
 		<option>End suction slurry</option>
         <option>End suction sewage</option>
@@ -29,8 +32,15 @@
         <option>Vertical turbine</option>
         <option>Large end suction</option>
     </select><br>
+	Flow<br>
+	<input name='flow'><br>
+	Head<br>
+	<input name='head'><br>
+	Pump Speed<br>
+	<input name='pump_rated_speed'><br>
+	<button id=calc_btn class=prime onclick='calc()'>CALCULATE</button>
 	<div id=plot>
-		<span style='margin-right:1rem'>Specific Speed: </span><span></span>
+		<span style='margin-right:1rem'>Specific Speed: </span><span id=ss></span>
 		<span>Efficiency Correction: </span><span></span>
 		<canvas width="700" height="500"></canvas>
 	</div>
@@ -54,15 +64,25 @@
 				specific_speed: x,
 			}))));
 	}
-	 
-	Cnv = dom('canvas');
-	
-	nm('pump_style').change(()=>{
+	function calc() {
+		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) / Math.pow(nm('head').val(),.75);
+		$('#ss').text(ss);
 		Cnv.width+=0;
 		plot();		
+	}	 
+	Cnv = dom('canvas');
+	
+	nmAll().change(()=>{
+		$('#plot').hide();
+		let d = setData({});debugger;
+		if (d.pump_style>=0 && d.flow!='' && d.head!='' && d.pump_rated_speed!='') {
+			$('#calc_btn').show();
+		} else {
+			$('#calc_btn').hide();
+		}
 	});
 
-
+	
 	
 </script>
 
