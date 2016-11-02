@@ -2,9 +2,13 @@
 	ul {
 		list-style-type: none;
 		padding-left: 4rem;
+		margin-bottom: .5rem;
+		margin-top: .5rem;
 	}
-	table {
-		border-collapse:collapse;		
+	#container table {
+		border-collapse:collapse;	
+		margin-top: .5rem;	
+		margin-bottom: .5rem;
 	}
 	td {
 		padding:.25rem 0;
@@ -16,22 +20,13 @@
 <p>
 The Pumping System Assessment Tool was developed by the Department of Energy's BestPractices Program to assist in preliminary assessments of how efficiently pumping systems are operating.
 </p> 
-<strong>Information</strong>
-<ul>    
-	<li><a onclick='lnk(event,"about")' href=''>About</a></li>
-    <li><a onclick='lnk(event,"help")' href=''>Help</a></li>
-	<li><a onclick='lnk(event,"goal")' href=''>Ultimate Goal</a></li>
-    <li><a onclick='lnk(event,"mvr")' href=''>Measured vs Required</a></li>
-	<li style='margin-bottom:1rem'><a onclick='lnk(event,"losses")' href=''>System Losses</a></li>	
-</ul>
-<strong>Analysis</strong>
+<strong>Preferences</strong>
 <ul>    
 	<a onclick='lnk(event,"units")' href=''>Units</a><br>
-	<a onclick='lnk(event,"conditions")' href=''>Pump Conditions</a><br>
-	<a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency</a><br>
-	<a onclick='lnk(event,"motor_perf")' href=''>Motor Performance</a><br>
-	<a onclick='lnk(event,"specific_speed")' href=''>Specific Speed</a><br>
-	<a onclick='lnk(event,"nema")' href=''>NEMA Energy Efficiency</a><br>	
+</ul>
+<strong>System Analysis</strong>
+<ul>    
+	<a onclick='lnk(event,"conditions")' href=''>Manage Pump Conditions</a><br>
 </ul>
 <table>
 	<tr>
@@ -44,6 +39,22 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		<td><button onclick='xprt()'>EXPORT</button></td><td>Save analysis data to file</td>
 	</tr>
 </table>
+<strong>Calculators</strong>
+<ul>    
+	<a onclick='lnk(event,"pump_eff")' href=''>Pump Efficiency</a><br>
+	<a onclick='lnk(event,"motor_perf")' href=''>Motor Performance</a><br>
+	<a onclick='lnk(event,"specific_speed")' href=''>Specific Speed</a><br>
+	<a onclick='lnk(event,"nema")' href=''>NEMA Energy Efficiency</a><br>	
+</ul>
+
+<strong>Information</strong>
+<ul>    
+	<li><a onclick='lnk(event,"about")' href=''>About</a></li>
+    <li><a onclick='lnk(event,"help")' href=''>Help</a></li>
+	<li><a onclick='lnk(event,"goal")' href=''>Ultimate Goal</a></li>
+    <li><a onclick='lnk(event,"mvr")' href=''>Measured vs Required</a></li>
+	<li style='margin-bottom:1rem'><a onclick='lnk(event,"losses")' href=''>System Losses</a></li>	
+</ul>
 <script>
 	function reset() {
 		loadData(true);
