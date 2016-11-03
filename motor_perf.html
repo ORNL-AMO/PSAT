@@ -67,7 +67,7 @@
 
 		P.getYobj = x => 
 			Bridge.motorPerformance(cvtArg(setData({
-				load_factor: x/100
+				load_factor: (x==0 ? .1 : x)/100
 			})));
 		curveMulti('efficiency');
 		curveMulti('current','white');
