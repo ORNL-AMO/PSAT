@@ -65,23 +65,33 @@
 		P = {
 			cnv: Cnv,
 			padX: 25,
-			stepX: 600,
+			stepX: 500,
 			cntX: 20,
 			padY: 50,
 			stepY: 2,
 			cntY: 14
 		};
-		let lblTxt = 'U.S.', m = 1;
+
+		let lblTxt = 'U.S.', m = 1, d = setData({});
 		if (unit(DIST) == 'm') {
 			lblTxt = 'metric';
 			m = 3472 / 4033;
+			if (d.pump_style==9) {
+				$.extend(P,{stepX: 1500});
+			} else {
+				$.extend(P,{stepX: 600});
+			}		
+			
+		} else if (d.pump_style==9) {
+			$.extend(P,{stepX: 1250});
 		}
 		const ctx = setupPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
-						
+
+		
 		curve(x => 
-			Bridge.achievableEfficiency(setData({
+			Bridge.achievableEfficiency($.extend({
 				specific_speed: x * m,
-			})));
+			},d)));
 	}
 	function calc() {
 		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) / Math.pow(nm('head').val(),.75);
