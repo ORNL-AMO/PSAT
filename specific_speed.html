@@ -65,29 +65,29 @@
 		P = {
 			cnv: Cnv,
 			padX: 25,
-			stepX: 500,
 			cntX: 20,
 			padY: 50,
 			stepY: 2,
 			cntY: 14
 		};
 
-		let lblTxt = 'U.S.', m = 1, d = setData({});
+		let lblTxt = 'U.S.', 
+			m = 1, 
+			d = setData({}),
+			stepX = 500;
 		if (unit(DIST) == 'm') {
 			lblTxt = 'metric';
 			m = 3472 / 4033;
 			if (d.pump_style==9) {
-				$.extend(P,{stepX: 1500});
+				stepX = 1500;
 			} else {
-				$.extend(P,{stepX: 600});
+				stepX = 600;
 			}		
-			
 		} else if (d.pump_style==9) {
-			$.extend(P,{stepX: 1250});
+			stepX = 1250;
 		}
-		const ctx = setupPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
-
-		
+		$.extend(P,{stepX});
+		setupPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
 		curve(x => 
 			Bridge.achievableEfficiency($.extend({
 				specific_speed: x * m,
