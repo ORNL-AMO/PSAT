@@ -105,12 +105,12 @@
   <tr>
     <td><div>Rated Power</div></td>
     <td>
-      <input name='motor_rated_power'>
+      <input name='motor_rated_power' onchange='vdGt(this)'>
     </td>
   </tr>
   <tr>
     <td><div>Speed <em>(rpm)</em></div></td>
-    <td><input name='motor_rated_speed'></td>
+    <td><input name='motor_rated_speed' onchange='vdGt(this)'></td>
   </tr>
   <tr>
     <td>Efficiency Class</td>
@@ -120,7 +120,7 @@
         <option>Energy</option>
         <option>Custom</option>
       </select>
-      <input name='efficiency'></input>
+      <input name='efficiency' onchange='vdGt(this)'></input>
     </td>
   </tr>    
   <tr>
