@@ -156,11 +156,6 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 // motor perf
 
   { 
-    MotorPowerFactor pf(200,0,.28*225.8,0,460);
-    //cout << pf.calculate();
-    //Check100(0,pf.calculate());
-
-
     MotorCurrent mc(200,1780,Motor::LineFrequency::FREQ60,Motor::EfficiencyClass::ENERGY_EFFICIENT,0,.25,460,225.8);
     auto mcVal = mc.calculate();
     Check100(36.11,mcVal/225.8);
@@ -188,7 +183,9 @@ void Test(const FunctionCallbackInfo<Value>& args) {
   {
     OptimalPrePumpEff pef(Pump::Style::END_SUCTION_ANSI_API, 0, 2000); 
     OptimalDeviationFactor df(2000);
-//  Check(87.1,pef.calculate()*df.calculate());
+
+    //cout <<  pef.calculate() << ";" << df.calculate();
+    //Check(87.1,pef.calculate()*df.calculate());
   }
 
 //spec speed
