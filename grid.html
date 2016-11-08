@@ -64,7 +64,7 @@
     </td>
   </tr>  
   <tr>
-    <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rated_speed' onchange='vdGt(this)'></td>
+    <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rated_speed' data-vd-gt></td>
   </tr>
   <tr>
     <td>Drive</td>
@@ -77,7 +77,7 @@
   </tr>
   <tr>
     <td><div>Kinematic Viscosity <em>(cS)</em></div></td>
-    <td><input name='viscosity' onchange='vdGt(this)'></td>
+    <td><input name='viscosity' data-vd-gt></td>
   </tr>
   <tr>
     <td>Specific Gravity</td>
@@ -85,7 +85,7 @@
   </tr>
   <tr>
     <td>Number Stages</td>
-    <td><input name='stages' type=number min=1 onchange='vdGt(this)'></td>
+    <td><input name='stages' type=number min=1 data-vd-gt></td>
   </tr>
   <tr>
     <td>Fixed Specific Speed?</td>
@@ -105,12 +105,12 @@
   <tr>
     <td><div>Rated Power</div></td>
     <td>
-      <input name='motor_rated_power' onchange='vdGt(this)'>
+      <input name='motor_rated_power' data-vd-gt>
     </td>
   </tr>
   <tr>
     <td><div>Speed <em>(rpm)</em></div></td>
-    <td><input name='motor_rated_speed' onchange='vdGt(this)'></td>
+    <td><input name='motor_rated_speed' data-vd-gt></td>
   </tr>
   <tr>
     <td>Efficiency Class</td>
@@ -120,20 +120,20 @@
         <option>Energy</option>
         <option>Custom</option>
       </select>
-      <input name='efficiency' onchange='vdGt(this)'></input>
+      <input name='efficiency' data-vd-gt></input>
     </td>
   </tr>    
   <tr>
     <td><div>Voltage<em>(V)</em></div></td>
-    <td><input name='motor_rated_voltage' onchange='vdGt(this)'></td>
+    <td><input name='motor_rated_voltage' data-vd-gt></td>
   </tr>
   <tr>
     <td><div>Full-load Current<em>(A)</em></div></td>
-    <td><input name='motor_rated_flc'> <button onclick='estFLC(this)' onchange='vdGt(this)'>EST</button></td>
+    <td><input name='motor_rated_flc'> <button onclick='estFLC(this)' data-vd-gt>EST</button></td>
   </tr>
   <tr>
     <td><div>Size Margin <em>(%)</em></div></td>
-    <td><input name='margin' onchange='vdGt(this)'></td>
+    <td><input name='margin' data-vd-gt></td>
   </tr>
   <tr>
     <td class='th'>Cost</td><td/>
@@ -151,12 +151,12 @@
   </tr>        
   <tr>
     <td><div>Flow Rate</td>
-    <td><input name='flow' onchange='vdGt(this)'></td>
+    <td><input name='flow' data-vd-gt></td>
   </tr>
   <tr>
     <td><div>Head</div></td>
     <td>
-      <input name='head' onchange='vdGt(this)'>
+      <input name='head' data-vd-gt>
       <button onclick='gotoHead(this)'><i class="fa fa-wrench"/></button>
     </td>
   </tr>         
@@ -170,7 +170,7 @@
   </tr>
   <tr>
     <td><div>Motor Voltage<em>(V)</em></div></td>
-    <td><input name='motor_field_voltage' onchange='vdGt(this)'></td>
+    <td><input name='motor_field_voltage' data-vd-gt></td>
   </tr>
   <tr id=results>
     <td class='th'>
@@ -371,7 +371,7 @@
       }
     });    
   });         
-
+  $('[data-vd-gt]').change(ev=>vdGt(ev.target));
   nmAll('#grid').change(function() {
     saveCol(this);
     showHdResults(false);
