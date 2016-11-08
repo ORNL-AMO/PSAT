@@ -64,7 +64,7 @@
     </td>
   </tr>  
   <tr>
-    <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rated_speed'></td>
+    <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rated_speed' onchange='vdGt(this)'></td>
   </tr>
   <tr>
     <td>Drive</td>
@@ -77,15 +77,15 @@
   </tr>
   <tr>
     <td><div>Kinematic Viscosity <em>(cS)</em></div></td>
-    <td><input name='viscosity'></td>
+    <td><input name='viscosity' onchange='vdGt(this)'></td>
   </tr>
   <tr>
     <td>Specific Gravity</td>
-    <td><input name='specific_gravity'></td>
+    <td><input name='specific_gravity' onchange='vdGt(this,.1)'></td>
   </tr>
   <tr>
     <td>Number Stages</td>
-    <td><input name='stages' type=number></td>
+    <td><input name='stages' type=number min=1 onchange='vdGt(this)'></td>
   </tr>
   <tr>
     <td>Fixed Specific Speed?</td>

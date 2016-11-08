@@ -173,7 +173,18 @@
     		e.preventDefault();
 		    go(nm);
 	    }
-      
+
+    // vd
+
+      function vdGt(e,min=1) {
+        if(Number($(e).val())>=min) {
+          e.defaultValue = $(e).val();
+        } else {
+          $(e).val(e.defaultValue);          
+        }
+      }
+
+    //
       function rnd(v,p=1) {
         const m=Math.pow(10,p);
         return $.isNumeric(v) ? Math.round(v*m)/m : v;
@@ -278,6 +289,7 @@
             default:
               ctl.val(rnd(v));
           }
+          ctl.prop('defaultValue',v);
           if (ctl.is('[data-init-chg]')) {
             ctl.trigger('change');
           }
