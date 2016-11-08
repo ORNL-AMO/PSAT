@@ -114,22 +114,23 @@
 	function ptsInp() {
 		return pg('#points input');
 	}
-	function inpChg(ev) {
-		if (ev) {
-			pg('select :disabled')[pparIdx(this,-1)].selected=true;
-		}
+
+	function inpChg() {		
 		$('#plot').hide();
 		Cnv.width+=0;
-		showHdBtn('hide');
-		if (ptsInp().filter((i,e)=>$.isNumeric($(e).val())).length==4) {
-			showHdBtn('show');
-		}
+		showHdBtn('show');
 		Curve.C = pg('#C').val();
 		Curve.plot = $.makeArray(ptsInp().map((i,v)=>$(v).val()));
 		saveProp('curve',Curve);
 	}
-
-	pg('input').change(inpChg);
+	pg('input').change(ev => {
+		vdGt(ev.target);
+		inpChg();
+	});
+	ptsInp().change(ev => {
+		pg('select :disabled')[pparIdx(ev.target,-1)].selected=true;
+	});
+	
 	
 	function showUnit(txt,u) {
 		pg(`th:contains(${txt})`).append(em(unit(u)));
@@ -138,8 +139,7 @@
 	showUnit('Flow',FLOW);
 	showUnit('Head',DIST);
 	pg('#C').val(Curve.C);
-	Curve.plot.forEach((v,i)=>ptsInp().eq(i).val(rnd(v)));
-	inpChg();
+	Curve.plot.forEach((v,i)=>ptsInp().eq(i).val(rnd(v)));	
 	
 </script>
 
