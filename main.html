@@ -94,7 +94,7 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 							hd = Object.keys(Conds[0]).sort().concat(Object.keys(r).sort());
 							lines=[JSON.stringify([0,DefCond,Units,HeadTool,Curve,MotorPerf]),hd.join('\t')];
 						}
-						let o = $.extend(crunch(cvtArg(c)),c);
+						let o = $.extend({},r,c);
 						lines.push(
 							hd.map((nm,i)=> {
 								return JSON.stringify(o[nm]);
