@@ -125,15 +125,15 @@
   </tr>    
   <tr>
     <td><div>Voltage<em>(V)</em></div></td>
-    <td><input name='motor_rated_voltage'></td>
+    <td><input name='motor_rated_voltage' onchange='vdGt(this)'></td>
   </tr>
   <tr>
     <td><div>Full-load Current<em>(A)</em></div></td>
-    <td><input name='motor_rated_flc'> <button onclick='estFLC(this)'>EST</button></td>
+    <td><input name='motor_rated_flc'> <button onclick='estFLC(this)' onchange='vdGt(this)'>EST</button></td>
   </tr>
   <tr>
     <td><div>Size Margin <em>(%)</em></div></td>
-    <td><input name='margin'></td>
+    <td><input name='margin' onchange='vdGt(this)'></td>
   </tr>
   <tr>
     <td class='th'>Cost</td><td/>
@@ -144,19 +144,19 @@
   </tr>
  <tr>
     <td><div>Energy Cost<em>($/kwhr)</em></td>
-    <td><input name='cost'></td>
+    <td><input name='cost' onchange='vdGt(this,0)'></td>
   </tr>
   <tr>
     <td class='th'>Field</td><td/>
   </tr>        
   <tr>
     <td><div>Flow Rate</td>
-    <td><input name='flow'></td>
+    <td><input name='flow' onchange='vdGt(this)'></td>
   </tr>
   <tr>
     <td><div>Head</div></td>
     <td>
-      <input name='head'>
+      <input name='head' onchange='vdGt(this)'>
       <button onclick='gotoHead(this)'><i class="fa fa-wrench"/></button>
     </td>
   </tr>         
@@ -170,7 +170,7 @@
   </tr>
   <tr>
     <td><div>Motor Voltage<em>(V)</em></div></td>
-    <td><input name='motor_field_voltage'></td>
+    <td><input name='motor_field_voltage' onchange='vdGt(this)'></td>
   </tr>
   <tr id=results>
     <td class='th'>
