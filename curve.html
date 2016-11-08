@@ -69,7 +69,9 @@
 		const 	c = $(e).find(':selected').data('cond'),
 				inp = $(e).parent().parent().find('input');
 		inp.first().val(rnd(c.flow));
+		inp.first().prop('defaultValue',rnd(c.flow));
 		inp.last().val(rnd(c.head));
+		inp.last().prop('defaultValue',rnd(c.head));		
 		inpChg();
 	}
 	function showHdBtn(show) {
@@ -139,7 +141,13 @@
 	showUnit('Flow',FLOW);
 	showUnit('Head',DIST);
 	pg('#C').val(Curve.C);
-	Curve.plot.forEach((v,i)=>ptsInp().eq(i).val(rnd(v)));	
+	pg('#C').prop('defaultValue',Curve.C);
+	Curve.plot.forEach((v,i) => {
+		ptsInp().eq(i).val(rnd(v));
+		ptsInp().eq(i).prop('defaultValue',rnd(v));
+	});	
+
+
 	
 </script>
 
