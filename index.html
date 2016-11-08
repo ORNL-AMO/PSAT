@@ -177,10 +177,12 @@
     // vd
 
       function vdGt(e,min=1) {
-        if(Number($(e).val())>=min) {
+        if(Number($(e).val()) >= min) {
           e.defaultValue = $(e).val();
-        } else {
+        } else if (e.defaultValue >= min) {
           $(e).val(e.defaultValue);          
+        } else {
+          $(e).val(min);
         }
       }
 
