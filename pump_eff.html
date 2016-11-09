@@ -47,8 +47,7 @@
 		
 		P.getYobj = x => 
 			Bridge.pumpEfficiency(cvtArg(setData({
-				flow: x,
-				pump_specified: 0
+				flow: x
 			})));
 		curveMulti('average');
 		curveMulti('max','white');

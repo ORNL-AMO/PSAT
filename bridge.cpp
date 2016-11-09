@@ -54,7 +54,7 @@ void Setup(const FunctionCallbackInfo<Value>& args) {
 void Results(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
   
-  Pump pump(style(),Get("pump_specified"),Get("pump_rated_speed"),drive(),
+  Pump pump(style(),Get("pump_specified")/100,Get("pump_rated_speed"),drive(),
       Get("viscosity"),Get("specific_gravity"),Get("stages"),(Pump::Speed)(int)(!Get("fixed_speed")));
   Motor motor(line(),Get("motor_rated_power"),Get("motor_rated_speed"),effCls(),
       Get("efficiency"),Get("motor_rated_voltage"),Get("motor_rated_flc"),Get("margin"));
@@ -113,7 +113,7 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
 
 void PumpEfficiency(const FunctionCallbackInfo<Value>& args) {
   Setup(args);
-  OptimalPrePumpEff pef(style(), Get("pump_specified"), Get("flow"));
+  OptimalPrePumpEff pef(style(), 0, Get("flow"));
   auto v = pef.calculate();
   SetR("average",v);
   SetR("max",v*OptimalDeviationFactor(Get("flow")).calculate());  
