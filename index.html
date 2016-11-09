@@ -193,7 +193,13 @@
         }
       }
       function setupVd() {
-        $('[data-vd-gt]').change(ev=>vdGt(ev.target));
+        $('[data-vd-gt]').change(ev => {
+          let min = $(ev.target).attr('data-vd-gt');
+          if (min == '') {
+            min = undefined;
+          }
+          vdGt(ev.target,min);
+        });
       }
 
     //
