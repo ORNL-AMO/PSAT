@@ -192,6 +192,9 @@
           $(e).val(min);
         }
       }
+      function setupVd() {
+        $('[data-vd-gt]').change(ev=>vdGt(ev.target));
+      }
 
     //
       function rnd(v,p=1) {

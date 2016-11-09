@@ -371,7 +371,7 @@
       }
     });    
   });         
-  $('[data-vd-gt]').change(ev=>vdGt(ev.target));
+  setupVd();
   nmAll('#grid').change(function() {
     saveCol(this);
     showHdResults(false);

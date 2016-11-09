@@ -87,7 +87,7 @@
 	pg('#unit_pow').text(`(${unit(POWER)})`)
 	setCtls(MotorPerf);
 	nm('efficiency_class').change(effChg);	
-	$('[data-vd-gt]').change(ev=>vdGt(ev.target));
+	setupVd();
 	nmAll().change(()=>{
 		$(Cnv).hide();
 		Cnv.width+=0;
