@@ -10,6 +10,9 @@
         margin-bottom: .5rem;
         display:block;
     }
+    #resultTxt > * {
+        vertical-align: middle;
+    }
 </style>
 
 <h1>NEMA Energy Efficiency</h1>
@@ -23,23 +26,13 @@ Motor Rated Speed <em>(rpm)</em>
 Efficiency Class<br>
 <label><input name='efficiency_class' type=radio value=0 checked> Standard</label>
 <label><input name='efficiency_class' type=radio value=1> Energy</label>
-<label class=vsp><input name='efficiency_class' type=radio value=2> Custom </label>
-<input class=vsp name='efficiency' style='display:none'></input>
 <hr>
-<div style='display:flex; align-items: center'>TEFC:<span id=result style='margin-left:.5rem'></span><em style='margin-left:.25rem'>(%)</em></div>
+<div id=resultTxt><span>TEFC: </span><span id=result></span><em> (%)</em></div>
 
 <script>
-    function effChg() {
-        if (nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom') {
-            nm('efficiency').show();      
-        } else {
-            nm('efficiency').hide();
-        }
-    }
     $('#lblMRP').append(em(unit(POWER)));    
 
-    nm('efficiency_class').change(effChg);
     setupVd();
-    nmAll().change(() => $('#result').text(rnd(Bridge.nema(cvtArg(setData({}))))));
+    nmAll().change(() => $('#result').text(rnd(Bridge.nema(cvtArg(setData({efficiency:0}))))));
     nmAll().first().change();
 </script>
