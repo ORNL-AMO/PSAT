@@ -34,7 +34,7 @@
 		<label><input name='efficiency_class' type=radio value=0> Standard</label>
 		<label><input name='efficiency_class' type=radio value=1> Energy</label>
 		<label class=vsp><input name='efficiency_class' type=radio value=2> Custom </label>
-		<input class=vsp name='efficiency'></input>
+		<div id=efficiency class=vsp><input name='efficiency'> <em>(%)</em></div>
 		Voltage <em>(V)</em><br>
 		<input name=motor_rated_voltage class=vsp data-vd-gt>
 		Full-load Current <em>(A)</em><br>
@@ -78,9 +78,9 @@
 	}
 	function effChg() {
 		if (nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom') {
-			nm('efficiency').show();      
+			$('#efficiency').show();      
 		} else {
-			nm('efficiency').hide();
+			$('#efficiency').hide();
 		}
 	}
 
