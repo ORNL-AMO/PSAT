@@ -68,10 +68,8 @@
 	function selCond(e) {
 		const 	c = $(e).find(':selected').data('cond'),
 				inp = $(e).parent().parent().find('input');
-		inp.first().val(rnd(c.flow));
-		inp.first().prop('defaultValue',rnd(c.flow));
-		inp.last().val(rnd(c.head));
-		inp.last().prop('defaultValue',rnd(c.head));		
+		setVal(inp.first(),rnd(c.flow));
+		setVal(inp.last(),rnd(c.head));	
 		inpChg();
 	}
 	function showHdBtn(show) {
@@ -102,8 +100,7 @@
 		$('#Hs').text(rnd(hS));
 		$('#K').text(rnd(k,6));
 
-		const ctx = setupPlot('FLOW RATE','HEAD');
-
+		setupPlot('FLOW RATE','HEAD');
 		curve(x => hS+k*Math.pow(x,1.9));				
 	}
 
@@ -140,14 +137,9 @@
 	
 	showUnit('Flow',FLOW);
 	showUnit('Head',DIST);
-	pg('#C').val(Curve.C);
-	pg('#C').prop('defaultValue',Curve.C);
+	setVal($('#C'),Curve.C);
 	Curve.plot.forEach((v,i) => {
-		ptsInp().eq(i).val(rnd(v));
-		ptsInp().eq(i).prop('defaultValue',rnd(v));
+		setVal(ptsInp().eq(i),rnd(v));
 	});	
-
-
-	
 </script>
 

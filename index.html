@@ -176,6 +176,13 @@
 
     // vd
 
+      function setDefVal(e,v) {
+        $(e).prop('defaultValue',v);
+      }
+      function setVal(e,v) {
+        $(e).val(v);
+        setDefVal(e,v);        
+      }
       function vdGt(e,min=1) {
         if(Number($(e).val()) >= min) {
           e.defaultValue = $(e).val();
@@ -291,7 +298,7 @@
             default:
               ctl.val(rnd(v));
           }
-          ctl.prop('defaultValue',v);
+          setDefVal(ctl,v);
           if (ctl.is('[data-init-chg]')) {
             ctl.trigger('change');
           }
