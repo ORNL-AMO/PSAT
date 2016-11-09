@@ -27,19 +27,16 @@
 		<label><input name=line type=radio value=0> 50</label>
 		<label class=vsp><input name=line type=radio value=1> 60</label>
 		Motor Power <em id=unit_pow></em><br>
-		<input name=motor_rated_power class=vsp>
-		<!--Motor Power Units
-		<label><input name=unit type=radio> hp</label>
-		<label class=vsp><input name=unit type=radio> kW</label>-->
+		<input name=motor_rated_power class=vsp data-vd-gt>
 		Speed <em>(rpm)</em><br>
-		<input name=motor_rated_speed class=vsp>
+		<input name=motor_rated_speed class=vsp data-vd-gt>
 		Efficiency Class<br>
 		<label><input name='efficiency_class' type=radio value=0> Standard</label>
 		<label><input name='efficiency_class' type=radio value=1> Energy</label>
 		<label class=vsp><input name='efficiency_class' type=radio value=2> Custom </label>
 		<input class=vsp name='efficiency'></input>
 		Voltage <em>(V)</em><br>
-		<input name=motor_rated_voltage class=vsp>
+		<input name=motor_rated_voltage class=vsp data-vd-gt>
 		Full-load Current <em>(A)</em><br>
 		<div class=vsp><input name='flc'> <button onclick='estFLC(this)'>EST</button></div>
 		<button id=plot_btn onclick='plot()'>PLOT</button>
@@ -90,6 +87,7 @@
 	pg('#unit_pow').text(`(${unit(POWER)})`)
 	setCtls(MotorPerf);
 	nm('efficiency_class').change(effChg);	
+	$('[data-vd-gt]').change(ev=>vdGt(ev.target));
 	nmAll().change(()=>{
 		$(Cnv).hide();
 		Cnv.width+=0;
