@@ -17,9 +17,9 @@ Line Frequency <em>(Hz)</em>
 <label><input name=line type=radio value=0> 50</label>
 <label class=vsp><input name=line type=radio value=1 checked> 60</label>
 <span id='lblMRP'>Motor Rated Power</span>
-<input class=vsp name='motor_rated_power'>
+<input class=vsp name='motor_rated_power' value=200 data-vd-gt>
 Motor Rated Speed <em>(rpm)</em>
-<input class=vsp name='motor_rated_speed'>
+<input class=vsp name='motor_rated_speed' value=1780 data-vd-gt>
 Efficiency Class<br>
 <label><input name='efficiency_class' type=radio value=0 checked> Standard</label>
 <label><input name='efficiency_class' type=radio value=1> Energy</label>
@@ -36,16 +36,10 @@ TEFC: <span id=result></span>
             nm('efficiency').hide();
         }
     }
-    function calc() {
-        let txt = '';
-        if (nm('motor_rated_power').val().trim()!='' 
-            && nm('motor_rated_speed').val().trim()!='') {
-                txt = rnd(Bridge.nema(cvtArg(setData({}))));
-            }
-        $('#result').text(txt);
-
-    }
-    nm('efficiency_class').change(effChg);
-    nmAll().change(calc);
     $('#lblMRP').append(em(unit(POWER)));    
+
+    nm('efficiency_class').change(effChg);
+    $('[data-vd-gt]').change(ev=>vdGt(ev.target));
+    nmAll().change(() => $('#result').text(rnd(Bridge.nema(cvtArg(setData({}))))));
+    nmAll().first().change();
 </script>
