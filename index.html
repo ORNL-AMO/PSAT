@@ -306,8 +306,8 @@
               break;
             default:
               ctl.val(rnd(v));
+              setDefVal(ctl,v);
           }
-          setDefVal(ctl,v);
           if (ctl.is('[data-init-chg]')) {
             ctl.trigger('change');
           }
