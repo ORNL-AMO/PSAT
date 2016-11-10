@@ -267,8 +267,8 @@
   function ioBtn(e) {
     return $('.ioBtn').eq(parIdx(e,-1));
   }
-  function col(e) {
-    return $(`td:nth-child(${parIdx(e,1)})`);
+  function col(e) {//UPTD!
+    return $(`td:nth-child(${upTD(e).index()+1})`);
   }
   function saveCol(e) {
       setData(colCond(e),col(e));          
@@ -287,8 +287,11 @@
     dom(dlg).close(); 
   }
 
+  function upTD(e) {
+    return $(e).closest('td');
+  }
   function colCond(e) {
-    return $(e).parent().data('cond');
+    return upTD(e).data('cond');
   }  
   function rm(e) {
     colCond(e).grid = false;
@@ -372,7 +375,7 @@
     });    
   });         
   setupVd();
-  nmAll('#grid').change(function() {
+  nmAll('#grid').change(function() {alert('yo');
     saveCol(this);
     showHdResults(false);
   });
