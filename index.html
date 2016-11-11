@@ -121,9 +121,9 @@
         P.ctx.strokeStyle = col;	
   			P.ctx.beginPath();
         for (let x=0; x<=P.cntX; x=rnd(x+.1)) {	   
-          if (fn(100*Math.pow(10,x))<=P.stepY*P.cntY) {
-            P.ctx.lineTo(xPosLog(x), yPos(fn(100*Math.pow(10,x))));		
-            console.log(x+'->'+xPosLog(x)+'->'+100*Math.pow(10,x)+'->'+rnd(fn(100*Math.pow(10,x)))+'->'+yPos(fn(100*Math.pow(10,x))));          
+          if (fn(P.stepX*Math.pow(10,x))<=P.stepY*P.cntY) {
+            P.ctx.lineTo(xPosLog(x), yPos(fn(P.stepX*Math.pow(10,x))));		
+            console.log(x+'->'+xPosLog(x)+'->'+P.stepX*Math.pow(10,x)+'->'+rnd(fn(P.stepX*Math.pow(10,x)))+'->'+yPos(fn(P.stepX*Math.pow(10,x))));          
           }       
 	    	}
 		    P.ctx.stroke();
@@ -154,7 +154,7 @@
         ctx.beginPath();
         ctx.textBaseline = 'top';
         for (let i=0; i<=P.cntX; i++) {
-          const x = 100*Math.pow(10,i), xp = xPosLog(i);
+          const x = P.stepX*Math.pow(10,i), xp = xPosLog(i);
           ctx.moveTo(xp,P.padY);
           ctx.lineTo(xp,P.cnv.height-P.padY);	
           ctx.fillText(x,xp,P.cnv.height-P.padY+5);	
