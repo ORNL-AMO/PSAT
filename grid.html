@@ -288,7 +288,7 @@
   }
 
   function upTD(e) {
-    return $(e).closest('td');
+    return $(e).closest('td,th');
   }
   function colCond(e) {
     return upTD(e).data('cond');

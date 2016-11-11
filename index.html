@@ -119,6 +119,7 @@
   			P.ctx.beginPath();
         for (let x=0; rnd(x)<=P.stepX*P.cntX; x+=P.stepX/10) {	          
           if (fn(x)<=P.stepY*P.cntY) {
+            console.log(x+','+rnd(fn(x)));
       			P.ctx.lineTo(xPos(x), yPos(fn(x)));		
           }		
 	    	}
