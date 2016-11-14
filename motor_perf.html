@@ -21,29 +21,21 @@
 			<label><input name=line type=radio value=0> 50</label>
 			<label><input name=line type=radio value=1> 60</label>
 		</div>
+		Motor Power <em id=unit_pow></em>
+		<div><input name=motor_rated_power data-vd-gt></div>
+		Speed <em>(rpm)</em>
+		<div><input name=motor_rated_speed data-vd-gt></div>
 		<div>
-			Motor Power <em id=unit_pow></em><br>
-			<input name=motor_rated_power data-vd-gt>
-		</div>
-		<div>
-			Speed <em>(rpm)</em><br>
-			<input name=motor_rated_speed data-vd-gt>
-		</div>
-		<div>
-			Efficiency Class<br>
+			Efficiency Class
 			<label><input name='efficiency_class' type=radio value=0> Standard</label>
 			<label><input name='efficiency_class' type=radio value=1> Energy</label>
 			<label><input name='efficiency_class' type=radio value=2> Custom </label>
 			<span><input name='efficiency'> <em>(%)</em></span>
 		</div>
-		<div>
-			Voltage <em>(V)</em><br>
-			<input name=motor_rated_voltage data-vd-gt>
-		</div>
-		<div>
-			Full-load Current <em>(A)</em><br>
-			<input name='flc'> <button onclick='estFLC(this)'>EST</button>
-		</div>
+		Voltage <em>(V)</em>
+		<div><input name=motor_rated_voltage data-vd-gt></div>
+		Full-load Current <em>(A)</em>
+		<div><input name='flc'> <button onclick='estFLC(this)'>EST</button></div>
 		<button id=plot_btn onclick='plot()'>PLOT</button>
 	</div>
 	<canvas id=plot width="700" height="500"></canvas>
