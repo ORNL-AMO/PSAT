@@ -11,31 +11,42 @@
 	button {
 		margin-top: .5rem;
 	}
-	.vsp {
+	#container div {
 		margin-bottom: .5rem;
-		display:block;
 	}
 }
 </style>
 <h1>Motor Performance</h1>
 <div style='display:flex; justify-content: space-between;'>
 	<div style='white-space: nowrap'>
-		Line Frequency <em>(Hz)</em>
-		<label><input name=line type=radio value=0> 50</label>
-		<label class=vsp><input name=line type=radio value=1> 60</label>
-		Motor Power <em id=unit_pow></em><br>
-		<input name=motor_rated_power class=vsp data-vd-gt>
-		Speed <em>(rpm)</em><br>
-		<input name=motor_rated_speed class=vsp data-vd-gt>
-		Efficiency Class<br>
-		<label><input name='efficiency_class' type=radio value=0> Standard</label>
-		<label><input name='efficiency_class' type=radio value=1> Energy</label>
-		<label class=vsp><input name='efficiency_class' type=radio value=2> Custom </label>
-		<div id=efficiency class=vsp><input name='efficiency'> <em>(%)</em></div>
-		Voltage <em>(V)</em><br>
-		<input name=motor_rated_voltage class=vsp data-vd-gt>
-		Full-load Current <em>(A)</em><br>
-		<div class=vsp><input name='flc'> <button onclick='estFLC(this)'>EST</button></div>
+		<div>
+			Line Frequency <em>(Hz)</em>
+			<label><input name=line type=radio value=0> 50</label>
+			<label><input name=line type=radio value=1> 60</label>
+		</div>
+		<div>
+			Motor Power <em id=unit_pow></em><br>
+			<input name=motor_rated_power data-vd-gt>
+		</div>
+		<div>
+			Speed <em>(rpm)</em><br>
+			<input name=motor_rated_speed data-vd-gt>
+		</div>
+		<div>
+			Efficiency Class<br>
+			<label><input name='efficiency_class' type=radio value=0> Standard</label>
+			<label><input name='efficiency_class' type=radio value=1> Energy</label>
+			<label><input name='efficiency_class' type=radio value=2> Custom </label>
+			<span><input name='efficiency'> <em>(%)</em></span>
+		</div>
+		<div>
+			Voltage <em>(V)</em><br>
+			<input name=motor_rated_voltage data-vd-gt>
+		</div>
+		<div>
+			Full-load Current <em>(A)</em><br>
+			<input name='flc'> <button onclick='estFLC(this)'>EST</button>
+		</div>
 		<button id=plot_btn onclick='plot()'>PLOT</button>
 	</div>
 	<canvas id=plot width="700" height="500"></canvas>
@@ -75,9 +86,9 @@
 	}
 	function effChg() {
 		if (nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom') {
-			$('#efficiency').show();      
+			nm('efficiency').parent().show();      
 		} else {
-			$('#efficiency').hide();
+			nm('efficiency').parent().hide();
 		}
 	}
 
