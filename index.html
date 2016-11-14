@@ -252,7 +252,10 @@
       function pg(s='') {
         return $('#container '+s);
       }
-
+      function setPumpStyle(m = 'append') {
+        nm('pump_style')[m]($('#tmp_pump').children().clone());
+	      nm('pump_style').children().first().prop('selected',true);
+      }
       function flc(a) {    
         return rnd(Bridge.estFLA(a));
       }

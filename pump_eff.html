@@ -45,10 +45,7 @@
 	 
 	Cnv = dom('canvas');
 
-	nm('pump_style').append($('#tmp_pump').children());
-	pg(':disabled').prop('selected',true);
-	
-
+	setPumpStyle();
 	nm('pump_style').change(()=>{
 		Cnv.width+=0;
 		plot();

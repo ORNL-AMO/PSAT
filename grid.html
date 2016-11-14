@@ -344,7 +344,7 @@
   txt = unit(FLOW);
   fldUnit('Flow');
 
-  nm('pump_style').prepend($('#tmp_pump').children());
+  setPumpStyle('prepend');
 
   Conds.filter(c => c.grid).forEach(c => {
     $('table tr').each(function (i,e) {

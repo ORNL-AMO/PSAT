@@ -83,8 +83,7 @@
 	}	 
 	Cnv = dom('canvas');
 	
-	nm('pump_style').append($('#tmp_pump').children());
-	pg('option').first().prop('selected',true);
+	setPumpStyle();
 
 	nmAll().change(()=>{
 		$('#plot').hide();
