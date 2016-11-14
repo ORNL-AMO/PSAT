@@ -98,9 +98,6 @@
     
     // canvas
 
-      function xPosLog(xPro) {
-        return xPro*(P.cnv.width-P.padX*2)/(P.cntX)+P.padX;
-      }
       function yPos(y) {
         return (P.stepY*P.cntY-y)*(P.cnv.height-P.padY*2)/(P.stepY*P.cntY)+P.padY;
       }
@@ -120,7 +117,7 @@
         for (let x=0; x<=P.cntX; x=rnd(x+.01,2)) {	   
           //console.log(x+'->'+xPosLog(x)+'->'+P.stepX*Math.pow(10,x)+'->'+rnd(fn(P.stepX*Math.pow(10,x)))+'->'+yPos(fn(P.stepX*Math.pow(10,x))));    
           if (fn(P.stepX*Math.pow(10,x))<=P.stepY*P.cntY) {
-            P.ctx.lineTo(xPosLog(x), yPos(fn(P.stepX*Math.pow(10,x))));		
+            P.ctx.lineTo(P.xPos(x), yPos(fn(P.stepX*Math.pow(10,x))));		
           }       
 	    	}
 		    P.ctx.stroke();
@@ -137,94 +134,11 @@
 		    P.ctx.stroke();
       }
       function setupLogPlot(lblX,lblY) {
-        P.m = new Map();
-        const ctx = P.ctx = P.cnv.getContext('2d');
-        $('#plot_btn').hide();
-        $('#plot').show();
-
-        ctx.strokeStyle = "#5d9300";
-        ctx.fillStyle = "white";
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.font = '12px san serif';
-        
-        ctx.beginPath();
-        ctx.textBaseline = 'top';
-        for (let i=0; i<=P.cntX; i++) {
-          const x = P.stepX*Math.pow(10,i), xp = xPosLog(i);
-          ctx.moveTo(xp,P.padY);
-          ctx.lineTo(xp,P.cnv.height-P.padY);	
-          ctx.fillText(x,xp,P.cnv.height-P.padY+5);	
-        }
-        ctx.textAlign = 'right';
-        ctx.textBaseline = 'middle';
-        for (let j=0; j<=P.cntY; j++) {
-          const y = j*P.stepY, yp = yPos(y);
-          ctx.moveTo(P.padX,yp);
-          ctx.lineTo(P.cnv.width-P.padX,yp);	
-          ctx.fillText(y,P.padX-5,yp);	
-        }
-        ctx.stroke();
-        ctx.save();
-
-        ctx.fillStyle = '#FECB00';
-        ctx.font = '14px san serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(lblX,Cnv.width/2,Cnv.height-.33*P.padY);
-        
-        ctx.textAlign='right';
-        ctx.textBaseline='bottom';
-        ctx.fillStyle = '#FECB00';
-        ctx.fillText(lblY,P.cnv.width-P.padX,P.padY-5);
-
-        ctx.lineWidth = 2;
-        return ctx;
+        P.x = i => P.stepX*Math.pow(10,i);
+        P.xPos = i => i*(P.cnv.width-P.padX*2)/(P.cntX)+P.padX;
+        setupPlot(lblX,lblY);
       }
-      function _setupPlot(lblX,lblY) {
-        P.m = new Map();
-        const ctx = P.ctx = P.cnv.getContext('2d');
-        $('#plot_btn').hide();
-        $('#plot').show();
-
-        ctx.strokeStyle = "#5d9300";
-        ctx.fillStyle = "white";
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.font = '12px san serif';
-        
-        ctx.beginPath();
-        ctx.textBaseline = 'top';
-        for (let i=0; i<=P.cntX; i++) {
-          const x = i*P.stepX, xp = xPos(x);
-          ctx.moveTo(xp,P.padY);
-          ctx.lineTo(xp,P.cnv.height-P.padY);	
-          ctx.fillText(x,xp,P.cnv.height-P.padY+5);	
-        }
-        ctx.textAlign = 'right';
-        ctx.textBaseline = 'middle';
-        for (let j=0; j<=P.cntY; j++) {
-          const y = j*P.stepY, yp = yPos(y);
-          ctx.moveTo(P.padX,yp);
-          ctx.lineTo(P.cnv.width-P.padX,yp);	
-          ctx.fillText(y,P.padX-5,yp);	
-        }
-        ctx.stroke();
-        ctx.save();
-
-        ctx.fillStyle = '#FECB00';
-        ctx.font = '14px san serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(lblX,Cnv.width/2,Cnv.height-.33*P.padY);
-        
-        ctx.textAlign='right';
-        ctx.textBaseline='bottom';
-        ctx.fillStyle = '#FECB00';
-        ctx.fillText(lblY,P.cnv.width-P.padX,P.padY-5);
-
-        ctx.lineWidth = 2;
-        return ctx;
-      }
-function setupPlot(lblX,lblY) {
+      function setupPlot(lblX,lblY) {
         P = $.extend({
           m: new Map(),
           x: i => i*P.stepX,
