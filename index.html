@@ -120,10 +120,10 @@
       function curveLog(fn,col='#FECB00') {        
         P.ctx.strokeStyle = col;	
   			P.ctx.beginPath();
-        for (let x=0; x<=P.cntX; x=rnd(x+.1)) {	   
+        for (let x=0; x<=P.cntX; x=rnd(x+.01,2)) {	   
+          //console.log(x+'->'+xPosLog(x)+'->'+P.stepX*Math.pow(10,x)+'->'+rnd(fn(P.stepX*Math.pow(10,x)))+'->'+yPos(fn(P.stepX*Math.pow(10,x))));    
           if (fn(P.stepX*Math.pow(10,x))<=P.stepY*P.cntY) {
             P.ctx.lineTo(xPosLog(x), yPos(fn(P.stepX*Math.pow(10,x))));		
-            console.log(x+'->'+xPosLog(x)+'->'+P.stepX*Math.pow(10,x)+'->'+rnd(fn(P.stepX*Math.pow(10,x)))+'->'+yPos(fn(P.stepX*Math.pow(10,x))));          
           }       
 	    	}
 		    P.ctx.stroke();

@@ -64,7 +64,7 @@
 			cnv: Cnv,
 			padX: 25,
 			cntX: 3,
-			//stepX: 100,
+			stepX: 100,
 			padY: 50,
 			stepY: 1,
 			cntY: 6
@@ -72,22 +72,13 @@
 
 		let lblTxt = 'U.S.', 
 			m = 1, 
-			d = setData({}),
-			stepX = 100;
+			d = setData({});
 		if (unit(DIST) == 'm') {
 			lblTxt = 'metric';
 			m = 3472 / 4033;
-			if (d.pump_style==9) {
-				//stepX = 1;
-			} else {
-				//stepX = 1;
-			}		
-		} else if (d.pump_style==9) {
-			//stepX = 1;
-		}
-		$.extend(P,{stepX});
+		} 
 		setupLogPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
-//return;
+
 		curveLog(x => 
 			Bridge.achievableEfficiency($.extend({
 				specific_speed: x * m,
