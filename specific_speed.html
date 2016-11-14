@@ -65,6 +65,7 @@
 			padX: 25,
 			cntX: 3,
 			stepX: 1,
+			xCvt: x => 100*Math.pow(10,x),
 			padY: 50,
 			stepY: 1,
 			cntY: 6
@@ -77,7 +78,7 @@
 			lblTxt = 'metric';
 			m = 3472 / 4033;
 		} 
-		setupLogPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
+		setupPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
 
 		curve(x => 
 			Bridge.achievableEfficiency($.extend({

@@ -114,32 +114,17 @@
           return r[prop];
         },col);
       }
-      function curveLog(fn,col='#FECB00') {        
-        P.ctx.strokeStyle = col;	
-  			P.ctx.beginPath();
-        for (let x=0; x<=P.cntX; x=rnd(x+.01,2)) {	   
-          //console.log(x+'->'+xPosLog(x)+'->'+P.stepX*Math.pow(10,x)+'->'+rnd(fn(P.stepX*Math.pow(10,x)))+'->'+yPos(fn(P.stepX*Math.pow(10,x))));    
-          if (fn(P.stepX*Math.pow(10,x))<=P.stepY*P.cntY) {
-            P.ctx.lineTo(xPos(x), yPos(fn(P.stepX*Math.pow(10,x))));		
-          }       
-	    	}
-		    P.ctx.stroke();
-      }
       function curve(fn,col='#FECB00') {        
         P.ctx.strokeStyle = col;	
   			P.ctx.beginPath();
         for (let x=0; rnd(x,2)<=P.stepX*P.cntX; x+=P.stepX/100) {
           const y = fn(P.xCvt(x));	          
           if ( y <= P.stepY*P.cntY) {
-            //console.log(x+','+rnd(fn(x)));
+            //console.log(x+','+rnd(y));
       			P.ctx.lineTo(xPos(x), yPos(y));		
           }		
 	    	}
 		    P.ctx.stroke();
-      }
-      function setupLogPlot(lblX,lblY) {
-        P.xCvt = x => 100*Math.pow(10,x);
-        setupPlot(lblX,lblY);
       }
       function setupPlot(lblX,lblY) {
         P = $.extend({
