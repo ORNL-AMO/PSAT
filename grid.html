@@ -43,17 +43,6 @@
     <td><span>Style</span></td>
     <td>
       <select name='pump_style' onchange='pumpChg(this)' data-init-chg>
-        <option>End suction slurry</option>
-        <option>End suction sewage</option>
-        <option>End suction stock</option>
-        <option>End suction submersible sewage</option>
-        <option>API double suction</option>
-        <option>Multistage boiler feed</option>
-        <option>End suction ANSI/API</option>
-        <option>Axial flow</option>
-        <option>Double suction</option>
-        <option>Vertical turbine</option>
-        <option>Large end suction</option>
         <option>Specified optimal efficiency</option>
       </select>
       <span><input name='pump_specified' data-vd-gt></input> <em>(%)</em></span>
@@ -354,6 +343,8 @@
   fldUnit('Head');
   txt = unit(FLOW);
   fldUnit('Flow');
+
+  nm('pump_style').prepend($('#tmp_pump').children());
 
   Conds.filter(c => c.grid).forEach(c => {
     $('table tr').each(function (i,e) {

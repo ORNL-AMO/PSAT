@@ -57,9 +57,6 @@
       td {
         white-space: nowrap;
       }
-      /*td > * {
-        vertical-align: middle;
-      }*/
 
       #container {
         padding:0 5%;
@@ -92,7 +89,19 @@
     </div>
     <button id=back onclick='back()'><i class="fa fa-long-arrow-left fa-lg"></i></button>
     <button id=home onclick='main()'><i class="fa fa-home fa-lg"></i></button>
-
+    <select id='tmp_pump' style='display:none'>
+        <option>End suction slurry</option>
+        <option>End suction sewage</option>
+        <option>End suction stock</option>
+        <option>End suction submersible sewage</option>
+        <option>API double suction</option>
+        <option>Multistage boiler feed</option>
+        <option>End suction ANSI/API</option>
+        <option>Axial flow</option>
+        <option>Double suction</option>
+        <option>Vertical turbine</option>
+        <option>Large end suction</option>
+    </select>
     <div id=container></div>
     <script>
     
