@@ -98,6 +98,9 @@
     
     // canvas
 
+      function xPos(x) {
+        return x*(P.cnv.width-P.padX*2)/(P.stepX*P.cntX)+P.padX;
+      }
       function yPos(y) {
         return (P.stepY*P.cntY-y)*(P.cnv.height-P.padY*2)/(P.stepY*P.cntY)+P.padY;
       }
@@ -117,7 +120,7 @@
         for (let x=0; x<=P.cntX; x=rnd(x+.01,2)) {	   
           //console.log(x+'->'+xPosLog(x)+'->'+P.stepX*Math.pow(10,x)+'->'+rnd(fn(P.stepX*Math.pow(10,x)))+'->'+yPos(fn(P.stepX*Math.pow(10,x))));    
           if (fn(P.stepX*Math.pow(10,x))<=P.stepY*P.cntY) {
-            P.ctx.lineTo(P.xPos(x), yPos(fn(P.stepX*Math.pow(10,x))));		
+            P.ctx.lineTo(xPos(x), yPos(fn(P.stepX*Math.pow(10,x))));		
           }       
 	    	}
 		    P.ctx.stroke();
@@ -125,24 +128,23 @@
       function curve(fn,col='#FECB00') {        
         P.ctx.strokeStyle = col;	
   			P.ctx.beginPath();
-        for (let x=0; rnd(x)<=P.stepX*P.cntX; x+=P.stepX/10) {	          
-          if (fn(x)<=P.stepY*P.cntY) {
+        for (let x=0; rnd(x,2)<=P.stepX*P.cntX; x+=P.stepX/100) {
+          const y = fn(P.xCvt(x));	          
+          if ( y <= P.stepY*P.cntY) {
             //console.log(x+','+rnd(fn(x)));
-      			P.ctx.lineTo(P.xPos(x), yPos(fn(x)));		
+      			P.ctx.lineTo(xPos(x), yPos(y));		
           }		
 	    	}
 		    P.ctx.stroke();
       }
       function setupLogPlot(lblX,lblY) {
-        P.x = i => P.stepX*Math.pow(10,i);
-        P.xPos = i => i*(P.cnv.width-P.padX*2)/(P.cntX)+P.padX;
+        P.xCvt = x => 100*Math.pow(10,x);
         setupPlot(lblX,lblY);
       }
       function setupPlot(lblX,lblY) {
         P = $.extend({
           m: new Map(),
-          x: i => i*P.stepX,
-          xPos: x => x*(P.cnv.width-P.padX*2)/(P.stepX*P.cntX)+P.padX
+          xCvt: x => x,
         },P);
         P.m = new Map();
         const ctx = P.ctx = P.cnv.getContext('2d');
@@ -158,10 +160,10 @@
         ctx.beginPath();
         ctx.textBaseline = 'top';
         for (let i=0; i<=P.cntX; i++) {
-          const x = P.x(i), xp = P.xPos(x);
+          const x = i*P.stepX, xp = xPos(x);
           ctx.moveTo(xp,P.padY);
           ctx.lineTo(xp,P.cnv.height-P.padY);	
-          ctx.fillText(x,xp,P.cnv.height-P.padY+5);	
+          ctx.fillText(P.xCvt(x),xp,P.cnv.height-P.padY+5);	
         }
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';

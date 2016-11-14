@@ -64,7 +64,7 @@
 			cnv: Cnv,
 			padX: 25,
 			cntX: 3,
-			stepX: 100,
+			stepX: 1,
 			padY: 50,
 			stepY: 1,
 			cntY: 6
@@ -79,7 +79,7 @@
 		} 
 		setupLogPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
 
-		curveLog(x => 
+		curve(x => 
 			Bridge.achievableEfficiency($.extend({
 				specific_speed: x * m,
 			},d)));
