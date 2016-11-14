@@ -24,17 +24,6 @@
 			<a style='display:block' onclick='lnk(event,"what_is_ss")' href=''>What Is Specific Speed?</a><br>
 			<span>Pump Style</span><br>
 			<select name='pump_style'>
-				<option selected>End suction slurry</option>
-				<option>End suction sewage</option>
-				<option>End suction stock</option>
-				<option>End suction submersible sewage</option>
-				<option>API double suction</option>
-				<option>Multistage boiler feed</option>
-				<option>End suction ANSI/API</option>
-				<option>Axial flow</option>
-				<option>Double suction</option>
-				<option>Vertical turbine</option>
-				<option>Large end suction</option>
 			</select><br>
 			Pump Speed <em>(rpm)</em><br>
 			<input name='pump_rated_speed' value=1780 data-vd-gt><br>
@@ -94,6 +83,9 @@
 	}	 
 	Cnv = dom('canvas');
 	
+	nm('pump_style').append($('#tmp_pump').children());
+	pg('option').first().prop('selected',true);
+
 	nmAll().change(()=>{
 		$('#plot').hide();
 		$('#plot_btn').show();
