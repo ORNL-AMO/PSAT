@@ -3,9 +3,8 @@
 		font-size: .75rem;
 		font-style: italic;
     }
-    .vsp {
-        margin-bottom: .5rem;
-        display:block;
+    #container div {
+        margin-bottom: .5rem;        
     }
     #resultTxt > * {
         vertical-align: middle;
@@ -13,14 +12,16 @@
 </style>
 
 <h1>NEMA Energy Efficiency</h1>
-Line Frequency <em>(Hz)</em>
-<label><input name=line type=radio value=0> 50</label>
-<label class=vsp><input name=line type=radio value=1 checked> 60</label>
+<div>
+    Line Frequency <em>(Hz)</em>
+    <label><input name=line type=radio value=0> 50</label>
+    <label><input name=line type=radio value=1 checked> 60</label>
+</div>
 <span id='lblMRP'>Motor Rated Power</span>
-<input class=vsp name='motor_rated_power' value=200 data-vd-gt>
+<div><input name='motor_rated_power' value=200 data-vd-gt></div>
 Motor Rated Speed <em>(rpm)</em>
-<input class=vsp name='motor_rated_speed' value=1780 data-vd-gt>
-Efficiency Class<br>
+<div><input name='motor_rated_speed' value=1780 data-vd-gt></div>
+Efficiency Class
 <label><input name='efficiency_class' type=radio value=0 checked> Standard</label>
 <label><input name='efficiency_class' type=radio value=1> Energy</label>
 <hr>

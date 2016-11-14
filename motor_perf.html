@@ -8,9 +8,6 @@
 		background-color: black;
 		display:none;		
 	}
-	button {
-		margin-top: .5rem;
-	}
 	#container div {
 		margin-bottom: .5rem;
 	}
@@ -85,11 +82,8 @@
 		nm('flc').val(flc(cvtArg(MotorPerf)));
 	}
 	function effChg() {
-		if (nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom') {
-			nm('efficiency').parent().show();      
-		} else {
-			nm('efficiency').parent().hide();
-		}
+		nm('efficiency').parent()[nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom'
+			? 'show' : 'hide']();
 	}
 
 	pg('#unit_pow').text(`(${unit(POWER)})`)
