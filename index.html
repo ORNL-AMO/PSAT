@@ -462,8 +462,6 @@
 				MotorPerf = loadProp('motorPerf');
 				return (DefCond = loadProp('defCond'));
 			}
-			Dlg=require('electron').remote.dialog;
-			Bridge = require('./build/Release/bridge');
 			LS = localStorage;
 			$ = require('jquery');
 
@@ -471,7 +469,16 @@
 				loadData(true);
 			}
 			$(document).ready(function() {
-				main();
+				try {
+					Dlg=require('electron').remote.dialog;
+					Bridge = require('./build/Release/bridge');				
+					Bridge.initTest({});
+					main();
+				} catch (e) {
+					alert(e);
+					require('electron').remote.getCurrentWindow().close();
+				}
+				
 			});
 		</script>
 	</body>
