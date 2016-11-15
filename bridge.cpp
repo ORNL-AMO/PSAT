@@ -327,7 +327,9 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 	cout << "done";
 }
 
-void Wtf(const FunctionCallbackInfo<Value>& args) {
+void InitTest(const FunctionCallbackInfo<Value>& args) {
+	Setup(args);
+	args.GetReturnValue().Set(String::NewFromUtf8(iso,"SUCCESS"));
 }
 
 void Init(Local<Object> exports) {
@@ -338,7 +340,7 @@ void Init(Local<Object> exports) {
 	NODE_SET_METHOD(exports, "achievableEfficiency", AchievableEfficiency);
 	NODE_SET_METHOD(exports, "nema", Nema);  
 	NODE_SET_METHOD(exports, "test", Test);  
-	NODE_SET_METHOD(exports, "wtf", Wtf);    
+	NODE_SET_METHOD(exports, "initTest", InitTest);    
 }
 
 NODE_MODULE(bridge, Init)
