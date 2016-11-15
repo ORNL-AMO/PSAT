@@ -1,369 +1,444 @@
 <style>
-  [title] {    
-    cursor: help;
-  }   
-  #results,#results~tr {
-    display:none;
-  }
-  #results td:not(:first-child) span,#results~tr span {
-    width:50%;
-  }
-  td>div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }  
-  td select {
-    width:100%;
-    padding-left: 5px;
-    padding-right: 5px;
-    display: block;
-  }
-  td input:not([type=checkbox]) {
-    width:7rem;
-  }
-  td:nth-child(2),th:nth-child(2) {
-    display: none;
-  }
-  tr:nth-child(even) {
-    background-color: #C3C8C8;
-  }
+	[title] {
+		cursor: help;
+	}
+	
+	#results,
+	#results~tr {
+		display: none;
+	}
+	
+	#results td:not(:first-child) span,
+	#results~tr span {
+		width: 50%;
+	}
+	
+	td>div {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	td select {
+		width: 100%;
+		padding-left: 5px;
+		padding-right: 5px;
+		display: block;
+	}
+	
+	td input:not([type=checkbox]) {
+		width: 7rem;
+	}
+	
+	td:nth-child(2),
+	th:nth-child(2) {
+		display: none;
+	}
+	
+	tr:nth-child(even) {
+		background-color: #C3C8C8;
+	}
 </style>
-<table id=grid>  
-  <tr>      
-    <th style='vertical-align: bottom'>Pump</th>
-      <th>
-        <button onclick='rm(this)'><i class="fa fa-times"/></button>
-        <button onclick='edit(this)'><i class="fa fa-pencil-square-o"></i></button>
-        <button class=ioBtn onclick='showIO(this);'><i class="fa fa-exchange"></i></button><br>
-        <span></span>
-      </th>      
-  </tr>
-  <tr>
-    <td><span>Style</span></td>
-    <td>
-      <select name='pump_style' onchange='pumpChg(this)' data-init-chg>
-        <option>Specified optimal efficiency</option>
-      </select>
-      <span><input name='pump_specified' data-vd-gt></input> <em>(%)</em></span>
-    </td>
-  </tr>  
-  <tr>
-    <td><div>Speed <em>(rpm)</em></div></td><td><input name='pump_rated_speed' data-vd-gt></td>
-  </tr>
-  <tr>
-    <td>Drive</td>
-    <td> 
-      <select name='drive'>
-        <option>Direct drive</option>
-        <option>Belt drive</option>
-      </select>
-    </td>
-  </tr>
-  <tr>
-    <td><div>Kinematic Viscosity <em>(cS)</em></div></td>
-    <td><input name='viscosity' data-vd-gt></td>
-  </tr>
-  <tr>
-    <td>Specific Gravity</td>
-    <td><input name='specific_gravity' data-vd-gt=.1></td>
-  </tr>
-  <tr>
-    <td>Number Stages</td>
-    <td><input name='stages' type=number min=1 data-vd-gt></td>
-  </tr>
-  <tr>
-    <td>Fixed Specific Speed?</td>
-    <td><input name='fixed_speed' type=checkbox></td>
-  </tr>
-  <tr>
-    <td class='th'>Motor</td><td/>
-  </tr>
-    <td><div>Line Frequency <em>(Hz)</em></div></td>
-    <td> 
-      <select name='line'>
-        <option>50</option>
-        <option>60</option>
-      </select>
-    </td>
-  </tr>      
-  <tr>
-    <td><div>Rated Power</div></td>
-    <td>
-      <input name='motor_rated_power' data-vd-gt>
-    </td>
-  </tr>
-  <tr>
-    <td><div>Speed <em>(rpm)</em></div></td>
-    <td><input name='motor_rated_speed' data-vd-gt></td>
-  </tr>
-  <tr>
-    <td>Efficiency Class</td>
-    <td> 
-      <select name='efficiency_class' onchange='effChg(this)' data-init-chg>
-        <option>Standard</option>
-        <option>Energy</option>
-        <option>Custom</option>
-      </select>
-      <span><input name='efficiency' data-vd-gt></input> <em>(%)</em></span>
-    </td>
-  </tr>    
-  <tr>
-    <td><div>Voltage<em>(V)</em></div></td>
-    <td><input name='motor_rated_voltage' data-vd-gt></td>
-  </tr>
-  <tr>
-    <td><div>Full-load Current<em>(A)</em></div></td>
-    <td><input name='motor_rated_flc'> <button onclick='estFLC(this)' data-vd-gt>EST</button></td>
-  </tr>
-  <tr>
-    <td><div>Size Margin <em>(%)</em></div></td>
-    <td><input name='margin' data-vd-gt=0></td>
-  </tr>
-  <tr>
-    <td class='th'>Cost</td><td/>
-  </tr>
-  <tr>
-    <td><div>Operating Fraction <em>(%)</em></div></td>
-    <td><input name='fraction' data-vd-gt></td>
-  </tr>
- <tr>
-    <td><div>Energy Cost<em>($/kwhr)</em></td>
-    <td><input name='cost' data-vd-gt=0></td>
-  </tr>
-  <tr>
-    <td class='th'>Field</td><td/>
-  </tr>        
-  <tr>
-    <td><div>Flow Rate</td>
-    <td><input name='flow' data-vd-gt></td>
-  </tr>
-  <tr>
-    <td><div>Head</div></td>
-    <td>
-      <input name='head' data-vd-gt>
-      <button onclick='gotoHead(this)'><i class="fa fa-wrench"/></button>
-    </td>
-  </tr>         
-  <tr>
-    <td><div title='Enter either power or current, for the desired estimation method'>Motor Power<em>(kW)</em></div></td>
-    <td><input name='motor_field_power' data-vd-gt onchange="clrFld('motor_field_current',this)"></td>
-  </tr>
-  <tr>
-    <td><div title='Enter either power or current, for the desired estimation method'>Motor Current<em>(A)</em></div></td>
-    <td><input name='motor_field_current' data-vd-gt onchange="clrFld('motor_field_power',this)"></td>
-  </tr>
-  <tr>
-    <td><div>Motor Voltage<em>(V)</em></div></td>
-    <td><input name='motor_field_voltage' data-vd-gt></td>
-  </tr>
-  <tr id=results>
-    <td class='th'>
-      <div style='justify-content:center'>        
-        Results
-        <button style='margin-left:.5rem' onclick='go("curve")'>
-          <i class="fa fa-line-chart"/>
-        </button>
-      </div>
-    </td>
-    <td><div style='color:#5d9300;'><span>Actual</span><span>Optimal</span></div></td>
-  </tr>
-  <tr>
-    <td><div>Pump Efficiency <em>(%)</em></div></td><td></td>
-  </tr>
-  <tr>
-    <td><div>Motor Rated Power</div></td><td></td>
-  </tr>
-  <tr>
-    <td><div>Motor Shaft Power</div></td><td></td>
-  </tr>
-  <tr>
-    <td><div>Pump Shaft Power</div></td><td></td>
-  </tr>
-  <tr>
-    <td><div>Motor Efficiency <em>(%)</em></div></td><td></td>
-  </tr>
-  <tr>
-    <td><div>Motor Power Factor <em>(%)</em></div></td><td></td>
-  </tr>
-  <tr>
-    <td><div>Motor Current <em>(amps)</em></div></td><td></td>
-  </tr>
-  <tr>
-    <td><div>Motor Power <em>(kW)</em></div></td><td></td>
-  </tr>
-  <tr>
-    <td><div>Annual Energy <em>(MWh)</em></div></td><td></td>
-  </tr>
-  <tr>
-    <td><div>Annual Cost <em>($)</em></div></td><td></td>
-  </tr>
-  <tr class=th>
-    <td>Summary</td><td></td>
-  </tr>
-  <tr class=sum>
-    <td>Savings Potential</td>
-    <td></td>
-  </tr>
-  <tr class=sum>
-    <td>Optimization Rating</td>
-    <td></td>
-  </tr>
+<table id=grid>
+	<tr>
+		<th style='vertical-align: bottom'>Pump</th>
+		<th>
+			<button onclick='rm(this)'><i class="fa fa-times"/></button>
+			<button onclick='edit(this)'><i class="fa fa-pencil-square-o"></i></button>
+			<button class=ioBtn onclick='showIO(this);'><i class="fa fa-exchange"></i></button><br>
+			<span></span>
+		</th>
+	</tr>
+	<tr>
+		<td><span>Style</span></td>
+		<td>
+			<select name='pump_style' onchange='pumpChg(this)' data-init-chg>
+				<option>Specified optimal efficiency</option>
+			</select>
+			<span><input name='pump_specified' data-vd-gt></input> <em>(%)</em></span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div>Speed <em>(rpm)</em></div>
+		</td>
+		<td><input name='pump_rated_speed' data-vd-gt></td>
+	</tr>
+	<tr>
+		<td>Drive</td>
+		<td>
+			<select name='drive'>
+				<option>Direct drive</option>
+				<option>Belt drive</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div>Kinematic Viscosity <em>(cS)</em></div>
+		</td>
+		<td><input name='viscosity' data-vd-gt></td>
+	</tr>
+	<tr>
+		<td>Specific Gravity</td>
+		<td><input name='specific_gravity' data-vd-gt=.1></td>
+	</tr>
+	<tr>
+		<td>Number Stages</td>
+		<td><input name='stages' type=number min=1 data-vd-gt></td>
+	</tr>
+	<tr>
+		<td>Fixed Specific Speed?</td>
+		<td><input name='fixed_speed' type=checkbox></td>
+	</tr>
+	<tr>
+		<td class='th'>Motor</td>
+		<td/>
+	</tr>
+	<td>
+		<div>Line Frequency <em>(Hz)</em></div>
+	</td>
+	<td>
+		<select name='line'>
+				<option>50</option>
+				<option>60</option>
+			</select>
+	</td>
+	</tr>
+	<tr>
+		<td>
+			<div>Rated Power</div>
+		</td>
+		<td>
+			<input name='motor_rated_power' data-vd-gt>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div>Speed <em>(rpm)</em></div>
+		</td>
+		<td><input name='motor_rated_speed' data-vd-gt></td>
+	</tr>
+	<tr>
+		<td>Efficiency Class</td>
+		<td>
+			<select name='efficiency_class' onchange='effChg(this)' data-init-chg>
+				<option>Standard</option>
+				<option>Energy</option>
+				<option>Custom</option>
+			</select>
+			<span><input name='efficiency' data-vd-gt></input> <em>(%)</em></span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div>Voltage<em>(V)</em></div>
+		</td>
+		<td><input name='motor_rated_voltage' data-vd-gt></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Full-load Current<em>(A)</em></div>
+		</td>
+		<td><input name='motor_rated_flc'> <button onclick='estFLC(this)' data-vd-gt>EST</button></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Size Margin <em>(%)</em></div>
+		</td>
+		<td><input name='margin' data-vd-gt=0></td>
+	</tr>
+	<tr>
+		<td class='th'>Cost</td>
+		<td/>
+	</tr>
+	<tr>
+		<td>
+			<div>Operating Fraction <em>(%)</em></div>
+		</td>
+		<td><input name='fraction' data-vd-gt></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Energy Cost<em>($/kwhr)</em></td>
+		<td><input name='cost' data-vd-gt=0></td>
+	</tr>
+	<tr>
+		<td class='th'>Field</td>
+		<td/>
+	</tr>
+	<tr>
+		<td>
+			<div>Flow Rate</td>
+		<td><input name='flow' data-vd-gt></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Head</div>
+		</td>
+		<td>
+			<input name='head' data-vd-gt>
+			<button onclick='gotoHead(this)'><i class="fa fa-wrench"/></button>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div title='Enter either power or current, for the desired estimation method'>Motor Power<em>(kW)</em></div>
+		</td>
+		<td><input name='motor_field_power' data-vd-gt onchange="clrFld('motor_field_current',this)"></td>
+	</tr>
+	<tr>
+		<td>
+			<div title='Enter either power or current, for the desired estimation method'>Motor Current<em>(A)</em></div>
+		</td>
+		<td><input name='motor_field_current' data-vd-gt onchange="clrFld('motor_field_power',this)"></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Motor Voltage<em>(V)</em></div>
+		</td>
+		<td><input name='motor_field_voltage' data-vd-gt></td>
+	</tr>
+	<tr id=results>
+		<td class='th'>
+			<div style='justify-content:center'>
+				Results
+				<button style='margin-left:.5rem' onclick='go("curve")'>
+					<i class="fa fa-line-chart"/>
+				</button>
+			</div>
+		</td>
+		<td>
+			<div style='color:#5d9300;'><span>Actual</span><span>Optimal</span></div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div>Pump Efficiency <em>(%)</em></div>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Motor Rated Power</div>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Motor Shaft Power</div>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Pump Shaft Power</div>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Motor Efficiency <em>(%)</em></div>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Motor Power Factor <em>(%)</em></div>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Motor Current <em>(amps)</em></div>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Motor Power <em>(kW)</em></div>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Annual Energy <em>(MWh)</em></div>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>
+			<div>Annual Cost <em>($)</em></div>
+		</td>
+		<td></td>
+	</tr>
+	<tr class=th>
+		<td>Summary</td>
+		<td></td>
+	</tr>
+	<tr class=sum>
+		<td>Savings Potential</td>
+		<td></td>
+	</tr>
+	<tr class=sum>
+		<td>Optimization Rating</td>
+		<td></td>
+	</tr>
 </table>
 <p>
-  <button onclick="results(true)">RESULTS</button>
+	<button onclick="results(true)">RESULTS</button>
 </p>
 <dialog id='io'>
-  <label>
-    <input name=saveopt type="radio"> Reset to default
-  </label>  
-  <label>
-    <input name=saveopt type="radio"> Set new default
-  </label>
-  <button class=prime onclick='io($(this.parentElement))'>ACCEPT</button> 
-  <button onclick='this.parentElement.close()'>CANCEL</button>
+	<label>
+		<input name=saveopt type="radio"> Reset to default
+	</label>
+	<label>
+		<input name=saveopt type="radio"> Set new default
+	</label>
+	<button class=prime onclick='io($(this.parentElement))'>ACCEPT</button>
+	<button onclick='this.parentElement.close()'>CANCEL</button>
 </dialog>
 
 <script>//# sourceURL=*grid
-  function clrFld(n,e) {
-    nm(n,col(e)).val('');
-  }  
-  function effChg(e) {
-    if ($(e).val()=='Custom') {
-      $(e).next().show();      
-    } else {
-      $(e).next().hide();
-    }
-  }
-  function pumpChg(e) {
-    if ($(e).val().startsWith('Specified')) {
-      $(e).next().show();      
-    } else {
-      $(e).next().hide();
-    }
-  }
+	function clrFld(n,e) {
+		nm(n,col(e)).val('');
+	}  
+	function effChg(e) {
+		if ($(e).val()=='Custom') {
+			$(e).next().show();      
+		} else {
+			$(e).next().hide();
+		}
+	}
+	function pumpChg(e) {
+		if ($(e).val().startsWith('Specified')) {
+			$(e).next().show();      
+		} else {
+			$(e).next().hide();
+		}
+	}
 
-  function showIO(e) {
-    const dlg = $('#io');
-    chk(dlg.find('input').first(),true);
-    dom(dlg).showModal();
-    dlg.data('src',$(e));
-  }
-  function ioBtn(e) {
-    return $('.ioBtn').eq(parIdx(e,-1));
-  }
-  function col(e) {
-    return $(`td:nth-child(${upTD(e).index()+1})`);
-  }
-  function saveCol(e) {
-      setData(colCond(e),col(e));          
-      saveConds();
-  }
-  function io(dlg) {    
-    let e = dlg.data('src');
-    if(parIdx(checked(dlg))==0) {
-      setCtls(DefCond,col(e));
-      saveCol(e);
-      showHdResults()
-    } else {
-      setData(DefCond,col(e));
-      saveProp('defCond',DefCond);
-    }
-    dom(dlg).close(); 
-  }
+	function showIO(e) {
+		const dlg = $('#io');
+		chk(dlg.find('input').first(),true);
+		dom(dlg).showModal();
+		dlg.data('src',$(e));
+	}
+	function ioBtn(e) {
+		return $('.ioBtn').eq(parIdx(e,-1));
+	}
+	function col(e) {
+		return $(`td:nth-child(${upTD(e).index()+1})`);
+	}
+	function saveCol(e) {
+			setData(colCond(e),col(e));          
+			saveConds();
+	}
+	function io(dlg) {    
+		let e = dlg.data('src');
+		if(parIdx(checked(dlg))==0) {
+			setCtls(DefCond,col(e));
+			saveCol(e);
+			showHdResults()
+		} else {
+			setData(DefCond,col(e));
+			saveProp('defCond',DefCond);
+		}
+		dom(dlg).close(); 
+	}
 
-  function upTD(e) {
-    return $(e).closest('td,th');
-  }
-  function colCond(e) {
-    return upTD(e).data('cond');
-  }  
-  function rm(e) {
-    colCond(e).grid = false;
-    col(e).remove();
-    $(e).parent().remove();
-  }
-  
-  function vdTol(n,col,v,tol) {
-    nm(n,col).css('background-color',
-      Math.abs(nm(n,col).val()-v)>tol*v ? '#FECB00' : '');
-  }
-  function estFLC(e) {
-    nm('motor_rated_flc',col(e)).val(flc(colArgs(col(e))));
-    vdTol('motor_rated_flc',col(e));
-    nm('motor_rated_flc',col(e)).change();
-  }
-  function showHdResults(show=false) {
-    $('#results,#results~tr').toggle(show);
-    $('p button').toggle(!show);
-  }
-  function colArgs(col) {
-    return cvtArg(col.data('cond'));    
-  }
-  function results() {
-    $('th:gt(1)').each((i,e)=>{
-      const col = $(`td:nth-child(${$(e).index()+1})`),
-        a = colArgs(col), r = crunch(a);
-      for (var key in r) {
-        const v0 = rnd(r[key][0]), v1 = rnd(r[key][1]);
-        col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).html(
-          `<div>
-            <span ${key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
-              ${v0}
-            </span>
-            <span style='color:#5d9300'>${v1>-1 ? v1 : ''}</span>
-          </div>`);
-      }          
-      vdTol('motor_rated_flc',col,flc(a),.5);
-      vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
-    });
-    showHdResults(true);
-  }
+	function upTD(e) {
+		return $(e).closest('td,th');
+	}
+	function colCond(e) {
+		return upTD(e).data('cond');
+	}  
+	function rm(e) {
+		colCond(e).grid = false;
+		col(e).remove();
+		$(e).parent().remove();
+	}
+	
+	function vdTol(n,col,v,tol) {
+		nm(n,col).css('background-color',
+			Math.abs(nm(n,col).val()-v)>tol*v ? '#FECB00' : '');
+	}
+	function estFLC(e) {
+		nm('motor_rated_flc',col(e)).val(flc(colArgs(col(e))));
+		vdTol('motor_rated_flc',col(e));
+		nm('motor_rated_flc',col(e)).change();
+	}
+	function showHdResults(show=false) {
+		$('#results,#results~tr').toggle(show);
+		$('p button').toggle(!show);
+	}
+	function colArgs(col) {
+		return cvtArg(col.data('cond'));    
+	}
+	function results() {
+		$('th:gt(1)').each((i,e)=>{
+			const col = $(`td:nth-child(${$(e).index()+1})`),
+				a = colArgs(col), r = crunch(a);
+			for (var key in r) {
+				const v0 = rnd(r[key][0]), v1 = rnd(r[key][1]);
+				col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).html(
+					`<div>
+						<span ${key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
+							${v0}
+						</span>
+						<span style='color:#5d9300'>${v1>-1 ? v1 : ''}</span>
+					</div>`);
+			}          
+			vdTol('motor_rated_flc',col,flc(a),.5);
+			vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
+		});
+		showHdResults(true);
+	}
 
-  function gotoHead(e) {
-    Cond = colCond(e);
-    go("headTool");
-  }
-  function edit(e) {
-    Cond = colCond(e);
-    go('notes');
-  }
-  
-  function fldUnit(nm) {
-    $(`td>div:not(:has(em)):contains(${nm})`).append(`<em>(${txt})</em>`);
-  }  
+	function gotoHead(e) {
+		Cond = colCond(e);
+		go("headTool");
+	}
+	function edit(e) {
+		Cond = colCond(e);
+		go('notes');
+	}
+	
+	function fldUnit(nm) {
+		$(`td>div:not(:has(em)):contains(${nm})`).append(`<em>(${txt})</em>`);
+	}  
 
-  txt = unit(POWER);
-  fldUnit('Rated Power');
-  fldUnit('Motor Rated');
-  fldUnit('Motor Shaft');
-  fldUnit('Pump Shaft');
-  //fldUnit('Motor Power');
-  txt = unit(DIST);
-  fldUnit('Head');
-  txt = unit(FLOW);
-  fldUnit('Flow');
+	txt = unit(POWER);
+	fldUnit('Rated Power');
+	fldUnit('Motor Rated');
+	fldUnit('Motor Shaft');
+	fldUnit('Pump Shaft');
+	//fldUnit('Motor Power');
+	txt = unit(DIST);
+	fldUnit('Head');
+	txt = unit(FLOW);
+	fldUnit('Flow');
 
-  setPumpStyle('prepend');
+	setPumpStyle('prepend');
 
-  Conds.filter(c => c.grid).forEach(c => {
-    $('table tr').each(function (i,e) {
-      const newEl = $(e).children().eq(1).clone();            
-      $(e).append(newEl);
-      newEl.find('input,select').attr('tabindex',newEl.index());
-      newEl.data('cond',c);
-      if (i==0) {
-        newEl.find('span').text(c.name);     
-      } else {              
-        setCtls(c,newEl);
-        //newEl.data('rowNm',$(e).children().first().children().first().contents().first().text().trim());
-        newEl.data('rowNm',$(e).children(':first').text().replace(/\(.*\)/,'').trim());
-      }
-    });    
-  });         
-  setupVd();
-  nmAll('#grid').change(function() {
-    saveCol(this);
-    showHdResults(false);
-  });
+	Conds.filter(c => c.grid).forEach(c => {
+		$('table tr').each(function (i,e) {
+			const newEl = $(e).children().eq(1).clone();            
+			$(e).append(newEl);
+			newEl.find('input,select').attr('tabindex',newEl.index());
+			newEl.data('cond',c);
+			if (i==0) {
+				newEl.find('span').text(c.name);     
+			} else {              
+				setCtls(c,newEl);
+				//newEl.data('rowNm',$(e).children().first().children().first().contents().first().text().trim());
+				newEl.data('rowNm',$(e).children(':first').text().replace(/\(.*\)/,'').trim());
+			}
+		});    
+	});         
+	setupVd();
+	nmAll('#grid').change(function() {
+		saveCol(this);
+		showHdResults(false);
+	});
 </script>
