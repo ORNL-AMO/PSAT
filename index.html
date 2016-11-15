@@ -1,478 +1,478 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <title>Pumping System Assessment Tool</title>
-  <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
-    <style>
-      em, dialog label {
-        font-size: .75rem;
-        font-style: italic;
-      }
-      label:hover {
-        cursor: pointer;
-      }
-      label [type=radio] {
-        vertical-align: middle;
-        margin-top: 0;        
-      }
-      label {
-        display: block;
-      }
+	<head>
+	<title>Pumping System Assessment Tool</title>
+	<link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+		<style>
+			em, dialog label {
+				font-size: .75rem;
+				font-style: italic;
+			}
+			label:hover {
+				cursor: pointer;
+			}
+			label [type=radio] {
+				vertical-align: middle;
+				margin-top: 0;        
+			}
+			label {
+				display: block;
+			}
 
-      [type=checkbox]:hover {
-        cursor: pointer;
-      }
-      input:not([type=radio]) {
-        padding: .5em;
-        border: solid 1px #fff;
-        box-shadow: inset 1px 1px 2px 0 #5E6A71;
-      }
+			[type=checkbox]:hover {
+				cursor: pointer;
+			}
+			input:not([type=radio]) {
+				padding: .5em;
+				border: solid 1px #fff;
+				box-shadow: inset 1px 1px 2px 0 #5E6A71;
+			}
 
-      .prime {
-        color: white;
-        background-color: dodgerblue;
-      }     
-      button {
-        color: dodgerblue;
-        background-color: white;
-        border: 1px solid #C3C8C8;
-        border-radius: 4px;
-        padding: 3px 6px;
-      }
-      button:hover {
-        border-color: dodgerblue;
-        cursor: pointer;
-      }
+			.prime {
+				color: white;
+				background-color: dodgerblue;
+			}     
+			button {
+				color: dodgerblue;
+				background-color: white;
+				border: 1px solid #C3C8C8;
+				border-radius: 4px;
+				padding: 3px 6px;
+			}
+			button:hover {
+				border-color: dodgerblue;
+				cursor: pointer;
+			}
 
-      h1, em {
-        color: #5d9300;
-      }
+			h1, em {
+				color: #5d9300;
+			}
 
-      th,.th {
-        color: #5d9300;
-        font-weight: bold;
-        text-align: center;
-        white-space: nowrap;
-      }
-      td {
-        white-space: nowrap;
-      }
+			th,.th {
+				color: #5d9300;
+				font-weight: bold;
+				text-align: center;
+				white-space: nowrap;
+			}
+			td {
+				white-space: nowrap;
+			}
 
-      #container {
-        padding:0 5%;
-      }
-      #banner {
-        padding:10px 5%;   
-        margin-bottom: 10px;   
-        background-color: #5d9300;
-        box-shadow: 0 3px 3px rgba(0,0,0,.5);
+			#container {
+				padding:0 5%;
+			}
+			#banner {
+				padding:10px 5%;   
+				margin-bottom: 10px;   
+				background-color: #5d9300;
+				box-shadow: 0 3px 3px rgba(0,0,0,.5);
 
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size:20pt;
-        font-weight:bold;
-      }
-      body {
-        margin:0;
-      }
-      html {
-        font-family: sans-serif;
-        font-size: 14pt;
-      }
-    </style>
-  </head>
-  <body> 
-    <div id="banner">
-      <img src="logo_eere.png" style='padding-right:1rem'>
-      <span style='padding-left:1rem;text-align:right'>Pumping System Assessment Tool</span>
-    </div>
-    <button id=back onclick='back()'><i class="fa fa-long-arrow-left fa-lg"></i></button>
-    <button id=home onclick='main()'><i class="fa fa-home fa-lg"></i></button>
-    <select id='tmp_pump' style='display:none'>
-        <option>End suction slurry</option>
-        <option>End suction sewage</option>
-        <option>End suction stock</option>
-        <option>End suction submersible sewage</option>
-        <option>API double suction</option>
-        <option>Multistage boiler feed</option>
-        <option>End suction ANSI/API</option>
-        <option>Axial flow</option>
-        <option>Double suction</option>
-        <option>Vertical turbine</option>
-        <option>Large end suction</option>
-    </select>
-    <div id=container></div>
-    <script>
-    
-    // canvas
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				font-size:20pt;
+				font-weight:bold;
+			}
+			body {
+				margin:0;
+			}
+			html {
+				font-family: sans-serif;
+				font-size: 14pt;
+			}
+		</style>
+	</head>
+	<body> 
+		<div id="banner">
+			<img src="logo_eere.png" style='padding-right:1rem'>
+			<span style='padding-left:1rem;text-align:right'>Pumping System Assessment Tool</span>
+		</div>
+		<button id=back onclick='back()'><i class="fa fa-long-arrow-left fa-lg"></i></button>
+		<button id=home onclick='main()'><i class="fa fa-home fa-lg"></i></button>
+		<select id='tmp_pump' style='display:none'>
+				<option>End suction slurry</option>
+				<option>End suction sewage</option>
+				<option>End suction stock</option>
+				<option>End suction submersible sewage</option>
+				<option>API double suction</option>
+				<option>Multistage boiler feed</option>
+				<option>End suction ANSI/API</option>
+				<option>Axial flow</option>
+				<option>Double suction</option>
+				<option>Vertical turbine</option>
+				<option>Large end suction</option>
+		</select>
+		<div id=container></div>
+		<script>
+		
+		// canvas
 
-      function xPos(x) {
-        return x*(P.cnv.width-P.padX*2)/(P.stepX*P.cntX)+P.padX;
-      }
-      function yPos(y) {
-        return (P.stepY*P.cntY-y)*(P.cnv.height-P.padY*2)/(P.stepY*P.cntY)+P.padY;
-      }
-      function curveMulti(prop,col) {
-        curve(x => {
-          let r = P.m.get(x);
-          if (!r) {
-            r = P.getYobj(x);
-            P.m.set(x,r);						
-          }
-          return r[prop];
-        },col);
-      }
-      function curve(fn,col='#FECB00') {        
-        P.ctx.strokeStyle = col;	
-  			P.ctx.beginPath();
-        for (let x=0; rnd(x,2)<=P.stepX*P.cntX; x+=P.stepX/100) {
-          const y = fn(P.xCvt(x));	          
-          if ( y <= P.stepY*P.cntY) {
-            //console.log(x+','+rnd(y));
-      			P.ctx.lineTo(xPos(x), yPos(y));		
-          }		
-	    	}
-		    P.ctx.stroke();
-      }
-      function setupPlot(lblX,lblY) {
-        P = $.extend({
-          m: new Map(),
-          xCvt: x => x,
-        },P);
-        P.m = new Map();
-        const ctx = P.ctx = P.cnv.getContext('2d');
-        $('#plot_btn').hide();
-        $('#plot').show();
+			function xPos(x) {
+				return x*(P.cnv.width-P.padX*2)/(P.stepX*P.cntX)+P.padX;
+			}
+			function yPos(y) {
+				return (P.stepY*P.cntY-y)*(P.cnv.height-P.padY*2)/(P.stepY*P.cntY)+P.padY;
+			}
+			function curveMulti(prop,col) {
+				curve(x => {
+					let r = P.m.get(x);
+					if (!r) {
+						r = P.getYobj(x);
+						P.m.set(x,r);						
+					}
+					return r[prop];
+				},col);
+			}
+			function curve(fn,col='#FECB00') {        
+				P.ctx.strokeStyle = col;	
+				P.ctx.beginPath();
+				for (let x=0; rnd(x,2)<=P.stepX*P.cntX; x+=P.stepX/100) {
+					const y = fn(P.xCvt(x));	          
+					if ( y <= P.stepY*P.cntY) {
+						//console.log(x+','+rnd(y));
+						P.ctx.lineTo(xPos(x), yPos(y));		
+					}		
+				}
+				P.ctx.stroke();
+			}
+			function setupPlot(lblX,lblY) {
+				P = $.extend({
+					m: new Map(),
+					xCvt: x => x,
+				},P);
+				P.m = new Map();
+				const ctx = P.ctx = P.cnv.getContext('2d');
+				$('#plot_btn').hide();
+				$('#plot').show();
 
-        ctx.strokeStyle = "#5d9300";
-        ctx.fillStyle = "white";
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.font = '12px san serif';
-        
-        ctx.beginPath();
-        ctx.textBaseline = 'top';
-        for (let i=0; i<=P.cntX; i++) {
-          const x = i*P.stepX, xp = xPos(x);
-          ctx.moveTo(xp,P.padY);
-          ctx.lineTo(xp,P.cnv.height-P.padY);	
-          ctx.fillText(P.xCvt(x),xp,P.cnv.height-P.padY+5);	
-        }
-        ctx.textAlign = 'right';
-        ctx.textBaseline = 'middle';
-        for (let j=0; j<=P.cntY; j++) {
-          const y = j*P.stepY, yp = yPos(y);
-          ctx.moveTo(P.padX,yp);
-          ctx.lineTo(P.cnv.width-P.padX,yp);	
-          ctx.fillText(y,P.padX-5,yp);	
-        }
-        ctx.stroke();
-        ctx.save();
+				ctx.strokeStyle = "#5d9300";
+				ctx.fillStyle = "white";
+				ctx.textAlign = 'center';
+				ctx.textBaseline = 'middle';
+				ctx.font = '12px san serif';
+				
+				ctx.beginPath();
+				ctx.textBaseline = 'top';
+				for (let i=0; i<=P.cntX; i++) {
+					const x = i*P.stepX, xp = xPos(x);
+					ctx.moveTo(xp,P.padY);
+					ctx.lineTo(xp,P.cnv.height-P.padY);	
+					ctx.fillText(P.xCvt(x),xp,P.cnv.height-P.padY+5);	
+				}
+				ctx.textAlign = 'right';
+				ctx.textBaseline = 'middle';
+				for (let j=0; j<=P.cntY; j++) {
+					const y = j*P.stepY, yp = yPos(y);
+					ctx.moveTo(P.padX,yp);
+					ctx.lineTo(P.cnv.width-P.padX,yp);	
+					ctx.fillText(y,P.padX-5,yp);	
+				}
+				ctx.stroke();
+				ctx.save();
 
-        ctx.fillStyle = '#FECB00';
-        ctx.font = '14px san serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(lblX,Cnv.width/2,Cnv.height-.33*P.padY);
-        
-        ctx.textAlign='right';
-        ctx.textBaseline='bottom';
-        ctx.fillStyle = '#FECB00';
-        ctx.fillText(lblY,P.cnv.width-P.padX,P.padY-5);
+				ctx.fillStyle = '#FECB00';
+				ctx.font = '14px san serif';
+				ctx.textAlign = 'center';
+				ctx.fillText(lblX,Cnv.width/2,Cnv.height-.33*P.padY);
+				
+				ctx.textAlign='right';
+				ctx.textBaseline='bottom';
+				ctx.fillStyle = '#FECB00';
+				ctx.fillText(lblY,P.cnv.width-P.padX,P.padY-5);
 
-        ctx.lineWidth = 2;
-        return ctx;
-      }
-    //
-    	function lnk(e,nm) {
-    		e.preventDefault();
-		    go(nm);
-	    }
+				ctx.lineWidth = 2;
+				return ctx;
+			}
+		//
+			function lnk(e,nm) {
+				e.preventDefault();
+				go(nm);
+			}
 
-    // vd
+		// vd
 
-      function setDefVal(e,v) {
-        $(e).prop('defaultValue',v);
-      }
-      function setVal(e,v) {
-        $(e).val(v);
-        setDefVal(e,v);        
-      }
-      function vdGt(e,min=1) {
-        if(Number($(e).val()) >= min) {
-          e.defaultValue = $(e).val();
-        } else if (e.defaultValue >= min) {
-          $(e).val(e.defaultValue);          
-        } else {
-          $(e).val(min);
-        }
-      }
-      function setupVd() {
-        $('[data-vd-gt]').change(ev => {
-          let min = $(ev.target).attr('data-vd-gt');
-          if (min == '') {
-            min = undefined;
-          }
-          vdGt(ev.target,min);
-        });
-      }
+			function setDefVal(e,v) {
+				$(e).prop('defaultValue',v);
+			}
+			function setVal(e,v) {
+				$(e).val(v);
+				setDefVal(e,v);        
+			}
+			function vdGt(e,min=1) {
+				if(Number($(e).val()) >= min) {
+					e.defaultValue = $(e).val();
+				} else if (e.defaultValue >= min) {
+					$(e).val(e.defaultValue);          
+				} else {
+					$(e).val(min);
+				}
+			}
+			function setupVd() {
+				$('[data-vd-gt]').change(ev => {
+					let min = $(ev.target).attr('data-vd-gt');
+					if (min == '') {
+						min = undefined;
+					}
+					vdGt(ev.target,min);
+				});
+			}
 
-    //
-      function rnd(v,p=1) {
-        const m=Math.pow(10,p);
-        return $.isNumeric(v) ? Math.round(v*m)/m : v;
-      }
-      function em(t) {
-        return ` <em>(${t})</em>`;
-      }
-      function checked(e=pg()) {
-        return $(e).find(':checked');
-      }
-      function chk(e,v) {
-        $(e).prop('checked',v);
-      }
-      function nmGet(e) {
-        return $(e).attr('name');
-      }
-      function nmAll(e) {
-        return nm('',e);
-      }
-      function nm(nm,e=document) {
-        return $(e).find(`[name=${nm}]`.replace('=]',']'));              
-      }
-      function parIdx(e,a=0) {
-        return $(e).parent().index()+a;
-      }
-      function pparIdx(e,a=0) {
-        return parIdx($(e).parent(),a);
-      }
-      function dom(e) {
-        return $(e)[0];
-      }
-      function pg(s='') {
-        return $('#container '+s);
-      }
-      function setPumpStyle(m = 'append') {
-        nm('pump_style')[m]($('#tmp_pump').children().clone());
-	      nm('pump_style').children().first().prop('selected',true);
-      }
-      function flc(a) {    
-        return rnd(Bridge.estFLA(a));
-      }
-      function cvtArg(c) {
-        const d=$.extend({},c);
-        cvtObj(d,'flow',FLOW,'gpm');
-        cvtObj(d,'motor_rated_power',POWER,'hp');
-        //cvtObj(d,'motor_field_power',POWER,'kW');      
-        cvtObj(d,'head',DIST,'ft');
-        return d;    
-      }
-      function crunch(a) {        
-        const r = Bridge.results(a);
-        console.log(a);
-        for (var key in r) {
-          console.log(key,r[key][0]);  
-        }
-        ['Motor Rated Power','Motor Shaft Power','Pump Shaft Power'].forEach(function(e) {
-          cvtObj(r[e],[0,1],POWER,unit(POWER),'hp');
-        });
-        r['Motor Efficiency'][0]*=100;
-        r['Motor Power Factor'][0]*=100;
-        return r;
-      }
+		//
+			function rnd(v,p=1) {
+				const m=Math.pow(10,p);
+				return $.isNumeric(v) ? Math.round(v*m)/m : v;
+			}
+			function em(t) {
+				return ` <em>(${t})</em>`;
+			}
+			function checked(e=pg()) {
+				return $(e).find(':checked');
+			}
+			function chk(e,v) {
+				$(e).prop('checked',v);
+			}
+			function nmGet(e) {
+				return $(e).attr('name');
+			}
+			function nmAll(e) {
+				return nm('',e);
+			}
+			function nm(nm,e=document) {
+				return $(e).find(`[name=${nm}]`.replace('=]',']'));              
+			}
+			function parIdx(e,a=0) {
+				return $(e).parent().index()+a;
+			}
+			function pparIdx(e,a=0) {
+				return parIdx($(e).parent(),a);
+			}
+			function dom(e) {
+				return $(e)[0];
+			}
+			function pg(s='') {
+				return $('#container '+s);
+			}
+			function setPumpStyle(m = 'append') {
+				nm('pump_style')[m]($('#tmp_pump').children().clone());
+				nm('pump_style').children().first().prop('selected',true);
+			}
+			function flc(a) {    
+				return rnd(Bridge.estFLA(a));
+			}
+			function cvtArg(c) {
+				const d=$.extend({},c);
+				cvtObj(d,'flow',FLOW,'gpm');
+				cvtObj(d,'motor_rated_power',POWER,'hp');
+				//cvtObj(d,'motor_field_power',POWER,'kW');      
+				cvtObj(d,'head',DIST,'ft');
+				return d;    
+			}
+			function crunch(a) {        
+				const r = Bridge.results(a);
+				console.log(a);
+				for (var key in r) {
+					console.log(key,r[key][0]);  
+				}
+				['Motor Rated Power','Motor Shaft Power','Pump Shaft Power'].forEach(function(e) {
+					cvtObj(r[e],[0,1],POWER,unit(POWER),'hp');
+				});
+				r['Motor Efficiency'][0]*=100;
+				r['Motor Power Factor'][0]*=100;
+				return r;
+			}
 
-      function setData(d,e) {
-        nmAll(e).each(function(i,el) {
-          let v;
-          switch (el.type) {
-            case 'checkbox':
-              v = el.checked;
-              break;
-            case 'select-one':
-              v = $(el).children(':selected').index();
-              if ($(el).children().first().is(':disabled')) {
-                v--;
-              }
-              break;
-            case 'radio':
-              if ($(el).is(':checked')) {
-                v = $(el).val();
-              } 
-              break;
-            default:
-              v = $(el).val();
-          }
-          if (v!==undefined) {
-            d[nmGet(el)] = v;
-          }
-        });
-        return d; 
-      }     
-      function setCtls(d,el) {
-        nmAll(el).each((j,e)=>{
-          const ctl = $(e), v = d[nmGet(ctl)];
-          if (v===undefined) return;
-          switch (e.type) {
-            case 'checkbox':
-              e.checked = v;
-              break;
-            case 'select-one':
-              ctl.find('option')[v].selected = true;
-              break;
-            case 'radio':
-              chk(ctl,ctl.val()==v);
-              break;
-            default:
-              ctl.val(rnd(v));
-              setDefVal(ctl,v);
-          }
-          if (ctl.is('[data-init-chg]')) {
-            ctl.trigger('change');
-          }
-        });
-      }
+			function setData(d,e) {
+				nmAll(e).each(function(i,el) {
+					let v;
+					switch (el.type) {
+						case 'checkbox':
+							v = el.checked;
+							break;
+						case 'select-one':
+							v = $(el).children(':selected').index();
+							if ($(el).children().first().is(':disabled')) {
+								v--;
+							}
+							break;
+						case 'radio':
+							if ($(el).is(':checked')) {
+								v = $(el).val();
+							} 
+							break;
+						default:
+							v = $(el).val();
+					}
+					if (v!==undefined) {
+						d[nmGet(el)] = v;
+					}
+				});
+				return d; 
+			}     
+			function setCtls(d,el) {
+				nmAll(el).each((j,e)=>{
+					const ctl = $(e), v = d[nmGet(ctl)];
+					if (v===undefined) return;
+					switch (e.type) {
+						case 'checkbox':
+							e.checked = v;
+							break;
+						case 'select-one':
+							ctl.find('option')[v].selected = true;
+							break;
+						case 'radio':
+							chk(ctl,ctl.val()==v);
+							break;
+						default:
+							ctl.val(rnd(v));
+							setDefVal(ctl,v);
+					}
+					if (ctl.is('[data-init-chg]')) {
+						ctl.trigger('change');
+					}
+				});
+			}
 
-      FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
-        'm^3/s':15850.32316, 'ft^3/s':448.8311693, _num:0};
-      POWER = {kW:1.341022218, _num:1}
-      DIST = {m:3.280839895, _num:2};
-      PRESSURE = {kPa:0.145037738007,m:1.42197020632,ft:0.433527501928,_num:3};
+			FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
+				'm^3/s':15850.32316, 'ft^3/s':448.8311693, _num:0};
+			POWER = {kW:1.341022218, _num:1}
+			DIST = {m:3.280839895, _num:2};
+			PRESSURE = {kPa:0.145037738007,m:1.42197020632,ft:0.433527501928,_num:3};
 
-      function unit(m) {
-        return Units[m._num];
-      }
-      function cvtObj(d,nms,m,nu,old) {
-        $.makeArray(nms).forEach((nm)=>{
-          d[nm] = cvt(d[nm],m,nu,old);
-        });
-      }
-      function cvt(v,m,nu,old=unit(m)) {
-        if (m[old] != m[nu]) {
-          if ($.isNumeric(v)) {
-            if (m[old]) {
-              v *= m[old];
-            }
-            if (m[nu]) {
-              v /= m[nu];
-            }
-          }
-        }
-        return v;
-      }
-      function em(t) {
-        return ` <em>(${t})</em>`;
-      }
-      
-      function main() {
-        Nav = [];
-        go('main');
-      }
-      function back() {
-          Nav.pop();
-          loadPg();
-      }
-     function loadPg() {
-        pg().load(Nav[Nav.length-1]+'.html',function () {
-          let back=false,home=false;
-          if (Nav.length>1) {
-            back = true;
-            if (Nav.length>2) {
-              home = true;
-            }            
-          }
-          $('#back').toggle(back);
-          $('#home').toggle(home);
-        });       
-     }
-      function go(nm) {
-        Nav.push(nm);
-        loadPg();
-      }
+			function unit(m) {
+				return Units[m._num];
+			}
+			function cvtObj(d,nms,m,nu,old) {
+				$.makeArray(nms).forEach((nm)=>{
+					d[nm] = cvt(d[nm],m,nu,old);
+				});
+			}
+			function cvt(v,m,nu,old=unit(m)) {
+				if (m[old] != m[nu]) {
+					if ($.isNumeric(v)) {
+						if (m[old]) {
+							v *= m[old];
+						}
+						if (m[nu]) {
+							v /= m[nu];
+						}
+					}
+				}
+				return v;
+			}
+			function em(t) {
+				return ` <em>(${t})</em>`;
+			}
+			
+			function main() {
+				Nav = [];
+				go('main');
+			}
+			function back() {
+					Nav.pop();
+					loadPg();
+			}
+		 function loadPg() {
+				pg().load(Nav[Nav.length-1]+'.html',function () {
+					let back=false,home=false;
+					if (Nav.length>1) {
+						back = true;
+						if (Nav.length>2) {
+							home = true;
+						}            
+					}
+					$('#back').toggle(back);
+					$('#home').toggle(home);
+				});       
+		 }
+			function go(nm) {
+				Nav.push(nm);
+				loadPg();
+			}
 
-      function saveHd(d=HeadTool) {
-        saveProp('headTool',d);
-      }
-      function saveConds() {
-        saveProp('conditions',Conds);
-      }  
-      function loadProp(nm) {
-        return JSON.parse(LS.getItem(nm));
-      }
-      function saveProp(nm,v) {
-        LS.setItem(nm,JSON.stringify(v));
-      }
-      function save() {
-        saveProp('defCond',DefCond);
-        saveProp('units',Units);
-        saveProp('headTool',HeadTool);
-        saveProp('conditions',Conds);
-        saveProp('curve',Curve);
-        saveProp('motorPerf',MotorPerf);        
-      }
-      IMP = ['gpm','hp','ft','psig'];      
-      function loadData(reset) {
-        if (reset) {
-          DefCond = {
-            pump_style: 5,
-            pump_specified: 0,
-            pump_rated_speed: 1780,
-            drive: 0,
-            viscosity: 1,
-            specific_gravity: 1,
-            stages: 1,
-            fixed_speed: false,
-            line: 1,
-            motor_rated_power: 200,
-            motor_rated_speed: 1780,
-            efficiency_class: 0,
-            efficiency:75,
-            motor_rated_voltage: 460,
-            motor_rated_flc: 225.4,
-            margin: 0,
-            fraction: 100,
-            cost: .05,
-            flow: 2000,
-            head: 277,
-            //load_method: 0,
-            motor_field_power: 150,
-            motor_field_current: '',
-            motor_field_voltage: 460,
+			function saveHd(d=HeadTool) {
+				saveProp('headTool',d);
+			}
+			function saveConds() {
+				saveProp('conditions',Conds);
+			}  
+			function loadProp(nm) {
+				return JSON.parse(LS.getItem(nm));
+			}
+			function saveProp(nm,v) {
+				LS.setItem(nm,JSON.stringify(v));
+			}
+			function save() {
+				saveProp('defCond',DefCond);
+				saveProp('units',Units);
+				saveProp('headTool',HeadTool);
+				saveProp('conditions',Conds);
+				saveProp('curve',Curve);
+				saveProp('motorPerf',MotorPerf);        
+			}
+			IMP = ['gpm','hp','ft','psig'];      
+			function loadData(reset) {
+				if (reset) {
+					DefCond = {
+						pump_style: 5,
+						pump_specified: 0,
+						pump_rated_speed: 1780,
+						drive: 0,
+						viscosity: 1,
+						specific_gravity: 1,
+						stages: 1,
+						fixed_speed: false,
+						line: 1,
+						motor_rated_power: 200,
+						motor_rated_speed: 1780,
+						efficiency_class: 0,
+						efficiency:75,
+						motor_rated_voltage: 460,
+						motor_rated_flc: 225.4,
+						margin: 0,
+						fraction: 100,
+						cost: .05,
+						flow: 2000,
+						head: 277,
+						//load_method: 0,
+						motor_field_power: 150,
+						motor_field_current: '',
+						motor_field_voltage: 460,
 
-            grid: false       
-          };        
-          Units = IMP;
-          Conds = [];
-          HeadTool = {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1,Zs:0,Zd:0,Pg_s:115,Ztnk_s:0};  
-          Curve = {C:1.9,plot:[2000,277,2300,350]};
-          MotorPerf = {
-            line: 1,
-            motor_rated_power: 200,
-            motor_rated_speed: 1780,
-            efficiency_class: 0,
-            efficiency: 75,
-            motor_rated_voltage: 460,
-            flc: 225.4
-          };
-          save();        
-        }
-        Conds = loadProp('conditions');
-        Units = loadProp('units');
-        HeadTool = loadProp('headTool');
-        Curve = loadProp('curve'); 
-        MotorPerf = loadProp('motorPerf');
-        return (DefCond = loadProp('defCond'));
-      }
-      Dlg=require('electron').remote.dialog;
-      Bridge = require('./build/Release/bridge');
-      LS = localStorage;
-      $ = require('jquery');
+						grid: false       
+					};        
+					Units = IMP;
+					Conds = [];
+					HeadTool = {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1,Zs:0,Zd:0,Pg_s:115,Ztnk_s:0};  
+					Curve = {C:1.9,plot:[2000,277,2300,350]};
+					MotorPerf = {
+						line: 1,
+						motor_rated_power: 200,
+						motor_rated_speed: 1780,
+						efficiency_class: 0,
+						efficiency: 75,
+						motor_rated_voltage: 460,
+						flc: 225.4
+					};
+					save();        
+				}
+				Conds = loadProp('conditions');
+				Units = loadProp('units');
+				HeadTool = loadProp('headTool');
+				Curve = loadProp('curve'); 
+				MotorPerf = loadProp('motorPerf');
+				return (DefCond = loadProp('defCond'));
+			}
+			Dlg=require('electron').remote.dialog;
+			Bridge = require('./build/Release/bridge');
+			LS = localStorage;
+			$ = require('jquery');
 
-      if (!loadData()) {
-        loadData(true);
-      }
-      $(document).ready(function() {
-        main();
-      });
-    </script>
-  </body>
+			if (!loadData()) {
+				loadData(true);
+			}
+			$(document).ready(function() {
+				main();
+			});
+		</script>
+	</body>
 </html>
