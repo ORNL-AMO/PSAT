@@ -1,21 +1,21 @@
 <style>
-    label {
+	label {
 		font-size: .75rem;
 		font-style: italic;
-    }
-    #container div {
-        margin-bottom: .5rem;        
-    }
-    #resultTxt > * {
-        vertical-align: middle;
-    }
+	}
+	#container div {
+		margin-bottom: .5rem;        
+	}
+	#resultTxt > * {
+		vertical-align: middle;
+	}
 </style>
 
 <h1>NEMA Energy Efficiency</h1>
 <div>
-    Line Frequency <em>(Hz)</em>
-    <label><input name=line type=radio value=0> 50</label>
-    <label><input name=line type=radio value=1 checked> 60</label>
+	Line Frequency <em>(Hz)</em>
+	<label><input name=line type=radio value=0> 50</label>
+	<label><input name=line type=radio value=1 checked> 60</label>
 </div>
 <span id='lblMRP'>Motor Rated Power</span>
 <div><input name='motor_rated_power' value=200 data-vd-gt></div>
@@ -28,9 +28,9 @@ Efficiency Class
 <div id=resultTxt><span>TEFC: </span><span id=result></span><em> (%)</em></div>
 
 <script>
-    $('#lblMRP').append(em(unit(POWER)));    
+	$('#lblMRP').append(em(unit(POWER)));    
 
-    setupVd();
-    nmAll().change(() => $('#result').text(rnd(Bridge.nema(cvtArg(setData({efficiency:0}))))));
-    nmAll().first().change();
+	setupVd();
+	nmAll().change(() => $('#result').text(rnd(Bridge.nema(cvtArg(setData({efficiency:0}))))));
+	nmAll().first().change();
 </script>
