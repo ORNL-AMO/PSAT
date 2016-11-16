@@ -380,7 +380,7 @@
 			const col = $(`td:nth-child(${$(e).index()+1})`),
 				a = colArgs(col), r = crunch(a);
 			for (var key in r) {
-				const v0 = rnd(r[key][0]), v1 = rnd(r[key][1]);
+				const v0 = rnd(r[key][0]).toLocaleString(), v1 = rnd(r[key][1]).toLocaleString();
 				col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).html(
 					`<div>
 						<span ${key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
