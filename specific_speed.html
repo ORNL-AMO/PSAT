@@ -74,7 +74,7 @@
 	}
 	function calc() {
 		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) / Math.pow(nm('head').val(),.75);
-		$('#ss').text(rnd(ss));
+		$('#ss').text(rnd(ss).toLocaleString());
 		$('#ec').text(rnd(Bridge.achievableEfficiency(setData({
 			specific_speed: ss,
 		}))));

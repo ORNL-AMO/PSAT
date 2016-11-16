@@ -166,7 +166,7 @@
 		return v*v/2/g;
 	}
 	function r(txt,v) {
-		$(`#results~ tr>td:contains(${txt})`).next().next().text(rnd(v));
+		$(`#results~ tr>td:contains(${txt})`).next().next().text(rnd(v).toLocaleString());
 	}
 	function calc() {
         let flowU, distF, g;
