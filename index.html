@@ -129,7 +129,7 @@
 				for (let x=0; rnd(x,2)<=P.stepX*P.cntX; x+=P.stepX/100) {
 					const y = fn(P.xCvt(x));	          
 					if ( y <= P.stepY*P.cntY) {
-						//console.log(x+','+rnd(y));
+						//console.log(rnd(P.xCvt(x),2)+','+rnd(y,2));
 						P.ctx.lineTo(xPos(x), yPos(y));		
 					}		
 				}
