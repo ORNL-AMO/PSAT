@@ -31,10 +31,12 @@
 <a onclick='back();return false;' href=''>Back to Pump Conditions</a>
 <script>
 	setCtls(Cond);
-	
 	nmAll().change(function(){
 		setData(Cond);
 		saveConds();
 	});
+	if (Cond.comment == undefined) {
+		nmAll().first().change();
+	}
 </script>
 
