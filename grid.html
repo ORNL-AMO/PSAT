@@ -398,7 +398,7 @@
 					[100, 20000],//End suction slurry
 					[100, 52500],//End suction sewage  
 					[400, 2200],//End suction stock  
-					[100, 52500],// End suction submersible sewage 
+					[100, 52500],//End suction submersible sewage 
 					[400, 22000],//API double suction  
 					[100, 4000],//Multistage boiler feed 
 					[100, 5000],//End suction ANSI/API  
@@ -406,9 +406,11 @@
 					[200, 100000],//Double suction  
 					[200, 40000],//Vertical turbine  
 					[5000, 100000],//Large end suction//
-				];
-
-			hl(eFlow,eFlow.val()<2000 || eFlow.val()>2500);
+				],//todo cus pmp
+				mm = minMax[nm('pump_style',col).children(':selected').index()];
+			//if (mm) {
+				hl(eFlow,(mm ? true : false) && (eFlow.val()<mm[0] || eFlow.val()>mm[1]));
+			//}
 		});
 		showHdResults(true);
 	}
