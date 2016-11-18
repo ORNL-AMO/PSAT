@@ -61,22 +61,33 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		loadPg();
 		alert("Reset complete.");
 	}	
+	// function imprt() {
+	// 	Dlg.showOpenDialog(DlgFilter,
+	// 		function (fn) {
+	// 			if (fn ) {
+	// 				const 
+	// 					fs = require('fs'),
+	// 					lines=fs.readFileSync(fn[0],'utf8').split('\n'),
+	// 					hd=lines[1].split('\t').filter(e => e > 'Z' );
+	// 				Conds=[];
+	// 				[,DefCond,Units,HeadTool,Curve,MotorPerf]=JSON.parse(lines[0]);					
+	// 				lines.slice(2).forEach((ln,row)=>{
+	// 					Conds.push({});
+	// 					ln.split('\t').slice(0,hd.length).forEach((v,i)=>{
+	// 						Conds[row][hd[i]]=JSON.parse(v);
+	// 					});
+	// 				});
+	// 				save();
+	// 				loadPg();	
+	// 			}
+	// 		}
+	// 	); 
+	// }		
 	function imprt() {
 		Dlg.showOpenDialog(DlgFilter,
 			function (fn) {
 				if (fn ) {
-					const 
-						fs = require('fs'),
-						lines=fs.readFileSync(fn[0],'utf8').split('\n'),
-						hd=lines[1].split('\t').filter(e => e > 'Z' );
-					Conds=[];
-					[,DefCond,Units,HeadTool,Curve,MotorPerf]=JSON.parse(lines[0]);					
-					lines.slice(2).forEach((ln,row)=>{
-						Conds.push({});
-						ln.split('\t').slice(0,hd.length).forEach((v,i)=>{
-							Conds[row][hd[i]]=JSON.parse(v);
-						});
-					});
+					[,Units,HeadTool,Curve,MotorPerf,DefCond,Conds]=JSON.parse(require('fs').readFileSync(fn[0],'utf8'));					
 					save();
 					loadPg();	
 				}
@@ -87,7 +98,7 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		Dlg.showSaveDialog(DlgFilter,
 			function (fn) {
 				if (fn) {					
-					require('fs').writeFile(fn,JSON.stringify([0,DefCond,Units,HeadTool,Curve,MotorPerf,Conds]));				
+					require('fs').writeFile(fn,JSON.stringify([0,Units,HeadTool,Curve,MotorPerf,DefCond,Conds]));				
 				}
 		}); 
 	}
