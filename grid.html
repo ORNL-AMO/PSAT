@@ -394,6 +394,7 @@
 			vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
 			const 
 				eFlow = nm('flow',col),
+				v = cvt(eFlow.val(),FLOW,'gpm'),
 				minMax = [
 					[100, 20000],//End suction slurry
 					[100, 52500],//End suction sewage  
@@ -406,11 +407,9 @@
 					[200, 100000],//Double suction  
 					[200, 40000],//Vertical turbine  
 					[5000, 100000],//Large end suction//
-				],//todo cus pmp
+				],
 				mm = minMax[nm('pump_style',col).children(':selected').index()];
-			//if (mm) {
-				hl(eFlow,(mm ? true : false) && (eFlow.val()<mm[0] || eFlow.val()>mm[1]));
-			//}
+				hl(eFlow,(mm ? true : false) && (v<mm[0] || v>mm[1]));
 		});
 		showHdResults(true);
 	}
