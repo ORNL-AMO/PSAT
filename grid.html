@@ -392,6 +392,8 @@
 			}          
 			vdTol('motor_rated_flc',col,flc(a),.5);
 			vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
+			const eFlow = nm('flow',col);
+			hl(eFlow,eFlow.val()<2000 || eFlow.val()>2500);
 		});
 		showHdResults(true);
 	}
@@ -438,11 +440,7 @@
 		});    
 	});         
 	setupVd();
-	function vdCol(e) {
-		if (nm('flow',col(e)).val()=='2000') {
-
-		}
-	}
+		
 	nmAll('#grid').change(function() {
 		saveCol(this);
 		showHdResults(false);
