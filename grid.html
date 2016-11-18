@@ -358,10 +358,11 @@
 		col(e).remove();
 		$(e).parent().remove();
 	}
-	
+	function hl(e,tf=true) {
+		$(e).css('background-color',tf ? '#FECB00' : '');
+	}
 	function vdTol(n,col,v,tol) {
-		nm(n,col).css('background-color',
-			Math.abs(nm(n,col).val()-v)>tol*v ? '#FECB00' : '');
+		hl(nm(n,col),Math.abs(nm(n,col).val()-v) > tol*v);
 	}
 	function estFLC(e) {
 		nm('motor_rated_flc',col(e)).val(flc(colArgs(col(e))));
@@ -437,6 +438,11 @@
 		});    
 	});         
 	setupVd();
+	function vdCol(e) {
+		if (nm('flow',col(e)).val()=='2000') {
+
+		}
+	}
 	nmAll('#grid').change(function() {
 		saveCol(this);
 		showHdResults(false);
