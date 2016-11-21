@@ -264,7 +264,7 @@
 		<td>Optimization Rating</td>
 		<td></td>
 	</tr>
-	<tr class=th>
+	<tr id=sum class=th>
 		<td>Summary</td>
 		<td></td>
 	</tr>
@@ -411,6 +411,8 @@
 				mm = minMax[nm('pump_style',col).children(':selected').index()];
 				hl(eFlow,(mm ? true : false) && (v<mm[0] || v>mm[1]));
 		});
+		$(`td:nth-child(${$('th').length+1})`).remove();
+		$('#sum').append('<td>Total</td>');
 		showHdResults(true);
 	}
 
