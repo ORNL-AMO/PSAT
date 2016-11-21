@@ -281,7 +281,7 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td>Savings Potential</td>
+		<td><div>Savings Potential <em>($)</em></div></td>
 		<td></td>
 	</tr>
 </table>
@@ -416,7 +416,7 @@
 				hl(eFlow,(mm ? true : false) && (v<mm[0] || v>mm[1]));
 		});
 		$(`td:nth-child(${$('th').length+1})`).remove();
-		$('#sum').append('<td>Total</td>');
+		$('#sum').append('<td style="text-align:left">Total</td>');
 		$('#sum ~').each((i,e) => {
 			let sum = 0;
 			$(e).children(':gt(1)').each((i,e) => {sum += $(e).data('r')});
@@ -424,6 +424,7 @@
 		});
 		showHdResults(true);
 	}
+
 	function gotoHead(e) {
 		Cond = colCond(e);
 		go("headTool");
