@@ -77,7 +77,7 @@ void Results(const FunctionCallbackInfo<Value>& args) {
 		{"Motor Power", {ex.motorPower_,opt.motorPower_}},
 		{"Annual Energy", {ex.annualEnergy_,opt.annualEnergy_}},
 		{"Annual Cost", {ex.annualCost_*1000,opt.annualCost_*1000}},
-		{"Savings Potential", {psat.getAnnualSavingsPotential(),-1}},
+		{"Savings Potential", {psat.getAnnualSavingsPotential()*1000,-1}},
 		{"Optimization Rating", {psat.getOptimizationRating(),-1}}
 	};
 	for(auto p: out) {    
