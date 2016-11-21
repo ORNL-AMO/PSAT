@@ -418,9 +418,8 @@
 		$(`td:nth-child(${$('th').length+1})`).remove();
 		$('#sum').append('<td>Total</td>');
 		let sum = 0;
-		$('#sum').next().children(':gt(1)').each((i,e) => {debugger; sum += $(e).data('r')});
-		alert(sum);
-		$('#sum').next().append('<td>haha</td>');
+		$('#sum').next().children(':gt(1)').each((i,e) => {sum += $(e).data('r')});
+		$('#sum').next().append($('<td>').append(rnd(sum)));
 		showHdResults(true);
 	}
 
