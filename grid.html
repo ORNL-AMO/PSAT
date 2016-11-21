@@ -417,24 +417,12 @@
 		});
 		$(`td:nth-child(${$('th').length+1})`).remove();
 		$('#sum').append('<td>Total</td>');
-		$('#sum ~').each((i,e) => sum(e));
-		/*
-		let sum = 0;
-		$('#sum').next().children(':gt(1)').each((i,e) => {sum += $(e).data('r')});
-		$('#sum').next().append($('<td>').append(rnd(sum).toLocaleString()));
-		sum = 0;
-		$('#sum').next().next().children(':gt(1)').each((i,e) => {sum += $(e).data('r')});
-		$('#sum').next().next().append($('<td>').append(rnd(sum).toLocaleString()));
-		sum = 0;
-		$('#sum').next().next().next().children(':gt(1)').each((i,e) => {sum += $(e).data('r')});
-		$('#sum').next().next().next().append($('<td>').append(rnd(sum).toLocaleString()));
-		*/
+		$('#sum ~').each((i,e) => {
+			let sum = 0;
+			$(e).children(':gt(1)').each((i,e) => {sum += $(e).data('r')});
+			$(e).append($('<td>').append(rnd(sum).toLocaleString()));		
+		});
 		showHdResults(true);
-	}
-	function sum(e) {
-		let sum = 0;
-		$(e).children(':gt(1)').each((i,e) => {sum += $(e).data('r')});
-		$(e).append($('<td>').append(rnd(sum).toLocaleString()));		
 	}
 	function gotoHead(e) {
 		Cond = colCond(e);
