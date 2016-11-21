@@ -419,7 +419,11 @@
 		$('#sum').append('<td>Total</td>');
 		let sum = 0;
 		$('#sum').next().children(':gt(1)').each((i,e) => {sum += $(e).data('r')});
-		$('#sum').next().append($('<td>').append(rnd(sum)));
+		$('#sum').next().append($('<td>').append(rnd(sum).toLocaleString()));
+		sum = 0;
+		$('#sum').next().next().children(':gt(1)').each((i,e) => {sum += $(e).data('r')});
+		$('#sum').next().next().append($('<td>').append(rnd(sum).toLocaleString()));
+		
 		showHdResults(true);
 	}
 
