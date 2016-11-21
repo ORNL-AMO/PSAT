@@ -16,9 +16,8 @@
 <div style='display: inline-block'>
 	<h1>Pump Conditions</h1>
 	<ul style='font-style:italic'>
-		<li>Create and edit</li>
 		<li>Click to edit description</li>
-		<li>Select conditions and click <i class="fa fa-table"></i> to edit input parameters</li>		
+		<li>Select to edit input parameters or export</li>		
 	</ul>
 	<table id=cond>
 		<tr>
@@ -33,7 +32,10 @@
 	</table>
 	<p>
 		<button class=prime onclick='nu()'>NEW</button>
-		<button class=prime id=grid onclick='grid()'><i class="fa fa-table"></i></button>
+		<span id=grid>
+			<button class=prime onclick='grid()'>PARAMETERS</button>
+			<button>EXPORT</i></button>		
+		</span>
 		<button style='float:right' class=gt0 onclick='removeAll()'>REMOVE ALL</button>
 	</p>
 </div>
