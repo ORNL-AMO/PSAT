@@ -468,6 +468,11 @@
 			if (!loadData()) {
 				loadData(true);
 			}
+
+			function dlgFil(ext='json') {
+				return {filters: [{ name: 'PSAT', extensions: [ext] }]};
+			}			
+
 			$(document).ready(function() {
 				try {
 					Dlg=require('electron').remote.dialog;

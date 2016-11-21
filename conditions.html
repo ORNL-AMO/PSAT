@@ -34,7 +34,7 @@
 		<button class=prime onclick='nu()'>NEW</button>
 		<span id=grid>
 			<button class=prime onclick='grid()'>PARAMETERS</button>
-			<button>EXPORT</i></button>		
+			<button onclick='xprt()'>EXPORT</i></button>		
 		</span>
 		<button style='float:right' class=gt0 onclick='removeAll()'>REMOVE ALL</button>
 	</p>
@@ -83,6 +83,7 @@
 		saveConds();
 		loadPg();
 	}
+
 	function edit(e) {
 		Cond = Conds[parIdx(e,-2)];
 		go('notes');
@@ -97,6 +98,32 @@
 		saveConds();
 		go('notes');
 	}	
+
+	function xprt() {		
+		Dlg.showSaveDialog(dlgFil('csv'),
+			function (fn) {
+				if (fn) {					
+					let hd, lines;
+					Conds.forEach(function(c,i) {
+						const r = crunch(cvtArg(c));						
+						if (i==0) {
+							hd = Object.keys(Conds[0]).sort().concat(Object.keys(r).sort());
+							lines=[hd.join(',')];
+						}
+						if (c.grid) {
+							let o = $.extend({},r,c);
+							lines.push(
+								hd.map((nm,i)=> {
+									return JSON.stringify(o[nm]);
+								}).join(',')
+							);
+						}
+					});		
+					require('fs').writeFile(fn,lines.join('\n'));				
+				}
+		}); 
+	}
+	
 	function start() {
 		$.each(Conds,function(i,d) {		
 			const nu = $('#cond tr').first().clone();

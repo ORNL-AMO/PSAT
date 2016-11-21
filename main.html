@@ -84,7 +84,7 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 	// 	); 
 	// }		
 	function imprt() {
-		Dlg.showOpenDialog(DlgFilter,
+		Dlg.showOpenDialog(dlgFil(),
 			function (fn) {
 				if (fn ) {
 					[,Units,HeadTool,Curve,MotorPerf,DefCond,Conds]=JSON.parse(require('fs').readFileSync(fn[0],'utf8'));					
@@ -95,36 +95,14 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		); 
 	}		
 	function xprt() {		
-		Dlg.showSaveDialog(DlgFilter,
+		Dlg.showSaveDialog(dlgFil(),
 			function (fn) {
 				if (fn) {					
 					require('fs').writeFile(fn,JSON.stringify([0,Units,HeadTool,Curve,MotorPerf,DefCond,Conds]));				
 				}
 		}); 
 	}
-	// function xprt() {		
-	// 	Dlg.showSaveDialog(DlgFilter,
-	// 		function (fn) {
-	// 			if (fn) {					
-	// 				let hd, lines;
-	// 				Conds.forEach(function(c,i) {
-	// 					const r = crunch(cvtArg(c));						
-	// 					if (i==0) {
-	// 						hd = Object.keys(Conds[0]).sort().concat(Object.keys(r).sort());
-	// 						lines=[JSON.stringify([0,DefCond,Units,HeadTool,Curve,MotorPerf]),hd.join('\t')];
-	// 					}
-	// 					let o = $.extend({},r,c);
-	// 					lines.push(
-	// 						hd.map((nm,i)=> {
-	// 							return JSON.stringify(o[nm]);
-	// 						}).join('\t')
-	// 					);
-	// 				});		
-	// 				require('fs').writeFile(fn,lines.join('\n'));				
-	// 			}
-	// 	}); 
-	// }
 
-	DlgFilter={filters: [{ name: 'PSAT Data File', extensions: ['json'] }]};
+	
 	
 </script>
