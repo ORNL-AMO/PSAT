@@ -382,13 +382,17 @@
 				a = colArgs(col), r = crunch(a);
 			for (var key in r) {
 				const v0 = rnd(r[key][0]).toLocaleString(), v1 = rnd(r[key][1]).toLocaleString();
-				col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).html(
+				col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).each((i,e) => {
+					$(e).data('r',r[key][0]);
+					$(e).html(
 					`<div>
 						<span ${key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
 							${v0}
 						</span>
 						<span style='color:#5d9300'>${v1>-1 ? v1 : ''}</span>
-					</div>`);
+					</div>`
+					);
+				});
 			}          
 			vdTol('motor_rated_flc',col,flc(a),.5);
 			vdTol('motor_field_voltage',col,nm('motor_rated_voltage',col).val(),.1);
@@ -413,6 +417,10 @@
 		});
 		$(`td:nth-child(${$('th').length+1})`).remove();
 		$('#sum').append('<td>Total</td>');
+		let sum = 0;
+		$('#sum').next().children(':gt(1)').each((i,e) => {debugger; sum += $(e).data('r')});
+		alert(sum);
+		$('#sum').next().append('<td>haha</td>');
 		showHdResults(true);
 	}
 
