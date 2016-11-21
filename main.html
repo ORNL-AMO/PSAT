@@ -61,28 +61,6 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		loadPg();
 		alert("Reset complete.");
 	}	
-	// function imprt() {
-	// 	Dlg.showOpenDialog(DlgFilter,
-	// 		function (fn) {
-	// 			if (fn ) {
-	// 				const 
-	// 					fs = require('fs'),
-	// 					lines=fs.readFileSync(fn[0],'utf8').split('\n'),
-	// 					hd=lines[1].split('\t').filter(e => e > 'Z' );
-	// 				Conds=[];
-	// 				[,DefCond,Units,HeadTool,Curve,MotorPerf]=JSON.parse(lines[0]);					
-	// 				lines.slice(2).forEach((ln,row)=>{
-	// 					Conds.push({});
-	// 					ln.split('\t').slice(0,hd.length).forEach((v,i)=>{
-	// 						Conds[row][hd[i]]=JSON.parse(v);
-	// 					});
-	// 				});
-	// 				save();
-	// 				loadPg();	
-	// 			}
-	// 		}
-	// 	); 
-	// }		
 	function imprt() {
 		Dlg.showOpenDialog(dlgFil(),
 			function (fn) {
