@@ -414,6 +414,13 @@
 				],
 				mm = minMax[nm('pump_style',col).children(':selected').index()];
 				hl(eFlow,(mm ? true : false) && (v<mm[0] || v>mm[1]));
+				const rpmFld = nm('motor_rated_speed',col);
+				hl(rpmFld,
+					[ [3000, 1500, 1000, 750, 500],[3600, 1800, 1200, 900, 720, 600] ]
+						[$(e).data('cond').line].filter(r => 
+							rpmFld.val() >= .9*r && rpmFld.val() <= r).length == 0);
+				
+
 		});
 		$(`td:nth-child(${$('th').length+1})`).remove();
 		$('#sum').append('<td style="text-align:left">Total</td>');
