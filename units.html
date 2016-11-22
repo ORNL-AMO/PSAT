@@ -157,6 +157,11 @@
 			nu[$('#units select').index(this)]=$(this).val();
 			chgUnits(nu);
 		});		
+		$('table input').eq(0).val(rnd(cvt(2000,FLOW,unit(FLOW),'gpm')));
+		$('table input').eq(1).val(rnd(cvt(200,POWER,unit(POWER),'hp')));
+		$('table input').eq(2).val(rnd(cvt(100,DIST,unit(DIST),'ft')));
+		$('table input').eq(3).val(rnd(cvt(5,PRESSURE,unit(PRESSURE),'psig')));
+		
 	}
 	start();
 </script>
