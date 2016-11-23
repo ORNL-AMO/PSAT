@@ -12,9 +12,6 @@
 		color: #5d9300;
 		padding-right: 1rem;
 	}
-	#zunits td:nth-child(4), #zunits th:nth-child(4) {
-		display: none;
-	}
 	#units th:nth-child(n+2),#units td:nth-child(n+2) {
 		padding-right: 1rem;
 		padding-left: 1rem;
@@ -24,6 +21,9 @@
 	}
 	th {
 		text-align: left;
+	}
+	input:not([type]) {
+		width: 4rem;
 	}
 </style>
 <div style='display: inline-block'>
@@ -137,9 +137,11 @@
 		switch (Units.toString()) {
 			case IMP.toString():
 				i=0;
+				lastCol.hide();
 				break;
 			case met.toString():
 				i=1;
+				lastCol.hide();
 				break;
 			default:
 				i=2;
@@ -176,7 +178,8 @@
 		]
 		setCtls(UnitExample);
 		$('table input').change(ev => {
-			UnitExample[$(ev.target).attr('name')] = $(ev.target).val();			
+			setData(UnitExample,$(ev.target).parent());
+			//UnitExample[$(ev.target).attr('name')] = $(ev.target).val();			
 		});
 	}
 	start();
