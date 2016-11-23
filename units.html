@@ -109,8 +109,26 @@
 		chg(FLOW, Curve, [0,2]);
 		chg(DIST, Curve, [1,3]);
 		chg(POWER,MotorPerf,'motor_rated_power');
+		
+		$('table input').eq(0).val(rnd(cvt(UnitExample[0],FLOW,nunits[FLOW._num])));
+		$('table input').eq(1).val(rnd(cvt(UnitExample[1],POWER,nunits[POWER._num])));
+		$('table input').eq(2).val(rnd(cvt(UnitExample[2],DIST,nunits[DIST._num])));
+		$('table input').eq(3).val(rnd(cvt(UnitExample[3],PRESSURE,nunits[PRESSURE._num])));
+		
+		UnitExample = [
+			cvt(UnitExample[0],FLOW,nunits[FLOW._num]),
+			cvt(UnitExample[1],POWER,nunits[POWER._num]),
+			cvt(UnitExample[2],DIST,nunits[DIST._num]),
+			cvt(UnitExample[3],PRESSURE,nunits[PRESSURE._num])
+		]
+		$('table input').eq(0).val(rnd(UnitExample[0]));
+		$('table input').eq(1).val(rnd(UnitExample[1]));
+		$('table input').eq(2).val(rnd(UnitExample[2]));
+		$('table input').eq(3).val(rnd(UnitExample[3]));
+		
 		Units = nunits;
 		save();
+
 	}
 	function shade(n) {
 		$('td').removeClass('shade');
@@ -160,11 +178,19 @@
 			nu[$('#units select').index(this)]=$(this).val();
 			chgUnits(nu);
 		});		
-		$('table input').eq(0).val(rnd(cvt(2000,FLOW,unit(FLOW),'gpm')));
-		$('table input').eq(1).val(rnd(cvt(200,POWER,unit(POWER),'hp')));
-		$('table input').eq(2).val(rnd(cvt(100,DIST,unit(DIST),'ft')));
-		$('table input').eq(3).val(rnd(cvt(5,PRESSURE,unit(PRESSURE),'psig')));
-		
+		UnitExample = [
+			cvt(2000,FLOW,unit(FLOW),'gpm'),
+			cvt(200,POWER,unit(POWER),'hp'),
+			cvt(100,DIST,unit(DIST),'ft'),
+			cvt(5,PRESSURE,unit(PRESSURE),'psig')
+		]
+		$('table input').eq(0).val(rnd(UnitExample[0]));
+		$('table input').eq(1).val(rnd(UnitExample[1]));
+		$('table input').eq(2).val(rnd(UnitExample[2]));
+		$('table input').eq(3).val(rnd(UnitExample[3]));
+		$('table input').change(ev => {
+			UnitExample[$('table input').index(ev.target)] = $(ev.target).val();			
+		});
 	}
 	start();
 </script>
