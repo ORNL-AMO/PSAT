@@ -49,19 +49,19 @@
 <script>//# sourceURL=*pump_eff
 	function plot() {
 		Cnv.width+=0;
-		let lblTxt = 'U.S.', 
-			m = 1, 
-			d = setData({});
+		let lblTxt = 'U.S.', m = 1;
 		if (unit(DIST) == 'm') {
 			lblTxt = 'metric';
 			m = 3472 / 4033;
 		} 
-		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) / Math.pow(nm('head').val(),.75),
-			ec = Bridge.achievableEfficiency(setData({
-				specific_speed: ss * m,
+		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) / Math.pow(nm('head').val(),.75);
+		function ec(x) {
+			return Bridge.achievableEfficiency(setData({
+				specific_speed: x * m,
 			}));
+		}
 		$('#ss').text(rnd(ss).toLocaleString());
-		$('#ec').text(rnd(ec));
+		$('#ec').text(rnd(ec(ss)));
 
 		P = {
 			cnv: Cnv,
@@ -74,14 +74,11 @@
 			cntY: 6
 		};
 		setupPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
-		curve(x => 
-			Bridge.achievableEfficiency($.extend({
-				specific_speed: x * m,
-			},d)));
-		
+		curve(ec);
+
 		P.ctx.beginPath();
 		P.ctx.fillStyle = '#1F82BB';
-		P.ctx.arc(xPos(Math.log10(ss/100)), yPos(ec),6,0,2*Math.PI,false);
+		P.ctx.arc(xPos(Math.log10(ss/100)), yPos(ec(ss)),6,0,2*Math.PI,false);
 		P.ctx.fill();
 	}	 
 
