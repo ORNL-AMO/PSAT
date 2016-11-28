@@ -15,7 +15,9 @@
 	select,input {
 		margin-bottom: .5rem;
 	}
-}
+	#ss,#ec {
+		color: #1F82BB;
+	}
 </style>
 <div>
 	<h1>Specific Speed</h1>
@@ -31,7 +33,7 @@
 			<input name='flow' value=2000 data-vd-gt><br>
 			<label id=lbl_hd>Head</label>
 			<input name='head' value=277 data-vd-gt><br>
-			<button id=plot_btn class=prime onclick='calc()'>CALCULATE</button>
+			<button id=plot_btn class=prime onclick='plot()'>PLOT</button>
 		</div>
 		<div id=plot>
 			<canvas width="700" height="500"></canvas>
@@ -46,6 +48,13 @@
 
 <script>//# sourceURL=*pump_eff
 	function plot() {
+		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) / Math.pow(nm('head').val(),.75);
+		$('#ss').text(rnd(ss).toLocaleString());
+		$('#ec').text(rnd(Bridge.achievableEfficiency(setData({
+			specific_speed: ss,
+		}))));
+		Cnv.width+=0;
+
 		P = {
 			cnv: Cnv,
 			padX: 25,
@@ -70,21 +79,13 @@
 			Bridge.achievableEfficiency($.extend({
 				specific_speed: x * m,
 			},d)));
-			
-	}
-	function calc() {
-		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) / Math.pow(nm('head').val(),.75);
-		$('#ss').text(rnd(ss).toLocaleString());
-		$('#ec').text(rnd(Bridge.achievableEfficiency(setData({
-			specific_speed: ss,
-		}))));
-		Cnv.width+=0;
-		plot();			
+		
 		P.ctx.beginPath();
-		//P.ctx.moveTo(xPos(0), yPos(2));	
-		P.ctx.arc(xPos(1), yPos(2),30,0,2*Math.PI,false);
-		//P.ctx.closePath();
-		P.ctx.stroke();
+		P.ctx.fillStyle = '#1F82BB';
+		P.ctx.arc(xPos(Math.log10(ss/100)), yPos(Bridge.achievableEfficiency(setData({
+			specific_speed: ss,
+		}))),6,0,2*Math.PI,false);
+		P.ctx.fill();
 	}	 
 	Cnv = dom('canvas');
 	
