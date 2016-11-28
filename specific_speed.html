@@ -79,7 +79,12 @@
 			specific_speed: ss,
 		}))));
 		Cnv.width+=0;
-		plot();				
+		plot();			
+		P.ctx.beginPath();
+		//P.ctx.moveTo(xPos(0), yPos(2));	
+		P.ctx.arc(xPos(1), yPos(2),30,0,2*Math.PI,false);
+		//P.ctx.closePath();
+		P.ctx.stroke();
 	}	 
 	Cnv = dom('canvas');
 	
