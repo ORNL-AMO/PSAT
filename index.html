@@ -368,10 +368,10 @@
 				go('main');
 			}
 			function back() {
-					Nav.pop();
-					loadPg();
+					loadPg(Nav.pop());
 			}
-		 function loadPg() {
+			function loadPg(bf) {
+				BackFrom = bf;
 				pg().load(Nav[Nav.length-1]+'.html',function () {
 					let back=false,home=false;
 					if (Nav.length>1) {
@@ -383,7 +383,7 @@
 					$('#back').toggle(back);
 					$('#home').toggle(home);
 				});       
-		 }
+			}
 			function go(nm) {
 				Nav.push(nm);
 				loadPg();
