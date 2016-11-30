@@ -435,9 +435,6 @@
 				const v0 = rnd(r[key][0]).toLocaleString(), v1 = rnd(r[key][1]).toLocaleString();
 				col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).each((i,e) => {
 					$(e).data('r',r[key][0]);
-					if (key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val()) {
-						$('h2').show();
-					}
 					$(e).html($('<div>').append(hl($('<span>').append(v0),key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val()))
 						.append($('<span>').css('color','#5d9300').append(v1>-1 ? v1 : '')));
 				});
