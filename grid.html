@@ -38,7 +38,15 @@
 	tr:nth-child(even) {
 		background-color: #C3C8C8;
 	}
+
+	h2 {
+		background-color:#FECB00;
+		text-align:center;
+		display: none;
+	}
 </style>
+<div style='display:inline-block'>
+<h2 value='OUT OF RANGE VALUES'>OUT OF RANGE VALUES</h2>
 <table id=grid>
 	<tr>
 		<th style='vertical-align: bottom'>Pump</th>
@@ -288,6 +296,8 @@
 <p>
 	<button onclick="results(true)">RESULTS</button>
 </p>
+<h2 value='OUT OF RANGE VALUES'>OUT OF RANGE VALUES</h2>
+</div>
 <dialog id='io'>
 	<label>
 		<input name=saveopt type="radio"> Reset to default
