@@ -406,6 +406,7 @@
 		} else {
 			$(e).removeClass('err');
 		}
+		return e;
 	}
 	function vdTol(n,col,v,tol) {
 		hl(nm(n,col),Math.abs(nm(n,col).val()-v) > tol*v);
@@ -437,19 +438,8 @@
 					if (key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val()) {
 						$('h2').show();
 					}
-					const spn = $('<span>').append(v0);
-					$(e).html($('<div>').append(spn).append($('<span>').css('color','#5d9300').append(v1>-1 ? v1 : '')));
-
-					hl(spn,key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val());
-					
-				// 	$(e).html(
-				// 	`<div>
-				// 		<span ${key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val() ? 'class=err' : ''}>
-				// 			${v0}
-				// 		</span>
-				// 		<span style='color:#5d9300'>${v1>-1 ? v1 : ''}</span>
-				// 	</div>`
-				// 	);
+					$(e).html($('<div>').append(hl($('<span>').append(v0),key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val()))
+						.append($('<span>').css('color','#5d9300').append(v1>-1 ? v1 : '')));
 				});
 			}          
 			vdTol('motor_rated_flc',col,flc(a),.5);
