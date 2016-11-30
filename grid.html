@@ -397,6 +397,9 @@
 	}
 	function hl(e,tf=true) {
 		$(e).css('background-color',tf ? '#FECB00' : '');
+		if (tf) {
+			$('h2').show();
+		}
 	}
 	function vdTol(n,col,v,tol) {
 		hl(nm(n,col),Math.abs(nm(n,col).val()-v) > tol*v);
@@ -414,6 +417,7 @@
 		return cvtArg(col.data('cond'));    
 	}
 	function results() {
+		$('h2').hide();
 		$('th:gt(1)').each((i,e)=>{
 			const col = $(`td:nth-child(${$(e).index()+1})`),
 				a = colArgs(col), r = crunch(a);
