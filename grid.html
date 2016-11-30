@@ -44,6 +44,10 @@
 		text-align:center;
 		display: none;
 	}
+
+	.err {
+		background-color: #FECB00
+	}
 </style>
 <div style='display:inline-block'>
 <h2 value='OUT OF RANGE VALUES'>OUT OF RANGE VALUES</h2>
@@ -396,9 +400,11 @@
 		$(e).parent().remove();
 	}
 	function hl(e,tf=true) {
-		$(e).css('background-color',tf ? '#FECB00' : '');
 		if (tf) {
+			$(e).addClass('err');
 			$('h2').show();
+		} else {
+			$(e).removeClass('err');
 		}
 	}
 	function vdTol(n,col,v,tol) {
@@ -412,12 +418,15 @@
 	function showHdResults(show=false) {
 		$('#results,#results~tr').toggle(show);
 		$('p button').toggle(!show);
+		if (!show) {
+			$('h2').hide();
+			$('.err').removeClass('err');
+		}
 	}
 	function colArgs(col) {
 		return cvtArg(col.data('cond'));    
 	}
 	function results() {
-		$('h2').hide();
 		$('th:gt(1)').each((i,e)=>{
 			const col = $(`td:nth-child(${$(e).index()+1})`),
 				a = colArgs(col), r = crunch(a);
@@ -425,9 +434,12 @@
 				const v0 = rnd(r[key][0]).toLocaleString(), v1 = rnd(r[key][1]).toLocaleString();
 				col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).each((i,e) => {
 					$(e).data('r',r[key][0]);
+					if (key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val()) {
+						$('h2').show();
+					} 
 					$(e).html(
 					`<div>
-						<span ${key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val() ? 'style=background-color:#FECB00' : ''}>
+						<span ${key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val() ? 'class=err' : ''}>
 							${v0}
 						</span>
 						<span style='color:#5d9300'>${v1>-1 ? v1 : ''}</span>
