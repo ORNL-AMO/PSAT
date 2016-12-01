@@ -115,7 +115,7 @@
 							let o = $.extend({},r,c);
 							lines.push(
 								hd.map((nm,i)=> {
-									return JSON.stringify(o[nm]);
+									return JSON.stringify(o[nm]).replace(/,/g,'; ').replace(/\[|\]/g,'');
 								}).join(',')
 							);
 						}
