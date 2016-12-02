@@ -105,7 +105,7 @@ void MotorPerformance(const FunctionCallbackInfo<Value>& args) {
 	
 	MotorCurrent mc(Get("motor_rated_power"),Get("motor_rated_speed"),line(),effCls(),Get("efficiency"),Get("load_factor"),Get("motor_rated_voltage"),Get("flc"));
 	auto mcVal = mc.calculate();
-	SetR("current",mcVal/225.8*100);  
+	SetR("current",mcVal/Get("flc")*100);  
 	
 	MotorPowerFactor pf(Get("motor_rated_power"),Get("load_factor"),mcVal,mefVal,Get("motor_rated_voltage"));
 	SetR("pf",pf.calculate()*100);  
