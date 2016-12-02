@@ -464,7 +464,8 @@
 			}
 			LS = localStorage;
 			$ = require('jquery');
-			$('title').append(` v${process.env.npm_package_version}`);
+			Remote = require('electron').remote;
+			$('title').append(` v${Remote.app.getVersion()}`);
 			if (!loadData()) {
 				loadData(true);
 			}
@@ -481,7 +482,7 @@
 					main();
 				} catch (e) {
 					alert(e);
-					require('electron').remote.getCurrentWindow().close();
+					Remote.getCurrentWindow().close();
 				}
 				
 			});
