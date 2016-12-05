@@ -2,11 +2,11 @@
   	"targets": [
 		{
 	    	"target_name": "bridge",
-	    	'include_dirs': ['../amo-library/include'],
+	    	'include_dirs': ['../AMO-Tools-Suite/include'],
 			'sources' : [
 				'bridge.cpp',
-				"<!@(node -e \"console.log(require('fs').readdirSync('../amo-library/src/').map(f=>'../amo-library/src/'+f).join(' '))\")",
-				"<!@(node -e \"console.log(require('fs').readdirSync('../amo-library/src/calculator/').map(f=>'../amo-library/src/calculator/'+f).join(' '))\")"
+				"<!@(node -e \"console.log(require('fs').readdirSync('../AMO-Tools-Suite/src/').map(f=>'../AMO-Tools-Suite/src/'+f).join(' '))\")",
+				"<!@(node -e \"console.log(require('fs').readdirSync('../AMO-Tools-Suite/src/calculator/').map(f=>'../AMO-Tools-Suite/src/calculator/'+f).join(' '))\")"
 			],
 			#"cflags": ["-Wall","-std=c++11"],  
 			"conditions": [ 
