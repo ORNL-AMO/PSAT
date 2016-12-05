@@ -2,10 +2,12 @@
 #include <vector>
 #include <map>
 #include <node.h>
+#include <cmath>
 
 #include "PSATResult.h"
 #include "calculator/EstimateFLA.h"
 #include "calculator/MotorCurrent.h"
+#include "calculator/MotorEfficiency.h"
 #include "calculator/MotorPowerFactor.h"
 #include "calculator/OptimalPrePumpEff.h"
 #include "calculator/OptimalSpecificSpeedCorrection.h"
