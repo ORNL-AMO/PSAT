@@ -377,7 +377,7 @@
 	}
 	function io(dlg) {    
 		let e = dlg.data('src');
-		if(parIdx(checked(dlg))==0) {
+		if(parIdx(dlg.find(':checked'))==0) {
 			setCtls(DefCond,col(e));
 			saveCol(e);
 			showHdResults()
