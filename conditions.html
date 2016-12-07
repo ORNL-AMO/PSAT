@@ -41,6 +41,9 @@
 	</p>
 </div>
 <script>
+
+// list
+
 	function listIdx(e) {
 		return parIdx(e.parentElement,-2);
 	}
@@ -52,6 +55,9 @@
 		saveConds();
 		setGridBtn();
 	}
+
+// grid
+
 	function setGrid(e) {
 		Conds[listIdx(e)].grid = e.checked;
 		saveConds();
@@ -67,6 +73,9 @@
 			$('#grid').hide();
 		}
 	}
+
+// crud
+
 	function rm(e) {
 		Conds.splice(listIdx(e),1);
 		saveConds();
@@ -84,7 +93,6 @@
 		saveConds();
 		loadPg();
 	}
-
 	function edit(e) {
 		Cond = Conds[parIdx(e,-2)];
 		go('notes');
@@ -99,6 +107,8 @@
 		saveConds();
 		go('notes');
 	}	
+
+// 
 
 	function xprt() {		
 		Dlg.showSaveDialog(dlgFil('csv'),
@@ -126,21 +136,21 @@
 					require('fs').writeFile(fn,lines.join('\n'));				
 				}
 		}); 
-	}
-	
-	function start() {
-		$.each(Conds,function(i,d) {		
-			const nu = $('#cond tr').first().clone();
-			nu.children().eq(1).text(d.name);
-			chk(nu.find(':checkbox'),d.grid);
-			$('#cond').append(nu);		  
+	}	
 
-		});		
-		if (Conds.length==0) {
-			$('#cond').html('<span style="font-style:italic">None</span>');
-			$('.gt0').hide();
-		}		
-		setGridBtn();
-	}
-	start();
+// 
+
+	$.each(Conds,function(i,d) {		
+		const nu = $('#cond tr').first().clone();
+		nu.children().eq(1).text(d.name);
+		chk(nu.find(':checkbox'),d.grid);
+		$('#cond').append(nu);		  
+
+	});		
+	if (Conds.length==0) {
+		$('#cond').html('<span style="font-style:italic">None</span>');
+		$('.gt0').hide();
+	}		
+	setGridBtn();
+
 </script>
