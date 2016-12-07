@@ -46,6 +46,7 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 	<a onclick='lnk(event,"motor_perf")' href=''>Motor Performance</a><br>
 	<a onclick='lnk(event,"specific_speed")' href=''>Specific Speed</a><br>
 	<a onclick='lnk(event,"nema")' href=''>NEMA Energy Efficiency</a><br>	
+	<a onclick='gotoHT()' href=''>Head Tool</a><br>
 </ul>
 
 <strong>Information</strong>
@@ -57,6 +58,10 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 	<li style='margin-bottom:1rem'><a onclick='lnk(event,"losses")' href=''>System Losses</a></li>	
 </ul>
 <script>
+	function gotoHT() {
+		Cond = {flow: cvt(2000,FLOW,unit(FLOW),'gpm'), specific_gravity: 1};
+		lnk(event,"headtool");
+	}
 	function reset() {
 		loadData(true);
 		loadPg();
