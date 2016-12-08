@@ -26,74 +26,74 @@
 		width: 4rem;
 	}
 </style>
-<div style='display: inline-block'>
-	<h1>Units</h1>
-	<div id="units">
-		<label><input type=radio name=unit_sys></input> Imperial</label>
-		<label><input type=radio name=unit_sys></input> Metric</label>
-		<label><input type=radio name=unit_sys></input> Custom</label>
-		<p>
-		<table>
-			<tr>
-				<th></th>
-				<th>Imperial</th>
-				<th>Metric</th>
-				<th>Custom</th>
-				<th>Example</th>
-			</tr>
-			<tr>
-				<td>Flow</td>
-				<td>gpm</td>
-				<td>m^3/hr</td>
-				<td>
-					<select>
-						<option>gpm</option>
-						<option>MGD</option>
-						<option>m^3/hr</option>
-						<option>L/s</option>
-					</select>
-				</td>
-				<td><input name=0></td>
-			</tr>
-			<tr>
-				<td>Power</td>
-				<td>hp</td>
-				<td>kW</td>
-				<td>
-					<select>
-						<option>hp</option>
-						<option>kW</option>				
-					</select>
-				</td>
-				<td><input name=1></td>
-			</tr>
-			<tr>
-				<td>Distance</td>
-				<td>ft</td>
-				<td>m</td>
-				<td>
-					<select>
-						<option>ft</option>
-						<option>m</option>
-					</select>
-				</td>
-				<td><input name=2></td>
-			</tr>
-			<tr>
-				<td>Pressure</td>
-				<td>psig</td>
-				<td>kPa</td>
-				<td>
-					<select>
-						<option>psig</option>
-						<option>kPa</option>
-					</select>
-				</td>
-				<td><input name=3></td>
-			</tr>
-		</table>
-	</div>
+
+<h1>Units</h1>
+<div id="units">
+	<label><input type=radio name=unit_sys></input> Imperial</label>
+	<label><input type=radio name=unit_sys></input> Metric</label>
+	<label><input type=radio name=unit_sys></input> Custom</label>
+	<p>
+	<table>
+		<tr>
+			<th></th>
+			<th>Imperial</th>
+			<th>Metric</th>
+			<th>Custom</th>
+			<th>Example</th>
+		</tr>
+		<tr>
+			<td>Flow</td>
+			<td>gpm</td>
+			<td>m^3/hr</td>
+			<td>
+				<select>
+					<option>gpm</option>
+					<option>MGD</option>
+					<option>m^3/hr</option>
+					<option>L/s</option>
+				</select>
+			</td>
+			<td><input name=0></td>
+		</tr>
+		<tr>
+			<td>Power</td>
+			<td>hp</td>
+			<td>kW</td>
+			<td>
+				<select>
+					<option>hp</option>
+					<option>kW</option>				
+				</select>
+			</td>
+			<td><input name=1></td>
+		</tr>
+		<tr>
+			<td>Distance</td>
+			<td>ft</td>
+			<td>m</td>
+			<td>
+				<select>
+					<option>ft</option>
+					<option>m</option>
+				</select>
+			</td>
+			<td><input name=2></td>
+		</tr>
+		<tr>
+			<td>Pressure</td>
+			<td>psig</td>
+			<td>kPa</td>
+			<td>
+				<select>
+					<option>psig</option>
+					<option>kPa</option>
+				</select>
+			</td>
+			<td><input name=3></td>
+		</tr>
+	</table>
 </div>
+
 <script>
 	function chgUnits(nunits) {
 		function chg(m,...args) {
