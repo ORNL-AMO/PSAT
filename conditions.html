@@ -28,7 +28,7 @@
 			<td><button onclick='cp(this)'><i class="fa fa-plus"></i></button></td>
 		</tr>
 		<tr>
-			<td><input class=gt0 type="checkbox" checked onclick='chkAll(this)'></input></td>
+			<td><input type="checkbox" checked onclick='chkAll(this)'></input></td>
 		</tr>
 	</table>
 	<p>
@@ -37,7 +37,7 @@
 			<button class=prime onclick='grid()'>PARAMETERS</button>
 			<button onclick='xprt()'>EXPORT</i></button>		
 		</span>
-		<button style='float:right' class=gt0 onclick='removeAll()'>REMOVE ALL</button>
+		<button style='float:right' onclick='removeAll()'>REMOVE ALL</button>
 	</p>
 </div>
 <script>
@@ -149,7 +149,7 @@
 	});		
 	if (Conds.length==0) {
 		$('#cond').html('<span style="font-style:italic">None</span>');
-		$('.gt0').hide();
+		pg('button:gt(0)').hide();
 	}		
 	setGridBtn();
 
