@@ -416,7 +416,6 @@
 			$('h2').hide();
 			$('.err').removeClass('err');
 		}
-		GridResultsShow = show;
 	}
 	function colArgs(col) {
 		return cvtArg(col.data('cond'));    
@@ -519,9 +518,4 @@
 		showHdResults(false);
 	});
 
-	if (BackFrom == 'curve' && window['GridResultsShow']) {
-		results();
-	} else {
-		delete GridResultsShow;
-	}
 </script>
