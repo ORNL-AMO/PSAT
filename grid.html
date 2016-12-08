@@ -172,7 +172,7 @@
 	</tr>
 	<tr>
 		<td>
-			<div>Energy Cost<em>($/kwhr)</em></td>
+			<div>Energy Cost<em>($/kwhr)</em></div></td>
 		<td><input name='cost' data-vd-gt=0></td>
 	</tr>
 	<tr>
@@ -186,7 +186,7 @@
 	</tr>
 	<tr>
 		<td>
-			<div>Head</div>
+			<div><span class=flxwd>Head<button style='margin-left: .25rem' class=prime onclick='go("curve")'><i class="fa fa-line-chart"/></button></span></div>
 		</td>
 		<td>
 			<input name='head' data-vd-gt>
@@ -212,14 +212,7 @@
 		<td><input name='motor_field_voltage' data-vd-gt></td>
 	</tr>
 	<tr id=results>
-		<td class='th'>
-			<div style='justify-content:center'>
-				Results
-				<button style='margin-left:.5rem' onclick='go("curve")'>
-					<i class="fa fa-line-chart"/>
-				</button>
-			</div>
-		</td>
+		<td class='th'>Results</td>
 		<td>
 			<div style='color:#5d9300;'><span>Actual</span><span>Optimal</span></div>
 		</td>
