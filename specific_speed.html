@@ -70,7 +70,8 @@
 			xCvt: x => 100*Math.pow(10,x),
 			padY: 50,
 			stepY: 1,
-			cntY: 6
+			cntY: 6,
+			yMax: x => x > 1.5 ? 3 : 6
 		};
 		setupPlot(`Specific Speed (${lblTxt})`,'Efficiency Correction (%)');
 		curve(ec);
