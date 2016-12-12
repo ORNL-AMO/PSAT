@@ -108,7 +108,16 @@
 		<div id=container></div>
 		<script>
 		
-		// canvas
+			function dlgFil(ext='psat') {
+				return {filters: [{ name: 'PSAT', extensions: [ext] }]};
+			}			
+		
+			function rnd(v,p=1) {
+				const m=Math.pow(10,p);
+				return $.isNumeric(v) ? Math.round(v*m)/m : v;
+			}
+
+		// plot
 
 			function xPos(x) {
 				return x*(P.cnv.width-P.padX*2)/(P.stepX*P.cntX)+P.padX;
@@ -187,13 +196,27 @@
 				ctx.lineWidth = 2;
 				return ctx;
 			}
-		//
-			function lnk(e,nm) {
-				e.preventDefault();
-				go(nm);
+
+		// c++
+
+			function flc(a) {    
+				return rnd(Bridge.estFLA(a));
+			}
+			function crunch(a) {        
+				const r = Bridge.results(a);
+				console.log(a);
+				for (var key in r) {
+					console.log(key,r[key][0]);  
+				}
+				['Motor Rated Power','Motor Shaft Power','Pump Shaft Power'].forEach(function(e) {
+					cvtObj(r[e],[0,1],POWER,unit(POWER),'hp');
+				});
+				r['Motor Efficiency'][0]*=100;
+				r['Motor Power Factor'][0]*=100;
+				return r;
 			}
 
-		// vd
+		// validation
 
 			function setDefVal(e,v) {
 				$(e).prop('defaultValue',v);
@@ -221,11 +244,8 @@
 				});
 			}
 
-		//
-			function rnd(v,p=1) {
-				const m=Math.pow(10,p);
-				return $.isNumeric(v) ? Math.round(v*m)/m : v;
-			}
+		// dom
+
 			function em(t) {
 				return ` <em>(${t})</em>`;
 			}
@@ -257,30 +277,8 @@
 				nm('pump_style')[m]($('#tmp_pump').children().clone());
 				nm('pump_style').children().first().prop('selected',true);
 			}
-			function flc(a) {    
-				return rnd(Bridge.estFLA(a));
-			}
-			function cvtArg(c) {
-				const d=$.extend({},c);
-				cvtObj(d,'flow',FLOW,'gpm');
-				cvtObj(d,'motor_rated_power',POWER,'hp');
-				//cvtObj(d,'motor_field_power',POWER,'kW');      
-				cvtObj(d,'head',DIST,'ft');
-				return d;    
-			}
-			function crunch(a) {        
-				const r = Bridge.results(a);
-				console.log(a);
-				for (var key in r) {
-					console.log(key,r[key][0]);  
-				}
-				['Motor Rated Power','Motor Shaft Power','Pump Shaft Power'].forEach(function(e) {
-					cvtObj(r[e],[0,1],POWER,unit(POWER),'hp');
-				});
-				r['Motor Efficiency'][0]*=100;
-				r['Motor Power Factor'][0]*=100;
-				return r;
-			}
+
+		// ctls
 
 			function setData(d,e) {
 				nmAll(e).each(function(i,el) {
@@ -333,6 +331,8 @@
 				});
 			}
 
+		//unit conversion
+
 			FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
 				'm^3/s':15850.32316, 'ft^3/s':448.8311693, _num:0};
 			POWER = {kW:1.341022218, _num:1}
@@ -360,10 +360,19 @@
 				}
 				return v;
 			}
-			function em(t) {
-				return ` <em>(${t})</em>`;
+
+			function cvtArg(c) {
+				const d=$.extend({},c);
+				cvtObj(d,'flow',FLOW,'gpm');
+				cvtObj(d,'motor_rated_power',POWER,'hp');
+				//cvtObj(d,'motor_field_power',POWER,'kW');      
+				cvtObj(d,'head',DIST,'ft');
+				return d;    
 			}
 			
+			
+		// pg nav
+
 			function main() {
 				Nav = [];
 				go('main');
@@ -389,6 +398,12 @@
 				Nav.push(nm);
 				loadPg();
 			}
+			function lnk(e,nm) {
+				e.preventDefault();
+				go(nm);
+			}
+
+		// prop io
 
 			function saveHd(d=HeadTool) {
 				saveProp('headTool',d);
@@ -463,6 +478,9 @@
 				MotorPerf = loadProp('motorPerf');
 				return (DefCond = loadProp('defCond'));
 			}
+
+		// init
+
 			LS = localStorage;
 			$ = require('jquery');
 			Remote = require('electron').remote;
@@ -470,10 +488,6 @@
 			if (!loadData()) {
 				loadData(true);
 			}
-
-			function dlgFil(ext='psat') {
-				return {filters: [{ name: 'PSAT', extensions: [ext] }]};
-			}			
 
 			$(document).ready(function() {
 				try {
@@ -485,7 +499,6 @@
 					alert(e);
 					Remote.getCurrentWindow().close();
 				}
-				
 			});
 		</script>
 	</body>
