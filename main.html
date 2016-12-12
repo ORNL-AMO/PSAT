@@ -5,6 +5,9 @@
 		margin-bottom: .5rem;
 		margin-top: .5rem;
 	}
+
+/* tbl */
+
 	#container table {
 		border-collapse:collapse;	
 		margin-top: .5rem;	
@@ -63,11 +66,15 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		Cond = {flow: cvt(2000,FLOW,unit(FLOW),'gpm'), specific_gravity: 1};
 		lnk(event,"headtool");
 	}
+
 	function reset() {
 		loadData(true);
 		loadPg();
 		alert("Reset complete.");
-	}	
+	}
+
+// io
+
 	function imprt() {
 		Dlg.showOpenDialog(dlgFil(),
 			function (fn) {
