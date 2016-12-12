@@ -307,6 +307,19 @@
 </dialog>
 
 <script>//# sourceURL=*grid
+
+// dom
+
+	function upTD(e) {
+		return $(e).closest('td,th');
+	}
+
+	function fldUnit(nm) {
+		$(`td>div:not(:has(em)):contains(${nm})`).append(`<em>(${txt})</em>`);
+	}  
+
+// ctls
+
 	function clrFld(n,e) {
 		nm(n,col(e)).val('');
 	}  
@@ -352,6 +365,9 @@
 		btn.after(ctl);
 		btn.hide();
 	}
+
+// col
+
 	function showIO(e) {
 		const dlg = $('#io');
 		chk(dlg.find('input').first(),true);
@@ -380,10 +396,6 @@
 		}
 		dom(dlg).close(); 
 	}
-
-	function upTD(e) {
-		return $(e).closest('td,th');
-	}
 	function colCond(e) {
 		return upTD(e).data('cond');
 	}  
@@ -392,6 +404,12 @@
 		col(e).remove();
 		$(e).parent().remove();
 	}
+	function colArgs(col) {
+		return cvtArg(col.data('cond'));    
+	}
+
+// validate
+
 	function hl(e,tf=true) {
 		if (tf) {
 			$(e).addClass('err');
@@ -404,6 +422,9 @@
 	function vdTol(n,col,v,tol) {
 		hl(nm(n,col),Math.abs(nm(n,col).val()-v) > tol*v);
 	}
+
+// results
+
 	function estFLC(e) {
 		nm('motor_rated_flc',col(e)).val(flc(colArgs(col(e))));
 		vdTol('motor_rated_flc',col(e));
@@ -416,9 +437,6 @@
 			$('h2').hide();
 			$('.err').removeClass('err');
 		}
-	}
-	function colArgs(col) {
-		return cvtArg(col.data('cond'));    
 	}
 	function results() {
 		$('th:gt(1)').each((i,e)=>{
@@ -470,6 +488,8 @@
 		showHdResults(true);
 	}
 
+// nav
+
 	function gotoHead(e) {
 		Cond = colCond(e);
 		go("headTool");
@@ -478,10 +498,8 @@
 		Cond = colCond(e);
 		go('notes');
 	}
-	
-	function fldUnit(nm) {
-		$(`td>div:not(:has(em)):contains(${nm})`).append(`<em>(${txt})</em>`);
-	}  
+
+// init
 
 	txt = unit(POWER);
 	fldUnit('Rated Power');
