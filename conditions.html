@@ -1,4 +1,11 @@
 <style>
+	p button {
+		float:left;
+		margin-right:2px;
+	}
+
+/* tbl (list) */
+
 	#cond td>* {
 		display: block;
 	}
@@ -9,11 +16,8 @@
 		background-color: #C3C8C8;
 		cursor: pointer;
 	}
-	p button {
-		float:left;
-		margin-right:2px;
-	}
 </style>
+
 <div style='display: inline-block'>
 	<h1>Pump Conditions</h1>
 	<ul style='font-style:italic'>
@@ -47,6 +51,7 @@
 	function listIdx(e) {
 		return parIdx(e.parentElement,-2);
 	}
+
 	function chkAll(e) {
 		chk(':checkbox',e.checked);
 		$.each(Conds,function(i,d) {
@@ -63,9 +68,11 @@
 		saveConds();
 		setGridBtn();		
 	}
+
 	function grid() {
 		go('grid');		
 	}
+
 	function setGridBtn() {
 		if ($('#cond :checkbox:gt(1):checked').length>0) {
 			$('#grid').show();
@@ -81,11 +88,13 @@
 		saveConds();
 		loadPg();
 	}
+
 	function removeAll() {
 		Conds = [];
 		saveConds();
 		loadPg();
 	}
+
 	function cp(e) {
 		let o=$.extend({},Conds[listIdx(e)]);
 		o.name+=' (copy)';
@@ -93,10 +102,12 @@
 		saveConds();
 		loadPg();
 	}
+
 	function edit(e) {
 		Cond = Conds[parIdx(e,-2)];
 		go('notes');
 	}
+
 	function nu() {
 		Cond = loadProp('defCond');
 		Conds.push(Cond);
@@ -138,7 +149,7 @@
 		}); 
 	}	
 
-// 
+// init
 
 	$.each(Conds,function(i,d) {		
 		const nu = $('#cond tr').first().clone();
@@ -147,10 +158,12 @@
 		$('#cond').append(nu);		  
 
 	});		
+
 	if (Conds.length==0) {
 		$('#cond').html('<span style="font-style:italic">None</span>');
 		pg('button:gt(0)').hide();
-	}		
+	}
+
 	setGridBtn();
 
 </script>
