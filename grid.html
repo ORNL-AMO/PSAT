@@ -3,17 +3,32 @@
 		cursor: help;
 	}
 	
-	#results,
-	#results~tr {
+/* err */
+
+	h2 {
+		background-color:#FECB00;
+		text-align:center;
+		display: none;
+	}
+
+	.err {
+		background-color: #FECB00
+	}
+
+
+/* results */
+
+	#results, #results~tr {
 		display: none;
 	}
 	
-	#results td:not(:first-child) span,
-	#results~tr span {
+	#results td:not(:first-child) span, #results~tr span {
 		width: 50%;
 	}
 	
-	td>div {
+/* tbl */
+
+	td > div {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -30,8 +45,7 @@
 		width: 7rem;
 	}
 	
-	td:nth-child(2),
-	th:nth-child(2) {
+	td:nth-child(2), th:nth-child(2) {
 		display: none;
 	}
 	
@@ -39,15 +53,6 @@
 		background-color: #C3C8C8;
 	}
 
-	h2 {
-		background-color:#FECB00;
-		text-align:center;
-		display: none;
-	}
-
-	.err {
-		background-color: #FECB00
-	}
 </style>
 <div style='display:inline-block'>
 <h2 value='OUT OF RANGE VALUES'>OUT OF RANGE VALUES</h2>
