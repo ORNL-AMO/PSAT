@@ -16,9 +16,18 @@
 using namespace v8;
 using namespace std;
 
+// Setup 
+
 Isolate* iso;
 Local<Object> inp;
 Local<Object> r;
+
+void Setup(const FunctionCallbackInfo<Value>& args) {
+	iso = args.GetIsolate();
+	inp = args[0]->ToObject();
+	r = Object::New(iso);
+	args.GetReturnValue().Set(r);
+}
 
 double Get(const char *nm) {
 	auto rObj = inp->ToObject()->Get(String::NewFromUtf8(iso,nm));
@@ -28,9 +37,12 @@ double Get(const char *nm) {
 	}
 	return rObj->NumberValue();
 }
+
 void SetR(const char *nm, double n) {
 	r->Set(String::NewFromUtf8(iso,nm),Number::New(iso,n));
 }
+
+// Fields
 
 Motor::LineFrequency line() {
 	return (Motor::LineFrequency)(int)(!Get("line"));
@@ -45,13 +57,7 @@ Pump::Style style() {
 	return (Pump::Style)(int)Get("pump_style");
 }
 
-void Setup(const FunctionCallbackInfo<Value>& args) {
-	iso = args.GetIsolate();
-	inp = args[0]->ToObject();
-	r = Object::New(iso);
-	args.GetReturnValue().Set(r);
-}
-
+// Operations
 
 void Results(const FunctionCallbackInfo<Value>& args) {
 	Setup(args);
@@ -135,7 +141,8 @@ void Nema(const FunctionCallbackInfo<Value>& args) {
 	);
 }
 
-//TODO round vs js round; loosen up to make next test case
+// Test
+
 void Check(double exp, double act, const char* nm="") {
 	//cout << "e " << exp << "; a " << act << endl;
 	// if (isnan(act) || (abs(exp-act)>.01*exp)) {
@@ -175,13 +182,15 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 		Check100(84.82,pf.calculate());
 	}
 
-//nema
+// nema
+
 	{
 		MotorEfficiency mef(Motor::LineFrequency::FREQ60,1200, Motor::EfficiencyClass::ENERGY_EFFICIENT,0,200,1);
 		//Check100(95,mef.calculate());    
 	}
 
-//pump eff
+// pump eff
+
 	{
 		OptimalPrePumpEff pef(Pump::Style::END_SUCTION_ANSI_API, 0, 2000); 
 		OptimalDeviationFactor df(2000);
@@ -190,7 +199,8 @@ void Test(const FunctionCallbackInfo<Value>& args) {
 		//Check(87.1,pef.calculate()*df.calculate());
 	}
 
-//spec speed
+// spec speed
+
 
 	{
 		OptimalSpecificSpeedCorrection cor(Pump::Style::END_SUCTION_ANSI_API, 1170);
@@ -334,6 +344,8 @@ void InitTest(const FunctionCallbackInfo<Value>& args) {
 	args.GetReturnValue().Set(String::NewFromUtf8(iso,"SUCCESS"));
 }
 
+// v8
+
 void Init(Local<Object> exports) {
 	NODE_SET_METHOD(exports, "results", Results);
 	NODE_SET_METHOD(exports, "estFLA", EstFLA);
@@ -346,4 +358,3 @@ void Init(Local<Object> exports) {
 }
 
 NODE_MODULE(bridge, Init)
-
