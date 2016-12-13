@@ -226,7 +226,7 @@
 	function setUnit(nm,s) {
 		pg(`tr:not(#results ~) td:contains(${nm})`).append(em(_txt));
 	}
-	_txt = unit(DIST) == 'ft' ? 'inches' : 'mm';
+	_txt = DIST_small[unit(DIST)];
 	setUnit('diameter');
 	_txt = unit(DIST);
 	setUnit('elevation');
