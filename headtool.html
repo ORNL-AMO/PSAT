@@ -145,8 +145,18 @@
 	</tr>				
 </table>		
 <script>
+
+	function accept() {
+		Cond.head = Head;
+		saveConds();
+		back();
+	}
+
+// dom
+
 	function size() {
-		pg().show();$('img').width(pg('table').width());
+		pg().show();
+		$('img').width(pg('table').width());
 	}
 	function suction() {
 		if (dom(nm('suc')).checked) {
@@ -159,14 +169,17 @@
 			pg('.sucTank').hide();
 		}
 	}
+	function r(txt,v) {
+		$(`#results~ tr>td:contains(${txt})`).next().next().text(rnd(v).toLocaleString());
+	}
+
+// math
+
 	function v(d,flow) {
 		return flow / (Math.PI*(d/2)*(d/2));
 	}
 	function vHd(v,g) {
 		return v*v/2/g;
-	}
-	function r(txt,v) {
-		$(`#results~ tr>td:contains(${txt})`).next().next().text(rnd(v).toLocaleString());
 	}
 	function calc() {
         let flowU, distF, g;
@@ -201,11 +214,6 @@
 
 		setData(HeadTool);
 		saveHd();
-	}
-	function accept() {
-		Cond.head = Head;
-		saveConds();
-		back();
 	}
 
 // init
