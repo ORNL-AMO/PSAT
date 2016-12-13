@@ -103,8 +103,9 @@
 			chg(FLOW,d,'flow');
 			chg(POWER,d,['motor_rated_power'/*,'motor_field_power'*/]);
 			chg(DIST,d,'head');
-		});
-		chg(DIST,HeadTool,['Ds','Dd','Zs','Ztnk_s','Zd']);		
+		});;
+		cvtObj(HeadTool,['Ds','Dd'],DIST,DIST_small[nunits[DIST._num]],DIST_small[unit(DIST)]);
+		chg(DIST,HeadTool,['Zs','Ztnk_s','Zd']);		
 		chg(PRESSURE,HeadTool,['Ps','Pg_s','Pd']);		
 		chg(FLOW, Curve.plot, [0,2]);
 		chg(DIST, Curve.plot, [1,3]);
