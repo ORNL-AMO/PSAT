@@ -202,23 +202,15 @@
 		setData(HeadTool);
 		saveHd();
 	}
-	function setUnit(nm,s) {
-		pg(`tr:not(#results ~) td:contains(${nm})`).append(em(_txt));
-	}
 	function accept() {
 		Cond.head = Head;
 		saveConds();
 		back();
 	}
+
+// init
+
 	pg().hide();
-	_txt = unit(DIST) == 'ft' ? 'inches' : 'mm';
-	setUnit('diameter');
-	_txt = unit(DIST);
-	setUnit('elevation');
-	$('#results th').last().append(em(_txt));
-	_txt = unit(PRESSURE);
-	setUnit('pressure');	
-	pg('td:contains("Flow")').append(em(unit(FLOW)));
 	$('#flow').html(rnd(Cond.flow));
 	$('#sg').text(Cond.specific_gravity);
 	$('input').change(function () {
@@ -228,4 +220,19 @@
 	setCtls(HeadTool);
 	suction();
 	setupVd();
+
+// init - unit
+
+	function setUnit(nm,s) {
+		pg(`tr:not(#results ~) td:contains(${nm})`).append(em(_txt));
+	}
+	_txt = unit(DIST) == 'ft' ? 'inches' : 'mm';
+	setUnit('diameter');
+	_txt = unit(DIST);
+	setUnit('elevation');
+	$('#results th').last().append(em(_txt));
+	_txt = unit(PRESSURE);
+	setUnit('pressure');	
+	pg('td:contains("Flow")').append(em(unit(FLOW)));
+	
 </script>
