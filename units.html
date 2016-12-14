@@ -1,13 +1,24 @@
 <style>
+
+	#units label {
+		padding-right: 1rem;
+	}
+
+	input:not([type]) {
+		width: 4rem;
+	}
+
+/* custom */
+
 	.shade {
 		background-color: #C3C8C8;
 	}
 	#units select {
 		vertical-align: middle;
 	}
-	#units label {
-		padding-right: 1rem;
-	}
+
+/* unit grid */
+
 	#units td:first-child {
 		color: #5d9300;
 		padding-right: 1rem;
@@ -22,9 +33,7 @@
 	th {
 		text-align: left;
 	}
-	input:not([type]) {
-		width: 4rem;
-	}
+
 </style>
 
 <h1>Units</h1>
@@ -123,7 +132,7 @@
 
 	}
 
-// unit tbl
+// unit grid
 
 	function shade(n) {
 		$('td').removeClass('shade');
@@ -136,9 +145,9 @@
 		lastCol.show();		
 	}	
 
-//
+// init
 
-	function start() {
+	{
 		const lastCol = $('#units th:nth-child(4),#units td:nth-child(4)');
 		const met = ['m^3/hr','kW','m','kPa'];
 		let i;
@@ -186,9 +195,8 @@
 		]
 		setCtls(UnitExample);
 		$('table input').change(ev => {
-			setData(UnitExample,$(ev.target).parent());
-			//UnitExample[$(ev.target).attr('name')] = $(ev.target).val();			
+			setData(UnitExample,$(ev.target).parent());		
 		});
 	}
-	start();
+	
 </script>
