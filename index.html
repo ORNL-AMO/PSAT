@@ -133,10 +133,6 @@
 
 		// plot
 
-			function resetCnv() {debugger;
-				dom('Canvas').width+=0;
-			}
-
 			function xPos(x) {
 				return x*(P.cnv.width-P.padX*2)/(P.stepX*P.cntX)+P.padX;
 			}
@@ -166,12 +162,13 @@
 				P.ctx.stroke();
 			}
 			function setupPlot(lblX,lblY) {
-				resetCnv();
 				P = $.extend({
+					cnv: dom('Canvas'),
 					m: new Map(),
 					xCvt: x => x,
 					yMax: x => P.stepY*P.cntY
 				},P);
+				P.cnv.width+=0;
 				P.m = new Map();
 				const ctx = P.ctx = P.cnv.getContext('2d');
 				$('#plot_btn').hide();
@@ -205,7 +202,7 @@
 				ctx.fillStyle = '#FECB00';
 				ctx.font = '14px san serif';
 				ctx.textAlign = 'center';
-				ctx.fillText(lblX,Cnv.width/2,Cnv.height-.33*P.padY);
+				ctx.fillText(lblX,P.cnv.width/2,P.cnv.height-.33*P.padY);
 				
 				ctx.textAlign='right';
 				ctx.textBaseline='bottom';

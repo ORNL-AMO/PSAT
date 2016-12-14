@@ -76,7 +76,6 @@
 
 	function inpChg() {		
 		$('#plot').hide();
-		Cnv.width+=0;
 		showHdBtn('show');
 		Curve.C = pg('#C').val();
 		Curve.plot = $.makeArray(ptsInp().map((i,v)=>$(v).val()));
@@ -104,7 +103,7 @@
 		return [step, Math.ceil(max / step)];
 	}
 	function plot() {		
-		const 	f1 = Curve.plot[0],
+		const f1 = Curve.plot[0],
 				h1 = Curve.plot[1],				
 				f2 = Curve.plot[2],
 				h2 = Curve.plot[3],  
@@ -112,7 +111,6 @@
 				k = (h2-h1)/(Math.pow(f2,Curve.C)-Math.pow(f1,Curve.C));							
 
 		P = {
-			cnv: Cnv,
 			padX: 25,
 			padY: 50
 		};
@@ -131,8 +129,6 @@
 	Conds.filter(c => c.grid).forEach(c => {
 	  pg('select').append($(`<option>${c.name}</option>`).data('cond',c));		
 	});
-	
-	Cnv = dom('canvas');
 	
 	function ptsInp() {
 		return pg('#points input');
