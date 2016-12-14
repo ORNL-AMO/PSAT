@@ -51,7 +51,6 @@
 
 	function plot() {
 		P = {
-			cnv: Cnv,
 			padX: 25,
 			stepX: 10,
 			cntX: 12,
@@ -62,9 +61,9 @@
 		const ctx = setupPlot('Motor Shaft Load (%)','Efficiency (%)');
 				
 		ctx.fillStyle = '#1F82BB';
-		ctx.fillText("Power Factor (%)",Cnv.width-P.padX,P.padY-5-15);
+		ctx.fillText("Power Factor (%)",P.cnv.width-P.padX,P.padY-5-15);
 		ctx.fillStyle = 'white';
-		ctx.fillText("Current (% FLC)",Cnv.width-P.padX,P.padY-5-30);
+		ctx.fillText("Current (% FLC)",P.cnv.width-P.padX,P.padY-5-30);
 
 		P.getYobj = x => 
 			Bridge.motorPerformance(cvtArg(setData({
@@ -75,7 +74,6 @@
 		curveMulti('pf','#1F82BB');		
 	}
 	 
-	Cnv = dom('canvas');
 	
 // init
 
@@ -89,7 +87,7 @@
 	nm('efficiency_class').change(effChg);	
 	setupVd();
 	nmAll().change(()=>{
-		$(Cnv).hide();
+		$('canvas').hide();
 		$('#plot_btn').show();
 		setData(MotorPerf);
 		saveProp('motorPerf',MotorPerf);
