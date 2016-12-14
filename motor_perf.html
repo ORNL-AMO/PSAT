@@ -42,6 +42,13 @@
 </div>
 
 <script>//# sourceURL=*pump_eff
+
+	function estFLC(e) {
+		nm('flc').val(flc(cvtArg(MotorPerf)));
+	}
+
+// plot
+
 	function plot() {
 		P = {
 			cnv: Cnv,
@@ -70,9 +77,8 @@
 	 
 	Cnv = dom('canvas');
 	
-	function estFLC(e) {
-		nm('flc').val(flc(cvtArg(MotorPerf)));
-	}
+// init
+
 	function effChg() {
 		nm('efficiency').parent()[nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom'
 			? 'show' : 'hide']();
