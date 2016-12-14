@@ -46,6 +46,7 @@
 </div>
 
 <script>//# sourceURL=*pump_eff
+
 	function plot() {
 		Cnv.width+=0;
 		let lblTxt = 'U.S.', m = 1;
@@ -82,6 +83,8 @@
 		P.ctx.fill();
 	}	 
 
+// init
+
 	Cnv = dom('canvas');
 
 	setPumpStyle();
@@ -90,7 +93,9 @@
 		$('#plot').hide();
 		$('#plot_btn').show();
 	});
+
 	setupVd();
+	
 	$('#lbl_flow').append(em(unit(DIST) == 'ft' ? 'gpm' : 'm^3/hr'));
 	$('#lbl_hd').append(em(unit(DIST)));	
 	
