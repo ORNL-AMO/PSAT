@@ -18,7 +18,6 @@
 	
 	function plot() {
 		P = {
-			cnv: Cnv,
 			padX: 25,
 			padY: 50,
 			stepY: 5,
@@ -33,7 +32,7 @@
 		const ctx = setupPlot(`Flow Rate (${unit(FLOW)})`,'Achievable Efficiency (average)');
 				
 		ctx.fillStyle = 'white';
-		ctx.fillText('Achievable Efficiency (max)',Cnv.width-P.padX,P.padY-5-15);
+		ctx.fillText('Achievable Efficiency (max)',P.cnv.width-P.padX,P.padY-5-15);
 		
 		P.getYobj = x => 
 			Bridge.pumpEfficiency(cvtArg(setData({
@@ -44,8 +43,6 @@
 	}
 	 
 // init 
-
-	Cnv = dom('canvas');
 
 	setPumpStyle();
 	nm('pump_style').change(()=>{
