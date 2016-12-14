@@ -133,6 +133,10 @@
 
 		// plot
 
+			function resetCnv() {debugger;
+				dom('Canvas').width+=0;
+			}
+
 			function xPos(x) {
 				return x*(P.cnv.width-P.padX*2)/(P.stepX*P.cntX)+P.padX;
 			}
@@ -162,6 +166,7 @@
 				P.ctx.stroke();
 			}
 			function setupPlot(lblX,lblY) {
+				resetCnv();
 				P = $.extend({
 					m: new Map(),
 					xCvt: x => x,
@@ -345,7 +350,7 @@
 				});
 			}
 
-		//unit conversion
+		// unit conversion
 
 			FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
 				'm^3/s':15850.32316, 'ft^3/s':448.8311693, _num:0};
