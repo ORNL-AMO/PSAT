@@ -7,7 +7,6 @@
 		box-shadow: 1px 1px 2px 0 #707070;
 		background-color: white;
 	}	
-}
 </style>
 
 <h1>Condition Notes</h1>
@@ -31,10 +30,12 @@
 <a onclick='back();return false;' href=''>Back</a>
 <script>
 	setCtls(Cond);
+
 	nmAll().change(function(){
 		setData(Cond);
 		saveConds();
 	});
+	
 	if (Cond.comment == undefined) {
 		nmAll().first().change();
 	}

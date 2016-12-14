@@ -4,7 +4,6 @@
 		background-color: black;
 		display: none;
 	}
-}
 </style>
 <div>
 	<h1>Achievable Pump Efficiency</h1>
@@ -16,6 +15,7 @@
 </div>
 
 <script>//# sourceURL=*pump_eff
+	
 	function plot() {
 		P = {
 			cnv: Cnv,
@@ -43,6 +43,8 @@
 		curveMulti('max','white');
 	}
 	 
+// init 
+
 	Cnv = dom('canvas');
 
 	setPumpStyle();
