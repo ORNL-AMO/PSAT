@@ -95,6 +95,7 @@
 </div>
 
 <script>
+
 	function chgUnits(nunits) {
 		function chg(m,...args) {
 			cvtObj(...args,m,nunits[m._num]);
@@ -121,6 +122,9 @@
 		save();
 
 	}
+
+// unit tbl
+
 	function shade(n) {
 		$('td').removeClass('shade');
 		$(`#units td:nth-child(${n})`).addClass('shade');		
@@ -131,6 +135,9 @@
 		});
 		lastCol.show();		
 	}	
+
+//
+
 	function start() {
 		const lastCol = $('#units th:nth-child(4),#units td:nth-child(4)');
 		const met = ['m^3/hr','kW','m','kPa'];
