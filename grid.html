@@ -329,11 +329,7 @@
 		nm(n,col(e)).val('');
 	}  
 	function effChg(e) {
-		if ($(e).val()=='Custom') {
-			$(e).next().show();      
-		} else {
-			$(e).next().hide();
-		}
+		$(e).next().toggle($(e).val()=='Custom');
 	}
 	function pumpChg(e) {
 		if ($(e).val().startsWith('Specified')) {
