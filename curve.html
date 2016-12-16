@@ -76,7 +76,7 @@
 
 	function inpChg() {		
 		$('#plot').hide();
-		showHdBtn('show');
+		pg('button').show();
 		Curve.C = pg('#C').val();
 		Curve.plot = $.makeArray(ptsInp().map((i,v)=>$(v).val()));
 		saveProp('curve',Curve);
@@ -88,10 +88,6 @@
 		setVal(inp.first(),rnd(c.flow));
 		setVal(inp.last(),rnd(c.head));	
 		inpChg();
-	}
-
-	function showHdBtn(show) {
-		pg('button')[show]();
 	}
 
 // plot
