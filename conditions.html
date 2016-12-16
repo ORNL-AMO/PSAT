@@ -26,7 +26,7 @@
 	</ul>
 	<table id=cond>
 		<tr>
-			<td><input type="checkbox" onclick="setGrid(this)"></td>
+			<td><input type="checkbox" onclick="selCond(this)"></td>
 			<td onclick='edit(this)'></td>
 			<td><button onclick='rm(this)'><i class="fa fa-trash-o"></i></button></td>
 			<td><button onclick='cp(this)'><i class="fa fa-plus"></i></button></td>
@@ -46,7 +46,7 @@
 </div>
 <script>
 
-// list
+// list selection
 
 	function listIdx(e) {
 		return parIdx(e.parentElement,-2);
@@ -58,30 +58,24 @@
 			d.grid = e.checked;
 		});
 		saveConds();
-		setGridBtn();
+		setBtns();
 	}
 
-// grid
+	function setBtns() {
+		$('#grid').toggle($('#cond :checkbox:gt(1):checked').length>0);
+	}
 
-	function setGrid(e) {
+	function selCond(e) {
 		Conds[listIdx(e)].grid = e.checked;
 		saveConds();
-		setGridBtn();		
+		setBtns();		
 	}
+
+// operations
 
 	function grid() {
 		go('grid');		
 	}
-
-	function setGridBtn() {
-		if ($('#cond :checkbox:gt(1):checked').length>0) {
-			$('#grid').show();
-		} else {
-			$('#grid').hide();
-		}
-	}
-
-// crud
 
 	function rm(e) {
 		Conds.splice(listIdx(e),1);
@@ -118,8 +112,6 @@
 		saveConds();
 		go('notes');
 	}	
-
-// 
 
 	function xprt() {		
 		Dlg.showSaveDialog(dlgFil('csv'),
@@ -164,6 +156,6 @@
 		pg('button:gt(0)').hide();
 	}
 
-	setGridBtn();
+	setBtns();
 
 </script>
