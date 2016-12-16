@@ -78,8 +78,7 @@
 // init
 
 	function effChg() {
-		nm('efficiency').parent()[nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom'
-			? 'show' : 'hide']();
+		nm('efficiency').parent().toggle(nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom');
 	}
 
 	pg('#unit_pow').text(`(${unit(POWER)})`)
@@ -93,7 +92,6 @@
 		saveProp('motorPerf',MotorPerf);
 	});
 	effChg();
-	
 	
 </script>
 
