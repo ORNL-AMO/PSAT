@@ -99,10 +99,7 @@
 		return [step, Math.ceil(max / step)];
 	}
 	function plot() {		
-		const f1 = Curve.plot[0],
-				h1 = Curve.plot[1],				
-				f2 = Curve.plot[2],
-				h2 = Curve.plot[3],  
+		const [f1, h1, f2, h2] = Curve.plot,  
 				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,Curve.C) - Math.pow(f1,Curve.C))),
 				k = (h2-h1)/(Math.pow(f2,Curve.C)-Math.pow(f1,Curve.C));							
 
