@@ -320,7 +320,7 @@
 	}
 
 	function fldUnit(nm) {
-		$(`td>div:not(:has(em)):contains(${nm})`).append(`<em>(${txt})</em>`);
+		$(`td>div:contains(${nm})`).append(`<em>(${txt})</em>`);
 	}  
 
 // ctls
@@ -500,7 +500,6 @@
 
 	txt = unit(POWER);
 	fldUnit('Rated Power');
-	fldUnit('Motor Rated');
 	fldUnit('Motor Shaft');
 	fldUnit('Pump Shaft');
 	//fldUnit('Motor Power');
