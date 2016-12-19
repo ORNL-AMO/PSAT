@@ -1,5 +1,5 @@
-Electron = require('electron')
-App = Electron.app
+Electron = require('electron');
+App = Electron.app;
 
 App.on('ready', function() {
 	Win = new Electron.BrowserWindow({width: 1280, height: 1024});
