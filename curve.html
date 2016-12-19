@@ -93,7 +93,7 @@
 // plot
 
 	function steps(v1,v2) {
-		const 	max = Math.max(v1,v2),
+		const max = Math.max(v1,v2),
 				m10 = Math.pow(10, Math.floor(Math.log10(max / 15))),
 				step = Math.round(max / 15 / m10) * m10;
 		return [step, Math.ceil(max / step)];
