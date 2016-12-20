@@ -215,6 +215,9 @@
 
 		// c++
 
+			function api(nm,obj) {
+				return Bridge[nm](cvtArg(setData(obj)));
+			}
 			function flc(a) {    
 				return rnd(Bridge.estFLA(a));
 			}

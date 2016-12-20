@@ -35,9 +35,9 @@
 		ctx.fillText('Achievable Efficiency (max)',P.cnv.width-P.padX,P.padY-5-15);
 		
 		P.getYobj = x => 
-			Bridge.pumpEfficiency(cvtArg(setData({
+			api('pumpEfficiency',{
 				flow: x
-			})));
+			});
 		curveMulti('average');
 		curveMulti('max','white');
 	}

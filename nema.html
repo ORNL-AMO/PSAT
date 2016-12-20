@@ -31,6 +31,6 @@ Efficiency Class
 	$('#lblMRP').append(em(unit(POWER)));    
 
 	setupVd();
-	nmAll().change(() => $('#result').text(rnd(Bridge.nema(cvtArg(setData({efficiency:0}))))));
+	nmAll().change(() => $('#result').text(rnd(api('nema',{efficiency:0}))));
 	nmAll().first().change();
 </script>
