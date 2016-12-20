@@ -444,7 +444,7 @@
 				saveProp('curve',Curve);
 				saveProp('motorPerf',MotorPerf);        
 			}
-			IMP = ['gpm','hp','ft','psig'];      
+			IMP = ['gpm','hp','ft','psig'];// imperial    
 			function loadData(reset) {
 				if (reset) {
 					DefCond = {
@@ -468,7 +468,6 @@
 						cost: .05,
 						flow: 2000,
 						head: 277,
-						//load_method: 0,
 						motor_field_power: 150,
 						motor_field_current: '',
 						motor_field_voltage: 460,
