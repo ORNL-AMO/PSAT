@@ -122,7 +122,7 @@
 		<div id=container></div>
 		<script>
 		
-			function dlgFil(ext='psat') {
+			function dlgFil(ext='psat') {// dialog filter
 				return {filters: [{ name: 'PSAT', extensions: [ext] }]};
 			}			
 		
@@ -133,10 +133,10 @@
 
 		// plot
 
-			function xPos(x) {
+			function xPos(x) {// map x to canvas pixels
 				return x*(P.cnv.width-P.padX*2)/(P.stepX*P.cntX)+P.padX;
 			}
-			function yPos(y) {
+			function yPos(y) {// map y to canvas pixels
 				return (P.stepY*P.cntY-y)*(P.cnv.height-P.padY*2)/(P.stepY*P.cntY)+P.padY;
 			}
 			function curveMulti(prop,col) {
