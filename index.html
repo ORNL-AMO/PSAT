@@ -139,7 +139,10 @@
 			function yPos(y) {// map y to canvas pixels
 				return (P.stepY*P.cntY-y)*(P.cnv.height-P.padY*2)/(P.stepY*P.cntY)+P.padY;
 			}
-			function curveMulti(prop,col) {
+
+			// so that multiple curve y values can be
+			// computed with one api call for a given x
+			function curveMulti(prop,col) {//property, color
 				curve(x => {
 					let r = P.m.get(x);
 					if (!r) {
@@ -149,7 +152,7 @@
 					return r[prop];
 				},col);
 			}
-			function curve(fn,col='#FECB00') {        
+			function curve(fn,col='#FECB00') {// plot fn using color       
 				P.ctx.strokeStyle = col;	
 				P.ctx.beginPath();
 				for (let x=0; rnd(x,2)<=P.stepX*P.cntX; x+=P.stepX/100) {
@@ -161,7 +164,7 @@
 				}
 				P.ctx.stroke();
 			}
-			function setupPlot(lblX,lblY) {
+			function setupPlot(lblX,lblY) {// axes and labels
 				P = $.extend({
 					cnv: dom('canvas'),
 					m: new Map(),
@@ -218,10 +221,10 @@
 			function api(nm,obj) {
 				return Bridge[nm](cvtArg(setData(obj)));
 			}
-			function flc(a) {    
+			function flc(a) {// full load current
 				return rnd(Bridge.estFLA(a));
 			}
-			function crunch(a) {        
+			function crunch(a) {// results with unit conversions
 				const r = Bridge.results(a);
 				console.log(a);
 				for (var key in r) {
@@ -237,14 +240,14 @@
 
 		// validation
 
-			function setDefVal(e,v) {
+			function setDefVal(e,v) {// set default value
 				$(e).prop('defaultValue',v);
 			}
 			function setVal(e,v) {
 				$(e).val(v);
 				setDefVal(e,v);        
 			}
-			function vdGt(e,min=1) {
+			function vdGt(e,min=1) {// validate >
 				if(Number($(e).val()) >= min) {
 					e.defaultValue = $(e).val();
 				} else if (e.defaultValue >= min) {
@@ -253,7 +256,7 @@
 					$(e).val(min);
 				}
 			}
-			function setupVd() {
+			function setupVd() {// set validation handler
 				$('[data-vd-gt]').change(ev => {
 					let min = $(ev.target).attr('data-vd-gt');
 					if (min == '') {
@@ -286,7 +289,7 @@
 			function dom(e) {
 				return $(e)[0];
 			}
-			function pg(s='') {
+			function pg(s='') {// page
 				return $('#container '+s);
 			}
 			function setPumpStyle(m = 'append') {
@@ -296,7 +299,7 @@
 
 		// ctls
 
-			function setData(d,e) {
+			function setData(d,e) {// controls -> data
 				nmAll(e).each(function(i,el) {
 					let v;
 					switch (el.type) {
@@ -323,7 +326,7 @@
 				});
 				return d; 
 			}     
-			function setCtls(d,el) {
+			function setCtls(d,el) {// data -> controls
 				nmAll(el).each((j,e)=>{
 					const ctl = $(e), v = d[nmGet(ctl)];
 					if (v===undefined) return;
@@ -352,18 +355,20 @@
 			FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
 				'm^3/s':15850.32316, 'ft^3/s':448.8311693, _num:0};
 			POWER = {kW:1.341022218, _num:1}
-			DIST = {m:3.280839895, inches: 1/12, mm: 3.280839895/1000, _num:2};
+			DIST = {m:3.280839895, inches: 1/12, mm: 3.280839895/1000, _num:2};// distance
 			DIST_small = {m: 'mm', ft: 'inches'};
 			PRESSURE = {kPa:0.145037738007,m:1.42197020632,ft:0.433527501928,_num:3};
 
-			function unit(m) {
+			function unit(m) {// m: multiplier object
 				return Units[m._num];
 			}
+			// convert object (data, names, multiplier, new unit, old unit)
 			function cvtObj(d,nms,m,nu,old) {
 				$.makeArray(nms).forEach((nm)=>{
 					d[nm] = cvt(d[nm],m,nu,old);
 				});
 			}
+			// convert (value, multiplier, new, old)
 			function cvt(v,m,nu,old=unit(m)) {
 				if (m[old] != m[nu]) {
 					if ($.isNumeric(v)) {
@@ -395,10 +400,10 @@
 				go('main');
 			}
 			function back() {
-					loadPg(Nav.pop());
+				Nav.pop();
+				loadPg();
 			}
-			function loadPg(bf) {
-				BackFrom = bf;
+			function loadPg() {// loadPage (backFrom)
 				pg().load(Nav[Nav.length-1]+'.html',function () {
 					let back=false,home=false;
 					if (Nav.length>1) {
@@ -411,7 +416,7 @@
 					$('#home').toggle(home);
 				});       
 			}
-			function go(nm) {
+			function go(nm) {// nm: name
 				Nav.push(nm);
 				loadPg();
 			}
