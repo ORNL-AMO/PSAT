@@ -232,14 +232,14 @@
 // init - unit
 
 	function setUnit(nm,s) {
-		pg(`tr:not(#results ~) td:contains(${nm})`).append(em(_txt));
+		pg(`tr:not(#results ~) td:contains(${nm})`).append(em(txt));
 	}
-	_txt = DIST_small[unit(DIST)];
+	txt = DIST_small[unit(DIST)];
 	setUnit('diameter');
-	_txt = unit(DIST);
+	txt = unit(DIST);
 	setUnit('elevation');
-	$('#results th').last().append(em(_txt));
-	_txt = unit(PRESSURE);
+	$('#results th').last().append(em(txt));
+	txt = unit(PRESSURE);
 	setUnit('pressure');	
 	pg('td:contains("Flow")').append(em(unit(FLOW)));
 	
