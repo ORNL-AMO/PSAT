@@ -132,7 +132,7 @@
 		inpChg();
 	});
 	ptsInp().change(ev => {
-		pg('select :disabled')[pparIdx(ev.target,-1)].selected=true;
+		pg('select :disabled')[parIdx(ev.target.parentElement,-1)].selected=true;
 	});
 
 	function showUnit(txt,u) {
