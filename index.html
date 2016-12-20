@@ -420,16 +420,13 @@
 				Nav.push(nm);
 				loadPg();
 			}
-			function lnk(e,nm) {
+			function lnk(e,nm) {// link (event, name)
 				e.preventDefault();
 				go(nm);
 			}
 
 		// prop io
 
-			function saveHd(d=HeadTool) {
-				saveProp('headTool',d);
-			}
 			function saveConds() {
 				saveProp('conditions',Conds);
 			}  
@@ -443,7 +440,7 @@
 				saveProp('defCond',DefCond);
 				saveProp('units',Units);
 				saveProp('headTool',HeadTool);
-				saveProp('conditions',Conds);
+				saveConds();
 				saveProp('curve',Curve);
 				saveProp('motorPerf',MotorPerf);        
 			}
