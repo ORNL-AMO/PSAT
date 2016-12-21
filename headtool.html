@@ -194,13 +194,14 @@
         }
 		let 
 			flow = cvt(Cond.flow,FLOW,flowU),
-			sucTnk = dom(nm('suc')).checked,
+			sucTnk = dom(nm('suc')).checked,// suction tank
+			// elevation head
 			elevHd = nm('Zd').val()-(sucTnk ? nm('Ztnk_s') : nm('Zs')).val(),
 			presHd = cvt(nm('Pd').val()-(sucTnk ? nm('Pg_s') : nm('Ps')).val(),
 				PRESSURE,unit(DIST))/Cond.specific_gravity,
-			vHdS = vHd(v(nm('Ds').val()/distF,flow),g),
-			vHdD = vHd(v(nm('Dd').val()/distF,flow),g),
-			vHdDif = vHdD - (sucTnk ? 0 : vHdS),
+			vHdS = vHd(v(nm('Ds').val()/distF,flow),g),// velocity head suction
+			vHdD = vHd(v(nm('Dd').val()/distF,flow),g),// velocity head discharge
+			vHdDif = vHdD - (sucTnk ? 0 : vHdS),// velocity head differential
 			sucHd = nm('Ks').val()*vHdS,
 			disHd = nm('Kd').val()*vHdD;
 		Head = elevHd + presHd + vHdDif + sucHd + disHd;
