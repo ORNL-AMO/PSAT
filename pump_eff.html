@@ -29,8 +29,8 @@
 			'm^3/hr': [100,12],
 			'L/s': [20,16]
 		}[unit(FLOW)];
+
 		const ctx = setupPlot(`Flow Rate (${unit(FLOW)})`,'Achievable Efficiency (average)');
-				
 		ctx.fillStyle = 'white';
 		ctx.fillText('Achievable Efficiency (max)',P.cnv.width-P.padX,P.padY-5-15);
 		

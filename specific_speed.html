@@ -53,7 +53,8 @@
 			lblTxt = 'metric';
 			m = 3472 / 4033;
 		} 
-		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) / Math.pow(nm('head').val(),.75);
+		const ss = nm('pump_rated_speed').val() * Math.sqrt(nm('flow').val()) 
+			/ Math.pow(nm('head').val(),.75);
 		function ec(x) {
 			return api('achievableEfficiency',{
 				specific_speed: x * m,

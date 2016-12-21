@@ -77,7 +77,8 @@
 // init
 
 	function effChg() {// efficiency field change
-		nm('efficiency').parent().toggle(nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom');
+		nm('efficiency').parent().toggle(nm('efficiency_class').filter(':checked')
+			.parent().text().trim()=='Custom');
 	}
 
 	pg('#unit_pow').text(`(${unit(POWER)})`)
