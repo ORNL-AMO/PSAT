@@ -77,7 +77,7 @@
 		go('grid');		
 	}
 
-	function rm(e) {
+	function rm(e) {// remove
 		Conds.splice(listIdx(e),1);
 		saveConds();
 		loadPg();
@@ -89,7 +89,7 @@
 		loadPg();
 	}
 
-	function cp(e) {
+	function cp(e) {// copy
 		let o=$.extend({},Conds[listIdx(e)]);
 		o.name+=' (copy)';
 		Conds.push(o);
