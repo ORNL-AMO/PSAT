@@ -42,7 +42,7 @@
 
 <script>//# sourceURL=*pump_eff
 
-	function estFLC(e) {
+	function estFLC(e) {// estimate full load current
 		nm('flc').val(flc(cvtArg(MotorPerf)));
 	}
 
@@ -76,7 +76,7 @@
 	
 // init
 
-	function effChg() {
+	function effChg() {// efficiency field change
 		nm('efficiency').parent().toggle(nm('efficiency_class').filter(':checked').parent().text().trim()=='Custom');
 	}
 
