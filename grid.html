@@ -334,7 +334,7 @@
 	function pumpChg(e) {
 		$(e).next().toggle($(e).val().startsWith('Specified'));
 	}
-	function selMRP(btn) {
+	function selMRP(btn) {// select motor rated power
 		const opts = {
 			ft: [
 				5,7.5,10,15,20,25,30,40,50,60,75,100,125,150,200,250,300,350,400,450,500,600,700,800,900,1000,1250,
@@ -374,7 +374,7 @@
 	function ioBtn(e) {
 		return $('.ioBtn').eq(parIdx(e,-1));
 	}
-	function col(e) {
+	function col(e) {// column
 		return $(`td:nth-child(${upTD(e).index()+1})`);
 	}
 	function saveCol(e) {
@@ -407,7 +407,7 @@
 
 // validate
 
-	function hl(e,tf=true) {
+	function hl(e,tf=true) {// highlight
 		if (tf) {
 			$(e).addClass('err');
 			$('h2').show();
@@ -416,18 +416,18 @@
 		}
 		return e;
 	}
-	function vdTol(n,col,v,tol) {
+	function vdTol(n,col,v,tol) {// validate tolerance
 		hl(nm(n,col),Math.abs(nm(n,col).val()-v) > tol*v);
 	}
 
 // results
 
-	function estFLC(e) {
+	function estFLC(e) {// estimate full load current
 		nm('motor_rated_flc',col(e)).val(flc(colArgs(col(e))));
 		vdTol('motor_rated_flc',col(e));
 		nm('motor_rated_flc',col(e)).change();
 	}
-	function showHdResults(show=false) {
+	function showHdResults(show=false) {// show hide
 		$('#results,#results~tr').toggle(show);
 		$('p button').toggle(!show);
 		if (!show) {
@@ -443,7 +443,8 @@
 				const v0 = rnd(r[key][0]).toLocaleString(), v1 = rnd(r[key][1]).toLocaleString();
 				col.filter('#results~tr:not(.th) td').filter((i,e)=>$(e).data('rowNm')==key).each((i,e) => {
 					$(e).data('r',r[key][0]);
-					$(e).html($('<div>').append(hl($('<span>').append(v0),key=='Motor Shaft Power' && v0>nm('motor_rated_power',col).val()))
+					$(e).html($('<div>').append(hl($('<span>').append(v0),key=='Motor Shaft Power' 
+						&& v0>nm('motor_rated_power',col).val()))
 						.append($('<span>').css('color','#5d9300').append(v1>-1 ? v1 : '')));
 				});
 			}          
@@ -510,6 +511,7 @@
 
 	setPumpStyle('prepend');
 
+	// create columns from 2nd column template
 	Conds.filter(c => c.grid).forEach(c => {
 		$('table tr').each(function (i,e) {
 			const newEl = $(e).children().eq(1).clone();            
@@ -520,6 +522,7 @@
 				newEl.find('span').text(c.name);     
 			} else {              
 				setCtls(c,newEl);
+				// save row name without units
 				newEl.data('rowNm',$(e).children(':first').text().replace(/\(.*\)/,'').trim());
 			}
 		});    

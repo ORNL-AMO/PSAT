@@ -169,23 +169,23 @@
 			pg('.sucTank').hide();
 		}
 	}
-	function r(txt,v) {
+	function r(txt,v) {// result
 		$(`#results~ tr>td:contains(${txt})`).next().next().text(rnd(v).toLocaleString());
 	}
 
 // math
 
-	function v(d,flow) {
+	function v(d,flow) {// velocity
 		return flow / (Math.PI*(d/2)*(d/2));
 	}
-	function vHd(v,g) {
+	function vHd(v,g) {// velocity head
 		return v*v/2/g;
 	}
 	function calc() {
         let flowU, distF, g;
         if (unit(DIST)=='ft') {
 			flowU='ft^3/s';
-			g=32.1740;
+			g=32.1740;// gravity
 			distF=12;
         } else {
 			flowU='m^3/s';

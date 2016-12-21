@@ -65,7 +65,7 @@
 		$('#grid').toggle($('#cond :checkbox:gt(1):checked').length>0);
 	}
 
-	function selCond(e) {
+	function selCond(e) {// select condition
 		Conds[listIdx(e)].grid = e.checked;
 		saveConds();
 		setBtns();		
@@ -102,7 +102,7 @@
 		go('notes');
 	}
 
-	function nu() {
+	function nu() {// new
 		Cond = loadProp('defCond');
 		Conds.push(Cond);
 		Cond.name = 'Condition ' + Conds.length;
