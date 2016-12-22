@@ -28,7 +28,7 @@
 			<select name='pump_style'>
 			</select><br>
 			Pump Speed <em>(rpm)</em><br>
-			<input name='pump_rated_speed' value=1780 data-vd-gt><br>
+			<input name='pump_rated_speed' data-vd-gt><br>
 			<label id=lbl_flow>Flow</label>
 			<input name='flow' data-vd-gt><br>
 			<label id=lbl_hd>Head</label>
@@ -91,12 +91,15 @@
 	nmAll().change(()=>{
 		$('#plot').hide();
 		$('#plot_btn').show();
+		setData(SpecSpeed);
+		saveProp('specSpeed',SpecSpeed);
 	});
 
 	setupVd();
-	
-	setVal(nm('flow'),rnd(cvt(2000,FLOW,unit(FLOW),'gpm')));
-	setVal(nm('head'),rnd(cvt(277,DIST,unit(DIST),'ft')));
+
+	setCtls(SpecSpeed);
+	// setVal(nm('flow'),rnd(cvt(2000,FLOW,unit(FLOW),'gpm')));
+	// setVal(nm('head'),rnd(cvt(277,DIST,unit(DIST),'ft')));
 	
 	$('#lbl_flow').append(em(unit(FLOW)));
 	$('#lbl_hd').append(em(unit(DIST)));	

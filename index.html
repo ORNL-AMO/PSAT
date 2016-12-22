@@ -442,7 +442,8 @@
 				saveProp('headTool',HeadTool);
 				saveConds();
 				saveProp('curve',Curve);
-				saveProp('motorPerf',MotorPerf);        
+				saveProp('motorPerf',MotorPerf);      
+				saveProp('specSpeed',SpecSpeed);      
 			}
 			IMP = ['gpm','hp','ft','psig'];// imperial    
 			function loadData(reset) {
@@ -487,6 +488,12 @@
 						motor_rated_voltage: 460,
 						flc: 225.4
 					};
+					SpecSpeed = {
+						pump_style: 0,
+						pump_rated_speed: 1780,
+						flow: 2000,
+						head: 277		
+					}
 					save();        
 				}
 				Conds = loadProp('conditions');
@@ -494,6 +501,7 @@
 				HeadTool = loadProp('headTool');
 				Curve = loadProp('curve'); 
 				MotorPerf = loadProp('motorPerf');
+				SpecSpeed = loadProp('specSpeed');
 				return (DefCond = loadProp('defCond'));
 			}
 
