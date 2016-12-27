@@ -377,6 +377,10 @@
 	function col(e) {// column
 		return $(`td:nth-child(${upTD(e).index()+1})`);
 	}
+	function saveFld(e) {
+			setData(colCond(e),upTD(e));          
+			saveConds();
+	}	
 	function saveCol(e) {
 			setData(colCond(e),col(e));          
 			saveConds();
@@ -530,7 +534,8 @@
 	setupVd();
 		
 	nmAll('#grid').change(function() {
-		saveCol(this);
+		saveFld(this);
+		// saveCol(this);
 		showHdResults(false);
 	});
 
