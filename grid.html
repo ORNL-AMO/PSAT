@@ -362,8 +362,13 @@
 		btn.after(ctl);
 		btn.hide();
 	}
+	function rm(e) {
+		colCond(e).grid = false;
+		col(e).remove();
+		$(e).parent().remove();
+	}
 
-// col
+// io
 
 	function showIO(e) {
 		const dlg = $('#io');
@@ -397,11 +402,6 @@
 	function colCond(e) {
 		return upTD(e).data('cond');
 	}  
-	function rm(e) {
-		colCond(e).grid = false;
-		col(e).remove();
-		$(e).parent().remove();
-	}
 	function colArgs(col) {
 		return cvtArg(col.data('cond'));    
 	}
