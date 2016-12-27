@@ -88,10 +88,10 @@
 
 	setPumpStyle();
 
-	nmAll().change(()=>{
+	nmAll().change((ev)=>{
 		$('#plot').hide();
 		$('#plot_btn').show();
-		setData(SpecSpeed);
+		setFromCtl(SpecSpeed,ev.target);
 		saveProp('specSpeed',SpecSpeed);
 	});
 

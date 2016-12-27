@@ -298,31 +298,33 @@
 			}
 
 		// ctls
-
+			function setFromCtl(d,el) {
+				let v;
+				switch (el.type) {
+					case 'checkbox':
+						v = el.checked;
+						break;
+					case 'select-one':
+						v = $(el).children(':selected').index();
+						if ($(el).children().first().is(':disabled')) {
+							v--;
+						}
+						break;
+					case 'radio':
+						if ($(el).is(':checked')) {
+							v = $(el).val();
+						} 
+						break;
+					default:
+						v = $(el).val();
+				}
+				if (v!==undefined) {
+					d[nmGet(el)] = v;
+				}
+			}
 			function setData(d,e) {// controls -> data
 				nmAll(e).each(function(i,el) {
-					let v;
-					switch (el.type) {
-						case 'checkbox':
-							v = el.checked;
-							break;
-						case 'select-one':
-							v = $(el).children(':selected').index();
-							if ($(el).children().first().is(':disabled')) {
-								v--;
-							}
-							break;
-						case 'radio':
-							if ($(el).is(':checked')) {
-								v = $(el).val();
-							} 
-							break;
-						default:
-							v = $(el).val();
-					}
-					if (v!==undefined) {
-						d[nmGet(el)] = v;
-					}
+					setFromCtl(d,el);
 				});
 				return d; 
 			}     

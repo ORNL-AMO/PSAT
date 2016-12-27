@@ -36,8 +36,8 @@ Efficiency Class
 	function result() {
 		$('#result').text(rnd(api('nema',{efficiency:0})));
 	}
-	nmAll().change((ev) => {//debugger;
-		setData(Nema,ev.target.parentElement);
+	nmAll().change((ev) => {
+		setFromCtl(Nema,ev.target);
 		saveProp('nema',Nema);
 		result();
 	});
