@@ -15,14 +15,14 @@
 <div>
 	Line Frequency <em>(Hz)</em>
 	<label><input name=line type=radio value=0> 50</label>
-	<label><input name=line type=radio value=1 checked> 60</label>
+	<label><input name=line type=radio value=1> 60</label>
 </div>
 <span id='lblMRP'>Motor Rated Power</span>
-<div><input name='motor_rated_power' value=200 data-vd-gt></div>
+<div><input name='motor_rated_power' data-vd-gt></div>
 Motor Rated Speed <em>(rpm)</em>
-<div><input name='motor_rated_speed' value=1780 data-vd-gt></div>
+<div><input name='motor_rated_speed' data-vd-gt></div>
 Efficiency Class
-<label><input name='efficiency_class' type=radio value=0 checked> Standard</label>
+<label><input name='efficiency_class' type=radio value=0> Standard</label>
 <label><input name='efficiency_class' type=radio value=1> Energy</label>
 <hr>
 <div id=resultTxt><span>TEFC: </span><span id=result></span><em> (%)</em></div>
@@ -31,6 +31,11 @@ Efficiency Class
 	$('#lblMRP').append(em(unit(POWER)));    
 
 	setupVd();
-	nmAll().change(() => $('#result').text(rnd(api('nema',{efficiency:0}))));
-	nmAll().first().change();
+	setCtls(Nema);
+	nmAll().change(() => {
+		$('#result').text(rnd(api('nema',{efficiency:0})));
+		setData(Nema);
+		saveProp('nema',Nema);
+	});
+	//nmAll().first().change();
 </script>

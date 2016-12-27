@@ -443,7 +443,8 @@
 				saveConds();
 				saveProp('curve',Curve);
 				saveProp('motorPerf',MotorPerf);      
-				saveProp('specSpeed',SpecSpeed);      
+				saveProp('specSpeed',SpecSpeed);
+				saveProp('nema',Nema);     
 			}
 			IMP = ['gpm','hp','ft','psig'];// imperial    
 			function loadData(reset) {
@@ -493,7 +494,13 @@
 						pump_rated_speed: 1780,
 						flow: 2000,
 						head: 277		
-					}
+					};
+					Nema = {
+						line: 1,
+						motor_rated_power: 200,
+						motor_rated_speed: 1780,
+						efficiency_class: 0
+					};
 					save();        
 				}
 				Conds = loadProp('conditions');
@@ -502,6 +509,7 @@
 				Curve = loadProp('curve'); 
 				MotorPerf = loadProp('motorPerf');
 				SpecSpeed = loadProp('specSpeed');
+				Nema = loadProp('nema');
 				return (DefCond = loadProp('defCond'));
 			}
 
