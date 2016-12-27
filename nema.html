@@ -32,10 +32,13 @@ Efficiency Class
 
 	setupVd();
 	setCtls(Nema);
-	nmAll().change(() => {
+
+	function result() {
 		$('#result').text(rnd(api('nema',{efficiency:0})));
+	}
+	nmAll().change(() => {
 		setData(Nema);
 		saveProp('nema',Nema);
 	});
-	nmAll().first().change();
+	result();
 </script>
