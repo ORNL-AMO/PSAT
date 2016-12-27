@@ -85,10 +85,10 @@
 	setCtls(MotorPerf);
 	nm('efficiency_class').change(effChg);	
 	setupVd();
-	nmAll().change(()=>{
+	nmAll().change((ev)=>{
 		$('canvas').hide();
 		$('#plot_btn').show();
-		setData(MotorPerf);
+		setFromCtl(MotorPerf,ev.target);
 		saveProp('motorPerf',MotorPerf);
 	});
 	effChg();
