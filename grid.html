@@ -381,18 +381,15 @@
 			setData(colCond(e),upTD(e));          
 			saveConds();
 	}	
-	function saveCol(e) {
-			setData(colCond(e),col(e));          
-			saveConds();
-	}
 	function io(dlg) {    
-		let e = dlg.data('src');
+		let e = dlg.data('src'), cond = colCond(e);
 		if(parIdx(dlg.find(':checked'))==0) {
-			setCtls(DefCond,col(e));
-			saveCol(e);
-			showHdResults()
+			$.extend(cond,DefCond);
+			setCtls(cond,col(e));
+			saveConds();
+			showHdResults();
 		} else {
-			setData(DefCond,col(e));
+			$.extend(DefCond,cond);
 			saveProp('defCond',DefCond);
 		}
 		dom(dlg).close(); 
@@ -535,7 +532,6 @@
 		
 	nmAll('#grid').change(function() {
 		saveFld(this);
-		// saveCol(this);
 		showHdResults(false);
 	});
 
