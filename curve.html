@@ -74,20 +74,10 @@
 
 // ctls 
 
-	function inpChg2(e) {		
+	function inpChg(e) {		
 		$('#plot').hide();
 		pg('button').show();
 		setFromCtl(Curve,e.target);
-		// Curve.C = pg('#C').val();
-		// Curve.plot = $.makeArray(ptsInp().map((i,v)=>$(v).val()));
-		saveProp('curve',Curve);
-	}
-
-	function _inpChg() {		
-		$('#plot').hide();
-		pg('button').show();
-		Curve.C = pg('#C').val();
-		Curve.plot = $.makeArray(ptsInp().map((i,v)=>$(v).val()));
 		saveProp('curve',Curve);
 	}
 
@@ -147,7 +137,7 @@
 
 	pg('input').change(ev => {
 		vdGt(ev.target);
-		inpChg2(ev);
+		inpChg(ev);
 	});
 	ptsInp().change(ev => {
 		pg('select :disabled')[parIdx(ev.target.parentElement,-1)].selected=true;
@@ -160,10 +150,6 @@
 	showUnit('Head',DIST);
 
 	setCtls(Curve);
-	// setVal($('#C'),Curve.C);
-	// Curve.plot.forEach((v,i) => {
-	// 	setVal(ptsInp().eq(i),rnd(v));
-	// });	
 	
 </script>
 
