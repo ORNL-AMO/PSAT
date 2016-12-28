@@ -212,9 +212,6 @@
 		r('discharge',disHd);
 		r('Pump',Head);
 		$('#accept').show();
-
-		setData(HeadTool);
-		saveProp('headTool',HeadTool);
 	}
 
 // init
@@ -225,6 +222,8 @@
 	$('input').change(function () {
 		pg('#results ~ :not(:last-child) :last-child').text('');
 		pg('#accept').hide();
+		setFromCtl(HeadTool,this);
+		saveProp('headTool',HeadTool);
 	});
 	setCtls(HeadTool);
 	suction();
