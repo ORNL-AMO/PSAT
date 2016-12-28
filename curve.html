@@ -72,30 +72,19 @@
 
 <script>//# sourceURL=*curve
 
-// ctls 
+	function selCond(e) {// select condition
+		const cond = $(e).find(':selected').data('cond'),
+				tr = $(e).parent().parent(),
+				inp = nmAll(tr);
 
-	function inpChg(e) {		
-		$('#plot').hide();
-		pg('button').show();
-		setFromCtl(Curve,e.target);
-		saveProp('curve',Curve);
-	}
-
-	function selCond(e) {
-		const c = $(e).find(':selected').data('cond'),
-				inp = $(e).parent().parent().find('input');
-
-		Curve[inp.first().attr('name')] = c.flow;
-		Curve[inp.last().attr('name')] = c.head;
-		setCtls(Curve,$(e).parent().parent())
+		Curve[inp.first().attr('name')] = cond.flow;
+		Curve[inp.last().attr('name')] = cond.head;
+		setCtls(Curve,tr)
 		
 		$('#plot').hide();
 		pg('button').show();
 
 		saveProp('curve',Curve);
-		//setVal(inp.first(),rnd(c.flow));
-		//setVal(inp.last(),rnd(c.head));	
-		//inpChg();
 	}
 
 // plot
@@ -131,15 +120,16 @@
 	  pg('select').append($(`<option>${c.name}</option>`).data('cond',c));		
 	});
 	
-	function ptsInp() {
-		return pg('#points input');
-	}
-
 	pg('input').change(ev => {
 		vdGt(ev.target);
-		inpChg(ev);
+		$('#plot').hide();
+		pg('button').show();
+		setFromCtl(Curve,ev.target);
+		saveProp('curve',Curve);
 	});
-	ptsInp().change(ev => {
+
+	// clear select on input change
+	pg('#points input').change(ev => {
 		pg('select :disabled')[parIdx(ev.target.parentElement,-1)].selected=true;
 	});
 
