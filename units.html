@@ -117,8 +117,8 @@
 		cvtObj(HeadTool,['Ds','Dd'],DIST,DIST_small[nunits[DIST._num]],DIST_small[unit(DIST)]);
 		chg(DIST,HeadTool,['Zs','Ztnk_s','Zd']);		
 		chg(PRESSURE,HeadTool,['Ps','Pg_s','Pd']);		
-		chg(FLOW, Curve.plot, [0,2]);
-		chg(DIST, Curve.plot, [1,3]);
+		chg(FLOW, Curve, ['f1','f2']);
+		chg(DIST, Curve, ['h1','h2']);
 		chg(POWER,MotorPerf,'motor_rated_power');
 		chg(FLOW,SpecSpeed,'flow');
 		chg(DIST,SpecSpeed,'head');

@@ -45,17 +45,17 @@
 		</tr>
 		<tr>
 			<td><select onchange='selCond(this)'><option selected disabled>Choose</option></select></td>			
-			<td><input></td>
-			<td><input></td>			
+			<td><input name=f1></td>
+			<td><input name=h1></td>			
 		</tr>
 		<tr>
 			<td><select onchange='selCond(this)'><option selected disabled>Choose</option></select></td>			
-			<td><input></td>
-			<td><input></td>			
+			<td><input name=f2></td>
+			<td><input name=h2></td>			
 		</tr>
 	</table>
 	Loss exponent<br>
-	<input id=C size=10><br>	
+	<input name=C size=10><br>	
 	<button id=plot_btn class='prime' onclick='plot()'>PLOT</button><br>
 	<div id=plot>
 		<table>
@@ -74,7 +74,16 @@
 
 // ctls 
 
-	function inpChg() {		
+	function inpChg2(e) {		
+		$('#plot').hide();
+		pg('button').show();
+		setFromCtl(Curve,e.target);
+		// Curve.C = pg('#C').val();
+		// Curve.plot = $.makeArray(ptsInp().map((i,v)=>$(v).val()));
+		saveProp('curve',Curve);
+	}
+
+	function _inpChg() {		
 		$('#plot').hide();
 		pg('button').show();
 		Curve.C = pg('#C').val();
@@ -83,11 +92,20 @@
 	}
 
 	function selCond(e) {
-		const 	c = $(e).find(':selected').data('cond'),
+		const c = $(e).find(':selected').data('cond'),
 				inp = $(e).parent().parent().find('input');
-		setVal(inp.first(),rnd(c.flow));
-		setVal(inp.last(),rnd(c.head));	
-		inpChg();
+
+		Curve[inp.first().attr('name')] = c.flow;
+		Curve[inp.last().attr('name')] = c.head;
+		setCtls(Curve,$(e).parent().parent())
+		
+		$('#plot').hide();
+		pg('button').show();
+
+		saveProp('curve',Curve);
+		//setVal(inp.first(),rnd(c.flow));
+		//setVal(inp.last(),rnd(c.head));	
+		//inpChg();
 	}
 
 // plot
@@ -99,9 +117,9 @@
 		return [step, Math.ceil(max / step)];
 	}
 	function plot() {		
-		const [f1, h1, f2, h2] = Curve.plot,  
-				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,Curve.C) - Math.pow(f1,Curve.C))),
-				k = (h2-h1)/(Math.pow(f2,Curve.C)-Math.pow(f1,Curve.C));							
+		const {f1, h1, f2, h2, C} = Curve,  
+				hS = h1-(Math.pow(f1,1.9) * (h2-h1) / (Math.pow(f2,C) - Math.pow(f1,C))),
+				k = (h2-h1)/(Math.pow(f2,C)-Math.pow(f1,C));							
 
 		P = {
 			padX: 25,
@@ -129,7 +147,7 @@
 
 	pg('input').change(ev => {
 		vdGt(ev.target);
-		inpChg();
+		inpChg2(ev);
 	});
 	ptsInp().change(ev => {
 		pg('select :disabled')[parIdx(ev.target.parentElement,-1)].selected=true;
@@ -141,10 +159,11 @@
 	showUnit('Flow',FLOW);
 	showUnit('Head',DIST);
 
-	setVal($('#C'),Curve.C);
-	Curve.plot.forEach((v,i) => {
-		setVal(ptsInp().eq(i),rnd(v));
-	});	
+	setCtls(Curve);
+	// setVal($('#C'),Curve.C);
+	// Curve.plot.forEach((v,i) => {
+	// 	setVal(ptsInp().eq(i),rnd(v));
+	// });	
 	
 </script>
 
