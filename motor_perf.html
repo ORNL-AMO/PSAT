@@ -21,9 +21,9 @@
 			<label><input name=line type=radio value=1> 60</label>
 		</div>
 		Motor Power <em id=unit_pow></em>
-		<div><input name=motor_rated_power data-vd-gt></div>
+		<div><input name=motor_rated_power data-vd-rng></div>
 		Speed <em>(rpm)</em>
-		<div><input name=motor_rated_speed data-vd-gt></div>
+		<div><input name=motor_rated_speed data-vd-rng></div>
 		<div>
 			Efficiency Class
 			<label><input name='efficiency_class' type=radio value=0> Standard</label>
@@ -32,7 +32,7 @@
 			<span><input name='efficiency'> <em>(%)</em></span>
 		</div>
 		Voltage <em>(V)</em>
-		<div><input name=motor_rated_voltage data-vd-gt></div>
+		<div><input name=motor_rated_voltage data-vd-rng></div>
 		Full-load Current <em>(A)</em>
 		<div><input name='flc'> <button onclick='estFLC(this)'>EST</button></div>
 		<button id=plot_btn onclick='plot()'>PLOT</button>

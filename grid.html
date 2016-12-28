@@ -72,14 +72,14 @@
 			<select name='pump_style' onchange='pumpChg(this)' data-init-chg>
 				<option>Specified optimal efficiency</option>
 			</select>
-			<span><input name='pump_specified' data-vd-gt></input> <em>(%)</em></span>
+			<span><input name='pump_specified' data-vd-rng></input> <em>(%)</em></span>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<div>Speed <em>(rpm)</em></div>
 		</td>
-		<td><input name='pump_rated_speed' data-vd-gt></td>
+		<td><input name='pump_rated_speed' data-vd-rng></td>
 	</tr>
 	<tr>
 		<td>Drive</td>
@@ -94,15 +94,15 @@
 		<td>
 			<div>Kinematic Viscosity <em>(cS)</em></div>
 		</td>
-		<td><input name='viscosity' data-vd-gt></td>
+		<td><input name='viscosity' data-vd-rng></td>
 	</tr>
 	<tr>
 		<td>Specific Gravity</td>
-		<td><input name='specific_gravity' data-vd-gt=.1></td>
+		<td><input name='specific_gravity' data-vd-rng=.1></td>
 	</tr>
 	<tr>
 		<td>Number Stages</td>
-		<td><input name='stages' type=number min=1 data-vd-gt></td>
+		<td><input name='stages' type=number min=1 data-vd-rng></td>
 	</tr>
 	<tr>
 		<td>Fixed Specific Speed?</td>
@@ -127,14 +127,14 @@
 			<div>Rated Power</div>
 		</td>
 		<td>
-			<input name='motor_rated_power' data-vd-gt> <button onclick="selMRP($(this))"><i class="fa fa-caret-square-o-down"/></button>
+			<input name='motor_rated_power' data-vd-rng> <button onclick="selMRP($(this))"><i class="fa fa-caret-square-o-down"/></button>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<div>Speed <em>(rpm)</em></div>
 		</td>
-		<td><input name='motor_rated_speed' data-vd-gt></td>
+		<td><input name='motor_rated_speed' data-vd-rng></td>
 	</tr>
 	<tr>
 		<td>Efficiency Class</td>
@@ -144,26 +144,26 @@
 				<option>Energy</option>
 				<option>Custom</option>
 			</select>
-			<span><input name='efficiency' data-vd-gt></input> <em>(%)</em></span>
+			<span><input name='efficiency' data-vd-rng></input> <em>(%)</em></span>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<div>Voltage<em>(V)</em></div>
 		</td>
-		<td><input name='motor_rated_voltage' data-vd-gt></td>
+		<td><input name='motor_rated_voltage' data-vd-rng></td>
 	</tr>
 	<tr>
 		<td>
 			<div>Full-load Current<em>(A)</em></div>
 		</td>
-		<td><input name='motor_rated_flc' data-vd-gt> <button onclick='estFLC(this)'>EST</button></td>
+		<td><input name='motor_rated_flc' data-vd-rng> <button onclick='estFLC(this)'>EST</button></td>
 	</tr>
 	<tr>
 		<td>
 			<div>Size Margin <em>(%)</em></div>
 		</td>
-		<td><input name='margin' data-vd-gt=0></td>
+		<td><input name='margin' data-vd-rng=0></td>
 	</tr>
 	<tr>
 		<td class='th'>Cost</td>
@@ -173,12 +173,12 @@
 		<td>
 			<div>Operating Fraction <em>(%)</em></div>
 		</td>
-		<td><input name='fraction' data-vd-gt='0.1-100'></td>
+		<td><input name='fraction' data-vd-rng='0.1-100'></td>
 	</tr>
 	<tr>
 		<td>
 			<div>Energy Cost<em>($/kwhr)</em></div></td>
-		<td><input name='cost' data-vd-gt=0></td>
+		<td><input name='cost' data-vd-rng=0></td>
 	</tr>
 	<tr>
 		<td class='th'>Field</td>
@@ -187,14 +187,14 @@
 	<tr>
 		<td>
 			<div>Flow Rate</td>
-		<td><input name='flow' data-vd-gt></td>
+		<td><input name='flow' data-vd-rng></td>
 	</tr>
 	<tr>
 		<td>
 			<div><span class=flxwd>Head<button style='margin-left: .25rem' class=prime onclick='go("curve")'><i class="fa fa-line-chart"/></button></span></div>
 		</td>
 		<td>
-			<input name='head' data-vd-gt>
+			<input name='head' data-vd-rng>
 			<button onclick='gotoHead(this)'><i class="fa fa-wrench"/></button>
 		</td>
 	</tr>
@@ -202,19 +202,19 @@
 		<td>
 			<div><span>Motor Power <i class="fa fa-question-circle" title='Enter either power or current, for the desired estimation method'/></span><em>(kW)</em></div>
 		</td>
-		<td><input name='motor_field_power' data-vd-gt onchange="clrFld('motor_field_current',this)"></td>
+		<td><input name='motor_field_power' data-vd-rng onchange="clrFld('motor_field_current',this)"></td>
 	</tr>
 	<tr>
 		<td>
 			<div>Motor Current<em>(A)</em></div>
 		</td>
-		<td><input name='motor_field_current' data-vd-gt onchange="clrFld('motor_field_power',this)"></td>
+		<td><input name='motor_field_current' data-vd-rng onchange="clrFld('motor_field_power',this)"></td>
 	</tr>
 	<tr>
 		<td>
 			<div>Motor Voltage<em>(V)</em></div>
 		</td>
-		<td><input name='motor_field_voltage' data-vd-gt></td>
+		<td><input name='motor_field_voltage' data-vd-rng></td>
 	</tr>
 	<tr id=results>
 		<td class='th'>Results</td>

@@ -121,7 +121,7 @@
 	});
 	
 	pg('input').change(ev => {
-		vdGt(ev.target);
+		vdRng(ev.target);
 		$('#plot').hide();
 		pg('button').show();
 		setFromCtl(Curve,ev.target);
