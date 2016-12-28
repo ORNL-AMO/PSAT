@@ -198,7 +198,7 @@
 		]
 		setCtls(UnitExample);
 		$('table input').change(ev => {
-			setData(UnitExample,$(ev.target).parent());		
+			setFromCtl(UnitExample,ev.target);		
 		});
 	}
 	
