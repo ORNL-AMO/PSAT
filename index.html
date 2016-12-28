@@ -241,19 +241,17 @@
 		// validation
 
 			function vdGt(e,min=1,max=Number.MAX_VALUE) {// validate 
-				let v = $(e).val();
-				if(Number(v) >= min && Number(v) <= max)  {
+				let v = $(e).val().trim();
+				if(v != '' && Number(v) >= min && Number(v) <= max)  {
 					e.defaultValue = v;
-				} else if (e.defaultValue >= min) {
-					$(e).val(e.defaultValue);          
 				} else {
-					$(e).val(min);
+					$(e).val(e.defaultValue);  
 				}
 			}
 			function setupVd() {// set validation handler
 				$('[data-vd-gt]').change(ev => {
-					let rng = $(ev.target).attr('data-vd-gt').split('-');
-					let min = rng[0];
+					let 	rng = $(ev.target).attr('data-vd-gt').split('-'),
+							min = rng[0];
 					if (min == '') {
 						min = undefined;
 					}
