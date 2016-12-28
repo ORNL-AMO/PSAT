@@ -240,13 +240,6 @@
 
 		// validation
 
-			function setDefVal(e,v) {// set default value
-				$(e).prop('defaultValue',v);
-			}
-			function setVal(e,v) {
-				$(e).val(v);
-				setDefVal(e,v);        
-			}
 			function vdGt(e,min=1) {// validate >
 				if(Number($(e).val()) >= min) {
 					e.defaultValue = $(e).val();
@@ -298,6 +291,7 @@
 			}
 
 		// ctls
+		
 			function setFromCtl(d,el) {
 				let v;
 				switch (el.type) {
@@ -344,7 +338,7 @@
 							break;
 						default:
 							ctl.val(rnd(v));
-							setDefVal(ctl,v);
+							$(e).prop('defaultValue',rnd(v));							
 					}
 					if (ctl.is('[data-init-chg]')) {
 						ctl.trigger('change');
