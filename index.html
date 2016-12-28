@@ -240,8 +240,9 @@
 
 		// validation
 
-			function vdGt(e,min=1) {// validate >
-				if(Number($(e).val()) >= min) {
+			function vdGt(e,min=1,max=Number.MAX_VALUE) {// validate 
+				let v = $(e).val();
+				if(Number(v) >= min && Number(v) <= max)  {
 					e.defaultValue = $(e).val();
 				} else if (e.defaultValue >= min) {
 					$(e).val(e.defaultValue);          
@@ -251,11 +252,12 @@
 			}
 			function setupVd() {// set validation handler
 				$('[data-vd-gt]').change(ev => {
-					let min = $(ev.target).attr('data-vd-gt');
+					let rng = $(ev.target).attr('data-vd-gt').split('-');
+					let min = rng[0];
 					if (min == '') {
 						min = undefined;
 					}
-					vdGt(ev.target,min);
+					vdGt(ev.target,min,rng[1]);
 				});
 			}
 
