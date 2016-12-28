@@ -137,7 +137,7 @@
 
 // init 
 
-	Conds.filter(c => c.grid).forEach(c => {
+	Conds.forEach(c => {
 	  pg('select').append($(`<option>${c.name}</option>`).data('cond',c));		
 	});
 	
