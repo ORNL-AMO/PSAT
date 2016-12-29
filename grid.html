@@ -384,7 +384,7 @@
 		return $(`td:nth-child(${upTD(e).index()+1})`);
 	}
 	function saveFld(e) {
-			setData(colCond(e),upTD(e));          
+			setFromCtl(colCond(e),e);          
 			saveConds();
 	}	
 	function io(dlg) {    
