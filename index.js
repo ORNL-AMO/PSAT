@@ -2,7 +2,11 @@ Electron = require('electron');
 App = Electron.app;
 
 App.on('ready', function() {
-	Win = new Electron.BrowserWindow({width: 1280, height: 1024});
+	let arg = {width: 1280, height: 1024};
+	if (process.platform == 'linux') {
+		arg.icon = __dirname + '/pump.png';
+	}
+	Win = new Electron.BrowserWindow(arg);
 	Win.loadURL(`file://${__dirname}/index.html`);
 })
 
