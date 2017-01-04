@@ -20,7 +20,7 @@
 			}
 			label [type=radio] {
 				vertical-align: middle;
-				margin-top: 0;        
+				margin-top: 0;
 			}
 			label {
 				display: block;
@@ -42,7 +42,7 @@
 			.prime {
 				color: white;
 				background-color: dodgerblue;
-			}     
+			}
 			button {
 				color: dodgerblue;
 				background-color: white;
@@ -70,7 +70,7 @@
 		/* layout */
 
 			.flxwd {
-				display:flex; 
+				display:flex;
 				justify-content: space-between;
 			}
 
@@ -78,8 +78,8 @@
 				padding:0 5%;
 			}
 			#banner {
-				padding:10px 5%;   
-				margin-bottom: 10px;   
+				padding:10px 5%;
+				margin-bottom: 10px;
 				background-color: #5d9300;
 				box-shadow: 0 3px 3px rgba(0,0,0,.5);
 
@@ -96,10 +96,10 @@
 				font-family: sans-serif;
 				font-size: 14pt;
 			}
-			
+
 		</style>
 	</head>
-	<body> 
+	<body>
 		<div id="banner">
 			<img src="logo_eere.png" style='padding-right:1rem'>
 			<span style='padding-left:1rem;text-align:right'>Pumping System Assessment Tool</span>
@@ -121,11 +121,11 @@
 		</select>
 		<div id=container></div>
 		<script>
-		
+
 			function dlgFil(ext='psat') {// dialog filter
 				return {filters: [{ name: 'PSAT', extensions: [ext] }]};
-			}			
-		
+			}
+
 			function rnd(v,p=1) {
 				const m=Math.pow(10,p);
 				return $.isNumeric(v) ? Math.round(v*m)/m : v;
@@ -147,20 +147,20 @@
 					let r = P.m.get(x);
 					if (!r) {
 						r = P.getYobj(x);
-						P.m.set(x,r);						
+						P.m.set(x,r);
 					}
 					return r[prop];
 				},col);
 			}
-			function curve(fn,col='#FECB00') {// plot fn using color       
-				P.ctx.strokeStyle = col;	
+			function curve(fn,col='#FECB00') {// plot fn using color
+				P.ctx.strokeStyle = col;
 				P.ctx.beginPath();
 				for (let x=0; rnd(x,2)<=P.stepX*P.cntX; x+=P.stepX/100) {
-					const y = fn(P.xCvt(x));	          
+					const y = fn(P.xCvt(x));
 					if ( y <= P.yMax(x)) {
 						console.log(rnd(P.xCvt(x),2)+','+rnd(y,2));
-						P.ctx.lineTo(xPos(x), yPos(y));		
-					}		
+						P.ctx.lineTo(xPos(x), yPos(y));
+					}
 				}
 				P.ctx.stroke();
 			}
@@ -182,22 +182,22 @@
 				ctx.textAlign = 'center';
 				ctx.textBaseline = 'middle';
 				ctx.font = '12px san serif';
-				
+
 				ctx.beginPath();
 				ctx.textBaseline = 'top';
 				for (let i=0; i<=P.cntX; i++) {
 					const x = i*P.stepX, xp = xPos(x);
 					ctx.moveTo(xp,P.padY);
-					ctx.lineTo(xp,P.cnv.height-P.padY);	
-					ctx.fillText(P.xCvt(x),xp,P.cnv.height-P.padY+5);	
+					ctx.lineTo(xp,P.cnv.height-P.padY);
+					ctx.fillText(P.xCvt(x),xp,P.cnv.height-P.padY+5);
 				}
 				ctx.textAlign = 'right';
 				ctx.textBaseline = 'middle';
 				for (let j=0; j<=P.cntY; j++) {
 					const y = j*P.stepY, yp = yPos(y);
 					ctx.moveTo(P.padX,yp);
-					ctx.lineTo(P.cnv.width-P.padX,yp);	
-					ctx.fillText(y,P.padX-5,yp);	
+					ctx.lineTo(P.cnv.width-P.padX,yp);
+					ctx.fillText(y,P.padX-5,yp);
 				}
 				ctx.stroke();
 				ctx.save();
@@ -206,7 +206,7 @@
 				ctx.font = '14px san serif';
 				ctx.textAlign = 'center';
 				ctx.fillText(lblX,P.cnv.width/2,P.cnv.height-.33*P.padY);
-				
+
 				ctx.textAlign='right';
 				ctx.textBaseline='bottom';
 				ctx.fillStyle = '#FECB00';
@@ -228,7 +228,7 @@
 				const r = Bridge.results(a);
 				console.log(a);
 				for (var key in r) {
-					console.log(key,r[key][0]);  
+					console.log(key,r[key][0]);
 				}
 				['Motor Rated Power','Motor Shaft Power','Pump Shaft Power'].forEach(function(e) {
 					cvtObj(r[e],[0,1],POWER,unit(POWER),'hp');
@@ -240,12 +240,12 @@
 
 		// validation
 
-			function vdRng(e,min=1,max=Number.MAX_VALUE) {// validate 
+			function vdRng(e,min=1,max=Number.MAX_VALUE) {// validate
 				let v = $(e).val().trim();
 				if(v != '' && Number(v) >= min && Number(v) <= max)  {
 					e.defaultValue = v;
 				} else {
-					$(e).val(e.defaultValue);  
+					$(e).val(e.defaultValue);
 				}
 			}
 			function setupVd() {// set validation handler
@@ -274,7 +274,7 @@
 				return nm('',e);
 			}
 			function nm(nm,e=document) {
-				return $(e).find(`[name=${nm}]`.replace('=]',']'));              
+				return $(e).find(`[name=${nm}]`.replace('=]',']'));
 			}
 			function parIdx(e,a=0) {
 				return $(e).parent().index()+a;
@@ -291,7 +291,7 @@
 			}
 
 		// ctls
-		
+
 			function setFromCtl(d,el) {
 				let v;
 				switch (el.type) {
@@ -307,7 +307,7 @@
 					case 'radio':
 						if ($(el).is(':checked')) {
 							v = $(el).val();
-						} 
+						}
 						break;
 					default:
 						v = $(el).val();
@@ -320,8 +320,8 @@
 				nmAll(e).each(function(i,el) {
 					setFromCtl(d,el);
 				});
-				return d; 
-			}     
+				return d;
+			}
 			function setCtls(d,el) {// data -> controls
 				nmAll(el).each((j,e)=>{
 					const ctl = $(e), v = d[nmGet(ctl)];
@@ -338,7 +338,7 @@
 							break;
 						default:
 							ctl.val(rnd(v));
-							$(e).prop('defaultValue',rnd(v));							
+							$(e).prop('defaultValue',rnd(v));
 					}
 					if (ctl.is('[data-init-chg]')) {
 						ctl.trigger('change');
@@ -348,7 +348,7 @@
 
 		// unit conversion
 
-			FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316, 
+			FLOW = {MGD:694.4422834,'m^3/hr':4.402867544,'L/s':15.85032316,
 				'm^3/s':15850.32316, 'ft^3/s':448.8311693, _num:0};
 			POWER = {kW:1.341022218, _num:1}
 			DIST = {m:3.280839895, inches: 1/12, mm: 3.280839895/1000, _num:2};// distance
@@ -383,12 +383,12 @@
 				const d=$.extend({},c);
 				cvtObj(d,'flow',FLOW,'gpm');
 				cvtObj(d,'motor_rated_power',POWER,'hp');
-				//cvtObj(d,'motor_field_power',POWER,'kW');      
+				//cvtObj(d,'motor_field_power',POWER,'kW');
 				cvtObj(d,'head',DIST,'ft');
-				return d;    
+				return d;
 			}
-			
-			
+
+
 		// pg nav
 
 			function main() {
@@ -406,11 +406,11 @@
 						back = true;
 						if (Nav.length>2) {
 							home = true;
-						}            
+						}
 					}
 					$('#back').toggle(back);
 					$('#home').toggle(home);
-				});       
+				});
 			}
 			function go(nm) {// nm: name
 				Nav.push(nm);
@@ -425,7 +425,7 @@
 
 			function saveConds() {
 				saveProp('conditions',Conds);
-			}  
+			}
 			function loadProp(nm) {
 				return JSON.parse(LS.getItem(nm));
 			}
@@ -433,50 +433,52 @@
 				LS.setItem(nm,JSON.stringify(v));
 			}
 			function save() {
-				saveProp('defCond',DefCond);
-				saveProp('units',Units);
-				saveProp('headTool',HeadTool);
-				saveConds();
-				saveProp('curve',Curve);
-				saveProp('motorPerf',MotorPerf);      
-				saveProp('specSpeed',SpecSpeed);
-				saveProp('nema',Nema);     
+				saveProp('data',D);
+				//saveProp('defCond',DefCond);
+				// saveProp('units',Units);
+				// saveProp('headTool',HeadTool);
+				// saveConds();
+				// saveProp('curve',Curve);
+				// saveProp('motorPerf',MotorPerf);
+				// saveProp('specSpeed',SpecSpeed);
+				// saveProp('nema',Nema);
 			}
-			IMP = ['gpm','hp','ft','psig'];// imperial    
+			IMP = ['gpm','hp','ft','psig'];// imperial
 			function loadData(reset) {
 				if (reset) {
-					DefCond = {
-						pump_style: 5,
-						pump_specified: 0,
-						pump_rated_speed: 1780,
-						drive: 0,
-						viscosity: 1,
-						specific_gravity: 1,
-						stages: 1,
-						fixed_speed: false,
-						line: 1,
-						motor_rated_power: 200,
-						motor_rated_speed: 1780,
-						efficiency_class: 0,
-						efficiency:75,
-						motor_rated_voltage: 460,
-						motor_rated_flc: 228.6,
-						margin: 0,
-						fraction: 100,
-						cost: .05,
-						flow: 2000,
-						head: 277,
-						motor_field_power: 150,
-						motor_field_current: '',
-						motor_field_voltage: 460,
+					D = {
+						defCond: {
+							pump_style: 5,
+							pump_specified: 0,
+							pump_rated_speed: 1780,
+							drive: 0,
+							viscosity: 1,
+							specific_gravity: 1,
+							stages: 1,
+							fixed_speed: false,
+							line: 1,
+							motor_rated_power: 200,
+							motor_rated_speed: 1780,
+							efficiency_class: 0,
+							efficiency:75,
+							motor_rated_voltage: 460,
+							motor_rated_flc: 228.6,
+							margin: 0,
+							fraction: 100,
+							cost: .05,
+							flow: 2000,
+							head: 277,
+							motor_field_power: 150,
+							motor_field_current: '',
+							motor_field_voltage: 460,
 
-						grid: false       
-					};        
-					Units = IMP;
-					Conds = [];
-					HeadTool = {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1,Zs:0,Zd:0,Pg_s:115,Ztnk_s:0};  
-					Curve = {C:1.9,f1:2000,h1:277,f2:2300,h2:350};
-					MotorPerf = {
+							grid: false
+					},
+					units: IMP,
+					conds: [],
+					headTool: {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1,Zs:0,Zd:0,Pg_s:115,Ztnk_s:0},
+					curve: {C:1.9,f1:2000,h1:277,f2:2300,h2:350},
+					motorPerf: {
 						line: 1,
 						motor_rated_power: 200,
 						motor_rated_speed: 1780,
@@ -484,25 +486,26 @@
 						efficiency: 75,
 						motor_rated_voltage: 460,
 						flc: 225.4
-					};
-					SpecSpeed = {
+					},
+					specSpeed = {
 						pump_style: 0,
 						pump_rated_speed: 1780,
 						flow: 2000,
-						head: 277		
-					};
-					Nema = {
+						head: 277
+					},
+					nema = {
 						line: 1,
 						motor_rated_power: 200,
 						motor_rated_speed: 1780,
 						efficiency_class: 0
-					};
-					save();        
+					}
 				}
+				save();
+			}
 				Conds = loadProp('conditions');
 				Units = loadProp('units');
 				HeadTool = loadProp('headTool');
-				Curve = loadProp('curve'); 
+				Curve = loadProp('curve');
 				MotorPerf = loadProp('motorPerf');
 				SpecSpeed = loadProp('specSpeed');
 				Nema = loadProp('nema');
@@ -522,7 +525,7 @@
 			$(document).ready(function() {
 				try {
 					Dlg=require('electron').remote.dialog;
-					Bridge = require('./build/Release/bridge');				
+					Bridge = require('./build/Release/bridge');
 					Bridge.initTest({});
 					main();
 				} catch (e) {
