@@ -473,42 +473,36 @@
 							motor_field_voltage: 460,
 
 							grid: false
-					},
-					units: IMP,
-					conds: [],
-					headTool: {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1,Zs:0,Zd:0,Pg_s:115,Ztnk_s:0},
-					curve: {C:1.9,f1:2000,h1:277,f2:2300,h2:350},
-					motorPerf: {
-						line: 1,
-						motor_rated_power: 200,
-						motor_rated_speed: 1780,
-						efficiency_class: 0,
-						efficiency: 75,
-						motor_rated_voltage: 460,
-						flc: 225.4
-					},
-					specSpeed = {
-						pump_style: 0,
-						pump_rated_speed: 1780,
-						flow: 2000,
-						head: 277
-					},
-					nema = {
-						line: 1,
-						motor_rated_power: 200,
-						motor_rated_speed: 1780,
-						efficiency_class: 0
+						},
+						units: IMP,
+						conds: [],
+						headTool: {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1,Zs:0,Zd:0,Pg_s:115,Ztnk_s:0},
+						curve: {C:1.9,f1:2000,h1:277,f2:2300,h2:350},
+						motorPerf: {
+							line: 1,
+							motor_rated_power: 200,
+							motor_rated_speed: 1780,
+							efficiency_class: 0,
+							efficiency: 75,
+							motor_rated_voltage: 460,
+							flc: 225.4
+						},
+						specSpeed = {
+							pump_style: 0,
+							pump_rated_speed: 1780,
+							flow: 2000,
+							head: 277
+						},
+						nema = {
+							line: 1,
+							motor_rated_power: 200,
+							motor_rated_speed: 1780,
+							efficiency_class: 0
+						}
 					}
+					save()
 				}
-				save();
-			}
-				Conds = loadProp('conditions');
-				Units = loadProp('units');
-				HeadTool = loadProp('headTool');
-				Curve = loadProp('curve');
-				MotorPerf = loadProp('motorPerf');
-				SpecSpeed = loadProp('specSpeed');
-				Nema = loadProp('nema');
+				D = loadProp('data');
 				return (DefCond = loadProp('defCond'));
 			}
 
