@@ -103,7 +103,7 @@
 	}
 
 	function nu() {// new
-		Cond = loadProp('defCond');
+		Cond = $.extend({},DefCond);
 		Conds.push(Cond);
 		Cond.name = 'Condition ' + Conds.length;
 		const dt = new Date();
