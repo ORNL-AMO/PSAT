@@ -57,7 +57,7 @@
 		$.each(Conds,function(i,d) {
 			d.grid = e.checked;
 		});
-		saveConds();
+		save();
 		setBtns();
 	}
 
@@ -67,7 +67,7 @@
 
 	function selCond(e) {// select condition
 		Conds[listIdx(e)].grid = e.checked;
-		saveConds();
+		save();
 		setBtns();		
 	}
 
@@ -79,13 +79,13 @@
 
 	function rm(e) {// remove
 		Conds.splice(listIdx(e),1);
-		saveConds();
+		save();
 		loadPg();
 	}
 
 	function removeAll() {
 		Conds = D.Conds = [];
-		saveConds();
+		save();
 		loadPg();
 	}
 
@@ -93,7 +93,7 @@
 		let o=$.extend({},Conds[listIdx(e)]);
 		o.name+=' (copy)';
 		Conds.push(o);
-		saveConds();
+		save();
 		loadPg();
 	}
 
@@ -109,7 +109,7 @@
 		const dt = new Date();
     	dt.setMinutes(dt.getMinutes()-dt.getTimezoneOffset());
 		Cond.date = dt.toJSON().slice(0,10);		
-		saveConds();
+		save();
 		go('notes');
 	}	
 

@@ -366,7 +366,7 @@
 		colCond(e).grid = false;
 		col(e).remove();
 		$(e).parent().remove();
-		saveConds();
+		save();
 	}
 
 // io
@@ -385,14 +385,14 @@
 	}
 	function saveFld(e) {
 			setFromCtl(colCond(e),e);          
-			saveConds();
+			save();
 	}	
 	function io(dlg) {    
 		let e = dlg.data('src'), cond = colCond(e);
 		if(parIdx(dlg.find(':checked'))==0) {
 			$.extend(cond,DefCond);
 			setCtls(cond,col(e));
-			saveConds();
+			save();
 			showHdResults();
 		} else {
 			$.extend(DefCond,cond);
