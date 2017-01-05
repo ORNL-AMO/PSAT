@@ -78,7 +78,7 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		Dlg.showOpenDialog(dlgFil(),
 			function (fn) {
 				if (fn) {
-					[,Units,HeadTool,Curve,MotorPerf,DefCond,Conds] =
+					D =
 						JSON.parse(require('fs').readFileSync(fn[0],'utf8'));					
 					save();
 					loadPg();	
@@ -90,8 +90,8 @@ The Pumping System Assessment Tool was developed by the Department of Energy's B
 		Dlg.showSaveDialog(dlgFil(),
 			function (fn) {
 				if (fn) {					
-					require('fs').writeFile(fn,JSON.stringify(
-						[process.env.npm_package_version,Units,HeadTool,Curve,MotorPerf,DefCond,Conds]));				
+					D.vs = Remote.app.getVersion()
+					require('fs').writeFile(fn,JSON.stringify(D));
 				}
 		}); 
 	}
