@@ -439,7 +439,7 @@
 			function loadData(reset) {
 				if (reset) {
 					D = {
-						defCond: {
+						DefCond: {
 							pump_style: 5,
 							pump_specified: 0,
 							pump_rated_speed: 1780,
@@ -466,11 +466,11 @@
 
 							grid: false
 						},
-						units: IMP,
-						conds: [],
-						headTool: {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1,Zs:0,Zd:0,Pg_s:115,Ztnk_s:0},
-						curve: {C:1.9,f1:2000,h1:277,f2:2300,h2:350},
-						motorPerf: {
+						Units: IMP,
+						Conds: [],
+						HeadTool: {Ds:14,Dd:10,Ps:5,Pd:124,Ks:1,Kd:1,Zs:0,Zd:0,Pg_s:115,Ztnk_s:0},
+						Curve: {C:1.9,f1:2000,h1:277,f2:2300,h2:350},
+						MotorPerf: {
 							line: 1,
 							motor_rated_power: 200,
 							motor_rated_speed: 1780,
@@ -479,13 +479,13 @@
 							motor_rated_voltage: 460,
 							flc: 225.4
 						},
-						specSpeed = {
+						SpecSpeed: {
 							pump_style: 0,
 							pump_rated_speed: 1780,
 							flow: 2000,
 							head: 277
 						},
-						nema = {
+						Nema: {
 							line: 1,
 							motor_rated_power: 200,
 							motor_rated_speed: 1780,
@@ -494,7 +494,9 @@
 					}
 					save()
 				}
-				return (D = loadProp('data'));
+				D = loadProp('data');
+				$.extend(window,D);
+				return D;
 			}
 
 		// init
