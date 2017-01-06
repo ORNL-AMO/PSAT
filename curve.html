@@ -84,7 +84,7 @@
 		$('#plot').hide();
 		pg('button').show();
 
-		saveProp('curve',Curve);
+		save();
 	}
 
 // plot
@@ -125,7 +125,7 @@
 		$('#plot').hide();
 		pg('button').show();
 		setFromCtl(Curve,ev.target);
-		saveProp('curve',Curve);
+		save();
 	});
 
 	// clear select on input change

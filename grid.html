@@ -392,12 +392,11 @@
 		if(parIdx(dlg.find(':checked'))==0) {
 			$.extend(cond,DefCond);
 			setCtls(cond,col(e));
-			save();
 			showHdResults();
 		} else {
 			$.extend(DefCond,cond);
-			saveProp('defCond',DefCond);
 		}
+		save();
 		dom(dlg).close(); 
 	}
 	function colCond(e) {
