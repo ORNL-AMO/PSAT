@@ -119,19 +119,19 @@
 				if (fn) {					
 					let hd, lines;
 					Conds.forEach(function(c,i) {
-						const r = crunch(cvtArg(c));						
+						let r = crunch(cvtArg(c));						
 						if (i==0) {
-							hd = Object.keys(Conds[0]).sort().concat(Object.keys(r).sort());
+							hd = Object.keys(c).sort().concat(Object.keys(r).sort());
 							lines=[hd.join(',')];
 						}
 						if (c.grid) {
 							$.each(r, (k,v) => {
 								r[k] = JSON.stringify(v);
 							});
-							let o = cp(c,cp(r));
+							cp(c,r);
 							lines.push(
 								hd.map((nm,i)=> {
-									return JSON.stringify(o[nm]);
+									return JSON.stringify(r[nm]);
 								}).join(',')
 							);
 						}
