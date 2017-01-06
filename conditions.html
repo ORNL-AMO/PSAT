@@ -29,7 +29,7 @@
 			<td><input type="checkbox" onclick="selCond(this)"></td>
 			<td onclick='edit(this)'></td>
 			<td><button onclick='rm(this)'><i class="fa fa-trash-o"></i></button></td>
-			<td><button onclick='cp(this)'><i class="fa fa-plus"></i></button></td>
+			<td><button onclick='cpCon(this)'><i class="fa fa-plus"></i></button></td>
 		</tr>
 		<tr>
 			<td><input type="checkbox" onclick='chkAll(this)'></input></td>
@@ -89,8 +89,8 @@
 		loadPg();
 	}
 
-	function cp(e) {// copy
-		let o=$.extend({},Conds[listIdx(e)]);
+	function cpCon(e) {// copy condition
+		let o = cp(Conds[listIdx(e)]);
 		o.name+=' (copy)';
 		Conds.push(o);
 		save();
@@ -103,7 +103,7 @@
 	}
 
 	function nu() {// new
-		Cond = $.extend({},DefCond);
+		Cond = cp(DefCond);
 		Conds.push(Cond);
 		Cond.name = 'Condition ' + Conds.length;
 		const dt = new Date();
@@ -128,7 +128,7 @@
 							$.each(r, (k,v) => {
 								r[k] = JSON.stringify(v);
 							});
-							let o = $.extend({},r,c);
+							let o = cp(c,cp(r));
 							lines.push(
 								hd.map((nm,i)=> {
 									return JSON.stringify(o[nm]);

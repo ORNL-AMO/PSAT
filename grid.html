@@ -390,11 +390,11 @@
 	function io(dlg) {    
 		let e = dlg.data('src'), cond = colCond(e);
 		if(parIdx(dlg.find(':checked'))==0) {
-			$.extend(cond,DefCond);
+			cp(DefCond,cond);
 			setCtls(cond,col(e));
 			showHdResults();
 		} else {
-			$.extend(DefCond,cond);
+			cp(cond,DefCond);
 		}
 		save();
 		dom(dlg).close(); 

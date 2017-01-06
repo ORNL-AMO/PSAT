@@ -131,6 +131,10 @@
 				return $.isNumeric(v) ? Math.round(v*m)/m : v;
 			}
 
+			function cp(o,into={}) {
+				return $.extend(into,o);
+			}
+
 		// plot
 
 			function xPos(x) {// map x to canvas pixels
@@ -165,12 +169,12 @@
 				P.ctx.stroke();
 			}
 			function setupPlot(lblX,lblY) {// axes and labels
-				P = $.extend({
+				P = cp(P,{
 					cnv: dom('canvas'),
 					m: new Map(),
 					xCvt: x => x,
 					yMax: x => P.stepY*P.cntY
-				},P);
+				});
 				P.cnv.width+=0;
 				P.m = new Map();
 				const ctx = P.ctx = P.cnv.getContext('2d');
@@ -380,7 +384,7 @@
 			}
 
 			function cvtArg(c) {
-				const d=$.extend({},c);
+				const d=cp(c);
 				cvtObj(d,'flow',FLOW,'gpm');
 				cvtObj(d,'motor_rated_power',POWER,'hp');
 				//cvtObj(d,'motor_field_power',POWER,'kW');
@@ -486,7 +490,7 @@
 					save()
 				}
 				D = JSON.parse(localStorage.getItem('data'));
-				$.extend(window,D);
+				cp(D,window);
 				return D;
 			}
 
