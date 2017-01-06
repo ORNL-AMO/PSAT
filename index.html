@@ -494,21 +494,21 @@
 
 			LS = localStorage;
 			$ = require('jquery');
-			Remote = require('electron').remote;
-			$('title').append(` v${Remote.app.getVersion()}`);
+			R = require('electron').remote;
+			$('title').append(` v${R.app.getVersion()}`);
 			if (!loadData()) {
 				loadData(true);
 			}
 
 			$(document).ready(function() {
 				try {
-					Dlg=require('electron').remote.dialog;
+					Dlg=R.dialog;
 					Bridge = require('./build/Release/bridge');
 					Bridge.initTest({});
 					main();
 				} catch (e) {
 					alert(e);
-					Remote.getCurrentWindow().close();
+					R.getCurrentWindow().close();
 				}
 			});
 		</script>
