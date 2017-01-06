@@ -424,7 +424,7 @@
 		// prop io
 
 			function save() {
-				LS.setItem('data',JSON.stringify(W))
+				localStorage.setItem('data',JSON.stringify(W))
 			}
 			IMP = ['gpm','hp','ft','psig'];// imperial
 			function loadData(reset) {
@@ -485,14 +485,13 @@
 					}
 					save()
 				}
-				D = JSON.parse(LS.getItem('data'));
+				D = JSON.parse(localStorage.getItem('data'));
 				$.extend(window,D);
 				return D;
 			}
 
 		// init
 
-			LS = localStorage;
 			$ = require('jquery');
 			R = require('electron').remote;
 			$('title').append(` v${R.app.getVersion()}`);
