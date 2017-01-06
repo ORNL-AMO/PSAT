@@ -237,8 +237,6 @@
 				['Motor Rated Power','Motor Shaft Power','Pump Shaft Power'].forEach(function(e) {
 					cvtObj(r[e],[0,1],POWER,unit(POWER),'hp');
 				});
-				r['Motor Efficiency'][0]*=100;
-				r['Motor Power Factor'][0]*=100;
 				return r;
 			}
 

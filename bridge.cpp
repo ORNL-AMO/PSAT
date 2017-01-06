@@ -75,18 +75,18 @@ void Results(const FunctionCallbackInfo<Value>& args) {
 	auto ex = psat.getExisting(), opt = psat.getOptimal();
 
 	map<const char *,vector<double>> out = { 
-		{"Pump Efficiency",{ex.pumpEfficiency_*100,opt.pumpEfficiency_*100}},
-		{"Motor Rated Power",{ex.motorRatedPower_,opt.motorRatedPower_}},        
+		{"Pump Efficiency",{ex.pumpEfficiency_ * 100, opt.pumpEfficiency_ * 100}},
+		{"Motor Rated Power",{ex.motorRatedPower_,  opt.motorRatedPower_}},        
 		{"Motor Shaft Power",{ex.motorShaftPower_,opt.motorShaftPower_}},
-		{"Pump Shaft Power",{ex.pumpShaftPower_,opt.pumpShaftPower_}},    
-		{"Motor Efficiency",{ex.motorEfficiency_,opt.motorEfficiency_}},
-		{"Motor Power Factor",{ex.motorPowerFactor_,opt.motorPowerFactor_}},
-		{"Motor Current",{ex.motorCurrent_,opt.motorCurrent_}},    
-		{"Motor Power", {ex.motorPower_,opt.motorPower_}},
-		{"Annual Energy", {ex.annualEnergy_,opt.annualEnergy_}},
-		{"Annual Cost", {ex.annualCost_*1000,opt.annualCost_*1000}},
-		{"Savings Potential", {psat.getAnnualSavingsPotential()*1000,-1}},
-		{"Optimization Rating", {psat.getOptimizationRating(),-1}}
+		{"Pump Shaft Power",{ex.pumpShaftPower_, opt.pumpShaftPower_}},    
+		{"Motor Efficiency",{ex.motorEfficiency_* 100, opt.motorEfficiency_ * 100}},
+		{"Motor Power Factor",{ex.motorPowerFactor_ * 100, opt.motorPowerFactor_ * 100}},
+		{"Motor Current",{ex.motorCurrent_, opt.motorCurrent_}},    
+		{"Motor Power", {ex.motorPower_, opt.motorPower_}},
+		{"Annual Energy", {ex.annualEnergy_  ,opt.annualEnergy_}},
+		{"Annual Cost", {ex.annualCost_*1000,opt.annualCost_ * 1000}},
+		{"Savings Potential", {psat.getAnnualSavingsPotential()  * 1000, -1}},
+		{"Optimization Rating", {psat.getOptimizationRating(), -1}}
 	};
 	for(auto p: out) {    
 		auto a = Array::New(iso);
