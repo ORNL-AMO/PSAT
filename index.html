@@ -423,14 +423,8 @@
 
 		// prop io
 
-			function loadProp(nm) {
-				return JSON.parse(LS.getItem(nm));
-			}
-			function saveProp(nm,v) {
-				LS.setItem(nm,JSON.stringify(v));
-			}
 			function save() {
-				saveProp('data',D);
+				LS.setItem('data',JSON.stringify(W))
 			}
 			IMP = ['gpm','hp','ft','psig'];// imperial
 			function loadData(reset) {
@@ -491,7 +485,7 @@
 					}
 					save()
 				}
-				D = loadProp('data');
+				D = JSON.parse(LS.getItem('data');
 				$.extend(window,D);
 				return D;
 			}
