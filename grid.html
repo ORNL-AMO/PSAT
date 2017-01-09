@@ -394,6 +394,8 @@
 			setCtls(cond,col(e));
 			showHdResults();
 		} else {
+			// .grid is copied, which is only ok
+			// because defaulting to true
 			cp(cond,DefCond);
 			delete DefCond.name;
 		}
