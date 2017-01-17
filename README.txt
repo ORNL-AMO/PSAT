@@ -34,7 +34,7 @@ For Building and Running PSAT in MAC OS:
 		in it, which in turn will have the PSAT Application.
 
 For Building and Running PSAT in Linux:
-	Pre-requisites: * Make sure one had the AMO-Tools-Suite,
+	Pre-requisites: * Make sure one has the AMO-Tools-Suite,
 			  and that it is on the same directory level as PSAT.
 			* Python 2.7
 			* npm
