@@ -1,5 +1,6 @@
 {
   "name": "PSAT",
+  "productName": "PSAT",
   "version": "1.0.0",
   "description": "Pumping System Assessment Tool",
   "homepage": "https://github.com/ORNL-AMO/PSAT#psat",
@@ -17,7 +18,7 @@
     "start": "electron .",
     "test": "electron test.js",
     "vs": "electron vs.js",
-    "pkg": "electron-packager . --version 1.4.1 --overwrite --out=../releases --icon=pump"
+    "pkg": "electron-packager . --version 1.4.1 --overwrite --out=../releases --icon=pump --win32metadata.ProductName=PSAT"
   },
   "devDependencies": {
     "electron-packager": "^8.1.0",
@@ -26,6 +27,7 @@
     "electron-winstaller": "^2.5.1"
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "jquery": ""
   }
 }

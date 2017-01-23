@@ -1,5 +1,9 @@
+
+
 Electron = require('electron');
 App = Electron.app;
+if(require('electron-squirrel-startup')) App.quit();
+
 
 App.on('ready', function() {
 	let arg = {width: 1280, height: 1024};
