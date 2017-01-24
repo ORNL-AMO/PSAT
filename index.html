@@ -507,6 +507,14 @@
 					Bridge = require('./build/Release/bridge');
 					Bridge.initTest({});
 					main();
+
+Upd = R.autoUpdater;
+Upd.setFeedURL('http://localhost/update/win32/'+R.app.getVersion());
+Upd.on('checking-for-update', function() {alert('check')});
+Upd.on('update-available', function() {alert('avail')});
+Upd.on('update-not-available', function() {alert('not')});
+Upd.checkForUpdates();
+
 				} catch (e) {
 					alert(e);
 					R.getCurrentWindow().close();
