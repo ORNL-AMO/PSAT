@@ -21,8 +21,7 @@
 	},
 	"devDependencies": {
 		"electron-packager": "^8.1.0",
-		"electron-prebuilt": "1.4.1",
-		"electron-reload": "^1.0.0"
+		"electron-prebuilt": "1.4.1"
 	},
 	"dependencies": {
 		"jquery": ""
