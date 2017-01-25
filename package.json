@@ -25,6 +25,7 @@
 		"electron-reload": "^1.0.0"
 	},
 	"dependencies": {
-		"jquery": ""
+		"jquery": "",
+		"bootstrap": "3.3.7"
 	}
 }
