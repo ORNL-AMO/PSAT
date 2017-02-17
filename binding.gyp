@@ -2,11 +2,13 @@
   	"targets": [
 		{
 	    	"target_name": "bridge",
-	    	'include_dirs': ['../AMO-Tools-Suite/include'],
+	        'include_dirs': ['../AMO-Tools-Suite/include', '../AMO-Tools-Suite/include/calculator', '../AMO-Tools-Suite/include/phast', '../AMO-Tools-Suite/include/psat'],
 			'sources' : [
 				'bridge.cpp',
 				"<!@(node -e \"console.log(require('fs').readdirSync('../AMO-Tools-Suite/src/').map(f=>'../AMO-Tools-Suite/src/'+f).join(' '))\")",
-				"<!@(node -e \"console.log(require('fs').readdirSync('../AMO-Tools-Suite/src/calculator/').map(f=>'../AMO-Tools-Suite/src/calculator/'+f).join(' '))\")"
+				"<!@(node -e \"console.log(require('fs').readdirSync('../AMO-Tools-Suite/src/calculator/').map(f=>'../AMO-Tools-Suite/src/calculator/'+f).join(' '))\")",
+				"<!@(node -e \"console.log(require('fs').readdirSync('../AMO-Tools-Suite/src/psat/').map(f=>'../AMO-Tools-Suite/src/psat/'+f).join(' '))\")",
+				"<!@(node -e \"console.log(require('fs').readdirSync('../AMO-Tools-Suite/src/phast/').map(f=>'../AMO-Tools-Suite/src/phast/'+f).join(' '))\")"
 			],
 			#"cflags": ["-Wall","-std=c++11"],  
 			"conditions": [ 
