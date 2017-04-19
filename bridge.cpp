@@ -4,14 +4,14 @@
 #include <node.h>
 #include <cmath>
 
-#include "PSATResult.h"
-#include "calculator/EstimateFLA.h"
-#include "calculator/MotorCurrent.h"
-#include "calculator/MotorEfficiency.h"
-#include "calculator/MotorPowerFactor.h"
-#include "calculator/OptimalPrePumpEff.h"
-#include "calculator/OptimalSpecificSpeedCorrection.h"
-#include "calculator/OptimalDeviationFactor.h"
+#include "psat/PSATResult.h"
+#include "motor/EstimateFLA.h"
+#include "motor/MotorCurrent.h"
+#include "motor/MotorEfficiency.h"
+#include "motor/MotorPowerFactor.h"
+#include "pump/OptimalPrePumpEff.h"
+#include "pump/OptimalSpecificSpeedCorrection.h"
+#include "pump/OptimalDeviationFactor.h"
 
 using namespace v8;
 using namespace std;

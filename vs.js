@@ -7,6 +7,7 @@ App.on('ready', function() {
   Win.loadURL(`file://${__dirname}/vs.html`);
 })
 
+
 App.on('window-all-closed', function () {
     App.quit();
 })
